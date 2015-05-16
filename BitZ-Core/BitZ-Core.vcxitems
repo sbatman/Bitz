@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\ContentManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\IO.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\TextureData.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Core.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameLogic\GameCore.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Debug\Console.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Debug\Logging.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameLogic\GameState.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameLogic\GameStateService.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Camera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Drawables\Model.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Drawables\Sprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\GraphicsStates\BaseGS.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\GraphicsStates\GS2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\GraphicsStates\GS3D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\RenderEngine.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Texture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Input\Keyboard.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Input\Mouse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Libs\Glew\glew.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Time\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\ContentManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\IO.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\TextureData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameLogic\GameCore.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Input\Keyboard.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Input\Mouse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Interfaces.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Debug\Console.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Debug\Logging.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameLogic\GameState.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameLogic\GameStateService.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Camera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Drawables\IDrawable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Drawables\Model.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Drawables\Sprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\GLContext.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\GraphicsManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\GraphicsStates\BaseGS.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\GraphicsStates\GS2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\GraphicsStates\GS3D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\RenderEngine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Texture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Window.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Libs\Glew\glew.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\Math.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector3.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector4.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Time\Consts.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Time\Timer.h" />
+  </ItemGroup>
+</Project>
