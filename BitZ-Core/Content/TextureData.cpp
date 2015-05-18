@@ -37,7 +37,7 @@ namespace Bitz
 			return _ID;
 		}
 
-		TextureData * TextureData::Load(const std::wstring fileName)
+		TextureData * TextureData::Load(const std::string fileName)
 		{
 			std::vector<uint8_t> png;
 			std::vector<uint8_t> image; //the raw pixels
@@ -51,8 +51,12 @@ namespace Bitz
 			TextureData * returnTextureData = new TextureData();
 
 			returnTextureData->_PixelData = new uint8_t[width*height * 4];
-			memcpy_s(returnTextureData->_PixelData, width*height * 4, &image[0], width*height * 4);
 
+#ifdef __ANDROID__
+			memcpy(returnTextureData->_PixelData, &image[0], width*height * 4);
+#elif WIN32
+			memcpy_s(returnTextureData->_PixelData, width*height * 4, &image[0], width*height * 4);
+#endif
 			returnTextureData->_Width = width;
 			returnTextureData->_Height = height;
 
@@ -77,7 +81,7 @@ namespace Bitz
 		void TextureData::DecrementUsageCount()
 		{
 			_UsageCount--;
-			_ASSERT(_UsageCount >= 0);
+			assert(_UsageCount >= 0);
 		}
 	}
 }

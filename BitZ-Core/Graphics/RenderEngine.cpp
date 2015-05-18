@@ -11,7 +11,7 @@ namespace Bitz
 	{
 		RenderEngine::RenderEngine(Window * window)
 		{
-			_ASSERT(window != nullptr);
+			assert(window != nullptr);
 
 			_VertCachePos = 0;
 			_ColCachePos = 0;
@@ -57,27 +57,27 @@ namespace Bitz
 		void RenderEngine::Init()
 		{
 
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 
 			glewInit();
 
 			SetSize(_CurrentWindow->GetWindowSize());
 
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 
 			glMatrixMode(GL_MODELVIEW);
 
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnableClientState(GL_COLOR_ARRAY);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 
 			glEnable(GL_MULTISAMPLE);
 
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		void RenderEngine::Update()
@@ -104,8 +104,8 @@ namespace Bitz
 		{
 			if (_RenderedVertCount + idrawable->GetVertCount() > BUFFERVERTCOUNT)
 			{
-				_ASSERT_EXPR(false, L"Render Buffer Overrun");
-				Debug::Logging::Log(Debug::Logging::ErrorType::Warning, L"Render Buffer Overrun");
+				assert(false && "Render Buffer Overrun");
+				Debug::Logging::Log(Debug::Logging::ErrorType::Warning, "Render Buffer Overrun");
 				return;
 			}
 
@@ -132,14 +132,14 @@ namespace Bitz
 			}
 			_RenderedVertCount += idrawable->GetVertCount();
 
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		void RenderEngine::SetSize(Vector2I newSize)
 		{
 			_CurrentWindow->SetWindowSize(newSize);
 			glViewport(0, 0, _CurrentWindow->GetWindowSize().X, _CurrentWindow->GetWindowSize().Y);
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		void RenderEngine::EnableNormals(bool enabled)
@@ -153,7 +153,7 @@ namespace Bitz
 			{
 				glDisableClientState(GL_NORMAL_ARRAY);
 			}
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		bool RenderEngine::IsEnabledNormals()
@@ -188,20 +188,20 @@ namespace Bitz
 					glPopMatrix();
 				}
 			}
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		void RenderEngine::Present()
 		{
 			_CurrentRenderingContext->FinishRender();
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		void RenderEngine::Clear(Vector3F colour)
 		{
 
 			_CurrentRenderingContext->Clear(colour);
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 
 		void RenderEngine::SetActiveTexture(Content::TextureData * activeTexture)
@@ -218,7 +218,7 @@ namespace Bitz
 					_TexturingEnabled = false;
 					glDisable(GL_TEXTURE_2D);
 				}
-				_ASSERT(glGetError() == GL_NO_ERROR);
+				assert(glGetError() == GL_NO_ERROR);
 				return;
 			}
 
@@ -246,7 +246,7 @@ namespace Bitz
 				_TexturingEnabled = true;
 				glEnable(GL_TEXTURE_2D);
 			}
-			_ASSERT(glGetError() == GL_NO_ERROR);
+			assert(glGetError() == GL_NO_ERROR);
 		}
 	}
 }

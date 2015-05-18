@@ -5,11 +5,11 @@ namespace Bitz
 {
 	namespace Content
 	{
-		std::wstring IO::_CachedWorkingDirectory;
+		std::string IO::_CachedWorkingDirectory;
 		bool IO::_CachedWorkingDirectoryStored;
-		std::vector<IO::FileHandle> IO::_OpenFiles;
+		std::vector<IO::FileHandle *> IO::_OpenFiles;
 
-		std::wstring IO::GetWorkingDirectory(bool force)
+		std::string IO::GetWorkingDirectory(bool force)
 		{
 			if (_CachedWorkingDirectoryStored && !force)return _CachedWorkingDirectory;
 
@@ -20,7 +20,7 @@ namespace Bitz
 		//	_ASSERT(hModule != NULL);
 		//	GetModuleFileName(hModule, exePath, MAX_PATH * sizeof(WCHAR));
 
-	//		std::wstring folder = std::wstring(exePath);
+	//		std::string folder = std::string(exePath);
 		//	size_t lastSlash = folder.find_last_of('\\');
 			//folder = folder.substr(0, lastSlash);
 
@@ -29,55 +29,77 @@ namespace Bitz
 
 	//		return folder;
 
-			return L"d";
+			return "/";
 		}
 
-		IO::FileHandle IO::OpenFile(std::wstring fileName, FileMode mode)
+		IO::FileHandle * IO::OpenFile(std::string fileName, FileMode mode)
 		{
-			_ASSERT(fileName.length() != 0);
+			assert(fileName.length() != 0);
 			FILE * fileHandle;
+			char modeChar;
 			switch (mode)
 			{
 			case Read:
-				_wfopen_s(&fileHandle, fileName.c_str(), L"r");
+				modeChar = 'r';
 				break;
 			case Write:
-				_wfopen_s(&fileHandle, fileName.c_str(), L"a");
+				modeChar = 'a';
 				break;
 			case Create:
-				_wfopen_s(&fileHandle, fileName.c_str(), L"w");
+				modeChar = 'w';
 				break;
 			default:
-				throw std::exception("Invalid FileMode");
+				throw std::invalid_argument("Invalid FileMode");
 			}
-			FileHandle returnHandle = { fileName, fileHandle, mode };
+
+#ifdef __ANDROID__
+			fileHandle = fopen(fileName.c_str(), &modeChar);
+#elif WIN32			
+			fopen_s(&fileHandle, fileName.c_str(), &modeChar);
+#endif	
+
+			FileHandle * returnHandle = new FileHandle( fileName, fileHandle, mode );
 			_OpenFiles.push_back(returnHandle);
 			return returnHandle;
 		}
 
 		void IO::CloseAllOpen()
 		{
-			for (FileHandle file : _OpenFiles)
+			for (FileHandle * file : _OpenFiles)
 			{
-				fclose(file.Handel);
-				file.Handel = nullptr;
+				fclose(file->Handle);
+				file->Handle = nullptr;
+				delete file;
 			}
 			_OpenFiles.clear();
 		}
 
 		void IO::CloseFile(FileHandle file)
 		{
-			_ASSERT(!file.IsDisposed());
+			assert(!file.IsDisposed());
 			if (!file.IsDisposed())
 			{
-				fclose(file.Handel);
-				file.Handel = nullptr;
+				fclose(file.Handle);
+				file.Handle = nullptr;
 			}
+		}
+
+		IO::FileHandle::FileHandle(std::string fileName, FILE * handle, FileMode mode)
+		{
+			FileName = fileName;
+			Handle = handle;
+			Mode = mode;
 		}
 
 		bool IO::FileHandle::IsDisposed()
 		{
-			return Handel == nullptr;
+			return Handle == nullptr;
+		}
+
+
+		void IO::FileHandle::Close()
+		{
+			IO::CloseFile(*this);
 		}
 	}
 }

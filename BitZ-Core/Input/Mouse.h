@@ -47,7 +47,9 @@ namespace Bitz
 			static Math::Vector2I _LastMouse;
 			static bool _ButtonDown[5];
 
-			//static void HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+#ifdef WIN32
+		static void HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+#endif
 
 		};
 	}

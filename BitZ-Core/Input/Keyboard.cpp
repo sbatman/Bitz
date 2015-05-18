@@ -15,17 +15,17 @@ namespace Bitz
 
 		bool Keyboard::WasKeyReleased(KEY key)
 		{
-			if (key >= Limits::KeyCount || key < 0) throw std::out_of_range("Key value out of range");
+			if (key >= Limits::KeyCount) throw std::out_of_range("Key value out of range");
 			return !_CurrentKeyStates[key] && _PreviousKeyStates[key];
 		}
 		bool Keyboard::WasKeyPressed(KEY key)
 		{
-			if (key >= Limits::KeyCount || key < 0) throw std::out_of_range("Key value out of range");
+			if (key >= Limits::KeyCount) throw std::out_of_range("Key value out of range");
 			return _CurrentKeyStates[key] && !_PreviousKeyStates[key];
 		}
 		bool Keyboard::IsKeyDown(KEY key)
 		{
-			if (key >= Limits::KeyCount || key < 0) throw std::out_of_range("Key value out of range");
+			if (key >= Limits::KeyCount) throw std::out_of_range("Key value out of range");
 			return _CurrentKeyStates[key];
 		}
 

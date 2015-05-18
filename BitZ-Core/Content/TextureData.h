@@ -33,7 +33,7 @@ namespace Bitz
 			/// Loads the PNG at the provided fileName returning a TextureData
 			/// </summary>
 			/// <param name='fileName'>The filename to load relative to ContentManager::GetGraphicsRoot()</param>
-			static TextureData * Load(const std::wstring fileName);
+			static TextureData * Load(const std::string fileName);
 			static std::vector<TextureData *> _LoadedTextureData;
 
 			uint32_t GetOpenglTextureID() const;

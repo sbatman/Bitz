@@ -88,7 +88,7 @@ namespace Bitz
 		typedef IPositionable<Vector3F> IPositionable3DF;
 
 		/// <summary>
-		/// This interface describes a class that has a Wstring name
+		/// This interface describes a class that has a string name
 		/// </summary>
 		class INameable
 		{
@@ -97,21 +97,21 @@ namespace Bitz
 			/// <summary>
 			/// Gets the current name of this class
 			/// </summary>
-			/// <returns>wstring containing the class name</returns>
-			virtual std::wstring GetName()
+			/// <returns>string containing the class name</returns>
+			virtual std::string GetName()
 			{
 				return _Name;
 			}
 			/// <summary>
 			/// Sets the current name of this class
 			/// </summary>
-			/// <param name='newName'>A std::wstring containing the classes new name</param>
-			virtual void SetName(const std::wstring newName)
+			/// <param name='newName'>A std::string containing the classes new name</param>
+			virtual void SetName(const std::string newName)
 			{
 				_Name = newName;
 			}
 		protected:
-			std::wstring _Name;
+			std::string _Name;
 		};
 
 		/// <summary>

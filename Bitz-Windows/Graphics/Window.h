@@ -20,7 +20,7 @@ namespace Bitz
 
 					virtual void Update() override;
 					virtual GLContext * GetGLContext() const override;
-					virtual void SetQuitFunction(void * function) override;
+					virtual void SetQuitFunction(void (function)(void)) override;
 					virtual Vector2I GetWindowSize() const override;
 					virtual void SetWindowSize(const Vector2I newSize) override;
 				private:

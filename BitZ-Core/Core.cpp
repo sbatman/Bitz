@@ -35,7 +35,7 @@ namespace Bitz
 
 	void Core::Run(GameLogic::GameCore * game)
 	{
-		_ASSERT_EXPR(!_Running, "Core cannot be run as it is already running");
+		assert(!_Running && "Core cannot be run as it is already running");
 		_Running = true;
 		_CurrentGameCore = game;
 
@@ -78,7 +78,7 @@ namespace Bitz
 						break;
 					}
 					GFX::GraphicsManager::PostRender();
-					Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format(L"Draw Took {0}", GFX::GraphicsManager::GetLastFrameTimeMS()));
+					Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Draw Took {0}", GFX::GraphicsManager::GetLastFrameTimeMS()));
 				}
 				else
 				{
@@ -88,9 +88,9 @@ namespace Bitz
 		}
 
 		bool unloadSuccessful = _CurrentGameCore->UnloadContent();
-		_ASSERT_EXPR(unloadSuccessful, "Unload Content Failed");
+		assert(unloadSuccessful && "Unload Content Failed");
 		bool exitSuccessful = _CurrentGameCore->OnExit();
-		_ASSERT_EXPR(exitSuccessful, "Exit Failed");
+		assert(exitSuccessful && "Exit Failed");
 
 		GFX::GraphicsManager::StaticDispose();
 		Content::IO::CloseAllOpen();
@@ -104,14 +104,14 @@ namespace Bitz
 
 	void Core::SetTargetUPS(double_t newUPS)
 	{
-		_ASSERT_EXPR(newUPS >= 1 && newUPS <= 1000, "UPS can only be set to a value between 1 and 1000 inclusive");
+		assert(newUPS >= 1 && newUPS <= 1000 && "UPS can only be set to a value between 1 and 1000 inclusive");
 		_TargetUPS = newUPS;
 		_MSPerUpdate = 1000.0f / _TargetUPS;
 	}
 
 	void Core::SetTargetFPS(double_t newFPS)
 	{
-		_ASSERT_EXPR(newFPS >= 1 && newFPS <= 1000, "FPS can only be set to a value between 1 and 1000 inclusive");
+		assert(newFPS >= 1 && newFPS <= 1000 && "FPS can only be set to a value between 1 and 1000 inclusive");
 		_TargetFPS = newFPS;
 		_MSPerDraw = 1000.0f / _TargetFPS;
 	}

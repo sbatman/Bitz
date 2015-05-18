@@ -43,7 +43,7 @@ namespace Bitz
 
 		protected:
 
-			static Texture * Load(const std::wstring fileName);
+			static Texture * Load(const std::string fileName);
 			Vector2S _UV_TL;
 			Vector2S _UV_TR;
 			Vector2S _UV_BL;

@@ -22,12 +22,12 @@ namespace Bitz
 
 		/// <summary>
 		/// The graphics manager acts as an interface to the underlying drawing technology
-		/// handeling tasks such as screen clearing and sackbuffer swapping
+		/// Handleing tasks such as screen clearing and sackbuffer swapping
 		/// </summary>
 		class GraphicsManager
 		{
-			friend class Window;
-			friend class Core;
+			friend class Bitz::GFX::Window;
+			friend class Bitz::Core;
 			friend class Bitz::PlatformSpecific::Windows::GFX::Window;
 		public:
 			/// <summary>

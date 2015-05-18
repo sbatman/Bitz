@@ -22,10 +22,10 @@ namespace Bitz
 		class Keyboard
 		{
 			typedef unsigned KEY;
-			friend class GFX::GraphicsManager;
-			friend class GFX::Window;
+			friend class Bitz::GFX::GraphicsManager;
+			friend class Bitz::GFX::Window;
 			friend class Bitz::PlatformSpecific::Windows::GFX::Window;
-			friend class Core;
+			friend class Bitz::Core;
 		public:
 			/// <summary>
 			/// Returns whether the specified key was released since the last update
@@ -53,6 +53,7 @@ namespace Bitz
 #ifdef WIN32
 			static void HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 #endif
+
 			static bool _CurrentKeyStates[];
 			static bool _PreviousKeyStates[];
 		};

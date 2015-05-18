@@ -35,8 +35,9 @@ void Bitz::GFX::Camera::MakeActive() const
 		case Perspective:
 		{
 			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			gluPerspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<double_t>(GraphicsManager::GetScreenSize().Y), 0.1, 500);
+			glm::mat4 projection = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X/static_cast<float>(GraphicsManager::GetScreenSize().Y),0.001f, 1000.0f);
+			glLoadMatrixf(glm::value_ptr(projection));
+
 		}
 			break;
 		case Ortho:

@@ -62,7 +62,7 @@ namespace Bitz
 			_UV_BR = br;
 		}
 
-		Texture* GFX::Texture::Load(std::wstring const fileName)
+		Texture* GFX::Texture::Load(std::string const fileName)
 		{
 			Content::TextureData * data = Content::TextureData::Load(fileName);
 			GFX::Texture * returnTexture = new Texture();

@@ -45,9 +45,9 @@ namespace Bitz
 					delete _GlContext;
 				}
 
-				void Window::SetQuitFunction(void * function)
+				void Window::SetQuitFunction(void(function)(void))
 				{
-					OnQuitEvent = static_cast<void(*)()>(function);
+					OnQuitEvent = function;
 				}
 
 				Vector2I Window::GetWindowSize() const

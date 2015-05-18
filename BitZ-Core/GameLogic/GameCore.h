@@ -11,7 +11,7 @@ namespace Bitz
 	{
 		class GameCore
 		{
-			friend class Core;
+			friend class Bitz::Core;
 		public:
 			/// <summary>
 			/// Starts the GameCore which in turn boots up the engine this is a blocking call

@@ -37,6 +37,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Libs\CppFormat\format.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Libs\Glew\glew.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Time\Timer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
@@ -72,5 +73,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector4.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Consts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Timer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Utility.h" />
   </ItemGroup>
 </Project>

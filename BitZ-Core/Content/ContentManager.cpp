@@ -8,17 +8,17 @@ namespace Bitz
 {
 	namespace Content
 	{
-		std::wstring ContentManager::_GraphicsRoot;
-		std::wstring ContentManager::_AudioRoot;
-		std::wstring ContentManager::_DataRoot;
+		std::string ContentManager::_GraphicsRoot;
+		std::string ContentManager::_AudioRoot;
+		std::string ContentManager::_DataRoot;
 		bool ContentManager::_HasInit = false;
 
-		void ContentManager::Init(std::wstring graphicsRoot, std::wstring audioRoot, std::wstring dataRoot)
+		void ContentManager::Init(std::string graphicsRoot, std::string audioRoot, std::string dataRoot)
 		{
-			_ASSERT(!_HasInit);
-			_ASSERT(graphicsRoot.length() != 0);
-			_ASSERT(audioRoot.length() != 0);
-			_ASSERT(dataRoot.length() != 0);
+			assert(!_HasInit);
+			assert(graphicsRoot.length() != 0);
+			assert(audioRoot.length() != 0);
+			assert(dataRoot.length() != 0);
 
 			_GraphicsRoot = graphicsRoot;
 			_AudioRoot = audioRoot;
@@ -28,7 +28,7 @@ namespace Bitz
 
 		void ContentManager::UnloadUnused()
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 			TextureData::_LoadedTextureData.erase(
 				std::remove_if(TextureData::_LoadedTextureData.begin(), TextureData::_LoadedTextureData.end(),
 					[](TextureData* element) -> bool
@@ -44,30 +44,30 @@ namespace Bitz
 			_HasInit = false;
 		}
 
-		std::wstring ContentManager::GetGraphicsRoot()
+		std::string ContentManager::GetGraphicsRoot()
 		{
 			return _GraphicsRoot;
 		}
 
-		std::wstring ContentManager::GetAudioRoot()
+		std::string ContentManager::GetAudioRoot()
 		{
 			return _AudioRoot;
 		}
 
-		std::wstring ContentManager::GetDataRoot()
+		std::string ContentManager::GetDataRoot()
 		{
 			return _DataRoot;
 		}
 
 		template <class T>
-		T* ContentManager::Load(std::wstring fileName)
+		T* ContentManager::Load(std::string fileName)
 		{
-			_ASSERT_EXPR(_HasInit, L"The content manager must have its init method called before it attempts to load content");
+			assert(_HasInit && L"The content manager must have its init method called before it attempts to load content");
 			auto func = T::Load;
 			return func(fileName);
 		}
 
-		template GFX::Texture* ContentManager::Load<GFX::Texture>(std::wstring fileName);
+		template GFX::Texture* ContentManager::Load<GFX::Texture>(std::string fileName);
 
 	}
 }

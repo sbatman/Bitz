@@ -31,7 +31,7 @@ namespace Bitz
 
 		void GraphicsManager::Init(Window * window)
 		{
-			_ASSERT(!_HasInit);
+			assert(!_HasInit);
 
 			_ActiveRenderEngine = new RenderEngine(window);
 
@@ -42,13 +42,13 @@ namespace Bitz
 
 		void GraphicsManager::Update()
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 			_ActiveRenderEngine->Update();
 		}
 
 		void GraphicsManager::PreRender()
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 
 			_FrameTimer->Start();
 
@@ -57,8 +57,8 @@ namespace Bitz
 
 		void GraphicsManager::PostRender()
 		{
-			_ASSERT(_HasInit);
-			_ASSERT_EXPR(!_InRenderScope, "End render must be called for every begin render");
+			assert(_HasInit);
+			assert(!_InRenderScope&& "End render must be called for every begin render");
 			glFinish();
 			_ActiveRenderEngine->Present();
 			_FrameTimer->Stop();
@@ -68,15 +68,15 @@ namespace Bitz
 
 		void GraphicsManager::BeginRender(GraphicsStates::BaseGS * graphicsState)
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 
 			_CurrentGraphicsState = graphicsState;
 
 			_ActiveRenderEngine->Begin();
 
-			_ASSERT_EXPR(graphicsState != nullptr, "Begin Render must be called with a graphics state");
-			_ASSERT_EXPR(_CurrentGraphicsState->GetActiveCamera() != nullptr, "The current camera must be set before attempting to draw");
-			_ASSERT_EXPR(!_InRenderScope, "Begin render has already been called");
+			assert(graphicsState != nullptr&& "Begin Render must be called with a graphics state");
+			assert(_CurrentGraphicsState->GetActiveCamera() != nullptr&& "The current camera must be set before attempting to draw");
+			assert(!_InRenderScope&& "Begin render has already been called");
 
 			_InRenderScope = true;
 
@@ -95,8 +95,8 @@ namespace Bitz
 
 		void GraphicsManager::EndRender()
 		{
-			_ASSERT(_HasInit);
-			_ASSERT_EXPR(_InRenderScope, "Begin render has not been called");
+			assert(_HasInit);
+			assert(_InRenderScope&& "Begin render has not been called");
 
 			if (_CurrentGraphicsState->IsNormalsEnabled())
 			{
@@ -122,14 +122,14 @@ namespace Bitz
 
 		double_t GraphicsManager::GetLastFrameTimeMS()
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 			return _LastFrameTime;
 		}
 
 		void GraphicsManager::Render(Drawables::IDrawable* idrawable)
 		{
-			_ASSERT(_HasInit);
-			_ASSERT_EXPR(_InRenderScope, "Begin render has not been called");
+			assert(_HasInit);
+			assert(_InRenderScope&& "Begin render has not been called");
 			_ActiveRenderEngine->Render(idrawable);
 		}
 
@@ -151,7 +151,7 @@ namespace Bitz
 
 		void GraphicsManager::StaticDispose()
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 			delete _FrameTimer;
 			delete _ActiveRenderEngine;
 
@@ -167,7 +167,7 @@ namespace Bitz
 
 		void GraphicsManager::SetBufferClearColour(const Vector3F colour)
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 			_BufferClearColour = colour;
 		}
 
@@ -183,7 +183,7 @@ namespace Bitz
 
 		Vector3F GraphicsManager::GetBufferClearColour()
 		{
-			_ASSERT(_HasInit);
+			assert(_HasInit);
 			return _BufferClearColour;
 		}
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Common.h"
+#include "../Content/IO.h"
 
 namespace Bitz
 {
@@ -13,7 +14,7 @@ namespace Bitz
 		public:
 			enum ErrorType { Notice, Warning, Error, Critcal, Debug };
 			const static std::string ErrorTypeAsString[];
-			static void Log(const ErrorType type, const std::wstring message);
+			static void Log(const ErrorType type, const std::string message);
 
 			static bool EnableLogToConsole();
 			static bool EnableLogToFile(std::string fileName);
@@ -32,7 +33,7 @@ namespace Bitz
 			struct LogEvent
 			{
 				ErrorType type;
-				std::wstring message;
+				std::string message;
 			};
 
 			static bool _LogToConsole;
@@ -46,7 +47,7 @@ namespace Bitz
 			static std::mutex _LogsToProcessMutex;
 			static std::mutex _SettingsMutex;
 
-			static FILE * _OutputFile;
+			static Bitz::Content::IO::FileHandle * _OutputFile;
 
 			static void Update(bool active);
 		};

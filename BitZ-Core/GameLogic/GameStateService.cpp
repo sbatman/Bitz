@@ -10,7 +10,7 @@ namespace Bitz
 
 		void GameStateService::StaticDispose()
 		{
-
+			_ActiveGameStates.clear();
 		}
 
 		void GameStateService::Update()

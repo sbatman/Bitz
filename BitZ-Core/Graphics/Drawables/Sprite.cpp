@@ -19,7 +19,7 @@ namespace Bitz
 			{
 				_RenderMode = TwoD;
 				FlagQuadDirty();
-				_VertCount = 6;
+				_VertCount = VERTCOUNT;
 				_VertArray = new float_t[_VertCount*DIMENTIONS];
 				_TexArray = new float_t[_VertCount * 2];
 				_Position = Vector2F(0);
@@ -83,7 +83,7 @@ namespace Bitz
 
 				uint32_t dataLength = _VertCount * DIMENTIONS * sizeof(float_t);
 
-				memcpy_s(vertArray + (*startPosition), dataLength, _VertArray, dataLength);
+				Memcpy(vertArray + (*startPosition), dataLength, _VertArray, dataLength);
 				(*startPosition) += _VertCount * DIMENTIONS;
 			}
 
@@ -93,7 +93,7 @@ namespace Bitz
 
 				uint32_t dataLength = _VertCount * 2 * sizeof(float_t);
 
-				memcpy_s(texArray + (*startPosition), dataLength, _TexArray, dataLength);
+				Memcpy(texArray + (*startPosition), dataLength, _TexArray, dataLength);
 				(*startPosition) += _VertCount * 2;
 			}
 
@@ -115,7 +115,7 @@ namespace Bitz
 
 			void Sprite::UpdateQuad()
 			{
-				memcpy_s(_VertArray, _VertCount*DIMENTIONS*sizeof(uint32_t), QUADDEFINITION, _VertCount*DIMENTIONS*sizeof(uint32_t));
+				Memcpy(_VertArray, _VertCount*DIMENTIONS*sizeof(uint32_t), QUADDEFINITION, _VertCount*DIMENTIONS*sizeof(uint32_t));
 
 				if (abs(_Rotation) <= 0.001f)
 				{

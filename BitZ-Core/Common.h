@@ -1,14 +1,10 @@
 #pragma once
 
-#ifdef WIN32
-#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
-#include <Windows.h>
-#endif
-
 #include <math.h>
+#include <float.h>
 #include <stdio.h>
 #include <cstdio>
-#include <tchar.h>
+
 #include <iostream>
 #include <thread>
 #include <string>
@@ -18,15 +14,35 @@
 #include <thread>
 #include <mutex>
 
-//OpenGL Includes
-#ifdef __ANDROID__
-#include <GLES/gl.h>
-#elif __APPLE__
-#include <OpenGLES/ES1/gl.h>
-#elif WIN32
 #define GLEW_STATIC true
 #include "Libs/Glew/glew.h"
+
+//OpenGL Includes
+#ifdef __ANDROID__
+
+typedef float float_t;
+typedef double double_t;
+
+#include <jni.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/resource.h>
+#include <android/log.h>
+#include <GLES/gl.h>
+
+#elif __APPLE__
+
+#include <OpenGLES/ES1/gl.h>
+
+#elif WIN32
+
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#include <tchar.h>
+
 #endif
+
 
 //GLM Include
 #include "../Support Libraries/glm/glm/glm.hpp"
@@ -35,3 +51,6 @@
 
 //Cpp Format Includes
 #include "Libs/CppFormat/format.h"
+
+//Utility Functions
+#include "Utility.h"

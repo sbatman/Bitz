@@ -1,12 +1,13 @@
 #include "../Common.h"
 #include "Logging.h"
 
+
 namespace Bitz
 {
 	namespace Debug
 	{
 		std::queue<Logging::LogEvent> * Logging::_LogsToProcess = nullptr;
-		FILE * Logging::_OutputFile = nullptr;
+		Bitz::Content::IO::FileHandle * Logging::_OutputFile = nullptr;
 		const std::string Logging::ErrorTypeAsString[] = { "Notice", "Warning", "Error", "Critcal", "Debug" };
 
 		bool Logging::_LogToConsole = false;
@@ -19,12 +20,10 @@ namespace Bitz
 		std::mutex Logging::_LogsToProcessMutex;
 		std::mutex Logging::_SettingsMutex;
 
-		static void Update();
-
-		void Logging::Log(const ErrorType type, const std::wstring message)
+		void Logging::Log(const ErrorType type, const std::string message)
 		{
 			if (type == ErrorType::Debug && !_LogDebug) return;
-			_ASSERT_EXPR(_Active, L"Log cannot be called on the logger untill it is made active");
+			assert(_Active && "Log cannot be called on the logger untill it is made active");
 			if (!_Active)return;
 			LogEvent logEvent;
 			logEvent.type = type;
@@ -51,7 +50,7 @@ namespace Bitz
 		{
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT(!_Active);
+			assert(!_Active);
 			_OutputFile = nullptr;
 			_LogToConsole = false;
 			_LogToFile = false;
@@ -79,7 +78,7 @@ namespace Bitz
 			}
 			if (_LogToFile)
 			{
-				fclose(_OutputFile);
+				_OutputFile->Close();
 				_OutputFile = nullptr;
 			}
 		}
@@ -88,7 +87,7 @@ namespace Bitz
 		{
 			std::queue<LogEvent> * _LogsInProcessing = nullptr;
 
-			_ASSERT(!_Active);
+			assert(!_Active);
 			_Active = active;
 			while (_Active)
 			{
@@ -114,12 +113,12 @@ namespace Bitz
 
 						if (_LogToConsole)
 						{
-							printf("%s:\t%S\n", Logging::ErrorTypeAsString[(int)event.type].c_str(), event.message.c_str());
+							printf("%s:\t%s\n", Logging::ErrorTypeAsString[(int)event.type].c_str(), event.message.c_str());
 						}
 						if (_LogToFile)
 						{
-							fprintf(_OutputFile, "%s:\t%S\n", Logging::ErrorTypeAsString[(int)event.type].c_str(), event.message.c_str());
-							fflush(_OutputFile);
+							fprintf(_OutputFile->Handle, "%s:\t%s\n", Logging::ErrorTypeAsString[(int)event.type].c_str(), event.message.c_str());
+							fflush(_OutputFile->Handle);
 						}
 						if (_LogToBlackHole)
 						{
@@ -142,7 +141,7 @@ namespace Bitz
 			if (!_Active)Init();
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT(!_LogToConsole);
+			assert(!_LogToConsole);
 			_LogToConsole = true;
 			return true;
 		}
@@ -151,10 +150,10 @@ namespace Bitz
 			if (!_Active)Init();
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT(!_LogToFile);
-			_ASSERT(_OutputFile == nullptr);
-			errno_t error = fopen_s(&_OutputFile, fileName.c_str(), "w");
-			_LogToFile = error == 0;
+			assert(!_LogToFile);
+			assert(_OutputFile == nullptr);
+			_OutputFile = Bitz::Content::IO::OpenFile(fileName, Bitz::Content::IO::FileMode::Write);
+			_LogToFile = !_OutputFile->IsDisposed();
 			return _LogToFile;
 		}
 		bool Logging::EnableLogToBlackHole()
@@ -162,7 +161,7 @@ namespace Bitz
 			if (!_Active)Init();
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT(!_LogToBlackHole);
+			assert(!_LogToBlackHole);
 			_LogToBlackHole = true;
 			return true;
 		}
@@ -171,9 +170,9 @@ namespace Bitz
 		{
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT_EXPR(_Active, L"DisableLogToConsole cannot be called on the logger untill it is made active");
+			assert(_Active &&"DisableLogToConsole cannot be called on the logger untill it is made active");
 			if (!_Active)return
-				_ASSERT(_LogToConsole);
+				assert(_LogToConsole);
 			_LogToConsole = false;
 		}
 
@@ -181,11 +180,12 @@ namespace Bitz
 		{
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT_EXPR(_Active, L"DisableLogToFile cannot be called on the logger untill it is made active");
+			assert(_Active && "DisableLogToFile cannot be called on the logger untill it is made active");
 			if (!_Active)return
-				_ASSERT(_LogToFile);
-			_ASSERT(_OutputFile != nullptr);
-			fclose(_OutputFile);
+				assert(_LogToFile);
+			assert(_OutputFile != nullptr);
+			_OutputFile->Close();
+			_OutputFile = nullptr;
 			_LogToFile = false;
 		}
 
@@ -193,9 +193,9 @@ namespace Bitz
 		{
 			std::lock_guard<std::mutex> Lock(_SettingsMutex);
 
-			_ASSERT_EXPR(_Active, L"DisableLogToBlackHole cannot be called on the logger untill it is made active");
+			assert(_Active && "DisableLogToBlackHole cannot be called on the logger untill it is made active");
 			if (!_Active)return
-				_ASSERT(_LogToBlackHole);
+				assert(_LogToBlackHole);
 			_LogToBlackHole = false;
 		}
 	}

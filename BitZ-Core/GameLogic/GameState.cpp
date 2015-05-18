@@ -29,7 +29,7 @@ namespace Bitz
 			_EntryTimer = new Time::Timer();
 			_EntryTimer->Start();
 			_Current = true;
-			Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format(L"Entering GameState {0}", _Name));
+			Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Entering GameState {0}", _Name));
 			OnEnter(preceedingState);
 		}
 
@@ -41,7 +41,7 @@ namespace Bitz
 				_EntryTimer = nullptr;
 			}
 			_Current = false;
-			Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format(L"Exiting GameState {0}", _Name));
+			Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Exiting GameState {0}", _Name));
 			OnExit();
 		}
 
