@@ -34,6 +34,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Texture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Input\Keyboard.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Input\Mouse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Libs\CppFormat\format.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Libs\Glew\glew.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Time\Timer.cpp" />
   </ItemGroup>
@@ -63,6 +64,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\RenderEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Texture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Window.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Libs\CppFormat\format.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Libs\Glew\glew.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\Math.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector2.h" />

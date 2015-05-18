@@ -13,6 +13,8 @@ namespace Bitz
 
 	class Core;
 
+	namespace PlatformSpecific { namespace Windows { namespace GFX { class Window; } } }
+
 	namespace GFX
 	{
 
@@ -26,6 +28,7 @@ namespace Bitz
 		{
 			friend class Window;
 			friend class Core;
+			friend class Bitz::PlatformSpecific::Windows::GFX::Window;
 		public:
 			/// <summary>
 			/// Sets the colour that will be used to clear the backbuffer

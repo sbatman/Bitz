@@ -11,11 +11,9 @@ namespace Bitz
 		class GLContext
 		{
 		public:
-			GLContext();
-			~GLContext();
-			virtual void Init() = 0;
+			virtual ~GLContext() {};
 			virtual void MakeCurrent() = 0;
-			virtual void Clear(Vector3F colour);
+			virtual void Clear(Vector3F colour) = 0;
 			virtual void FinishRender() = 0;
 		};
 	}

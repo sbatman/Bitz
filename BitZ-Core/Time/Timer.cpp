@@ -59,5 +59,22 @@ namespace Bitz
 		{
 			return _Running;
 		}
+
+#ifdef WIN32
+		int64_t Timer::SystemCurrentTicks() const
+		{
+			LARGE_INTEGER now;
+			QueryPerformanceCounter(&now);
+			return now.QuadPart;
+		}
+
+		double_t Timer::SystemFrequency() const
+		{
+			LARGE_INTEGER frequency;
+			QueryPerformanceFrequency(&frequency);
+			return  static_cast<double_t>(frequency.QuadPart);
+		}
+#endif
+
 	}
 }

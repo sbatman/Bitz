@@ -49,7 +49,8 @@ namespace Bitz
 			}
 		}
 
-	/*	void Keyboard::HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+#ifdef WIN32
+		void Keyboard::HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			switch (message)
 			{
@@ -66,6 +67,7 @@ namespace Bitz
 			}
 			break;
 			}
-		}*/
+		}
+#endif
 	}
 }

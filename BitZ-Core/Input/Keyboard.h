@@ -9,6 +9,8 @@ namespace Bitz
 		class Window;
 	}
 
+	namespace PlatformSpecific { namespace Windows { namespace GFX { class Window; } } }
+
 	class Core;
 
 	namespace Input
@@ -22,6 +24,7 @@ namespace Bitz
 			typedef unsigned KEY;
 			friend class GFX::GraphicsManager;
 			friend class GFX::Window;
+			friend class Bitz::PlatformSpecific::Windows::GFX::Window;
 			friend class Core;
 		public:
 			/// <summary>
@@ -47,8 +50,9 @@ namespace Bitz
 			static void StaticDispose();
 			static void Update();
 
-			//	static void HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
+#ifdef WIN32
+			static void HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+#endif
 			static bool _CurrentKeyStates[];
 			static bool _PreviousKeyStates[];
 		};

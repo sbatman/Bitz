@@ -1,6 +1,3 @@
 [submodule "Support Libraries/glm"]
 	path = Support Libraries/glm
 	url = https://github.com/sbatman/glm.git
-[submodule "Support Libraries/ccpformat"]
-	path = Support Libraries/ccpformat
-	url = https://github.com/cppformat/cppformat.git

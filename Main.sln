@@ -1,38 +1,48 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{97B74F48-F2EF-4F73-9EFA-11EB58CFF768}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitz-Core", "Bitz-Core\Bitz-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZ-Core", "BitZ-Core\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitz-Windows", "Bitz-Windows\Bitz-Windows.vcxproj", "{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApp", "TestApp", "{DF26A834-5041-43C9-9241-550B2026B6EA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Core", "..\TestApp\TestApp-Core\TestApp-Core.vcxitems", "{37F790C2-09B6-4F14-ADA6-423BF78D0351}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Windows", "..\TestApp\TestApp-Windows\TestApp-Windows.vcxproj", "{03DF354A-C732-459D-B722-956F7E7BD180}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\TestApp\TestApp-Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
+		Bitz-Core\Bitz-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
 		Bitz-Core\Bitz-Core.vcxitems*{66a88188-accc-4d4a-a032-abdb1470e5f9}*SharedItemsImports = 4
 		Bitz-Core\Bitz-Core.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
+		..\TestApp\TestApp-Core\TestApp-Core.vcxitems*{37f790c2-09b6-4f14-ada6-423bf78d0351}*SharedItemsImports = 9
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
-		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|Win32.ActiveCfg = Debug|Win32
 		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|Win32.Build.0 = Debug|Win32
-		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|x64.ActiveCfg = Debug|Win32
-		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|x64.ActiveCfg = Debug|x64
+		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Debug|x64.Build.0 = Debug|x64
 		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Release|Win32.ActiveCfg = Release|Win32
 		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Release|Win32.Build.0 = Release|Win32
 		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}.Release|x64.ActiveCfg = Release|Win32
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Debug|Win32.ActiveCfg = Debug|Win32
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Debug|Win32.Build.0 = Debug|Win32
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Debug|x64.ActiveCfg = Debug|x64
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Debug|x64.Build.0 = Debug|x64
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Release|Win32.ActiveCfg = Release|Win32
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Release|Win32.Build.0 = Release|Win32
+		{03DF354A-C732-459D-B722-956F7E7BD180}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,5 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {97B74F48-F2EF-4F73-9EFA-11EB58CFF768}
 		{66A88188-ACCC-4D4A-A032-ABDB1470E5F9} = {97B74F48-F2EF-4F73-9EFA-11EB58CFF768}
+		{37F790C2-09B6-4F14-ADA6-423BF78D0351} = {DF26A834-5041-43C9-9241-550B2026B6EA}
+		{03DF354A-C732-459D-B722-956F7E7BD180} = {DF26A834-5041-43C9-9241-550B2026B6EA}
 	EndGlobalSection
 EndGlobal
