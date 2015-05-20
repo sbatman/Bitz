@@ -40,7 +40,6 @@ namespace Bitz
 
 			private:
 				bool _QuadDirty = true;
-
 			};
 		}
 	}

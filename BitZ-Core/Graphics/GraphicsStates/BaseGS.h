@@ -6,7 +6,6 @@ namespace Bitz
 {
 	namespace GFX
 	{
-
 		namespace GraphicsStates
 		{
 			class BaseGS

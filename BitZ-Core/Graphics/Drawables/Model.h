@@ -42,7 +42,6 @@ namespace Bitz
 				virtual void ApplyTransformation();
 
 			private:
-
 			};
 		}
 	}

@@ -4,3 +4,4 @@
 *.sdf
 *.opensdf
 /ipch/BITZ-ANDROID-375bdf73/*.ipch
+*.ipch

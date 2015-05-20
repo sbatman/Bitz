@@ -43,7 +43,6 @@ typedef double double_t;
 
 #endif
 
-
 //GLM Include
 #include "../Support Libraries/glm/glm/glm.hpp"
 #include "../Support Libraries/glm/glm/gtc/matrix_transform.hpp"

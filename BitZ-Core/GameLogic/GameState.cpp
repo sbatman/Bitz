@@ -65,5 +65,4 @@ namespace Bitz
 			return _NextGameState;
 		}
 	}
-
 }

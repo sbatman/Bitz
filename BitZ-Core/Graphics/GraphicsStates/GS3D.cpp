@@ -5,7 +5,6 @@ namespace Bitz
 {
 	namespace GFX
 	{
-
 		GraphicsStates::GS3D::GS3D()
 		{
 			_ActiveCamera = new Camera();

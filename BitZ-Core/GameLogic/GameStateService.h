@@ -8,7 +8,6 @@ namespace Bitz
 
 	namespace GameLogic
 	{
-
 		class GameStateService
 		{
 			friend Core;

@@ -32,7 +32,6 @@ namespace Bitz
 			_NormalsEnabled = false;
 		}
 
-
 		RenderEngine::~RenderEngine()
 		{
 			if (_VertCache != nullptr)
@@ -56,7 +55,6 @@ namespace Bitz
 
 		void RenderEngine::Init()
 		{
-
 			assert(glGetError() == GL_NO_ERROR);
 
 			glewInit();
@@ -199,7 +197,6 @@ namespace Bitz
 
 		void RenderEngine::Clear(Vector3F colour)
 		{
-
 			_CurrentRenderingContext->Clear(colour);
 			assert(glGetError() == GL_NO_ERROR);
 		}

@@ -75,6 +75,5 @@ namespace Bitz
 			return  static_cast<double_t>(frequency.QuadPart);
 		}
 #endif
-
 	}
 }

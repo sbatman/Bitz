@@ -186,6 +186,5 @@ namespace Bitz
 			assert(_HasInit);
 			return _BufferClearColour;
 		}
-
 	}
 }

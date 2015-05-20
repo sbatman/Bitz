@@ -39,10 +39,10 @@ namespace Bitz
 			case WM_MOUSEMOVE:
 			{
 				int32_t screenHeight = Bitz::GFX::GraphicsManager::GetScreenSize().Y;
-		
+
 				int32_t xPos = LOWORD(lParam);
 				int32_t yPos = HIWORD(lParam);
-		
+
 				if (xPos != _LastMouse.X || yPos != _LastMouse.Y)
 				{
 					_LastMouse.X = xPos;
@@ -79,6 +79,5 @@ namespace Bitz
 			}
 		}
 #endif
-
 	}
 }

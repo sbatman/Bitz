@@ -16,6 +16,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Windows", "..\TestA
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitz-Android", "Bitz-Android\Bitz-Android.vcxproj", "{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApp-Android", "TestApp-Android", "{F2B5F42B-9A7D-49CA-8B64-8AA3BFDD629D}"
+EndProject
+Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "TestApp-Android.Packaging", "..\TestApp\TestApp-Android\TestApp-Android.Packaging\TestApp-Android.Packaging.androidproj", "{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Android.NativeActivity", "..\TestApp\TestApp-Android\TestApp-Android.NativeActivity\TestApp-Android.NativeActivity.vcxproj", "{45922089-CA82-48D3-AB2D-2CD47D9E3A32}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\TestApp\TestApp-Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
@@ -61,8 +67,25 @@ Global
 		{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}.Release|Android.ActiveCfg = Release|ARM
 		{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}.Release|Android.Build.0 = Release|ARM
 		{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}.Release|Win32.ActiveCfg = Release|x86
-		{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}.Release|Win32.Build.0 = Release|x86
 		{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}.Release|x64.ActiveCfg = Release|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Debug|Android.ActiveCfg = Debug|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Debug|Win32.ActiveCfg = Debug|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Debug|Win32.Build.0 = Debug|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Debug|Win32.Deploy.0 = Debug|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Debug|x64.ActiveCfg = Debug|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Android.ActiveCfg = Release|ARM
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Android.Build.0 = Release|ARM
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Android.Deploy.0 = Release|ARM
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Win32.ActiveCfg = Release|x86
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|x64.ActiveCfg = Release|x86
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Debug|Android.ActiveCfg = Debug|x86
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Debug|Win32.ActiveCfg = Debug|x86
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Debug|Win32.Build.0 = Debug|x86
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Debug|x64.ActiveCfg = Debug|x86
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Release|Android.ActiveCfg = Release|ARM
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Release|Android.Build.0 = Release|ARM
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Release|Win32.ActiveCfg = Release|x86
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32}.Release|x64.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +96,8 @@ Global
 		{37F790C2-09B6-4F14-ADA6-423BF78D0351} = {DF26A834-5041-43C9-9241-550B2026B6EA}
 		{03DF354A-C732-459D-B722-956F7E7BD180} = {DF26A834-5041-43C9-9241-550B2026B6EA}
 		{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC} = {97B74F48-F2EF-4F73-9EFA-11EB58CFF768}
+		{F2B5F42B-9A7D-49CA-8B64-8AA3BFDD629D} = {DF26A834-5041-43C9-9241-550B2026B6EA}
+		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7} = {F2B5F42B-9A7D-49CA-8B64-8AA3BFDD629D}
+		{45922089-CA82-48D3-AB2D-2CD47D9E3A32} = {F2B5F42B-9A7D-49CA-8B64-8AA3BFDD629D}
 	EndGlobalSection
 EndGlobal

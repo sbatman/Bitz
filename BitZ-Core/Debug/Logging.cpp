@@ -1,7 +1,6 @@
 #include "../Common.h"
 #include "Logging.h"
 
-
 namespace Bitz
 {
 	namespace Debug
@@ -64,7 +63,6 @@ namespace Bitz
 			_LogsToProcess = new std::queue<LogEvent>();
 
 			_LogProcessingThread = std::thread(&Logging::Update, true);
-
 		}
 
 		void Logging::StaticDispose()
@@ -122,7 +120,6 @@ namespace Bitz
 						}
 						if (_LogToBlackHole)
 						{
-
 						}
 					}
 					delete _LogsInProcessing;
@@ -132,7 +129,6 @@ namespace Bitz
 				else {
 					std::this_thread::sleep_for(std::chrono::milliseconds(5));
 				}
-
 			}
 		}
 

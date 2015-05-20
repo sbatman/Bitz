@@ -53,7 +53,6 @@ namespace Bitz
 				}
 			};
 
-
 			/// <summary>
 			/// The array used for storing vertex positional information before its sent to the card
 			/// </summary>

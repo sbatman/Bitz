@@ -3,7 +3,6 @@
 #include "../Content/TextureData.h"
 #include "Texture.h"
 
-
 namespace Bitz
 {
 	using namespace Math;

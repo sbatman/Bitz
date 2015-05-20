@@ -14,7 +14,7 @@ namespace Bitz
 	/// the engines services
 	/// </summary>
 	class Core
-	{	
+	{
 		friend class GameLogic::GameCore;
 	protected:
 		/// <summary>

@@ -17,7 +17,6 @@ namespace Bitz
 
 	namespace GFX
 	{
-
 		class Window;
 
 		/// <summary>

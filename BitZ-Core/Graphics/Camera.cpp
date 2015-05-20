@@ -32,32 +32,29 @@ void Bitz::GFX::Camera::MakeActive() const
 {
 	switch (_CurrentMode)
 	{
-		case Perspective:
-		{
-			glMatrixMode(GL_PROJECTION);
-			glm::mat4 projection = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X/static_cast<float>(GraphicsManager::GetScreenSize().Y),0.001f, 1000.0f);
-			glLoadMatrixf(glm::value_ptr(projection));
-
-		}
-			break;
-		case Ortho:
-		{
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0, GraphicsManager::GetScreenSize().X, GraphicsManager::GetScreenSize().Y, 0, 0, 1);
-
-		}
-			break;
-		default: break;
+	case Perspective:
+	{
+		glMatrixMode(GL_PROJECTION);
+		glm::mat4 projection = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.001f, 1000.0f);
+		glLoadMatrixf(glm::value_ptr(projection));
 	}
-
+	break;
+	case Ortho:
+	{
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, GraphicsManager::GetScreenSize().X, GraphicsManager::GetScreenSize().Y, 0, 0, 1);
+	}
+	break;
+	default: break;
+	}
 }
 
 void Bitz::GFX::Camera::SetFOV(const float_t newValue)
 {
 	_FOV = newValue;
 	if (_FOV < 1)_FOV = 1;
-	if (_FOV >360)_FOV = 360;
+	if (_FOV > 360)_FOV = 360;
 	_ForceMakeActiveOnApply = true;
 }
 
