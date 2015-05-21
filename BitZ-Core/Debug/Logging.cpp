@@ -111,7 +111,19 @@ namespace Bitz
 
 						if (_LogToConsole)
 						{
+#ifdef WIN32
 							printf("%s:\t%s\n", Logging::ErrorTypeAsString[(int)event.type].c_str(), event.message.c_str());
+#elif __ANDROID__
+							switch (event.type)
+							{
+
+							case Logging::ErrorType::Critcal:((void)__android_log_print(ANDROID_LOG_FATAL, "Bitz", event.message.c_str()));break;
+							case Logging::ErrorType::Error:((void)__android_log_print(ANDROID_LOG_ERROR, "Bitz", event.message.c_str()));break;
+							case Logging::ErrorType::Warning:((void)__android_log_print(ANDROID_LOG_WARN, "Bitz", event.message.c_str()));break;
+							case Logging::ErrorType::Notice:((void)__android_log_print(ANDROID_LOG_INFO, "Bitz", event.message.c_str()));break;
+							case Logging::ErrorType::Debug:((void)__android_log_print(ANDROID_LOG_DEBUG, "Bitz", event.message.c_str()));break;
+							}
+#endif
 						}
 						if (_LogToFile)
 						{

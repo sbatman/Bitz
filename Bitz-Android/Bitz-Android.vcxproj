@@ -18,6 +18,9 @@
       <Platform>x86</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Import.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1cd5569c-d9a4-4c69-840b-ae93fa7d3acc}</ProjectGuid>
     <Keyword>Android</Keyword>
