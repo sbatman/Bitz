@@ -12,7 +12,7 @@ namespace Bitz
 		{
 		public:
 			Timer();
-			~Timer();
+			virtual ~Timer();
 
 			/// <summary>
 			/// Starts the timer from 0

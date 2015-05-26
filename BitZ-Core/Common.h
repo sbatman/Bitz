@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math.h>
+#include <cmath>
 #include <float.h>
 #include <stdio.h>
 #include <cstdio>
@@ -11,14 +11,16 @@
 #include <stdint.h>
 #include <vector>
 #include <queue>
-#include <thread>
 #include <mutex>
 
-#define GLEW_STATIC true
-#include "Libs/Glew/glew.h"
+
 
 //OpenGL Includes
 #ifdef __ANDROID__
+
+#define GLEW_NO_GLU true
+#define GLEW_STATIC true
+#include "Libs/Glew/glew.h"
 
 typedef float float_t;
 typedef double double_t;
@@ -30,13 +32,17 @@ typedef double double_t;
 #include <sys/resource.h>
 #include <android/log.h>
 #include <GLES/gl.h>
+#include <jni.h>
+#include <errno.h>
+#include <EGL/egl.h>
 
 #elif __APPLE__
 
 #include <OpenGLES/ES1/gl.h>
 
 #elif WIN32
-
+#define GLEW_STATIC true
+#include "Libs/Glew/glew.h"
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <tchar.h>

@@ -41,9 +41,9 @@ void Bitz::GFX::Camera::MakeActive() const
 	break;
 	case Ortho:
 	{
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, GraphicsManager::GetScreenSize().X, GraphicsManager::GetScreenSize().Y, 0, 0, 1);
+		glMatrixMode(GL_PROJECTION);		
+		glm::mat4 projection = glm::ortho(0.0, (double_t)GraphicsManager::GetScreenSize().X, (double_t)GraphicsManager::GetScreenSize().Y, 0.0, 0.0, 1.0);
+		glLoadMatrixf(glm::value_ptr(projection));
 	}
 	break;
 	default: break;

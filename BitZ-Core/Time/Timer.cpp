@@ -75,5 +75,19 @@ namespace Bitz
 			return  static_cast<double_t>(frequency.QuadPart);
 		}
 #endif
+
+#ifdef __ANDROID__
+		int64_t Timer::SystemCurrentTicks() const
+		{
+			struct timespec now;
+			clock_gettime(CLOCK_MONOTONIC, &now);
+			return now.tv_sec * 1000000000LL + now.tv_nsec;
+		}
+
+		double_t Timer::SystemFrequency() const
+		{		
+			return  1000000000;
+		}
+#endif
 	}
 }
