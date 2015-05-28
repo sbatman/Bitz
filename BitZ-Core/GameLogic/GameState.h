@@ -8,11 +8,17 @@ namespace Bitz
 	{
 		class GameStateService;
 
+		/// <summary>
+		/// The GameState class acts as a backbone of the games logic paths, each of the possible states
+		/// the game could be in should have its logic compartmentalized into a derived copy of this class
+		/// Optimal use of this structure will offer an objectorientation of not just classes and objects
+		/// within the code, but an oject orientation of the logic pathways themselves.
+		/// </summary>
 		class GameState : public Interfaces::INameable, public Interfaces::IUpdateable
 		{
 			friend GameStateService;
 		public:
-			GameState();
+			GameState(std::string name);
 			~GameState();
 
 			Time::Timer * GetTimeSinceEnter() const;

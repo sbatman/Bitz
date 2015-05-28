@@ -6,8 +6,10 @@ namespace Bitz
 {
 	namespace GameLogic
 	{
-		GameState::GameState()
+		GameState::GameState(std::string name)
 		{
+			assert(name.length() > 0 && "Not providing a name for a GameState is bbad practice");
+			_Name = name;
 		}
 
 		GameState::~GameState()

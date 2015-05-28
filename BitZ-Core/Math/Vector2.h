@@ -1,4 +1,6 @@
 #pragma once
+#include "../Common.h"
+
 namespace Bitz
 {
 	namespace Math
@@ -39,39 +41,39 @@ namespace Bitz
 			{
 			}
 
-			Vector2<T>& __fastcall operator=(const Vector2<T>& other)
+			Vector2<T>& __FASTCALL operator=(const Vector2<T>& other)
 			{
 				this->X = other.X;
 				this->Y = other.Y;
 				return *this;
 			}
 
-			Vector2<T> __fastcall operator+(const Vector2<T> other)
+			Vector2<T> __FASTCALL operator+(const Vector2<T> other)
 			{
 				return Vector2<T>(X + other.X, Y + other.Y);
 			}
 
-			Vector2<T> __fastcall operator-(const Vector2<T> other)
+			Vector2<T> __FASTCALL operator-(const Vector2<T> other)
 			{
 				return Vector2<T>(X - other.X, Y - other.Y);
 			}
 
-			Vector2<T> __fastcall operator/(const Vector2<T> other)
+			Vector2<T> __FASTCALL operator/(const Vector2<T> other)
 			{
 				return Vector2<T>(X / other.X, Y / other.Y);
 			}
 
-			Vector2<T> __fastcall operator*(const Vector2<T> other)
+			Vector2<T> __FASTCALL operator*(const Vector2<T> other)
 			{
 				return Vector2<T>(X * other.X, Y * other.Y);
 			}
 
-			T __fastcall Length() const
+			T __FASTCALL Length() const
 			{
 				return static_cast<T>(sqrt((X*X) + (Y*Y)));
 			}
 
-			T __fastcall LengthSquared() const
+			T __FASTCALL LengthSquared() const
 			{
 				return static_cast<T> ((X*X) + (Y*Y));
 			}

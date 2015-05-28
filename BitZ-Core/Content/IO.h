@@ -44,7 +44,7 @@ namespace Bitz
 
 		private:
 			/// <summary>
-			/// A cached copy of the last return by GetWorkingDirectory
+			/// A cached copy of the last Directory returned by GetWorkingDirectory
 			/// </summary>
 			static std::string _CachedWorkingDirectory;
 			/// <summary>

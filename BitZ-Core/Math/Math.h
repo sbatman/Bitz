@@ -1,13 +1,12 @@
 #pragma once
+#include "../Common.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
-#include <stdint.h>
-#include <math.h>
 
 typedef unsigned char byte;
 
-namespace Bitz 
+namespace Bitz
 {
 	namespace Math
 	{

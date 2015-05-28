@@ -4,7 +4,6 @@
 #include <float.h>
 #include <stdio.h>
 #include <cstdio>
-
 #include <iostream>
 #include <thread>
 #include <string>
@@ -12,11 +11,13 @@
 #include <vector>
 #include <queue>
 #include <mutex>
-
-
+#include <cstddef>
+#include <memory>
 
 //OpenGL Includes
 #ifdef __ANDROID__
+
+#define __FASTCALL
 
 #define GLEW_NO_GLU true
 #define GLEW_STATIC true
@@ -41,6 +42,9 @@ typedef double double_t;
 #include <OpenGLES/ES1/gl.h>
 
 #elif WIN32
+
+#define __FASTCALL __fastcall
+
 #define GLEW_STATIC true
 #include "Libs/Glew/glew.h"
 #define WIN32_LEAN_AND_MEAN

@@ -1,6 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "GameLogic/GameCore.h"
+#include "Time\Timer.h"
 
 namespace Bitz
 {
@@ -52,5 +53,30 @@ namespace Bitz
 		/// Gets the current target frame draws per second
 		/// </summary>
 		static double_t GetTargetFPS();
+
+		/// <summary>
+		/// Pause or unpause the renderloop, this effectivly causes the engine to skip calling draw logic while paused
+		/// This is mostly used for periods of lost focus
+		/// </summary>
+		/// <param name='state'>True to prevent further draw calls, else false</param>
+		static void SetRenderPause(bool state);
+
+		/// <summary>
+		/// Returns whether the render loop is paused
+		/// </summary>
+		/// <returns>True if paused else false</returns>
+		static bool IsRenderPaused();
+
+	private:
+		static bool _PauseRender;
+		static double_t _LastUpdate;
+		static double_t _LastDraw;
+		static double_t _TargetFPS;
+		static double_t _TargetUPS;
+		static double_t _MSPerDraw;
+		static double_t _MSPerUpdate;
+		static bool _Running;
+		static GameLogic::GameCore * _CurrentGameCore;
+		static Time::Timer _RunningTimer;
 	};
 }

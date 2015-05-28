@@ -10,20 +10,21 @@
 
 namespace Bitz
 {
+	bool Core::_Running;
+	GameLogic::GameCore * Core::_CurrentGameCore;
 
-	static bool _Running;
-	static GameLogic::GameCore * _CurrentGameCore;
+	Time::Timer Core::_RunningTimer;
 
-	static Time::Timer _RunningTimer;
+	double_t Core::_TargetFPS = 60;
+	double_t Core::_TargetUPS = 120;
 
-	static double_t _TargetFPS = 60;
-	static double_t _TargetUPS = 120;
+	double_t Core::_MSPerDraw = 1000 / _TargetFPS;
+	double_t Core::_MSPerUpdate = 1000 / _TargetUPS;
 
-	static double_t _MSPerDraw = 1000 / _TargetFPS;
-	static double_t _MSPerUpdate = 1000 / _TargetUPS;
+	double_t Core::_LastDraw;
+	double_t  Core::_LastUpdate = 0;
 
-	static double_t _LastDraw;
-	static double_t _LastUpdate;
+	bool Core::_PauseRender = false;
 
 	void Core::Init()
 	{
@@ -70,15 +71,18 @@ namespace Bitz
 				else if ((elapsedMS - _LastDraw) > _MSPerDraw) //The else is to ensure the update always gets preference, only doing the draw if the update wasnt required
 				{
 					_LastDraw += _MSPerDraw;
-					GFX::GraphicsManager::PreRender();
-					GameLogic::GameStateService::Draw();
-					if (!_CurrentGameCore->Draw())
+					if (!_PauseRender)
 					{
-						_Running = false;
-						break;
+						GFX::GraphicsManager::PreRender();
+						GameLogic::GameStateService::Draw();
+						if (!_CurrentGameCore->Draw())
+						{
+							_Running = false;
+							break;
+						}
+						GFX::GraphicsManager::PostRender();
+						Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Draw Took {0}", GFX::GraphicsManager::GetLastFrameTimeMS()));
 					}
-					GFX::GraphicsManager::PostRender();
-					Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Draw Took {0}", GFX::GraphicsManager::GetLastFrameTimeMS()));
 				}
 				else
 				{

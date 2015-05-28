@@ -14,7 +14,7 @@ namespace Bitz
 			friend class Bitz::Core;
 		public:
 			/// <summary>
-			/// Starts the GameCore which in turn boots up the engine this is a blocking call
+			/// Starts the GameCore which in turn boots up the engine this is consumes the calling thread
 			/// </summary>
 			void Run(GFX::Window * initialWindow);
 
@@ -54,6 +54,9 @@ namespace Bitz
 			virtual bool OnExit() = 0;
 
 		private:
+			/// <summary>
+			/// The name of the game for logs
+			/// </summary>
 			std::string _GameName;
 		};
 	}

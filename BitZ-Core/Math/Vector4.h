@@ -1,4 +1,6 @@
 #pragma once
+#include "../Common.h"
+
 namespace Bitz
 {
 	namespace Math
@@ -49,7 +51,7 @@ namespace Bitz
 			{
 			}
 
-			Vector4<T>& __fastcall operator = (const Vector4<T>& other)
+			Vector4<T>& __FASTCALL operator = (const Vector4<T>& other)
 			{
 				this->X = other.X;
 				this->Y = other.Y;
@@ -58,32 +60,32 @@ namespace Bitz
 				return *this;
 			}
 
-			Vector4<T> __fastcall operator + (const Vector4<T> other)
+			Vector4<T> __FASTCALL operator + (const Vector4<T> other)
 			{
 				return Vector4<T>(X + other.X, Y + other.Y, Z + other.Z, W + other.W);
 			}
 
-			Vector4<T> __fastcall operator - (const Vector4<T> other)
+			Vector4<T> __FASTCALL operator - (const Vector4<T> other)
 			{
 				return Vector4<T>(X - other.X, Y - other.Y, Z - other.Z, W - other.W);
 			}
 
-			Vector4<T> __fastcall operator / (const Vector4<T> other)
+			Vector4<T> __FASTCALL operator / (const Vector4<T> other)
 			{
 				return Vector4<T>(X / other.X, Y / other.Y, Z / other.Z, W / other.W);
 			}
 
-			Vector4<T> __fastcall operator*(const Vector4<T> other)
+			Vector4<T> __FASTCALL operator*(const Vector4<T> other)
 			{
 				return Vector4<T>(X * other.X, Y * other.Y, Z * other.Z, W * other.W);
 			}
 
-			T __fastcall Length() const
+			T __FASTCALL Length() const
 			{
 				return static_cast<T>(sqrt((X*X) + (Y*Y) + (Z*Z) + (W*W)));
 			}
 
-			T __fastcall LengthSquared() const
+			T __FASTCALL LengthSquared() const
 			{
 				return static_cast<T> ((X*X) + (Y*Y) + (Z*Z) + (W*W));
 			}
