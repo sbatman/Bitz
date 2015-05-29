@@ -29,6 +29,8 @@ namespace Bitz
 					EGLSurface surface;
 					EGLContext context;
 
+					_NativeApp = app;
+
 					EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 
 					eglInitialize(display, 0, 0);
@@ -37,9 +39,9 @@ namespace Bitz
 
 					eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
 
-					ANativeWindow_setBuffersGeometry(app->window, 0, 0, format);
+					ANativeWindow_setBuffersGeometry(_NativeApp->window, 0, 0, format);
 
-					surface = eglCreateWindowSurface(display, config, app->window, NULL);
+					surface = eglCreateWindowSurface(display, config, _NativeApp->window, NULL);
 					context = eglCreateContext(display, config, NULL, NULL);
 
 					_GlContext = new Bitz::PlatformSpecific::Android::GFX::GLContext();
@@ -51,7 +53,7 @@ namespace Bitz
 					eglQuerySurface(display, surface, EGL_HEIGHT, &h);
 
 					_WindowSize.X = w;
-					_WindowSize.Y = h;	
+					_WindowSize.Y = h;
 
 					Bitz::GFX::GraphicsManager::Init(this);
 				}
@@ -72,7 +74,15 @@ namespace Bitz
 
 				void Window::Update()
 				{
-
+					int ident;
+					int events;
+					struct android_poll_source* source;
+					while ((ident = ALooper_pollAll(0, NULL, &events, (void**)&source)) >= 0) {
+						// Process this event.
+						if (source != NULL) {
+							source->process(_NativeApp, source);
+						}
+					}
 				}
 
 				void Window::SetWindowSize(const Vector2I newSize)

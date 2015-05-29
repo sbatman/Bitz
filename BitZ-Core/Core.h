@@ -33,10 +33,6 @@ namespace Bitz
 		/// <returns>True if the engine is running else false</returns>
 		static bool IsRunning();
 		/// <summary>
-		/// Stops the engine
-		/// </summary>
-		static void Stop();
-		/// <summary>
 		/// Sets the target update rate per second
 		/// </summary>
 		static void SetTargetUPS(double_t newUPS);
@@ -54,6 +50,7 @@ namespace Bitz
 		/// </summary>
 		static double_t GetTargetFPS();
 
+	public:
 		/// <summary>
 		/// Pause or unpause the renderloop, this effectivly causes the engine to skip calling draw logic while paused
 		/// This is mostly used for periods of lost focus
@@ -67,6 +64,11 @@ namespace Bitz
 		/// <returns>True if paused else false</returns>
 		static bool IsRenderPaused();
 
+		/// <summary>
+		/// Stops the engine
+		/// </summary>
+		static void Stop();
+
 	private:
 		static bool _PauseRender;
 		static double_t _LastUpdate;
@@ -78,5 +80,7 @@ namespace Bitz
 		static bool _Running;
 		static GameLogic::GameCore * _CurrentGameCore;
 		static Time::Timer _RunningTimer;
+
+		static void PlatformSpecificUpdate();
 	};
 }

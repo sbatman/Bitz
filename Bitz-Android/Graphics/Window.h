@@ -25,6 +25,7 @@ namespace Bitz
 					virtual	void ApplyWindowSizeChange()override;
 				private:
 					GLContext * _GlContext = nullptr;
+					android_app * _NativeApp = nullptr;
 				};
 			}
 		}

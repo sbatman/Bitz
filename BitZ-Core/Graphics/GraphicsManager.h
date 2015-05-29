@@ -15,7 +15,7 @@ namespace Bitz
 
 	namespace PlatformSpecific
 	{
-		namespace Windows { namespace GFX { class Window; } } 
+		namespace Windows { namespace GFX { class Window; } }
 		namespace Android { namespace GFX { class Window; } }
 	}
 
@@ -33,6 +33,7 @@ namespace Bitz
 			friend class Bitz::Core;
 			friend class Bitz::PlatformSpecific::Windows::GFX::Window;
 			friend class Bitz::PlatformSpecific::Android::GFX::Window;
+
 		public:
 			/// <summary>
 			/// Sets the colour that will be used to clear the backbuffer
@@ -87,6 +88,8 @@ namespace Bitz
 			/// Forcefully clears the backbuffer of the rendering window
 			/// </summary>
 			static void Clear();
+
+			static void SetActiveWindow(Window * window);
 
 		protected:
 			/// <summary>
@@ -160,6 +163,8 @@ namespace Bitz
 			static Vector2I _CurrentScreenSize;
 
 			static RenderEngine * _ActiveRenderEngine;
+
+			static Window * _ActiveWindow;
 		};
 	}
 }

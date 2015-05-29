@@ -19,11 +19,12 @@ namespace Bitz
 
 		Vector3F GraphicsManager::_Debug_BackbufferColourAlt = Vector3F(0.5f, 0.3f, 0.5f);
 		Vector3F GraphicsManager::_BufferClearColour = Vector3F(0);
-		Timer * GraphicsManager::_FrameTimer = new Timer();
+		Timer * GraphicsManager::_FrameTimer = nullptr;
 		uint64_t GraphicsManager::_FrameNumber = 0;
 		double_t GraphicsManager::_LastFrameTime = 0;
 		GraphicsStates::BaseGS * GraphicsManager::_CurrentGraphicsState = nullptr;
 		RenderEngine * GraphicsManager::_ActiveRenderEngine = nullptr;
+		Window * GraphicsManager::_ActiveWindow = nullptr;
 
 		Camera * GraphicsManager::_LastActiveCamera = nullptr;
 
@@ -32,24 +33,47 @@ namespace Bitz
 		void GraphicsManager::Init(Window * window)
 		{
 			assert(!_HasInit);
-
-			_ActiveRenderEngine = new RenderEngine(window);
-
-			_ActiveRenderEngine->Init();
-
+#ifdef WIN32
+			SetActiveWindow(window);
+#endif
 			_HasInit = true;
+			_FrameTimer = new Timer();
+		}
+
+		void GraphicsManager::SetActiveWindow(Window * window)
+		{
+			if (window == _ActiveWindow)return;
+			if (_ActiveWindow != nullptr)
+			{
+				if (_ActiveRenderEngine != nullptr)
+				{
+					delete _ActiveRenderEngine;
+					_ActiveRenderEngine = nullptr;
+				}
+				delete window;
+				window = nullptr;
+			}
+
+			_ActiveWindow = window;
+
+			if (_ActiveWindow != nullptr)
+			{
+				_ActiveRenderEngine = new RenderEngine(window);
+
+				_ActiveRenderEngine->Init();
+			}
 		}
 
 		void GraphicsManager::Update()
 		{
 			assert(_HasInit);
-			_ActiveRenderEngine->Update();
+			if (_ActiveRenderEngine != nullptr)_ActiveRenderEngine->Update();
 		}
 
 		void GraphicsManager::PreRender()
 		{
 			assert(_HasInit);
-
+			if (_ActiveRenderEngine == nullptr) return;
 			_FrameTimer->Start();
 
 			Clear();
@@ -59,6 +83,9 @@ namespace Bitz
 		{
 			assert(_HasInit);
 			assert(!_InRenderScope&& "End render must be called for every begin render");
+
+			if (_ActiveRenderEngine == nullptr) return;
+
 			glFinish();
 			_ActiveRenderEngine->Present();
 			_FrameTimer->Stop();
@@ -69,6 +96,8 @@ namespace Bitz
 		void GraphicsManager::BeginRender(GraphicsStates::BaseGS * graphicsState)
 		{
 			assert(_HasInit);
+
+			if (_ActiveRenderEngine == nullptr) return;
 
 			_CurrentGraphicsState = graphicsState;
 
@@ -98,6 +127,8 @@ namespace Bitz
 			assert(_HasInit);
 			assert(_InRenderScope&& "Begin render has not been called");
 
+			if (_ActiveRenderEngine == nullptr) return;
+
 			if (_CurrentGraphicsState->IsNormalsEnabled())
 			{
 				_ActiveRenderEngine->EnableNormals(true);
@@ -117,6 +148,7 @@ namespace Bitz
 
 		void GraphicsManager::Clear()
 		{
+			if (_ActiveRenderEngine == nullptr) return;
 			_ActiveRenderEngine->Clear((!_Debug_EnableBackbufferColourAlt || _FrameNumber % 2) ? _BufferClearColour : _Debug_BackbufferColourAlt);
 		}
 
@@ -130,6 +162,9 @@ namespace Bitz
 		{
 			assert(_HasInit);
 			assert(_InRenderScope&& "Begin render has not been called");
+
+			if (_ActiveRenderEngine == nullptr) return;
+
 			_ActiveRenderEngine->Render(idrawable);
 		}
 
@@ -152,8 +187,21 @@ namespace Bitz
 		void GraphicsManager::StaticDispose()
 		{
 			assert(_HasInit);
-			delete _FrameTimer;
-			delete _ActiveRenderEngine;
+			if (_FrameTimer != nullptr)
+			{
+				delete _FrameTimer;
+				_FrameTimer = nullptr;
+			}
+			if (_ActiveRenderEngine != nullptr)
+			{
+				delete _ActiveRenderEngine;
+				_ActiveRenderEngine = nullptr;
+			}
+			if (_ActiveWindow != nullptr)
+			{
+				delete _ActiveWindow;
+				_ActiveWindow = nullptr;
+			}
 
 			if (_CurrentGraphicsState != nullptr)
 			{

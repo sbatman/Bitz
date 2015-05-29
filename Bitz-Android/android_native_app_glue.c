@@ -10,7 +10,9 @@
 #include <android/log.h>
 #include "android_native_app_glue.h"
 
+#include "Core.h"
 #include "GameLogic\GameCore.h"
+#include "Graphics\GraphicsManager.h"
 #include "Graphics\Window.h"
 
 #include <EGL/egl.h>
@@ -55,7 +57,9 @@ static void free_saved_state(struct android_app* android_app) {
 	pthread_mutex_unlock(&android_app->mutex);
 }
 
-int8_t android_app_read_cmd(struct android_app* android_app) {
+int8_t android_app_read_cmd(struct android_app* android_app)
+{
+	if (android_app == nullptr)return -1;
 	int8_t cmd;
 	if (read(android_app->msgread, &cmd, sizeof(cmd)) == sizeof(cmd)) {
 		switch (cmd) {
@@ -215,22 +219,40 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 	struct engine* engine = (struct engine*)app->userData;
 	switch (cmd) {
 	case APP_CMD_SAVE_STATE:
-		// The system has asked us to save our current state.  Do so.
-
+		app->stateSaved = true;
 		break;
 	case APP_CMD_INIT_WINDOW:
-		// The window is being shown, get it ready.
-		if (_GameInstance != NULL&&_Window==nullptr) 			_Window = new Bitz::PlatformSpecific::Android::GFX::Window(app);
+		if (_GameInstance != NULL&&_Window != nullptr)
+		{
+			Bitz::GFX::GraphicsManager::SetActiveWindow(nullptr);
+			_Window = nullptr;
+		}
+		if (_GameInstance != NULL&&_Window == nullptr)
+		{
+			_Window = new Bitz::PlatformSpecific::Android::GFX::Window(app);
+			Bitz::GFX::GraphicsManager::SetActiveWindow(_Window);
+		}
 
 		break;
 	case APP_CMD_TERM_WINDOW:
 
+		Bitz::Core::SetRenderPause(false);
 		break;
 	case APP_CMD_GAINED_FOCUS:
-
+		Bitz::Core::SetRenderPause(false);
 		break;
 	case APP_CMD_LOST_FOCUS:
+		Bitz::Core::SetRenderPause(true);
+		break;
 
+	case APP_CMD_DESTROY:
+		app->destroyed = true;
+		Bitz::Core::Stop();
+		if (_GameInstance != NULL&&_Window != nullptr)
+		{
+			Bitz::GFX::GraphicsManager::SetActiveWindow(nullptr);
+			_Window = nullptr;
+		}
 		break;
 	}
 }
@@ -266,8 +288,7 @@ static void* android_app_entry(void* param) {
 		int ident;
 		int events;
 		struct android_poll_source* source;
-		while ((ident = ALooper_pollAll(0, NULL, &events,	(void**)&source)) >= 0) {
-
+		while ((ident = ALooper_pollAll(0, NULL, &events, (void**)&source)) >= 0) {
 			// Process this event.
 			if (source != NULL) {
 				source->process(android_app, source);
@@ -289,8 +310,6 @@ static void* android_app_entry(void* param) {
 static struct android_app* android_app_create(ANativeActivity* activity,
 	void* savedState, size_t savedStateSize)
 {
-
-
 	struct android_app* android_app = (struct android_app*)malloc(sizeof(struct android_app));
 	memset(android_app, 0, sizeof(struct android_app));
 	android_app->activity = activity;
