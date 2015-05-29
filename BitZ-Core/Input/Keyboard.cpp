@@ -39,7 +39,6 @@ namespace Bitz
 		}
 		void Keyboard::StaticDispose()
 		{
-
 		}
 		void Keyboard::Update()
 		{

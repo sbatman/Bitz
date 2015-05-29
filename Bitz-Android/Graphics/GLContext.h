@@ -28,9 +28,7 @@ namespace Bitz
 					EGLSurface  _Surface;
 					EGLContext  _Context;
 				};
-
 			}
 		}
 	}
 }
-

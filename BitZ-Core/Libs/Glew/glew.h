@@ -54,28 +54,28 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*
-** Copyright (c) 2007 The Khronos Group Inc.
-**
-** Permission is hereby granted, free of charge, to any person obtaining a
-** copy of this software and/or associated documentation files (the
-** "Materials"), to deal in the Materials without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Materials, and to
-** permit persons to whom the Materials are furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be included
-** in all copies or substantial portions of the Materials.
-**
-** THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-** IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-** MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
-*/
+ /*
+ ** Copyright (c) 2007 The Khronos Group Inc.
+ **
+ ** Permission is hereby granted, free of charge, to any person obtaining a
+ ** copy of this software and/or associated documentation files (the
+ ** "Materials"), to deal in the Materials without restriction, including
+ ** without limitation the rights to use, copy, modify, merge, publish,
+ ** distribute, sublicense, and/or sell copies of the Materials, and to
+ ** permit persons to whom the Materials are furnished to do so, subject to
+ ** the following conditions:
+ **
+ ** The above copyright notice and this permission notice shall be included
+ ** in all copies or substantial portions of the Materials.
+ **
+ ** THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ ** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ ** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ ** IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ ** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ ** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ ** MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+ */
 
 #ifndef __glew_h__
 #define __glew_h__
@@ -112,12 +112,12 @@
 
 #if defined(_WIN32)
 
-/*
- * GLEW does not include <windows.h> to avoid name space pollution.
- * GL needs GLAPI and GLAPIENTRY, GLU needs APIENTRY, CALLBACK, and wchar_t
- * defined properly.
- */
-/* <windef.h> and <gl.h>*/
+ /*
+  * GLEW does not include <windows.h> to avoid name space pollution.
+  * GL needs GLAPI and GLAPIENTRY, GLU needs APIENTRY, CALLBACK, and wchar_t
+  * defined properly.
+  */
+  /* <windef.h> and <gl.h>*/
 #ifdef APIENTRY
 #  ifndef GLAPIENTRY
 #    define GLAPIENTRY APIENTRY
@@ -208,19 +208,19 @@ typedef _W64 int ptrdiff_t;
 
 #else /* _UNIX */
 
-/*
- * Needed for ptrdiff_t in turn needed by VBO.  This is defined by ISO
- * C.  On my system, this amounts to _3 lines_ of included code, all of
- * them pretty much harmless.  If you know of a way of detecting 32 vs
- * 64 _targets_ at compile time you are free to replace this with
- * something that's portable.  For now, _this_ is the portable solution.
- * (mem, 2004-01-04)
- */
+ /*
+  * Needed for ptrdiff_t in turn needed by VBO.  This is defined by ISO
+  * C.  On my system, this amounts to _3 lines_ of included code, all of
+  * them pretty much harmless.  If you know of a way of detecting 32 vs
+  * 64 _targets_ at compile time you are free to replace this with
+  * something that's portable.  For now, _this_ is the portable solution.
+  * (mem, 2004-01-04)
+  */
 
 #include <stddef.h>
 
-/* SGI MIPSPro doesn't like stdint.h in C++ mode          */
-/* ID: 3376260 Solaris 9 has inttypes.h, but not stdint.h */
+  /* SGI MIPSPro doesn't like stdint.h in C++ mode          */
+  /* ID: 3376260 Solaris 9 has inttypes.h, but not stdint.h */
 
 #if (defined(__sgi) || defined(__sun)) && !defined(__GNUC__)
 #include <inttypes.h>
@@ -247,7 +247,7 @@ typedef _W64 int ptrdiff_t;
 #  endif
 #endif
 
-/* <glu.h> */
+ /* <glu.h> */
 #ifndef GLAPI
 #define GLAPI extern
 #endif

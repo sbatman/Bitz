@@ -11,7 +11,7 @@
 namespace Bitz
 {
 	bool Core::_Running;
-	GameLogic::GameCore * Core::_CurrentGameCore=nullptr;
+	GameLogic::GameCore * Core::_CurrentGameCore = nullptr;
 
 	Time::Timer Core::_RunningTimer = Time::Timer();
 
@@ -21,7 +21,7 @@ namespace Bitz
 	double_t Core::_MSPerDraw = 1000 / _TargetFPS;
 	double_t Core::_MSPerUpdate = 1000 / _TargetUPS;
 
-	double_t Core::_LastDraw=0;
+	double_t Core::_LastDraw = 0;
 	double_t  Core::_LastUpdate = 0;
 
 	bool Core::_PauseRender = false;

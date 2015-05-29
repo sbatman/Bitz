@@ -68,6 +68,5 @@ namespace Bitz
 		}
 
 		template GFX::Texture* ContentManager::Load<GFX::Texture>(std::string fileName);
-
 	}
 }

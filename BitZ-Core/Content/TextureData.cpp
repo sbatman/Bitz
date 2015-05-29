@@ -41,7 +41,7 @@ namespace Bitz
 		{
 			std::vector<uint8_t> png;
 			std::vector<uint8_t> image; //the raw pixels
-			unsigned width=0, height=0;
+			unsigned width = 0, height = 0;
 
 			//load and decode
 			//lodepng::load_file(png, ContentManager::GetGraphicsRoot() + L"\\" + fileName);

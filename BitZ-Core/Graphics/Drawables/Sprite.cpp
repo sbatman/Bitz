@@ -10,7 +10,6 @@ namespace Bitz
 	{
 		namespace Drawables
 		{
-
 			const int32_t DIMENTIONS = 3;
 			const float_t QUADDEFINITION[]{ 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0 };
 			const uint32_t VERTCOUNT = 6;
@@ -29,7 +28,6 @@ namespace Bitz
 
 			Sprite::~Sprite()
 			{
-
 			}
 
 			void Sprite::SetPosition(const Vector2F newPosition)

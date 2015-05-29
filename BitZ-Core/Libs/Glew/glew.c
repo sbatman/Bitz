@@ -71,9 +71,9 @@
 
 #if defined(GLEW_REGAL)
 
-/* In GLEW_REGAL mode we call direcly into the linked
-   libRegal.so glGetProcAddressREGAL for looking up
-   the GL function pointers. */
+ /* In GLEW_REGAL mode we call direcly into the linked
+	libRegal.so glGetProcAddressREGAL for looking up
+	the GL function pointers. */
 
 #  undef glGetProcAddressREGAL
 #  ifdef WIN32
@@ -185,9 +185,9 @@ void* NSGLGetProcAddress(const GLubyte *name)
 #  define glewGetProcAddress(name) (*glXGetProcAddressARB)(name)
 #endif
 
-/*
- * Redefine GLEW_GET_VAR etc without const cast
- */
+ /*
+  * Redefine GLEW_GET_VAR etc without const cast
+  */
 
 #undef GLEW_GET_VAR
 #ifdef GLEW_MX
@@ -214,10 +214,10 @@ void* NSGLGetProcAddress(const GLubyte *name)
 # endif /* GLEW_MX */
 #endif /* GLXEW_GET_VAR */
 
-/*
- * GLEW, just like OpenGL or GLU, does not rely on the standard C library.
- * These functions implement the functionality required in this file.
- */
+  /*
+   * GLEW, just like OpenGL or GLU, does not rely on the standard C library.
+   * These functions implement the functionality required in this file.
+   */
 static GLuint _glewStrLen(const GLubyte* s)
 {
 	GLuint i = 0;
@@ -12824,7 +12824,7 @@ GLboolean GLEWAPIENTRY wglewGetExtension(const char* name)
 	const GLubyte* end;
 	if (_wglewGetExtensionsStringARB == NULL)
 		if (_wglewGetExtensionsStringEXT == NULL)
-			return GL_FALSE;
+		return GL_FALSE;
 		else
 			start = (const GLubyte*)_wglewGetExtensionsStringEXT();
 	else
@@ -12846,7 +12846,7 @@ GLenum GLEWAPIENTRY wglewContextInit(WGLEW_CONTEXT_ARG_DEF_LIST)
 	/* query wgl extension string */
 	if (_wglewGetExtensionsStringARB == NULL)
 		if (_wglewGetExtensionsStringEXT == NULL)
-			extStart = (const GLubyte*)"";
+		extStart = (const GLubyte*)"";
 		else
 			extStart = (const GLubyte*)_wglewGetExtensionsStringEXT();
 	else

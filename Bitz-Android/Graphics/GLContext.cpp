@@ -10,7 +10,6 @@ namespace Bitz
 			{
 				GLContext::GLContext()
 				{
-	
 				}
 
 				GLContext::~GLContext()

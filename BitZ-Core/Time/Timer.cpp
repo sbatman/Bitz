@@ -85,7 +85,7 @@ namespace Bitz
 		}
 
 		double_t Timer::SystemFrequency() const
-		{		
+		{
 			return  1000000000;
 		}
 #endif

@@ -13,21 +13,21 @@ namespace Bitz
 		{
 			if (_CachedWorkingDirectoryStored && !force)return _CachedWorkingDirectory;
 
-		//	WCHAR buffer[MAX_PATH] = { 0 };
-		//	LPWSTR exePath = buffer;
+			//	WCHAR buffer[MAX_PATH] = { 0 };
+			//	LPWSTR exePath = buffer;
 
-		//	HMODULE hModule = GetModuleHandle(nullptr);
-		//	_ASSERT(hModule != NULL);
-		//	GetModuleFileName(hModule, exePath, MAX_PATH * sizeof(WCHAR));
+			//	HMODULE hModule = GetModuleHandle(nullptr);
+			//	_ASSERT(hModule != NULL);
+			//	GetModuleFileName(hModule, exePath, MAX_PATH * sizeof(WCHAR));
 
-	//		std::string folder = std::string(exePath);
-		//	size_t lastSlash = folder.find_last_of('\\');
-			//folder = folder.substr(0, lastSlash);
+		//		std::string folder = std::string(exePath);
+			//	size_t lastSlash = folder.find_last_of('\\');
+				//folder = folder.substr(0, lastSlash);
 
-		//	_CachedWorkingDirectory = folder;
-		//	_CachedWorkingDirectoryStored = true;
+			//	_CachedWorkingDirectory = folder;
+			//	_CachedWorkingDirectoryStored = true;
 
-	//		return folder;
+		//		return folder;
 
 			return "/";
 		}
@@ -54,11 +54,11 @@ namespace Bitz
 
 #ifdef __ANDROID__
 			fileHandle = fopen(fileName.c_str(), &modeChar);
-#elif WIN32			
+#elif WIN32
 			fopen_s(&fileHandle, fileName.c_str(), &modeChar);
-#endif	
+#endif
 
-			FileHandle * returnHandle = new FileHandle( fileName, fileHandle, mode );
+			FileHandle * returnHandle = new FileHandle(fileName, fileHandle, mode);
 			_OpenFiles.push_back(returnHandle);
 			return returnHandle;
 		}
@@ -95,7 +95,6 @@ namespace Bitz
 		{
 			return Handle == nullptr;
 		}
-
 
 		void IO::FileHandle::Close()
 		{

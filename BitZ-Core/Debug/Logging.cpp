@@ -116,7 +116,6 @@ namespace Bitz
 #elif __ANDROID__
 							switch (event.type)
 							{
-
 							case Logging::ErrorType::Critcal:((void)__android_log_print(ANDROID_LOG_FATAL, "Bitz", event.message.c_str()));break;
 							case Logging::ErrorType::Error:((void)__android_log_print(ANDROID_LOG_ERROR, "Bitz", event.message.c_str()));break;
 							case Logging::ErrorType::Warning:((void)__android_log_print(ANDROID_LOG_WARN, "Bitz", event.message.c_str()));break;

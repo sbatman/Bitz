@@ -333,7 +333,6 @@ extern "C" {
 	 */
 	void android_app_post_exec_cmd(struct android_app* android_app, int8_t cmd);
 
-
 	void ANativeActivity_Create(ANativeActivity* activity, void* savedState, size_t savedStateSize, Bitz::GameLogic::GameCore *gameInstance);
 	/**
 	 * This is the function that application code must implement, representing

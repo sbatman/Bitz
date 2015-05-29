@@ -60,6 +60,8 @@ namespace Bitz
 
 				Window::~Window()
 				{
+					delete _GlContext;
+					_GlContext = nullptr;
 				}
 
 				GLContext * Window::GetGLContext() const
@@ -77,9 +79,10 @@ namespace Bitz
 					int ident;
 					int events;
 					struct android_poll_source* source;
-					while ((ident = ALooper_pollAll(0, NULL, &events, (void**)&source)) >= 0) {
-						// Process this event.
-						if (source != NULL) {
+					while ((ident = ALooper_pollAll(0, NULL, &events, (void**)&source)) >= 0)
+					{
+						if (source != NULL)
+						{
 							source->process(_NativeApp, source);
 						}
 					}
