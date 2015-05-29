@@ -5,3 +5,6 @@
 *.opensdf
 /ipch/BITZ-ANDROID-375bdf73/*.ipch
 *.ipch
+/packages
+/Tools/AssetPacker/obj
+/Tools/AssetPacker/bin
