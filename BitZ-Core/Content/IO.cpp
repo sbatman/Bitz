@@ -1,3 +1,6 @@
+#ifdef __ANDROID__
+#include "../Bitz-Android/android_native_app_glue.h"
+#endif
 #include "../Common.h"
 #include "IO.h"
 
@@ -36,7 +39,7 @@ namespace Bitz
 		{
 			assert(fileName.length() != 0);
 			FILE * fileHandle;
-			char modeChar;
+			std::string modeChar;
 			switch (mode)
 			{
 			case Read:
@@ -53,9 +56,9 @@ namespace Bitz
 			}
 
 #ifdef __ANDROID__
-			fileHandle = fopen(fileName.c_str(), &modeChar);
+			fileHandle = fopen(fileName.c_str(), modeChar.c_str());
 #elif WIN32
-			fopen_s(&fileHandle, fileName.c_str(), &modeChar);
+			fopen_s(&fileHandle, fileName.c_str(), modeChar.c_str());
 #endif
 
 			FileHandle * returnHandle = new FileHandle(fileName, fileHandle, mode);
@@ -82,6 +85,30 @@ namespace Bitz
 				fclose(file.Handle);
 				file.Handle = nullptr;
 			}
+		}
+
+		std::vector<char> IO::ReadAllBytes(std::string filename)
+		{
+
+
+#ifdef __ANDROID__
+			AAssetManager* assetManager = android_app_GetAssetManager();
+			AAsset* asset = AAssetManager_open(assetManager, filename.c_str(), AASSET_MODE_BUFFER);
+			int32_t length = AAsset_getLength(asset);
+			const void * ptr = AAsset_getBuffer(asset);
+			std::vector<char> result(length);
+			Memcpy(&result[0], length, ptr, length);
+			AAsset_close(asset);
+#elif WIN32
+			std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
+			std::ifstream::pos_type pos = ifs.tellg();
+
+			std::vector<char>  result(pos);
+
+			ifs.seekg(0, std::ios::beg);
+			ifs.read(&result[0], pos);
+#endif
+			return result;
 		}
 
 		IO::FileHandle::FileHandle(std::string fileName, FILE * handle, FileMode mode)

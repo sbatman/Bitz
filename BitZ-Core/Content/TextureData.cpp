@@ -1,12 +1,15 @@
 #include "../Common.h"
 #include "TextureData.h"
 #include "ContentManager.h"
+#include "../Serialize/Packet.h"
+#include "IO.h"
 //#include "libs/lodepng/lodepng.h"
 
 namespace Bitz
 {
 	namespace Content
 	{
+
 		uint32_t TextureData::_NextID = 0;
 
 		std::vector<TextureData *> TextureData::_LoadedTextureData;
@@ -39,24 +42,22 @@ namespace Bitz
 
 		TextureData * TextureData::Load(const std::string fileName)
 		{
-			std::vector<uint8_t> png;
-			std::vector<uint8_t> image; //the raw pixels
-			unsigned width = 0, height = 0;
+			int32_t width = 0, height = 0;
+			uint8_t * byteArray;
 
-			//load and decode
-			//lodepng::load_file(png, ContentManager::GetGraphicsRoot() + L"\\" + fileName);
-		//	unsigned error = lodepng::decode(image, width, height, png);
-			//if (error != 0) throw std::exception("Error loading PNG");
+			std::vector<char> imageData = IO::ReadAllBytes(fileName.c_str());
+			Serialize::Packet * packet = Serialize::Packet::FromByteArray(imageData);
+			std::vector<Bitz::Serialize::Packet::PakObject> objects = packet->GetObjects();
+			width = *((int32_t *)objects[0].Ptr);
+			height = *((int32_t *)objects[1].Ptr);
+			byteArray = ((uint8_t *)objects[2].Ptr);
 
 			TextureData * returnTextureData = new TextureData();
 
 			returnTextureData->_PixelData = new uint8_t[width*height * 4];
+		
+			Memcpy(returnTextureData->_PixelData, width*height * 4, byteArray, width*height * 4);
 
-#ifdef __ANDROID__
-			memcpy(returnTextureData->_PixelData, &image[0], width*height * 4);
-#elif WIN32
-			memcpy_s(returnTextureData->_PixelData, width*height * 4, &image[0], width*height * 4);
-#endif
 			returnTextureData->_Width = width;
 			returnTextureData->_Height = height;
 

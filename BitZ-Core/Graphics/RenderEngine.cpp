@@ -51,6 +51,7 @@ namespace Bitz
 			}
 			_CurrentRenderingContext = nullptr;
 			delete _CurrentWindow;
+			_CurrentWindow = nullptr;
 		}
 
 		void RenderEngine::Init()

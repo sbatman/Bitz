@@ -1,6 +1,7 @@
 #include "../Common.h"
 #include "../Math/Math.h"
 #include "../Content/TextureData.h"
+#include "../Content/ContentManager.h"
 #include "Texture.h"
 
 namespace Bitz
@@ -63,7 +64,7 @@ namespace Bitz
 
 		Texture* GFX::Texture::Load(std::string const fileName)
 		{
-			Content::TextureData * data = Content::TextureData::Load(fileName);
+			Content::TextureData * data = Content::TextureData::Load(Bitz::Content::ContentManager::GetGraphicsRoot()+fileName);
 			GFX::Texture * returnTexture = new Texture();
 			returnTexture->_Data = data;
 			returnTexture->_Data->IncrementUsageCount();

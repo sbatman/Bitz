@@ -46,6 +46,7 @@
 
 Bitz::GameLogic::GameCore *_GameInstance = nullptr;
 Bitz::PlatformSpecific::Android::GFX::Window * _Window = nullptr;
+AAssetManager * AndroidAssetManager=nullptr;
 
 static void free_saved_state(struct android_app* android_app) {
 	pthread_mutex_lock(&android_app->mutex);
@@ -55,6 +56,11 @@ static void free_saved_state(struct android_app* android_app) {
 		android_app->savedStateSize = 0;
 	}
 	pthread_mutex_unlock(&android_app->mutex);
+}
+
+AAssetManager * android_app_GetAssetManager()
+{
+	return AndroidAssetManager;
 }
 
 int8_t android_app_read_cmd(struct android_app* android_app)
@@ -295,6 +301,7 @@ static void* android_app_entry(void* param) {
 			}
 		}
 	}
+	AndroidAssetManager = android_app->activity->assetManager;
 	_GameInstance->Run(_Window);
 
 	//delete _GameInstance;

@@ -2,6 +2,11 @@
 //Common includes
 #include "../Bitz-Core/Common.h"
 
+//Content
+#include "../Bitz-Core/Content/ContentManager.h"
+#include "../Bitz-Core/Content/IO.h"
+#include "../Bitz-Core/Content/TextureData.h"
+
 //GameLogic
 #include "../Bitz-Core/GameLogic/GameCore.h"
 #include "../Bitz-Core/GameLogic/GameState.h"
@@ -12,6 +17,10 @@
 #include "../Bitz-Core/Graphics/GLContext.h"
 #include "../Bitz-Core/Graphics/GraphicsManager.h"
 #include "../Bitz-Core/Graphics/Texture.h"
+#include "../Bitz-Core/Graphics//GraphicsStates/GS2D.h"
+#include "../Bitz-Core/Graphics//GraphicsStates/GS3D.h"
+#include "../Bitz-Core/Graphics/Drawables/Sprite.h"
+#include "../Bitz-Core/Graphics/Drawables/Model.h"
 #include "Graphics\Window.h"
 
 //Math

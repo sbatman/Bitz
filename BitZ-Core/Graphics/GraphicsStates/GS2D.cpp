@@ -28,13 +28,22 @@ namespace Bitz
 				break;
 			case BlendStates::ALPHA:
 				glEnable(GL_BLEND);
+#ifdef __ANDROID__
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#elif WIN32
 				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
 				glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+#endif
+
 				break;
 			case BlendStates::ADDATIVE:
 				glEnable(GL_BLEND);
+#ifdef __ANDROID__
+#elif WIN32
 				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+#endif
+
 				break;
 			}
 			glDisable(GL_DEPTH_TEST);

@@ -197,11 +197,9 @@ namespace Bitz
 				delete _ActiveRenderEngine;
 				_ActiveRenderEngine = nullptr;
 			}
-			if (_ActiveWindow != nullptr)
-			{
-				delete _ActiveWindow;
-				_ActiveWindow = nullptr;
-			}
+
+			_ActiveWindow = nullptr;
+
 
 			if (_CurrentGraphicsState != nullptr)
 			{

@@ -14,14 +14,14 @@ namespace AssetPacker
     internal class Program
     {
         private const string INPUTFOLDER = "Input";
-        private const string OUTPUTFILE = "Dat.Pack";
+        private const string OUTPUTFOLDER = "Output";
         private const UInt16 PACKETID_PACK = 1412;
         private const UInt16 PACKETID_PNG = 1247;
 
         private static void Main(string[] args)
         {
             if (!Directory.Exists(INPUTFOLDER)) { Console.WriteLine("Input Folder Missing"); return; }
-            if (File.Exists(OUTPUTFILE)) File.Delete(OUTPUTFILE);
+            if (!Directory.Exists(OUTPUTFOLDER)) Directory.CreateDirectory(OUTPUTFOLDER);
 
             List<string> DetectedFiles = new List<string>();
 
@@ -29,28 +29,26 @@ namespace AssetPacker
 
             FilterFiles(ref DetectedFiles);
 
-            List<Packet> ProcessedFiles = new List<Packet>();
+            List<Tuple<string, Packet>> ProcessedFiles = new List<Tuple<string, Packet>>();
 
             foreach (string s in DetectedFiles)
             {
                 if (s.ToLowerInvariant().EndsWith(".png")) ProcessedFiles.Add(ProcessPNG(s));
             }
 
-            Packet Pack = new Packet(PACKETID_PACK);
-            foreach (Packet p in ProcessedFiles)
+            foreach (Tuple<string, Packet> p in ProcessedFiles)
             {
-                Pack.Add(p.ToByteArray());
-                p.Dispose();
+                byte[] packData = p.Item2.ToByteArray();
+                using (FileStream outStream = File.Create(OUTPUTFOLDER + "\\" + p.Item1))
+                {
+                    outStream.Write(packData, 0, packData.Length);
+                }
+                p.Item2.Dispose();
             }
 
             ProcessedFiles.Clear();
 
-            using (FileStream outStream = File.Create(OUTPUTFILE))
-            {
-                byte[] packData = Pack.ToByteArray();
-                Pack.Dispose();
-                outStream.Write(packData, 0, packData.Length);
-            }
+
         }
 
         private static void FilterFiles(ref List<string> detectedFiles)
@@ -64,7 +62,7 @@ namespace AssetPacker
             foreach (string s in Directory.EnumerateDirectories(folder)) DetectFiles(detectedFiles, s);
         }
 
-        private static Tuple<Int32, Int32, byte[]> LoadPng(string fileName)
+        private static Tuple<Int32, Int32, byte[], string> LoadPng(string fileName)
         {
             using (Bitmap bmp = new Bitmap(fileName))
             {
@@ -73,19 +71,18 @@ namespace AssetPacker
                 BitmapData dat = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
                 IntPtr ptr = dat.Scan0;
                 Marshal.Copy(ptr, returnData, 0, bytes);
-                return new Tuple<int, int, byte[]>(bmp.Width, bmp.Height, returnData);
+                return new Tuple<int, int, byte[], string>(bmp.Width, bmp.Height, returnData, fileName);
             }
         }
 
-        private static Packet ProcessPNG(string fileName)
+        private static Tuple<string, Packet> ProcessPNG(string fileName)
         {
-            Tuple<int, int, byte[]> data = LoadPng(fileName);
+            Tuple<int, int, byte[], string> data = LoadPng(fileName);
             Packet p = new Packet(PACKETID_PNG);
-            p.Add(fileName);
             p.Add(data.Item1);
             p.Add(data.Item2);
             p.Add(data.Item3);
-            return p;
+            return new Tuple<string, Packet>(fileName.Replace(INPUTFOLDER+"\\","").ToLower().Replace(".png",".Gdat"), p);
         }
     }
 }

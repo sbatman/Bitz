@@ -36,6 +36,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Input\Mouse.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Libs\CppFormat\format.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Libs\Glew\glew.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Serialize\Packet.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Time\Timer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility.cpp" />
   </ItemGroup>
@@ -71,6 +72,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\Vector4.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Serialize\Packet.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Consts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility.h" />

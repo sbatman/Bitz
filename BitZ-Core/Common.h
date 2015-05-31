@@ -13,6 +13,7 @@
 #include <mutex>
 #include <cstddef>
 #include <memory>
+#include <fstream>
 
 //OpenGL Includes
 #ifdef __ANDROID__
@@ -36,6 +37,7 @@ typedef double double_t;
 #include <jni.h>
 #include <errno.h>
 #include <EGL/egl.h>
+#include <android/asset_manager.h>
 
 #elif __APPLE__
 

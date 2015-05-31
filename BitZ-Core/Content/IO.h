@@ -39,6 +39,8 @@ namespace Bitz
 			static FileHandle * OpenFile(std::string fileName, FileMode mode);
 			static void CloseFile(FileHandle file);
 
+			static std::vector<char> ReadAllBytes(std::string filename);
+
 		protected:
 			static void CloseAllOpen();
 
@@ -53,6 +55,7 @@ namespace Bitz
 			static bool _CachedWorkingDirectoryStored;
 
 			static std::vector<FileHandle *> _OpenFiles;
+
 		};
 	}
 }

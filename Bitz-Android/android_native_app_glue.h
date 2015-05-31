@@ -340,6 +340,8 @@ extern "C" {
 	 */
 	extern void android_main(struct android_app* app);
 
+	AAssetManager * android_app_GetAssetManager();
+
 #ifdef __cplusplus
 }
 #endif
