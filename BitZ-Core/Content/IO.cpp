@@ -87,26 +87,25 @@ namespace Bitz
 			}
 		}
 
-		std::vector<char> IO::ReadAllBytes(std::string filename)
+		std::vector<byte> IO::ReadAllBytes(std::string filename)
 		{
-
 
 #ifdef __ANDROID__
 			AAssetManager* assetManager = android_app_GetAssetManager();
 			AAsset* asset = AAssetManager_open(assetManager, filename.c_str(), AASSET_MODE_BUFFER);
 			int32_t length = AAsset_getLength(asset);
 			const void * ptr = AAsset_getBuffer(asset);
-			std::vector<char> result(length);
+			std::vector<byte> result(length);
 			Memcpy(&result[0], length, ptr, length);
 			AAsset_close(asset);
 #elif WIN32
 			std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
 			std::ifstream::pos_type pos = ifs.tellg();
 
-			std::vector<char>  result(pos);
+			std::vector<byte>  result(pos);
 
 			ifs.seekg(0, std::ios::beg);
-			ifs.read(&result[0], pos);
+			ifs.read(reinterpret_cast<char *>(&result[0]), pos);
 #endif
 			return result;
 		}

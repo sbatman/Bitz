@@ -100,7 +100,7 @@ uint16_t Packet::GetType() const
 	return _Type;
 }
 
-Packet * Packet::FromByteArray(std::vector<char> data)
+Packet * Packet::FromByteArray(std::vector<byte> data)
 {
 	return FromByteArray((uint8_t *)&data[0]);
 }

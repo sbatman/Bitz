@@ -15,6 +15,8 @@
 #include <memory>
 #include <fstream>
 
+typedef uint8_t byte;
+
 //OpenGL Includes
 #ifdef __ANDROID__
 

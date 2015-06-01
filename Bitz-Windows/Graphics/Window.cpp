@@ -43,6 +43,7 @@ namespace Bitz
 				Window::~Window()
 				{
 					delete _GlContext;
+					_GlContext = nullptr;
 				}
 
 				void Window::SetQuitFunction(void(function)(void))

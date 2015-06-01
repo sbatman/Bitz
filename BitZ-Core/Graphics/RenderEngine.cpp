@@ -52,6 +52,8 @@ namespace Bitz
 			_CurrentRenderingContext = nullptr;
 			delete _CurrentWindow;
 			_CurrentWindow = nullptr;
+			_ActiveTexture = nullptr;
+			Content::TextureData::ClearAllOpenGLIDs();
 		}
 
 		void RenderEngine::Init()

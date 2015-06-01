@@ -1,5 +1,5 @@
 #pragma once
-#include "Common.h"
+#include "../Common.h"
 
 namespace Bitz
 {
@@ -106,7 +106,7 @@ namespace Bitz
 			/// </summary>
 			uint16_t GetType() const;
 
-			static Packet * FromByteArray(std::vector<char> data);
+			static Packet * FromByteArray(std::vector<byte> data);
 
 			/// <summary>
 			///    Creates a packet from tje provided byte aray and returns 

@@ -39,7 +39,7 @@ namespace Bitz
 			static FileHandle * OpenFile(std::string fileName, FileMode mode);
 			static void CloseFile(FileHandle file);
 
-			static std::vector<char> ReadAllBytes(std::string filename);
+			static std::vector<byte> ReadAllBytes(std::string filename);
 
 		protected:
 			static void CloseAllOpen();

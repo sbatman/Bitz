@@ -45,7 +45,7 @@ namespace Bitz
 			int32_t width = 0, height = 0;
 			uint8_t * byteArray;
 
-			std::vector<char> imageData = IO::ReadAllBytes(fileName.c_str());
+			std::vector<byte> imageData = IO::ReadAllBytes(fileName.c_str());
 			Serialize::Packet * packet = Serialize::Packet::FromByteArray(imageData);
 			std::vector<Bitz::Serialize::Packet::PakObject> objects = packet->GetObjects();
 			width = *((int32_t *)objects[0].Ptr);
@@ -83,6 +83,11 @@ namespace Bitz
 		{
 			_UsageCount--;
 			assert(_UsageCount >= 0);
+		}
+
+		void TextureData::ClearAllOpenGLIDs()
+		{
+			for (TextureData* tex : _LoadedTextureData)tex->SetOpenglTextureID(-1);
 		}
 	}
 }
