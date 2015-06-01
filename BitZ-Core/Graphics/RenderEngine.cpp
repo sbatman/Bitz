@@ -248,5 +248,10 @@ namespace Bitz
 			}
 			assert(glGetError() == GL_NO_ERROR);
 		}
+
+		Vector2I RenderEngine::GetSize()
+		{
+			return _CurrentWindow->GetWindowSize();
+		}
 	}
 }

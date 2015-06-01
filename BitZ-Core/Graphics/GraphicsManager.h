@@ -157,10 +157,6 @@ namespace Bitz
 			/// The last active camera saved for some optimisations like projection matix baking
 			/// </summary>
 			static Camera * _LastActiveCamera;
-			/// <summary>
-			/// The current screensize
-			/// </summary>
-			static Vector2I _CurrentScreenSize;
 
 			static RenderEngine * _ActiveRenderEngine;
 

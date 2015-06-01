@@ -67,10 +67,19 @@ namespace AssetPacker
             using (Bitmap bmp = new Bitmap(fileName))
             {
                 int bytes = bmp.Width * bmp.Height * 4;
+                byte[] tempData = new byte[bytes];
                 byte[] returnData = new byte[bytes];
                 BitmapData dat = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
                 IntPtr ptr = dat.Scan0;
-                Marshal.Copy(ptr, returnData, 0, bytes);
+                Marshal.Copy(ptr, tempData, 0, bytes);
+                for(int x=0;x< bytes;x+=4)
+                {
+                    returnData[x] = tempData[x + 3]; 
+                    returnData[x+1] = tempData[x + 2];
+                    returnData[x+2] = tempData[x + 1];
+                    returnData[x+3] = tempData[x];
+                }
+
                 return new Tuple<int, int, byte[], string>(bmp.Width, bmp.Height, returnData, fileName);
             }
         }

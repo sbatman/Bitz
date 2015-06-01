@@ -24,6 +24,7 @@ namespace Bitz
 			Window * GetWindow();
 			void Render(Drawables::IDrawable* idrawable);
 			void SetSize(Vector2I newSize);
+			Vector2I GetSize();
 			void EnableNormals(bool enabled);
 			bool IsEnabledNormals();
 			bool IsEnabledTexturing();

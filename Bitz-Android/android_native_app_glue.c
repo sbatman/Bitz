@@ -32,6 +32,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ *
+ * This file is to be considered heavily modified from the above licensed origional
+ *
  */
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "threaded_app", __VA_ARGS__))
