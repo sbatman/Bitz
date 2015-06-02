@@ -25,10 +25,10 @@ namespace Bitz
 				};
 				virtual ~IDrawable()
 				{
-					if (_VertArray != nullptr)delete[] _VertArray;
-					if (_ColArray != nullptr)delete[] _ColArray;
-					if (_TexArray != nullptr)delete[] _TexArray;
-					if (_NormArray != nullptr)delete[] _NormArray;
+					if(_VertArray != nullptr)delete[] _VertArray;
+					if(_ColArray != nullptr)delete[] _ColArray;
+					if(_TexArray != nullptr)delete[] _TexArray;
+					if(_NormArray != nullptr)delete[] _NormArray;
 				}
 				virtual void PopulateVertArray(float_t * vertArray, int32_t * startPosition) = 0;
 				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) = 0;
@@ -43,6 +43,18 @@ namespace Bitz
 				{
 					return _Texture;
 				}
+				virtual void SetVisible(bool visible)
+				{
+					_Visible = visible;
+				}
+				virtual bool IsVisible() const
+				{
+					return _Visible;
+				}
+				virtual bool ShouldDraw() const
+				{
+					return _Visible && _VertCount > 0;
+				}
 
 			protected:
 				float_t * _VertArray = nullptr;
@@ -52,6 +64,7 @@ namespace Bitz
 				int32_t _VertCount = 0;
 				RenderMode _RenderMode;
 				Texture * _Texture = nullptr;
+				bool _Visible = true;
 			};
 		}
 	}
