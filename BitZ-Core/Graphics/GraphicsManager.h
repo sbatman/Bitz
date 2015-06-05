@@ -91,6 +91,8 @@ namespace Bitz
 
 			static void SetActiveWindow(Window * window);
 
+			static RenderEngine * GetActiveRenderEngine();
+
 		protected:
 			/// <summary>
 			/// Initalises the Graphics manager, making the rendering context current and creating resources

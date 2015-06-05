@@ -39,11 +39,11 @@ namespace Bitz
 			case BlendStates::ADDATIVE:
 				glEnable(GL_BLEND);
 #ifdef __ANDROID__
-#elif WIN32
-				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-#endif
 
+#elif WIN32
+				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);			
+#endif
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 				break;
 			}
 			glDisable(GL_DEPTH_TEST);

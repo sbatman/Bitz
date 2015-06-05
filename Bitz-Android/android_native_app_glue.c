@@ -14,6 +14,7 @@
 #include "GameLogic\GameCore.h"
 #include "Graphics\GraphicsManager.h"
 #include "Graphics\Window.h"
+#include "Math\Math.h"
 
 #include <EGL/egl.h>
 #include <GLES/gl.h>
@@ -49,9 +50,10 @@
 
 Bitz::GameLogic::GameCore *_GameInstance = nullptr;
 Bitz::PlatformSpecific::Android::GFX::Window * _Window = nullptr;
-AAssetManager * AndroidAssetManager=nullptr;
+AAssetManager * AndroidAssetManager = nullptr;
 
-static void free_saved_state(struct android_app* android_app) {
+static void free_saved_state(struct android_app* android_app)
+{
 	pthread_mutex_lock(&android_app->mutex);
 	if (android_app->savedState != NULL) {
 		free(android_app->savedState);
@@ -70,7 +72,8 @@ int8_t android_app_read_cmd(struct android_app* android_app)
 {
 	if (android_app == nullptr)return -1;
 	int8_t cmd;
-	if (read(android_app->msgread, &cmd, sizeof(cmd)) == sizeof(cmd)) {
+	if (read(android_app->msgread, &cmd, sizeof(cmd)) == sizeof(cmd))
+	{
 		switch (cmd) {
 		case APP_CMD_SAVE_STATE:
 			free_saved_state(android_app);
@@ -84,7 +87,8 @@ int8_t android_app_read_cmd(struct android_app* android_app)
 	return -1;
 }
 
-static void print_cur_config(struct android_app* android_app) {
+static void print_cur_config(struct android_app* android_app)
+{
 	char lang[2], country[2];
 	AConfiguration_getLanguage(android_app->config, lang);
 	AConfiguration_getCountry(android_app->config, country);
@@ -109,7 +113,8 @@ static void print_cur_config(struct android_app* android_app) {
 		AConfiguration_getUiModeNight(android_app->config));
 }
 
-void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
+void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd)
+{
 	switch (cmd) {
 	case APP_CMD_INPUT_CHANGED:
 		LOGV("APP_CMD_INPUT_CHANGED\n");
@@ -153,11 +158,16 @@ void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
 		break;
 
 	case APP_CMD_CONFIG_CHANGED:
+	{
 		LOGV("APP_CMD_CONFIG_CHANGED\n");
 		AConfiguration_fromAssetManager(android_app->config,
 			android_app->activity->assetManager);
+
+
+
 		print_cur_config(android_app);
-		break;
+	}
+	break;
 
 	case APP_CMD_DESTROY:
 		LOGV("APP_CMD_DESTROY\n");
@@ -166,7 +176,8 @@ void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
 	}
 }
 
-void android_app_post_exec_cmd(struct android_app* android_app, int8_t cmd) {
+void android_app_post_exec_cmd(struct android_app* android_app, int8_t cmd)
+{
 	switch (cmd) {
 	case APP_CMD_TERM_WINDOW:
 		LOGV("APP_CMD_TERM_WINDOW\n");
@@ -190,7 +201,8 @@ void android_app_post_exec_cmd(struct android_app* android_app, int8_t cmd) {
 	}
 }
 
-static void android_app_destroy(struct android_app* android_app) {
+static void android_app_destroy(struct android_app* android_app)
+{
 	LOGV("android_app_destroy!");
 	free_saved_state(android_app);
 	pthread_mutex_lock(&android_app->mutex);
@@ -204,7 +216,8 @@ static void android_app_destroy(struct android_app* android_app) {
 	// Can't touch android_app object after this.
 }
 
-static void process_input(struct android_app* app, struct android_poll_source* source) {
+static void process_input(struct android_app* app, struct android_poll_source* source)
+{
 	AInputEvent* event = NULL;
 	while (AInputQueue_getEvent(app->inputQueue, &event) >= 0) {
 		LOGV("New input event: type=%d\n", AInputEvent_getType(event));
@@ -217,7 +230,8 @@ static void process_input(struct android_app* app, struct android_poll_source* s
 	}
 }
 
-static void process_cmd(struct android_app* app, struct android_poll_source* source) {
+static void process_cmd(struct android_app* app, struct android_poll_source* source)
+{
 	int8_t cmd = android_app_read_cmd(app);
 	android_app_pre_exec_cmd(app, cmd);
 	if (app->onAppCmd != NULL) app->onAppCmd(app, cmd);
@@ -230,6 +244,7 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 	case APP_CMD_SAVE_STATE:
 		app->stateSaved = true;
 		break;
+
 	case APP_CMD_INIT_WINDOW:
 		if (_GameInstance != NULL&&_Window != nullptr)
 		{
@@ -493,13 +508,14 @@ static void onInputQueueCreated(ANativeActivity* activity, AInputQueue* queue) {
 	android_app_set_input((struct android_app*)activity->instance, queue);
 }
 
-static void onInputQueueDestroyed(ANativeActivity* activity, AInputQueue* queue) {
+static void onInputQueueDestroyed(ANativeActivity* activity, AInputQueue* queue)
+{
 	LOGV("InputQueueDestroyed: %p -- %p\n", activity, queue);
 	android_app_set_input((struct android_app*)activity->instance, NULL);
 }
 
-void ANativeActivity_Create(ANativeActivity* activity,
-	void* savedState, size_t savedStateSize, Bitz::GameLogic::GameCore *gameInstance) {
+void ANativeActivity_Create(ANativeActivity* activity, void* savedState, size_t savedStateSize, Bitz::GameLogic::GameCore *gameInstance)
+{
 	LOGV("Creating: %p\n", activity);
 	_GameInstance = gameInstance;
 	activity->callbacks->onDestroy = onDestroy;

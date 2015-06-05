@@ -25,13 +25,11 @@ namespace Bitz
 					};
 					EGLint w, h, format;
 					EGLint numConfigs;
-					EGLConfig config;
-					EGLSurface surface;
-					EGLContext context;
+
 
 					_NativeApp = app;
 
-					EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+					display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 
 					eglInitialize(display, 0, 0);
 
@@ -44,6 +42,7 @@ namespace Bitz
 					surface = eglCreateWindowSurface(display, config, _NativeApp->window, NULL);
 					context = eglCreateContext(display, config, NULL, NULL);
 
+
 					_GlContext = new Bitz::PlatformSpecific::Android::GFX::GLContext();
 					_GlContext->Init(display, surface, context);
 
@@ -55,13 +54,19 @@ namespace Bitz
 					_WindowSize.X = w;
 					_WindowSize.Y = h;
 
+
 					Bitz::GFX::GraphicsManager::Init(this);
+
+					Bitz::GFX::GraphicsManager::SetScreenSize(Vector2I(w, h));
 				}
 
 				Window::~Window()
 				{
 					delete _GlContext;
 					_GlContext = nullptr;
+					eglDestroyContext(display, context);
+					eglDestroySurface(display, surface);
+
 				}
 
 				GLContext * Window::GetGLContext() const
@@ -86,11 +91,20 @@ namespace Bitz
 							source->process(_NativeApp, source);
 						}
 					}
+
+					EGLint w, h;
+					eglQuerySurface(display, surface, EGL_WIDTH, &w);
+					eglQuerySurface(display, surface, EGL_HEIGHT, &h);
+					if ((_WindowSize.X != w || _WindowSize.Y != h) && w != 0 && h != 0)
+					{
+						Bitz::GFX::GraphicsManager::SetScreenSize(Vector2I(w, h));
+					}
+
 				}
 
 				void Window::SetWindowSize(const Vector2I newSize)
 				{
-					//Fail silently as this is not possible on Android
+					_WindowSize = newSize;
 				}
 
 				void Window::SetQuitFunction(void(function)(void))

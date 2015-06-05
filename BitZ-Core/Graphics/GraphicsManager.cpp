@@ -30,12 +30,12 @@ namespace Bitz
 
 		void GraphicsManager::Init(Window * window)
 		{
-			assert(!_HasInit);
+		
 #ifdef WIN32
 			SetActiveWindow(window);
 #endif
 			_HasInit = true;
-			_FrameTimer = new Timer();
+			if(_FrameTimer==nullptr)_FrameTimer = new Timer();
 		}
 
 		void GraphicsManager::SetActiveWindow(Window * window)
@@ -228,6 +228,11 @@ namespace Bitz
 		{
 			assert(_HasInit);
 			return _BufferClearColour;
+		}
+
+		RenderEngine * GraphicsManager::GetActiveRenderEngine()
+		{
+			return _ActiveRenderEngine;
 		}
 	}
 }

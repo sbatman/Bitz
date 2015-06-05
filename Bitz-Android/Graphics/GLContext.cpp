@@ -14,6 +14,7 @@ namespace Bitz
 
 				GLContext::~GLContext()
 				{
+					eglMakeCurrent(_Display, _Surface, _Surface, NULL);
 				}
 
 				void GFX::GLContext::Init(EGLDisplay display, EGLSurface surface, EGLContext context)

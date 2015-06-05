@@ -16,7 +16,7 @@ namespace Bitz
 	Time::Timer Core::_RunningTimer = Time::Timer();
 
 	double_t Core::_TargetFPS = 60;
-	double_t Core::_TargetUPS = 120;
+	double_t Core::_TargetUPS = 60;
 
 	double_t Core::_MSPerDraw = 1000 / _TargetFPS;
 	double_t Core::_MSPerUpdate = 1000 / _TargetUPS;
@@ -25,6 +25,8 @@ namespace Bitz
 	double_t  Core::_LastUpdate = 0;
 
 	bool Core::_PauseRender = false;
+
+	std::mutex Core::_InternalLock;
 
 	void Core::Init()
 	{
@@ -45,6 +47,7 @@ namespace Bitz
 			_RunningTimer.Start();
 			while (_Running)
 			{
+				_InternalLock.lock();
 				Input::Keyboard::Update();
 				GFX::GraphicsManager::Update();
 				double_t elapsedMS = _RunningTimer.GetElapsedMS();
@@ -65,6 +68,7 @@ namespace Bitz
 					if (!_CurrentGameCore->Update())
 					{
 						_Running = false;
+						_InternalLock.unlock();
 						break;
 					}
 				}
@@ -78,6 +82,7 @@ namespace Bitz
 						if (!_CurrentGameCore->Draw())
 						{
 							_Running = false;
+							_InternalLock.unlock();
 							break;
 						}
 						GFX::GraphicsManager::PostRender();
@@ -88,6 +93,7 @@ namespace Bitz
 				{
 					std::this_thread::sleep_for(std::chrono::milliseconds(0));
 				}
+				_InternalLock.unlock();
 			}
 		}
 
@@ -143,5 +149,15 @@ namespace Bitz
 	bool Core::IsRenderPaused()
 	{
 		return _PauseRender;
+	}
+
+	void Core::Lock()
+	{
+		_InternalLock.lock();
+	}
+
+	void Core::Unlock()
+	{
+		_InternalLock.unlock();
 	}
 }

@@ -140,7 +140,7 @@ namespace Bitz
 		void RenderEngine::SetSize(Vector2I newSize)
 		{
 			_CurrentWindow->SetWindowSize(newSize);
-			glViewport(0, 0, _CurrentWindow->GetWindowSize().X, _CurrentWindow->GetWindowSize().Y);
+			glViewport(0, 0, newSize.X, newSize.Y);
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
@@ -242,11 +242,13 @@ namespace Bitz
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, activeTexture->GetWidth(), activeTexture->GetHeight(),
 					0, GL_RGBA, GL_UNSIGNED_BYTE, activeTexture->_PixelData);
 			}
+
 			if(!_TexturingEnabled)
 			{
 				_TexturingEnabled = true;
 				glEnable(GL_TEXTURE_2D);
 			}
+
 			assert(glGetError() == GL_NO_ERROR);
 		}
 

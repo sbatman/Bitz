@@ -69,6 +69,12 @@ namespace Bitz
 		/// </summary>
 		static void Stop();
 
+		static void Lock();
+
+		static void Unlock();
+
+		
+
 	private:
 		static bool _PauseRender;
 		static double_t _LastUpdate;
@@ -82,5 +88,7 @@ namespace Bitz
 		static Time::Timer _RunningTimer;
 
 		static void PlatformSpecificUpdate();
+
+		static std::mutex _InternalLock;
 	};
 }

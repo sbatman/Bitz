@@ -26,6 +26,10 @@ namespace Bitz
 				private:
 					GLContext * _GlContext = nullptr;
 					android_app * _NativeApp = nullptr;
+					EGLSurface surface;
+					EGLContext context;
+					EGLDisplay display;
+					EGLConfig config;
 				};
 			}
 		}
