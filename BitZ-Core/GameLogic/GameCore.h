@@ -18,9 +18,10 @@ namespace Bitz
 			/// </summary>
 			void Run(GFX::Window * initialWindow);
 
-		protected:
-			GameCore(std::string gameName);
 			virtual ~GameCore() {};
+
+		protected:
+			GameCore(std::string gameName);			
 			/// <summary>
 			/// This is executed once every game update cycle
 			/// </summary>

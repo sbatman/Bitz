@@ -23,6 +23,9 @@
 #include "../Bitz-Core/Graphics/Drawables/Model.h"
 #include "Graphics\Window.h"
 
+//Debug
+#include "../Bitz-Core/Debug/Logging.h"
+
 //Math
 #include "../Bitz-Core/Math/Math.h"
 

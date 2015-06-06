@@ -22,14 +22,13 @@ namespace Bitz
 		void Logging::Log(const ErrorType type, const std::string message)
 		{
 			if (type == ErrorType::Debug && !_LogDebug) return;
-			assert(_Active && "Log cannot be called on the logger untill it is made active");
-			if (!_Active)return;
+
 			LogEvent logEvent;
 			logEvent.type = type;
 			logEvent.message = message;
 
 			_LogsToProcessMutex.lock();
-
+			if(_LogsToProcess ==nullptr)_LogsToProcess = new std::queue<LogEvent>();
 			_LogsToProcess->push(logEvent);
 
 			_LogsToProcessMutex.unlock();
@@ -55,14 +54,10 @@ namespace Bitz
 			_LogToFile = false;
 			_LogToBlackHole = false;
 			_Active = false;
-			if (_LogsToProcess != nullptr)
-			{
-				delete _LogsToProcess;
-				_LogsToProcess = nullptr;
-			}
-			_LogsToProcess = new std::queue<LogEvent>();
+		
+			if (_LogsToProcess == nullptr)_LogsToProcess = new std::queue<LogEvent>();
 
-			_LogProcessingThread = std::thread(&Logging::Update, true);
+			_LogProcessingThread = std::thread(Logging::Update, true);
 		}
 
 		void Logging::StaticDispose()
