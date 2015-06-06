@@ -23,7 +23,7 @@ namespace Bitz
 				_Size = newSize;
 			}
 		protected:
-			T _Size;
+			T _Size = T();
 		};
 
 		template <class T>
@@ -40,7 +40,7 @@ namespace Bitz
 				_Position = newPosition;
 			}
 		protected:
-			T _Position;
+			T _Position = T();
 		};
 
 		template <class T>
@@ -57,7 +57,7 @@ namespace Bitz
 				_Rotation = newRotation;
 			}
 		protected:
-			T _Rotation;
+			T _Rotation = T();
 		};
 
 		/// <summary>
@@ -111,7 +111,7 @@ namespace Bitz
 				_Name = newName;
 			}
 		protected:
-			std::string _Name;
+			std::string _Name = std::string();
 		};
 
 		/// <summary>
@@ -146,7 +146,7 @@ namespace Bitz
 				_UpdatePaused = paused;
 			}
 		protected:
-			bool _UpdatePaused;
+			bool _UpdatePaused = false;
 			virtual void InternalUpdate() = 0;
 		};
 

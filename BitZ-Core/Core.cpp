@@ -38,6 +38,7 @@ namespace Bitz
 
 	void Core::Run(GameLogic::GameCore * game)
 	{
+		_InternalLock.lock();
 		assert(!_Running && "Core cannot be run as it is already running");
 		_Running = true;
 		_CurrentGameCore = game;
@@ -47,6 +48,7 @@ namespace Bitz
 			_RunningTimer.Start();
 			while (_Running)
 			{
+				_InternalLock.unlock();
 				_InternalLock.lock();
 				Input::Keyboard::Update();
 				GFX::GraphicsManager::Update();
@@ -93,7 +95,6 @@ namespace Bitz
 				{
 					std::this_thread::sleep_for(std::chrono::milliseconds(0));
 				}
-				_InternalLock.unlock();
 			}
 		}
 
@@ -105,6 +106,7 @@ namespace Bitz
 		GFX::GraphicsManager::StaticDispose();
 		Content::IO::CloseAllOpen();
 		Debug::Logging::StaticDispose();
+		_InternalLock.unlock();
 	}
 
 	bool Core::IsRunning()

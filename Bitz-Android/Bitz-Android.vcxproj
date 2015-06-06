@@ -158,6 +158,7 @@
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <ExceptionHandling>Enabled</ExceptionHandling>
       <CompileAs>CompileAsCpp</CompileAs>
+      <OmitFramePointers>false</OmitFramePointers>
     </ClCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
