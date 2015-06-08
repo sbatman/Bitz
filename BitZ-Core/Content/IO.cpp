@@ -16,22 +16,9 @@ namespace Bitz
 		{
 			if (_CachedWorkingDirectoryStored && !force)return _CachedWorkingDirectory;
 
-			//	WCHAR buffer[MAX_PATH] = { 0 };
-			//	LPWSTR exePath = buffer;
-
-			//	HMODULE hModule = GetModuleHandle(nullptr);
-			//	_ASSERT(hModule != NULL);
-			//	GetModuleFileName(hModule, exePath, MAX_PATH * sizeof(WCHAR));
-
-		//		std::string folder = std::string(exePath);
-			//	size_t lastSlash = folder.find_last_of('\\');
-				//folder = folder.substr(0, lastSlash);
-
-			//	_CachedWorkingDirectory = folder;
-			//	_CachedWorkingDirectoryStored = true;
-
-		//		return folder;
-
+#ifdef __ANDROID__
+#elif WIN32
+#endif
 			return "/";
 		}
 
@@ -102,7 +89,7 @@ namespace Bitz
 			std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
 			std::ifstream::pos_type pos = ifs.tellg();
 
-			std::vector<byte>  result(pos);
+			std::vector<byte>  result(static_cast<uint32_t>(pos));
 
 			ifs.seekg(0, std::ios::beg);
 			ifs.read(reinterpret_cast<char *>(&result[0]), pos);
