@@ -18,8 +18,7 @@
 
 #include "../../Collision/Shapes/b2ChainShape.h"
 #include "../../Collision/Shapes/b2EdgeShape.h"
-#include <memory.h>
-#include <new>
+#include "../Bitz-Core/Common.h"
 
 b2ChainShape::~b2ChainShape()
 {

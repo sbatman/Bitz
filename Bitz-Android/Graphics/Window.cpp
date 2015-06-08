@@ -86,7 +86,7 @@ namespace Bitz
 					struct android_poll_source* source;
 					while ((ident = ALooper_pollAll(0, NULL, &events, (void**)&source)) >= 0)
 					{
-						if (source != NULL)
+						if (source != NULL && _NativeApp !=nullptr)
 						{
 							source->process(_NativeApp, source);
 						}

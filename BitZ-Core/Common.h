@@ -14,6 +14,7 @@
 #include <cstddef>
 #include <memory>
 #include <fstream>
+#include <limits>
 
 typedef uint8_t byte;
 

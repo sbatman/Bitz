@@ -18,9 +18,7 @@
 // Notice : Code modified by Sbatchelor-Manning 2015 and as such is "Altered Source"
 
 #include "b2BlockAllocator.h"
-#include <limits.h>
-#include <memory.h>
-#include <stddef.h>
+#include "../Bitz-Core/Common.h"
 
 int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] = 
 {

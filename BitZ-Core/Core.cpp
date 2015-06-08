@@ -43,69 +43,76 @@ namespace Bitz
 		_Running = true;
 		_CurrentGameCore = game;
 
-		if (_CurrentGameCore->LoadContent() && _CurrentGameCore->Init())
-		{
-			_RunningTimer.Start();
-			while (_Running)
+		try {
+
+			if (_CurrentGameCore->LoadContent() && _CurrentGameCore->Init())
 			{
-				_InternalLock.unlock();
-				_InternalLock.lock();
-				Input::Keyboard::Update();
-				GFX::GraphicsManager::Update();
-				double_t elapsedMS = _RunningTimer.GetElapsedMS();
+				_RunningTimer.Start();
+				while (_Running)
+				{
+					_InternalLock.unlock();
+					_InternalLock.lock();
+					Input::Keyboard::Update();
+					GFX::GraphicsManager::Update();
+					double_t elapsedMS = _RunningTimer.GetElapsedMS();
 
-				if (_LastDraw > elapsedMS)
-				{
-					_LastDraw = elapsedMS;
-				}
-				if (_LastUpdate > elapsedMS)
-				{
-					_LastUpdate = elapsedMS;
-				}
-
-				if ((elapsedMS - _LastUpdate) > _MSPerUpdate)
-				{
-					_LastUpdate += _MSPerUpdate;
-					GameLogic::GameStateService::Update();
-					if (!_CurrentGameCore->Update())
+					if (_LastDraw > elapsedMS)
 					{
-						_Running = false;
-						_InternalLock.unlock();
-						break;
+						_LastDraw = elapsedMS;
 					}
-				}
-				else if ((elapsedMS - _LastDraw) > _MSPerDraw) //The else is to ensure the update always gets preference, only doing the draw if the update wasnt required
-				{
-					_LastDraw += _MSPerDraw;
-					if (!_PauseRender)
+					if (_LastUpdate > elapsedMS)
 					{
-						GFX::GraphicsManager::PreRender();
-						GameLogic::GameStateService::Draw();
-						if (!_CurrentGameCore->Draw())
+						_LastUpdate = elapsedMS;
+					}
+
+					if ((elapsedMS - _LastUpdate) > _MSPerUpdate)
+					{
+						_LastUpdate += _MSPerUpdate;
+						GameLogic::GameStateService::Update();
+						if (!_CurrentGameCore->Update())
 						{
 							_Running = false;
 							_InternalLock.unlock();
 							break;
 						}
-						GFX::GraphicsManager::PostRender();
-						Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Draw Took {0}", GFX::GraphicsManager::GetLastFrameTimeMS()));
+					}
+					else if ((elapsedMS - _LastDraw) > _MSPerDraw) //The else is to ensure the update always gets preference, only doing the draw if the update wasnt required
+					{
+						_LastDraw += _MSPerDraw;
+						if (!_PauseRender)
+						{
+							GFX::GraphicsManager::PreRender();
+							GameLogic::GameStateService::Draw();
+							if (!_CurrentGameCore->Draw())
+							{
+								_Running = false;
+								_InternalLock.unlock();
+								break;
+							}
+							GFX::GraphicsManager::PostRender();
+							Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Draw Took {0}", GFX::GraphicsManager::GetLastFrameTimeMS()));
+						}
+					}
+					else
+					{
+						std::this_thread::sleep_for(std::chrono::milliseconds(0));
 					}
 				}
-				else
-				{
-					std::this_thread::sleep_for(std::chrono::milliseconds(0));
-				}
 			}
+
+			bool unloadSuccessful = _CurrentGameCore->UnloadContent();
+			assert(unloadSuccessful && "Unload Content Failed");
+			bool exitSuccessful = _CurrentGameCore->OnExit();
+			assert(exitSuccessful && "Exit Failed");
+
+			GFX::GraphicsManager::StaticDispose();
+			Content::IO::CloseAllOpen();
+			Debug::Logging::StaticDispose();
 		}
-
-		bool unloadSuccessful = _CurrentGameCore->UnloadContent();
-		assert(unloadSuccessful && "Unload Content Failed");
-		bool exitSuccessful = _CurrentGameCore->OnExit();
-		assert(exitSuccessful && "Exit Failed");
-
-		GFX::GraphicsManager::StaticDispose();
-		Content::IO::CloseAllOpen();
-		Debug::Logging::StaticDispose();
+		catch(std::exception e)
+		{
+			throw e;
+		}
 		_InternalLock.unlock();
 	}
 

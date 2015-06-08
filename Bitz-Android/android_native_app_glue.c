@@ -220,7 +220,7 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 		break;
 	case APP_CMD_TERM_WINDOW:
 
-		Bitz::Core::SetRenderPause(false);
+		Bitz::Core::SetRenderPause(true);
 		break;
 	case APP_CMD_GAINED_FOCUS:
 		Bitz::Core::SetRenderPause(false);
