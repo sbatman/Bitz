@@ -10,17 +10,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitz-Windows", "Bitz-Window
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApp", "TestApp", "{DF26A834-5041-43C9-9241-550B2026B6EA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Core", "..\TestApp\TestApp-Core\TestApp-Core.vcxitems", "{37F790C2-09B6-4F14-ADA6-423BF78D0351}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Core", "TestApp\TestApp-Core\TestApp-Core.vcxitems", "{37F790C2-09B6-4F14-ADA6-423BF78D0351}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Windows", "..\TestApp\TestApp-Windows\TestApp-Windows.vcxproj", "{03DF354A-C732-459D-B722-956F7E7BD180}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp-Windows", "TestApp\TestApp-Windows\TestApp-Windows.vcxproj", "{03DF354A-C732-459D-B722-956F7E7BD180}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitz-Android", "Bitz-Android\Bitz-Android.vcxproj", "{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApp-Android", "TestApp-Android", "{F2B5F42B-9A7D-49CA-8B64-8AA3BFDD629D}"
 EndProject
-Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "TestApp_Android.Packaging", "..\TestApp\TestApp-Android\TestApp-Android.Packaging\TestApp_Android.Packaging.androidproj", "{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}"
+Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "TestApp_Android.Packaging", "TestApp\TestApp-Android\TestApp-Android.Packaging\TestApp_Android.Packaging.androidproj", "{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp_Android.NativeActivity", "..\TestApp\TestApp-Android\TestApp-Android.NativeActivity\TestApp-Android.NativeActivity.vcxproj", "{45922089-CA82-48D3-AB2D-2CD47D9E3A32}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp_Android.NativeActivity", "TestApp\TestApp-Android\TestApp-Android.NativeActivity\TestApp-Android.NativeActivity.vcxproj", "{45922089-CA82-48D3-AB2D-2CD47D9E3A32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{63C0ECEB-1B47-4E49-A64B-A14A573C1FE2}"
 EndProject
@@ -28,12 +28,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetPacker", "Tools\AssetP
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\TestApp\TestApp-Core\TestApp-Core.vcxitems*{45922089-ca82-48d3-ab2d-2cd47d9e3a32}*SharedItemsImports = 4
-		..\TestApp\TestApp-Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
+		TestApp\TestApp-Core\TestApp-Core.vcxitems*{45922089-ca82-48d3-ab2d-2cd47d9e3a32}*SharedItemsImports = 4
+		TestApp\TestApp-Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
 		Bitz-Core\Bitz-Core.vcxitems*{66a88188-accc-4d4a-a032-abdb1470e5f9}*SharedItemsImports = 4
 		Bitz-Core\Bitz-Core.vcxitems*{1cd5569c-d9a4-4c69-840b-ae93fa7d3acc}*SharedItemsImports = 4
 		Bitz-Core\Bitz-Core.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
-		..\TestApp\TestApp-Core\TestApp-Core.vcxitems*{37f790c2-09b6-4f14-ada6-423bf78d0351}*SharedItemsImports = 9
+		TestApp\TestApp-Core\TestApp-Core.vcxitems*{37f790c2-09b6-4f14-ada6-423bf78d0351}*SharedItemsImports = 9
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Android = Debug|Android

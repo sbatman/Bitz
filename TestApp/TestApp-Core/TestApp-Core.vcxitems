@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{37F790C2-09B6-4F14-ADA6-423BF78D0351}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Game.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\GSMain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\GSPhysics.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Orb.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Crate.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Ground.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Game.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\GSMain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\GSPhysics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Orb.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Crate.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Ground.h" />
+  </ItemGroup>
+</Project>
