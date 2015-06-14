@@ -1,12 +1,12 @@
 #pragma once
-#include "../../Common.h"
-#include "../Objects/Orb.h"
+#include "../../../Common.h"
+#include "../../Objects/Test1/Orb.h"
 
-class GSMain : public Bitz::GameLogic::GameState
+class GSTest1 : public Bitz::GameLogic::GameState
 {
 public:
-	GSMain();
-	~GSMain();
+	GSTest1();
+	~GSTest1();
 protected:
 	virtual void OnEnter(GameState * preceedingState) override;
 	virtual void OnExit() override;

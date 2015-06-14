@@ -1,8 +1,9 @@
 #pragma once
 #include "Common.h"
 
-#include "GameClasses/States/GSMain.h"
-#include "GameClasses/States/GSPhysics.h"
+#include "GameClasses/States/Test1/GSTest1.h"
+#include "GameClasses/States/Test2/GSTest2.h"
+#include "GameClasses/States/Test3/GSTest3.h"
 
 class Game : public Bitz::GameLogic::GameCore
 {
@@ -21,6 +22,7 @@ protected:
 	virtual bool OnExit() override;
 
 private:
-	static GSMain * GameState_Main;
-	static GSPhysics * GameState_Physics;
+	static GSTest1 * GameState_Test1;
+	static GSTest2 * GameState_Test2;
+	static GSTest3 * GameState_Test3;
 };

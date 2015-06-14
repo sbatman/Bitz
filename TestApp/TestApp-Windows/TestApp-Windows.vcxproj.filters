@@ -6,5 +6,6 @@
   <ItemGroup>
     <None Include="Content\particle.Gdat" />
     <None Include="Content\box.Gdat" />
+    <None Include="Content\purple.Gdat" />
   </ItemGroup>
 </Project>

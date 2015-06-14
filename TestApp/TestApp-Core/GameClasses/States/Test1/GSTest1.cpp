@@ -1,5 +1,5 @@
-#include "GSMain.h"
-#include "../../Game.h"
+#include "GSTest1.h"
+#include "../../../Game.h"
 
 #define ORBCOUNT 1000
 
@@ -8,15 +8,15 @@ using namespace Bitz::GFX;
 
 static Orb *_TestOrbs[ORBCOUNT];
 
-GSMain::GSMain() : Bitz::GameLogic::GameState("Main")
+GSTest1::GSTest1() : Bitz::GameLogic::GameState("Main")
 {
 }
 
-GSMain::~GSMain()
+GSTest1::~GSTest1()
 {
 }
 
-void GSMain::OnEnter(GameState *)
+void GSTest1::OnEnter(GameState *)
 {
 	for (auto x = 0; x < ORBCOUNT; x++)
 	{
@@ -25,12 +25,12 @@ void GSMain::OnEnter(GameState *)
 	}
 }
 
-void GSMain::OnExit()
+void GSTest1::OnExit()
 {
 	for (auto x = 0; x < ORBCOUNT; x++) delete _TestOrbs[x];
 }
 
-void GSMain::OnUpdate()
+void GSTest1::OnUpdate()
 {
 	int xLimit = Bitz::GFX::GraphicsManager::GetScreenSize().X;
 	int yLimit = Bitz::GFX::GraphicsManager::GetScreenSize().Y;
@@ -40,7 +40,7 @@ void GSMain::OnUpdate()
 	}
 }
 
-void GSMain::OnDraw()
+void GSTest1::OnDraw()
 {
 	GraphicsManager::BeginRender(Game::RenderState2d);
 	for (auto x = 0; x < ORBCOUNT; x++)GraphicsManager::Render(_TestOrbs[x]);

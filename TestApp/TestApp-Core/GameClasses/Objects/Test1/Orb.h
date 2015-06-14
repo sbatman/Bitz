@@ -1,4 +1,4 @@
-#include "../../Common.h"
+#include "../../../Common.h"
 
 class Orb : public Bitz::GFX::Drawables::Sprite
 {

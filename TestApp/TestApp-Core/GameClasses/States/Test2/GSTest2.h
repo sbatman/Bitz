@@ -1,14 +1,14 @@
 #pragma once
-#include "../../Common.h"
+#include "../../../Common.h"
 
-#include "../Objects/Phys_Crate.h"
-#include "../Objects/Phys_Ground.h"
+#include "../../Objects/Test2/Phys_Crate.h"
+#include "../../Objects/Test2/Phys_Ground.h"
 
-class GSPhysics : public Bitz::GameLogic::GameState
+class GSTest2 : public Bitz::GameLogic::GameState
 {
 public:
-	GSPhysics();
-	~GSPhysics();
+	GSTest2();
+	~GSTest2();
 protected:
 	virtual void OnEnter(GameState * preceedingState) override;
 	virtual void OnExit() override;

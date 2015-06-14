@@ -37,8 +37,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\purple.Gdat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Content\box.Gdat" />
     <None Include="Content\particle.Gdat" />
+    <None Include="Content\purple.Gdat" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03DF354A-C732-459D-B722-956F7E7BD180}</ProjectGuid>

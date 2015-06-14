@@ -1,11 +1,11 @@
 #pragma once
-#include "../../Common.h"
+#include "../../../Common.h"
 
-class Phys_Ground : public I2DPhysicsEnabled
+class Phys_Crate : public I2DPhysicsEnabled
 {
 public:
-	Phys_Ground(b2World * world, float_t x, float_t y);
-	~Phys_Ground();
+	Phys_Crate(b2World * world, float_t x, float_t y);
+	~Phys_Crate();
 
 	static void LoadContent();
 	static void UnloadContent();
@@ -17,7 +17,7 @@ private:
 	static Bitz::GFX::Texture * _DefaultTexture;
 	static b2PolygonShape * _PhysShape;
 
-	static Bitz::GFX::Texture * GetDefaultTexture();
-
 	Bitz::GFX::Drawables::Sprite * _Sprite = nullptr;
+
+	static Bitz::GFX::Texture * GetDefaultTexture();
 };

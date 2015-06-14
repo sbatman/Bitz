@@ -15,19 +15,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Game.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\GSMain.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\GSPhysics.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Orb.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Crate.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Ground.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test3\Background.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\Test1\GSTest1.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\Test2\GSTest2.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test1\Orb.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Crate.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Ground.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\Test3\GSTest3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Game.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\GSMain.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\GSPhysics.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Orb.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Crate.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Phys_Ground.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test3\Background.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\Test1\GSTest1.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\Test2\GSTest2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test1\Orb.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Crate.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Ground.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\Test3\GSTest3.h" />
   </ItemGroup>
 </Project>

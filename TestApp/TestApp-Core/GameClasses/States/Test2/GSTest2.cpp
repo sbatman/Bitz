@@ -1,18 +1,18 @@
-#include "GSPhysics.h"
-#include "../../Game.h"
+#include "GSTest2.h"
+#include "../../../Game.h"
 
 using namespace Bitz::Math;
 using namespace Bitz::GFX;
 
-GSPhysics::GSPhysics() : Bitz::GameLogic::GameState("GSPhysics")
+GSTest2::GSTest2() : Bitz::GameLogic::GameState("GSTest2")
 {
 }
 
-GSPhysics::~GSPhysics()
+GSTest2::~GSTest2()
 {
 }
 
-void GSPhysics::OnEnter(GameState *)
+void GSTest2::OnEnter(GameState *)
 {
 	_PhyWorld = new b2World(b2Vec2(0, 1));
 
@@ -22,14 +22,14 @@ void GSPhysics::OnEnter(GameState *)
 	for (size_t i = 0; i < 25; i++)_TestCreate[i] = new Phys_Crate(_PhyWorld, 24 * ((i % 6) + 20), 35 * i);
 }
 
-void GSPhysics::OnExit()
+void GSTest2::OnExit()
 {
 	for (size_t i = 0; i < 50; i++) if (_TestGround[i] != nullptr)delete _TestGround[i];
 	for (size_t i = 0; i < 25; i++)if (_TestCreate[i] != nullptr)delete _TestCreate[i];
 	delete _PhyWorld;
 }
 
-void GSPhysics::OnUpdate()
+void GSTest2::OnUpdate()
 {
 	_PhyWorld->Step(1.0f / 60.0f, 6, 2);
 
@@ -38,7 +38,7 @@ void GSPhysics::OnUpdate()
 	for (size_t i = 0; i < 25; i++)_TestCreate[i]->Update();
 }
 
-void GSPhysics::OnDraw()
+void GSTest2::OnDraw()
 {
 	GraphicsManager::BeginRender(Game::RenderState2d);
 
