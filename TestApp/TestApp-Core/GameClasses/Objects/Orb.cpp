@@ -1,8 +1,11 @@
 #include "Orb.h"
 
+using namespace Bitz::GFX;
+using namespace Bitz::Content;
 using namespace Bitz::Input;
 using namespace Bitz::Math;
 
+Texture* Orb::_DefaultTexture = nullptr;
 
 Orb::Orb()
 {
@@ -15,6 +18,8 @@ Orb::Orb()
 	_AccY = ((rand() % 400) - 200) / 100.0f;
 
 	SetColour(Vector4F(1.0f, 1.0f, 1.0f, 1.0f));
+
+	SetTexture(GetDefaultTexture());
 }
 
 Orb::~Orb()
@@ -62,4 +67,22 @@ void Orb::Update(int32_t xLimit, int32_t yLimit, int32_t targetX, int32_t target
 		_AccX *= 0.98f;
 		_AccY *= 0.98f;
 	}
+}
+
+void Orb::LoadContent()
+{
+	if (_DefaultTexture == nullptr)
+	{
+		_DefaultTexture = ContentManager::Load<Texture>("particle.Gdat");
+	}
+}
+
+void Orb::UnloadContent()
+{
+	delete _DefaultTexture;
+}
+
+Texture* Orb::GetDefaultTexture()
+{
+	return _DefaultTexture;
 }

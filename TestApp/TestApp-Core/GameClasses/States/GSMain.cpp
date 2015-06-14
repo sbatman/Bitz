@@ -1,5 +1,4 @@
 #include "GSMain.h"
-#include "../Objects/Orb.h"
 #include "../../Game.h"
 
 #define ORBCOUNT 1000
@@ -11,7 +10,7 @@ static Orb *_TestOrbs[ORBCOUNT];
 
 GSMain::GSMain() : Bitz::GameLogic::GameState("Main")
 {
-} 
+}
 
 GSMain::~GSMain()
 {
@@ -19,11 +18,11 @@ GSMain::~GSMain()
 
 void GSMain::OnEnter(GameState *)
 {
-	for (auto x = 0; x < ORBCOUNT; x++)_TestOrbs[x] = new Orb();
-
-	for (auto x = 0; x < ORBCOUNT; x++)_TestOrbs[x]->SetTexture(Game::TestTexture);
-
-	for (auto x = 0; x < ORBCOUNT; x++)_TestOrbs[x]->SetColour(Vector4F(1.0f, (x % 150) / 255.0f, 0.0f, 1.0f));
+	for (auto x = 0; x < ORBCOUNT; x++)
+	{
+		_TestOrbs[x] = new Orb();
+		_TestOrbs[x]->SetColour(Vector4F(1.0f, (x % 150) / 255.0f, 0.0f, 1.0f));
+	}
 }
 
 void GSMain::OnExit()

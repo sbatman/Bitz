@@ -8,10 +8,8 @@ GSPhysics::GSPhysics() : Bitz::GameLogic::GameState("GSPhysics")
 {
 }
 
-
 GSPhysics::~GSPhysics()
 {
-	
 }
 
 void GSPhysics::OnEnter(GameState *)
@@ -20,9 +18,8 @@ void GSPhysics::OnEnter(GameState *)
 
 	for (size_t i = 0; i < 30; i++)_TestGround[i] = new Phys_Ground(_PhyWorld, 32 * (i + 1), 768 - 32);
 	for (size_t i = 30; i < 40; i++)_TestGround[i] = new Phys_Ground(_PhyWorld, 0, 768 - (32 * (i - 30)));
-	for (size_t i = 40; i < 50; i++)_TestGround[i] = new Phys_Ground(_PhyWorld, 32*30, 768 - (32 * (i - 40)));
-	for (size_t i = 0; i < 25; i++)_TestCreate[i] = new Phys_Crate(_PhyWorld, 24 * ((i %6)+ 20), 35 * i);
-	
+	for (size_t i = 40; i < 50; i++)_TestGround[i] = new Phys_Ground(_PhyWorld, 32 * 30, 768 - (32 * (i - 40)));
+	for (size_t i = 0; i < 25; i++)_TestCreate[i] = new Phys_Crate(_PhyWorld, 24 * ((i % 6) + 20), 35 * i);
 }
 
 void GSPhysics::OnExit()

@@ -10,10 +10,8 @@ public:
 	Game();
 	~Game();
 
-	static Bitz::GFX::Texture* TestTexture;
 	static Bitz::GFX::GraphicsStates::GS2D * RenderState2d;
-	static Bitz::GFX::Drawables::Sprite * TestSprite;
-	
+
 protected:
 	virtual bool Update() override;
 	virtual bool Draw() override;

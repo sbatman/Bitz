@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Common.h"
+#include "../Objects/Orb.h"
 
 class GSMain : public Bitz::GameLogic::GameState
 {
@@ -12,4 +13,3 @@ protected:
 	virtual void OnUpdate() override;
 	virtual void OnDraw() override;
 };
-

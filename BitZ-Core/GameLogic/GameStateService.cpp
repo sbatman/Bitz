@@ -50,12 +50,14 @@ namespace Bitz
 
 		void GameStateService::StartState(GameState * state, GameState * preceedingState)
 		{
+			assert(state != nullptr);
 			_ActiveGameStates.push_back(state);
 			state->Enter(preceedingState);
 		}
 
 		void GameStateService::EndState(GameState * state)
 		{
+			assert(state != nullptr);
 			_ActiveGameStates.erase(std::remove(_ActiveGameStates.begin(), _ActiveGameStates.end(), state), _ActiveGameStates.end());
 			state->Exit();
 		}

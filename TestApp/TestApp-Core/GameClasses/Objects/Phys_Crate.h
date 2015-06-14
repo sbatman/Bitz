@@ -17,8 +17,7 @@ private:
 	static Bitz::GFX::Texture * _DefaultTexture;
 	static b2PolygonShape * _PhysShape;
 
-	static Bitz::GFX::Texture * GetDefaultTexture();
-	
 	Bitz::GFX::Drawables::Sprite * _Sprite = nullptr;
-};
 
+	static Bitz::GFX::Texture * GetDefaultTexture();
+};
