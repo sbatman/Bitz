@@ -58,7 +58,7 @@ namespace Bitz
 			return _ActiveCamera;
 		}
 
-		bool GraphicsStates::GS3D::IsNormalsEnabled()
+		bool GraphicsStates::GS3D::IsNormalsEnabled() const
 		{
 			return true;
 		}

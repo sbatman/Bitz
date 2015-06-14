@@ -98,7 +98,7 @@ namespace Bitz
 			/// Gets the current name of this class
 			/// </summary>
 			/// <returns>string containing the class name</returns>
-			virtual std::string GetName()
+			virtual std::string GetName() const
 			{
 				return _Name;
 			}
@@ -133,7 +133,7 @@ namespace Bitz
 			/// Returns whether the class update function is paused
 			/// </summary>
 			/// <returns>True if it is paused else false</returns>
-			virtual bool IsUpdatePaused()
+			virtual bool IsUpdatePaused() const
 			{
 				return _UpdatePaused;
 			}

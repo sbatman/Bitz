@@ -69,8 +69,13 @@ namespace Bitz
 		/// </summary>
 		static void Stop();
 
+		/// <summary>
+		/// Locks the games internal mutex preventing it from performing a draw or update
+		/// </summary>
 		static void Lock();
-
+		/// <summary>
+		/// Unlocks the games internal mutex allowing it to continue normal operation after a lock
+		/// </summary>
 		static void Unlock();
 
 		

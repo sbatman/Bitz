@@ -88,9 +88,15 @@ namespace Bitz
 			/// Forcefully clears the backbuffer of the rendering window
 			/// </summary>
 			static void Clear();
-
+			/// <summary>
+			/// Sets the window used for rendering
+			/// </summary>
+			/// <param name='graphicsState'>The window to use for rendering</param>
 			static void SetActiveWindow(Window * window);
-
+			/// <summary>
+			/// Gets the currnet active render engine
+			/// </summary>
+			/// <returns>A pointer to the active render engine</returns>
 			static RenderEngine * GetActiveRenderEngine();
 
 		protected:
@@ -148,7 +154,9 @@ namespace Bitz
 			/// The number of frames rendered by the render system since init
 			/// </summary>
 			static uint64_t _FrameNumber;
-
+			/// <summary>
+			/// The time taken to complete the last frame render
+			/// </summary>
 			static double_t _LastFrameTime;
 
 			/// <summary>
@@ -159,9 +167,13 @@ namespace Bitz
 			/// The last active camera saved for some optimisations like projection matix baking
 			/// </summary>
 			static Camera * _LastActiveCamera;
-
+			/// <summary>
+			/// A pointer to the active render engine
+			/// </summary>
 			static RenderEngine * _ActiveRenderEngine;
-
+			/// <summary>
+			/// A pointer to the active window
+			/// </summary>
 			static Window * _ActiveWindow;
 		};
 	}

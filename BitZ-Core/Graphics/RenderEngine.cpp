@@ -158,12 +158,12 @@ namespace Bitz
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
-		bool RenderEngine::IsEnabledNormals()
+		bool RenderEngine::IsEnabledNormals() const
 		{
 			return _NormalsEnabled;
 		}
 
-		bool RenderEngine::IsEnabledTexturing()
+		bool RenderEngine::IsEnabledTexturing() const
 		{
 			return _TexturingEnabled;
 		}
@@ -252,7 +252,7 @@ namespace Bitz
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
-		Vector2I RenderEngine::GetSize()
+		Vector2I RenderEngine::GetSize() const
 		{
 			return _CurrentWindow->GetWindowSize();
 		}

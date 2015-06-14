@@ -16,7 +16,7 @@ namespace Bitz
 				virtual void EnterState() = 0;
 				virtual void ExitState() = 0;
 				virtual Camera * GetActiveCamera() const = 0;
-				virtual bool IsNormalsEnabled() = 0;
+				virtual bool IsNormalsEnabled() const = 0;
 
 				void SetActiveBlendState(BlendStates newBlendState);
 				BlendStates GetActiveBlendState();

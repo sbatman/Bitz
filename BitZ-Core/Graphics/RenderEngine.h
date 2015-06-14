@@ -24,10 +24,10 @@ namespace Bitz
 			Window * GetWindow();
 			void Render(Drawables::IDrawable* idrawable);
 			void SetSize(Vector2I newSize);
-			Vector2I GetSize();
+			Vector2I GetSize() const;
 			void EnableNormals(bool enabled);
-			bool IsEnabledNormals();
-			bool IsEnabledTexturing();
+			bool IsEnabledNormals() const;
+			bool IsEnabledTexturing() const;
 
 			const uint32_t BUFFERVERTCOUNT = 100000;
 
