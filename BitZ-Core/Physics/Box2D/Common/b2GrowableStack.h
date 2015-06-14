@@ -82,5 +82,4 @@ private:
 	int32 m_capacity;
 };
 
-
 #endif

@@ -30,20 +30,19 @@ namespace Bitz
 
 		void GraphicsManager::Init(Window * window)
 		{
-		
 #ifdef WIN32
 			SetActiveWindow(window);
 #endif
 			_HasInit = true;
-			if(_FrameTimer==nullptr)_FrameTimer = new Timer();
+			if (_FrameTimer == nullptr)_FrameTimer = new Timer();
 		}
 
 		void GraphicsManager::SetActiveWindow(Window * window)
 		{
-			if(window == _ActiveWindow)return;
-			if(_ActiveWindow != nullptr)
+			if (window == _ActiveWindow)return;
+			if (_ActiveWindow != nullptr)
 			{
-				if(_ActiveRenderEngine != nullptr)
+				if (_ActiveRenderEngine != nullptr)
 				{
 					delete _ActiveRenderEngine;
 					_ActiveRenderEngine = nullptr;
@@ -54,7 +53,7 @@ namespace Bitz
 
 			_ActiveWindow = window;
 
-			if(_ActiveWindow != nullptr)
+			if (_ActiveWindow != nullptr)
 			{
 				_ActiveRenderEngine = new RenderEngine(window);
 
@@ -65,13 +64,13 @@ namespace Bitz
 		void GraphicsManager::Update()
 		{
 			assert(_HasInit);
-			if(_ActiveRenderEngine != nullptr)_ActiveRenderEngine->Update();
+			if (_ActiveRenderEngine != nullptr)_ActiveRenderEngine->Update();
 		}
 
 		void GraphicsManager::PreRender()
 		{
 			assert(_HasInit);
-			if(_ActiveRenderEngine == nullptr) return;
+			if (_ActiveRenderEngine == nullptr) return;
 			_FrameTimer->Start();
 
 			Clear();
@@ -82,7 +81,7 @@ namespace Bitz
 			assert(_HasInit);
 			assert(!_InRenderScope&& "End render must be called for every begin render");
 
-			if(_ActiveRenderEngine == nullptr) return;
+			if (_ActiveRenderEngine == nullptr) return;
 
 			glFinish();
 			_ActiveRenderEngine->Present();
@@ -95,7 +94,7 @@ namespace Bitz
 		{
 			assert(_HasInit);
 
-			if(_ActiveRenderEngine == nullptr) return;
+			if (_ActiveRenderEngine == nullptr) return;
 
 			_CurrentGraphicsState = graphicsState;
 
@@ -111,7 +110,7 @@ namespace Bitz
 
 			Camera * camera = _CurrentGraphicsState->GetActiveCamera();
 
-			if(_LastActiveCamera != camera)
+			if (_LastActiveCamera != camera)
 			{
 				camera->MakeActive();
 				_LastActiveCamera = camera;
@@ -125,16 +124,16 @@ namespace Bitz
 			assert(_HasInit);
 			assert(_InRenderScope&& "Begin render has not been called");
 
-			if(_ActiveRenderEngine == nullptr) return;
+			if (_ActiveRenderEngine == nullptr) return;
 
-			if(_CurrentGraphicsState->IsNormalsEnabled())
+			if (_CurrentGraphicsState->IsNormalsEnabled())
 			{
 				_ActiveRenderEngine->EnableNormals(true);
 			}
 
 			_ActiveRenderEngine->End();
 
-			if(_CurrentGraphicsState->IsNormalsEnabled())
+			if (_CurrentGraphicsState->IsNormalsEnabled())
 			{
 				_ActiveRenderEngine->EnableNormals(false);
 			}
@@ -146,7 +145,7 @@ namespace Bitz
 
 		void GraphicsManager::Clear()
 		{
-			if(_ActiveRenderEngine == nullptr) return;
+			if (_ActiveRenderEngine == nullptr) return;
 			_ActiveRenderEngine->Clear((!_Debug_EnableBackbufferColourAlt || _FrameNumber % 2) ? _BufferClearColour : _Debug_BackbufferColourAlt);
 		}
 
@@ -161,14 +160,14 @@ namespace Bitz
 			assert(_HasInit);
 			assert(_InRenderScope&& "Begin render has not been called");
 
-			if(_ActiveRenderEngine == nullptr) return;
+			if (_ActiveRenderEngine == nullptr) return;
 
 			_ActiveRenderEngine->Render(idrawable);
 		}
 
 		Camera* GraphicsManager::GetCurrentCamera()
 		{
-			if(_CurrentGraphicsState == nullptr) return nullptr;
+			if (_CurrentGraphicsState == nullptr) return nullptr;
 			return _CurrentGraphicsState->GetActiveCamera();
 		}
 
@@ -185,12 +184,12 @@ namespace Bitz
 		void GraphicsManager::StaticDispose()
 		{
 			assert(_HasInit);
-			if(_FrameTimer != nullptr)
+			if (_FrameTimer != nullptr)
 			{
 				delete _FrameTimer;
 				_FrameTimer = nullptr;
 			}
-			if(_ActiveRenderEngine != nullptr)
+			if (_ActiveRenderEngine != nullptr)
 			{
 				delete _ActiveRenderEngine;
 				_ActiveRenderEngine = nullptr;
@@ -198,8 +197,7 @@ namespace Bitz
 
 			_ActiveWindow = nullptr;
 
-
-			if(_CurrentGraphicsState != nullptr)
+			if (_CurrentGraphicsState != nullptr)
 			{
 				_CurrentGraphicsState->ExitState();
 				delete _CurrentGraphicsState;
@@ -217,8 +215,8 @@ namespace Bitz
 
 		void GraphicsManager::SetScreenSize(Vector2I newSize)
 		{
-			if(_ActiveRenderEngine != nullptr)_ActiveRenderEngine->SetSize(newSize);
-			if(_LastActiveCamera != nullptr)
+			if (_ActiveRenderEngine != nullptr)_ActiveRenderEngine->SetSize(newSize);
+			if (_LastActiveCamera != nullptr)
 			{
 				_LastActiveCamera->_ForceMakeActiveOnApply = true;
 			}

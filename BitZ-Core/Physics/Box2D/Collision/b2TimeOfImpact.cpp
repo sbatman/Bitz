@@ -326,8 +326,8 @@ void b2TimeOfImpact(b2TOIOutput* output, const b2TOIInput* input)
 		{
 			const int32 N = 100;
 			float32 dx = 1.0f / N;
-			float32 xs[N+1];
-			float32 fs[N+1];
+			float32 xs[N + 1];
+			float32 fs[N + 1];
 
 			float32 x = 0.0f;
 

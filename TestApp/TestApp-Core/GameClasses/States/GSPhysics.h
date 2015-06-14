@@ -19,4 +19,3 @@ private:
 	Phys_Ground * _TestGround[50];
 	Phys_Crate * _TestCreate[25];
 };
-

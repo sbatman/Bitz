@@ -21,4 +21,3 @@ private:
 
 	Bitz::GFX::Drawables::Sprite * _Sprite = nullptr;
 };
-

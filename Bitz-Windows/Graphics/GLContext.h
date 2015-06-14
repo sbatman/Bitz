@@ -27,7 +27,6 @@ namespace Bitz
 					HWND _HWND;
 					HDC _HDC;
 				};
-
 			}
 		}
 	}

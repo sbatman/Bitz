@@ -25,10 +25,10 @@ namespace Bitz
 				};
 				virtual ~IDrawable()
 				{
-					if(_VertArray != nullptr)delete[] _VertArray;
-					if(_ColArray != nullptr)delete[] _ColArray;
-					if(_TexArray != nullptr)delete[] _TexArray;
-					if(_NormArray != nullptr)delete[] _NormArray;
+					if (_VertArray != nullptr)delete[] _VertArray;
+					if (_ColArray != nullptr)delete[] _ColArray;
+					if (_TexArray != nullptr)delete[] _TexArray;
+					if (_NormArray != nullptr)delete[] _NormArray;
 				}
 				virtual void PopulateVertArray(float_t * vertArray, int32_t * startPosition) = 0;
 				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) = 0;

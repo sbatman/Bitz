@@ -28,7 +28,7 @@ namespace Bitz
 			logEvent.message = message;
 
 			_LogsToProcessMutex.lock();
-			if(_LogsToProcess ==nullptr)_LogsToProcess = new std::queue<LogEvent>();
+			if (_LogsToProcess == nullptr)_LogsToProcess = new std::queue<LogEvent>();
 			_LogsToProcess->push(logEvent);
 
 			_LogsToProcessMutex.unlock();
@@ -54,7 +54,7 @@ namespace Bitz
 			_LogToFile = false;
 			_LogToBlackHole = false;
 			_Active = false;
-		
+
 			if (_LogsToProcess == nullptr)_LogsToProcess = new std::queue<LogEvent>();
 
 			_LogProcessingThread = std::thread(Logging::Update, true);

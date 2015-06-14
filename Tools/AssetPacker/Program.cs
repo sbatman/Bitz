@@ -6,8 +6,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssetPacker
 {
@@ -47,8 +45,6 @@ namespace AssetPacker
             }
 
             ProcessedFiles.Clear();
-
-
         }
 
         private static void FilterFiles(ref List<string> detectedFiles)
@@ -67,12 +63,11 @@ namespace AssetPacker
             using (Bitmap bmp = new Bitmap(fileName))
             {
                 int bytes = bmp.Width * bmp.Height * 4;
-                
+
                 byte[] returnData = new byte[bytes];
                 BitmapData dat = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
                 IntPtr ptr = dat.Scan0;
                 Marshal.Copy(ptr, returnData, 0, bytes);
-
 
                 return new Tuple<int, int, byte[], string>(bmp.Width, bmp.Height, returnData, fileName);
             }
@@ -85,7 +80,7 @@ namespace AssetPacker
             p.Add(data.Item1);
             p.Add(data.Item2);
             p.Add(data.Item3);
-            return new Tuple<string, Packet>(fileName.Replace(INPUTFOLDER+"\\","").ToLower().Replace(".png",".Gdat"), p);
+            return new Tuple<string, Packet>(fileName.Replace(INPUTFOLDER + "\\", "").ToLower().Replace(".png", ".Gdat"), p);
         }
     }
 }

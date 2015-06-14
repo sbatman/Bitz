@@ -333,7 +333,6 @@ void b2Body::ResetMassData()
 		m_I -= m_mass * b2Dot(localCenter, localCenter);
 		b2Assert(m_I > 0.0f);
 		m_invI = 1.0f / m_I;
-
 	}
 	else
 	{
@@ -384,7 +383,7 @@ void b2Body::SetMassData(const b2MassData* massData)
 
 	// Move center of mass.
 	b2Vec2 oldCenter = m_sweep.c;
-	m_sweep.localCenter =  massData->center;
+	m_sweep.localCenter = massData->center;
 	m_sweep.c0 = m_sweep.c = b2Mul(m_xf, m_sweep.localCenter);
 
 	// Update center of mass velocity.

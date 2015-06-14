@@ -23,7 +23,7 @@
 #include "../Bitz-Core/Graphics/Drawables/Model.h"
 #include "Graphics\Window.h"
 
-//Physics 
+//Physics
 #include "../Bitz-Core/Physics/I2DPhysicsEnabled.h"
 #include "../Bitz-Core/Physics/Box2D/Box2D.h"
 

@@ -9,7 +9,6 @@ namespace Bitz
 {
 	namespace Content
 	{
-
 		uint32_t TextureData::_NextID = 0;
 
 		std::vector<TextureData *> TextureData::_LoadedTextureData;
@@ -55,7 +54,7 @@ namespace Bitz
 			TextureData * returnTextureData = new TextureData();
 
 			returnTextureData->_PixelData = new uint8_t[width*height * 4];
-		
+
 			Memcpy(returnTextureData->_PixelData, width*height * 4, byteArray, width*height * 4);
 
 			returnTextureData->_Width = width;

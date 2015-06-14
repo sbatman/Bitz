@@ -4,7 +4,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int32_t iCmdShow)
 {
 	Game * gameInstance = new Game();
-	Bitz::PlatformSpecific::Windows::GFX::Window * initalWindow = new Bitz::PlatformSpecific::Windows::GFX::Window(L"TestApp", 1920,1080, hInstance);
+	Bitz::PlatformSpecific::Windows::GFX::Window * initalWindow = new Bitz::PlatformSpecific::Windows::GFX::Window(L"TestApp", 1920, 1080, hInstance);
 	gameInstance->Run(initalWindow);
 	delete gameInstance;
 	return 0;

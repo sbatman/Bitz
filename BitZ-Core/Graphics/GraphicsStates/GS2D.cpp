@@ -41,7 +41,7 @@ namespace Bitz
 #ifdef __ANDROID__
 
 #elif WIN32
-				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);			
+				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
 #endif
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 				break;

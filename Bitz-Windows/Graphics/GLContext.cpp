@@ -1,6 +1,5 @@
 #include "GLContext.h"
 
-
 namespace Bitz
 {
 	namespace PlatformSpecific

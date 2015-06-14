@@ -38,4 +38,3 @@ private:
 	b2Fixture * _PhysFixture;
 	b2Body * _PhysBody;
 };
-

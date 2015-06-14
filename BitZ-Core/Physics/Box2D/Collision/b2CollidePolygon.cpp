@@ -21,8 +21,8 @@
 
 // Find the max separation between poly1 and poly2 using edge normals from poly1.
 static float32 b2FindMaxSeparation(int32* edgeIndex,
-								 const b2PolygonShape* poly1, const b2Transform& xf1,
-								 const b2PolygonShape* poly2, const b2Transform& xf2)
+	const b2PolygonShape* poly1, const b2Transform& xf1,
+	const b2PolygonShape* poly2, const b2Transform& xf2)
 {
 	int32 count1 = poly1->m_count;
 	int32 count2 = poly2->m_count;
@@ -62,8 +62,8 @@ static float32 b2FindMaxSeparation(int32* edgeIndex,
 }
 
 static void b2FindIncidentEdge(b2ClipVertex c[2],
-							 const b2PolygonShape* poly1, const b2Transform& xf1, int32 edge1,
-							 const b2PolygonShape* poly2, const b2Transform& xf2)
+	const b2PolygonShape* poly1, const b2Transform& xf1, int32 edge1,
+	const b2PolygonShape* poly2, const b2Transform& xf2)
 {
 	const b2Vec2* normals1 = poly1->m_normals;
 
@@ -114,8 +114,8 @@ static void b2FindIncidentEdge(b2ClipVertex c[2],
 
 // The normal points from 1 to 2
 void b2CollidePolygons(b2Manifold* manifold,
-					  const b2PolygonShape* polyA, const b2Transform& xfA,
-					  const b2PolygonShape* polyB, const b2Transform& xfB)
+	const b2PolygonShape* polyA, const b2Transform& xfA,
+	const b2PolygonShape* polyB, const b2Transform& xfB)
 {
 	manifold->pointCount = 0;
 	float32 totalRadius = polyA->m_radius + polyB->m_radius;
@@ -172,13 +172,13 @@ void b2CollidePolygons(b2Manifold* manifold,
 
 	b2Vec2 localTangent = v12 - v11;
 	localTangent.Normalize();
-	
+
 	b2Vec2 localNormal = b2Cross(localTangent, 1.0f);
 	b2Vec2 planePoint = 0.5f * (v11 + v12);
 
 	b2Vec2 tangent = b2Mul(xf1.q, localTangent);
 	b2Vec2 normal = b2Cross(tangent, 1.0f);
-	
+
 	v11 = b2Mul(xf1, v11);
 	v12 = b2Mul(xf1, v12);
 
@@ -201,7 +201,7 @@ void b2CollidePolygons(b2Manifold* manifold,
 		return;
 
 	// Clip to negative box side 1
-	np = b2ClipSegmentToLine(clipPoints2, clipPoints1,  tangent, sideOffset2, iv2);
+	np = b2ClipSegmentToLine(clipPoints2, clipPoints1, tangent, sideOffset2, iv2);
 
 	if (np < 2)
 	{

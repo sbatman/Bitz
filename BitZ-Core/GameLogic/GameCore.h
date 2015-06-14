@@ -21,7 +21,7 @@ namespace Bitz
 			virtual ~GameCore() {};
 
 		protected:
-			GameCore(std::string gameName);			
+			GameCore(std::string gameName);
 			/// <summary>
 			/// This is executed once every game update cycle
 			/// </summary>

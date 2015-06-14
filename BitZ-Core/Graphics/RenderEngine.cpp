@@ -34,17 +34,17 @@ namespace Bitz
 
 		RenderEngine::~RenderEngine()
 		{
-			if(_VertCache != nullptr)
+			if (_VertCache != nullptr)
 			{
 				delete[] _VertCache;
 				_VertCache = nullptr;
 			}
-			if(_ColCache != nullptr)
+			if (_ColCache != nullptr)
 			{
 				delete[] _ColCache;
 				_ColCache = nullptr;
 			}
-			if(_TexCache != nullptr)
+			if (_TexCache != nullptr)
 			{
 				delete[] _TexCache;
 				_TexCache = nullptr;
@@ -103,8 +103,8 @@ namespace Bitz
 
 		void RenderEngine::Render(Drawables::IDrawable* idrawable)
 		{
-			if(!idrawable->ShouldDraw())return;
-			if(_RenderedVertCount + idrawable->GetVertCount() > BUFFERVERTCOUNT)
+			if (!idrawable->ShouldDraw())return;
+			if (_RenderedVertCount + idrawable->GetVertCount() > BUFFERVERTCOUNT)
 			{
 				assert(false && "Render Buffer Overrun");
 				Debug::Logging::Log(Debug::Logging::ErrorType::Warning, "Render Buffer Overrun");
@@ -118,12 +118,12 @@ namespace Bitz
 
 			Content::TextureData * data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
 
-			if(_DrawIntervals.empty())
+			if (_DrawIntervals.empty())
 			{
 				DrawInterval interval = { uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, idrawable };
 				_DrawIntervals.push_back(interval);
 			}
-			else	if(_DrawIntervals.back().Texture != data
+			else	if (_DrawIntervals.back().Texture != data
 				|| _DrawIntervals.back().Mode != idrawable->_RenderMode
 				|| idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD)
 			{
@@ -146,7 +146,7 @@ namespace Bitz
 
 		void RenderEngine::EnableNormals(bool enabled)
 		{
-			if(enabled)
+			if (enabled)
 			{
 				glEnableClientState(GL_NORMAL_ARRAY);
 				glNormalPointer(GL_FLOAT, 0, _NormCache);
@@ -175,17 +175,17 @@ namespace Bitz
 			glTexCoordPointer(2, GL_FLOAT, 0, _TexCache);
 
 			_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
-			for(uint32_t i = 0; i < _DrawIntervals.size(); i++)
+			for (uint32_t i = 0; i < _DrawIntervals.size(); i++)
 			{
 				SetActiveTexture(_DrawIntervals[i].Texture);
-				if(_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
+				if (_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
 				{
 					Drawables::Model * model = static_cast<Drawables::Model *>(_DrawIntervals[i].InitialDrawable);
 					glPushMatrix();
 					model->ApplyTransformation();
 				}
 				glDrawArrays(GL_TRIANGLES, _DrawIntervals[i].VertCountStart, _DrawIntervals[i].VertCountEnd - _DrawIntervals[i].VertCountStart);
-				if(_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
+				if (_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
 				{
 					glPopMatrix();
 				}
@@ -207,14 +207,14 @@ namespace Bitz
 
 		void RenderEngine::SetActiveTexture(Content::TextureData * activeTexture)
 		{
-			if(_ActiveTexture == activeTexture)return;
+			if (_ActiveTexture == activeTexture)return;
 
-			if(activeTexture == nullptr)
+			if (activeTexture == nullptr)
 			{
 				_ActiveTexture = nullptr;
 				glBindTexture(GL_TEXTURE_2D, 0);
 				_TexturingEnabled = false;
-				if(_TexturingEnabled)
+				if (_TexturingEnabled)
 				{
 					_TexturingEnabled = false;
 					glDisable(GL_TEXTURE_2D);
@@ -223,7 +223,7 @@ namespace Bitz
 				return;
 			}
 
-			if(activeTexture->GetOpenglTextureID() != -1)
+			if (activeTexture->GetOpenglTextureID() != -1)
 			{
 				_ActiveTexture = activeTexture;
 				glBindTexture(GL_TEXTURE_2D, activeTexture->GetOpenglTextureID());
@@ -243,7 +243,7 @@ namespace Bitz
 					0, GL_RGBA, GL_UNSIGNED_BYTE, activeTexture->_PixelData);
 			}
 
-			if(!_TexturingEnabled)
+			if (!_TexturingEnabled)
 			{
 				_TexturingEnabled = true;
 				glEnable(GL_TEXTURE_2D);

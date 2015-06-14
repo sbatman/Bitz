@@ -15,12 +15,11 @@ Phys_Ground::Phys_Ground(b2World * world, float_t x, float_t y) : I2DPhysicsEnab
 	_Sprite->SetTexture(GetDefaultTexture());
 	_Sprite->SetColour(Vector4F(1.0f));
 	_Sprite->SetSize(Vector2F(32.0f));
-	SetPosition(Vector2F(x,y));
+	SetPosition(Vector2F(x, y));
 }
 
 Phys_Ground::~Phys_Ground()
 {
-
 }
 
 Texture* Phys_Ground::GetDefaultTexture()
@@ -37,7 +36,7 @@ void Phys_Ground::LoadContent()
 	if (_PhysShape == nullptr)
 	{
 		_PhysShape = new b2PolygonShape();
-		_PhysShape->SetAsBox(16,16);
+		_PhysShape->SetAsBox(16, 16);
 	}
 }
 

@@ -55,7 +55,6 @@ namespace Bitz
 			static bool _CachedWorkingDirectoryStored;
 
 			static std::vector<FileHandle *> _OpenFiles;
-
 		};
 	}
 }

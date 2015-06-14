@@ -44,7 +44,6 @@ namespace Bitz
 		_CurrentGameCore = game;
 
 		try {
-
 			if (_CurrentGameCore->LoadContent() && _CurrentGameCore->Init())
 			{
 				_RunningTimer.Start();
@@ -109,7 +108,7 @@ namespace Bitz
 			Content::IO::CloseAllOpen();
 			Debug::Logging::StaticDispose();
 		}
-		catch(std::exception e)
+		catch (std::exception e)
 		{
 			throw e;
 		}

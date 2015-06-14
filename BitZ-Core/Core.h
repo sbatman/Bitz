@@ -78,8 +78,6 @@ namespace Bitz
 		/// </summary>
 		static void Unlock();
 
-		
-
 	private:
 		static bool _PauseRender;
 		static double_t _LastUpdate;

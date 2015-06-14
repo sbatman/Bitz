@@ -76,7 +76,6 @@ namespace Bitz
 
 		std::vector<byte> IO::ReadAllBytes(std::string filename)
 		{
-
 #ifdef __ANDROID__
 			AAssetManager* assetManager = android_app_GetAssetManager();
 			AAsset* asset = AAssetManager_open(assetManager, filename.c_str(), AASSET_MODE_BUFFER);

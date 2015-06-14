@@ -53,7 +53,6 @@ namespace Bitz
 
 			uint32_t _OpenglTextureID = -1;
 
-
 		private:
 			uint8_t * _PixelData;
 			uint32_t _Width = 0;

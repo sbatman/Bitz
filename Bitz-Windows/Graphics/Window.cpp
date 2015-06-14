@@ -30,7 +30,6 @@ namespace Bitz
 					_WC.lpszClassName = title.c_str();
 					RegisterClass(&_WC);
 
-
 					// create main window
 					_HWnd = CreateWindow(title.c_str(), title.c_str(), WS_CAPTION | WS_SYSMENU | WS_VISIBLE | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, 0, 0, _WindowSize.X, _WindowSize.Y, NULL, NULL, hInstance, NULL);
 					ApplyWindowSizeChange();

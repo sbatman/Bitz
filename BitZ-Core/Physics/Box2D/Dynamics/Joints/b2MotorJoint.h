@@ -43,7 +43,7 @@ struct b2MotorJointDef : public b2JointDef
 
 	/// The bodyB angle minus bodyA angle in radians.
 	float32 angularOffset;
-	
+
 	/// The maximum motor force in N.
 	float32 maxForce;
 

@@ -109,17 +109,16 @@ namespace Bitz
 			static Packet * FromByteArray(std::vector<byte> data);
 
 			/// <summary>
-			///    Creates a packet from tje provided byte aray and returns 
+			///    Creates a packet from tje provided byte aray and returns
 			///    a pointer to the packet
 			/// </summary>
 			static Packet * FromByteArray(const uint8_t * data);
 
 			/// <summary>
-			///    These bytes are added tot he front of ever packet to help identify 
+			///    These bytes are added tot he front of ever packet to help identify
 			///    a packet start in a byte stream
 			/// </summary>
 			static const uint8_t PacketStartBytes[4];
-
 
 		protected:
 			/// <summary>
@@ -185,7 +184,6 @@ namespace Bitz
 			///     Rebuilds the vector of stored values from the data array
 			/// </summary>
 			void UpdateObjects();
-
 
 			/// <summary>
 			///     Deletes the internal vector of packed objects in a memory safe way
