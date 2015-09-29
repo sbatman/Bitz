@@ -92,6 +92,7 @@ namespace Bitz
 
 			ifs.seekg(0, std::ios::beg);
 			ifs.read(reinterpret_cast<char *>(&result[0]), pos);
+			ifs.close();
 #endif
 			return result;
 		}

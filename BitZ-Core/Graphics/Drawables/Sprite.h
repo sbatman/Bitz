@@ -14,9 +14,8 @@ namespace Bitz
 		{
 			class Sprite : public Bitz::Interfaces::IPositionable2DF,
 				public Bitz::Interfaces::ISizeable2DF,
-				public IDrawable,
-				public Bitz::Interfaces::IColourable,
-				public Bitz::Interfaces::IRotateable2DF
+				public Bitz::Interfaces::IRotateable2DF,
+				public IDrawable
 			{
 			public:
 				Sprite();

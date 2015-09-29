@@ -36,3 +36,7 @@
 //Input
 #include "../Bitz-Core/Input/Mouse.h"
 #include "../Bitz-Core/Input/Keyboard.h"
+
+//Time
+#include "../BitZ-Core/Time/Consts.h"
+#include "../BitZ-Core/Time/Timer.h"

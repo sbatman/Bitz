@@ -1,6 +1,7 @@
 #include "Core.h"
 #include "Common.h"
 #include "Time\Timer.h"
+#include "Time\Consts.h"
 #include "Debug\Logging.h"
 #include "Input\Keyboard.h"
 #include "Input\Mouse.h"
@@ -18,8 +19,8 @@ namespace Bitz
 	double_t Core::_TargetFPS = 60;
 	double_t Core::_TargetUPS = 60;
 
-	double_t Core::_MSPerDraw = 1000 / _TargetFPS;
-	double_t Core::_MSPerUpdate = 1000 / _TargetUPS;
+	double_t Core::_MSPerDraw = Time::MSINSEC / _TargetFPS;
+	double_t Core::_MSPerUpdate = Time::MSINSEC / _TargetUPS;
 
 	double_t Core::_LastDraw = 0;
 	double_t  Core::_LastUpdate = 0;
@@ -124,14 +125,14 @@ namespace Bitz
 	{
 		assert(newUPS >= 1 && newUPS <= 1000 && "UPS can only be set to a value between 1 and 1000 inclusive");
 		_TargetUPS = newUPS;
-		_MSPerUpdate = 1000.0f / _TargetUPS;
+		_MSPerUpdate = Time::MSINSEC / _TargetUPS;
 	}
 
 	void Core::SetTargetFPS(double_t newFPS)
 	{
 		assert(newFPS >= 1 && newFPS <= 1000 && "FPS can only be set to a value between 1 and 1000 inclusive");
 		_TargetFPS = newFPS;
-		_MSPerDraw = 1000.0f / _TargetFPS;
+		_MSPerDraw = Time::MSINSEC / _TargetFPS;
 	}
 
 	double_t Core::GetTargetUPS()

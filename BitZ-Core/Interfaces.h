@@ -150,6 +150,33 @@ namespace Bitz
 			virtual void InternalUpdate() = 0;
 		};
 
+		/// <summary>
+		/// This interface describes a class that can switch between a visible and invisible state
+		/// </summary>
+		class IVisible
+		{
+		public:
+			virtual ~IVisible() {}
+			/// <summary>
+			/// Returns whether the class is visible or not
+			/// </summary>
+			/// <returns>True if it is visible else false</returns>
+			virtual bool IsVisible()
+			{
+				return _Visible;
+			}
+			/// <summary>
+			/// Sets whether the class should be visible or not
+			/// </summary>
+			/// <param name='visible'>True to make it visible, false to make it invisible</param>
+			virtual void SetVisible(bool visible)
+			{
+				_Visible = visible;
+			}
+		protected:
+			bool _Visible;
+		};
+
 		class IColourable
 		{
 		public:
@@ -161,6 +188,14 @@ namespace Bitz
 			virtual void SetColour(const Vector4F newColour)
 			{
 				_Colour = newColour;
+			}
+			virtual void SetAlpha(const float newAlpha)
+			{
+				_Colour.W = newAlpha;
+			}
+			virtual float GetAlpha()
+			{
+				return _Colour.W;
 			}
 		protected:
 			Vector4F _Colour = Vector4F(1);

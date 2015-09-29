@@ -24,6 +24,7 @@ namespace Bitz
 				_Position = Vector2F(0);
 				_Rotation = 0;
 				_Size = Vector2F(1);
+				_Visible = true;
 			}
 
 			Sprite::~Sprite()

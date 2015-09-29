@@ -174,7 +174,10 @@ namespace Bitz
 			glColorPointer(4, GL_FLOAT, 0, _ColCache);
 			glTexCoordPointer(2, GL_FLOAT, 0, _TexCache);
 
+			if (_DrawIntervals.size() == 0)return;
+
 			_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
+		
 			for (uint32_t i = 0; i < _DrawIntervals.size(); i++)
 			{
 				SetActiveTexture(_DrawIntervals[i].Texture);

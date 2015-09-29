@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Common.h"
 #include "../Texture.h"
+#include "../../Interfaces.h"
 
 namespace Bitz
 {
@@ -14,7 +15,9 @@ namespace Bitz
 			/// <summary>
 			/// This interface defines an object that can be rendered by the graphics manager
 			/// </summary>
-			class IDrawable
+			class IDrawable : 
+				public Bitz::Interfaces::IVisible,
+				public Bitz::Interfaces::IColourable
 			{
 			public:
 				friend GraphicsManager;
@@ -43,14 +46,6 @@ namespace Bitz
 				{
 					return _Texture;
 				}
-				virtual void SetVisible(bool visible)
-				{
-					_Visible = visible;
-				}
-				virtual bool IsVisible() const
-				{
-					return _Visible;
-				}
 				virtual bool ShouldDraw() const
 				{
 					return _Visible && _VertCount > 0;
@@ -64,7 +59,6 @@ namespace Bitz
 				int32_t _VertCount = 0;
 				RenderMode _RenderMode;
 				Texture * _Texture = nullptr;
-				bool _Visible = true;
 			};
 		}
 	}

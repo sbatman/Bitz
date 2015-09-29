@@ -37,23 +37,23 @@ bool Game::Init()
 	RenderState2d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 0));
 	RenderState2d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ADDATIVE);
 
-	//if (GameState_Test1 == nullptr)
-	//{
-	//	GameState_Test1 = new GSTest1();
-	//	Bitz::GameLogic::GameStateService::StartState(GameState_Test1);
-	//}
-	//
-	//if (GameState_Test2 == nullptr)
-	//{
-	//	GameState_Test2 = new GSTest2();
-	//	Bitz::GameLogic::GameStateService::StartState(GameState_Test2);
-	//}
-
-	if (GameState_Test3 == nullptr)
+	/*if (GameState_Test1 == nullptr)
 	{
-		GameState_Test3 = new GSTest3();
-		Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
+		GameState_Test1 = new GSTest1();
+		Bitz::GameLogic::GameStateService::StartState(GameState_Test1);
+	}*/
+	
+	if (GameState_Test2 == nullptr)
+	{
+		GameState_Test2 = new GSTest2();
+		Bitz::GameLogic::GameStateService::StartState(GameState_Test2);
 	}
+
+	//if (GameState_Test3 == nullptr)
+	//{
+	//	GameState_Test3 = new GSTest3();
+	//	Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
+	//}
 	return true;
 }
 
@@ -77,17 +77,26 @@ bool Game::UnloadContent()
 
 bool Game::OnExit()
 {
-	//Bitz::GameLogic::GameStateService::EndState(GameState_Test1);
-	//delete GameState_Test1;
-	//GameState_Test1 = nullptr;
-	//
-	//Bitz::GameLogic::GameStateService::EndState(GameState_Test2);
-	//delete GameState_Test2;
-	//GameState_Test2 = nullptr;
+	if (GameState_Test1 != nullptr)
+	{
+		Bitz::GameLogic::GameStateService::EndState(GameState_Test1);
+		delete GameState_Test1;
+		GameState_Test1 = nullptr;
+	}
+	
+	if (GameState_Test2 != nullptr)
+	{
+		Bitz::GameLogic::GameStateService::EndState(GameState_Test2);
+		delete GameState_Test2;
+		GameState_Test2 = nullptr;
+	}
 
-	Bitz::GameLogic::GameStateService::EndState(GameState_Test3);
-	delete GameState_Test3;
-	GameState_Test3 = nullptr;
+	if (GameState_Test3 != nullptr)
+	{
+		Bitz::GameLogic::GameStateService::EndState(GameState_Test3);
+		delete GameState_Test3;
+		GameState_Test3 = nullptr;
+	}
 
 	return true;
 }

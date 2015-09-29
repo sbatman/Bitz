@@ -15,10 +15,9 @@ namespace Bitz
 		namespace Drawables
 		{
 			class Model : public Bitz::Interfaces::IPositionable3DF,
-				public Bitz::Interfaces::ISizeable3DF,
-				public IDrawable,
-				public Bitz::Interfaces::IColourable,
-				public Bitz::Interfaces::IRotateable3DF
+				public Bitz::Interfaces::ISizeable3DF,				
+				public Bitz::Interfaces::IRotateable3DF,
+				public IDrawable
 			{
 				friend GraphicsManager;
 				friend RenderEngine;
