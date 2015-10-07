@@ -31,11 +31,10 @@ namespace Bitz
 			assert(_HasInit);
 			TextureData::_LoadedTextureData.erase(
 				std::remove_if(TextureData::_LoadedTextureData.begin(), TextureData::_LoadedTextureData.end(),
-					[](TextureData* element) -> bool
+					[](TextureData_Ptr element) -> bool
 			{
 				if (element->_UsageCount == 0)
 				{
-					delete element;
 					return true;
 				}
 				return false;

@@ -11,7 +11,10 @@ namespace Bitz
 
 	namespace Content
 	{
+		class TextureData;
 		class ContentManager;
+
+		typedef std::shared_ptr<TextureData> TextureData_Ptr;
 
 		class TextureData
 		{
@@ -29,13 +32,13 @@ namespace Bitz
 			uint32_t GetID() const;
 
 		protected:
-			static std::vector<TextureData *> _LoadedTextureData;
+			static std::vector<TextureData_Ptr> _LoadedTextureData;
 
 			/// <summary>
 			/// Loads the PNG at the provided fileName returning a TextureData
 			/// </summary>
 			/// <param name='fileName'>The filename to load relative to ContentManager::GetGraphicsRoot()</param>
-			static TextureData * Load(const std::string fileName);
+			static TextureData_Ptr Load(const std::string fileName);
 			/// <summary>
 			/// Resets the OpenGL Id's of all loaded assets, this is usualy triggered when the OpenGL context has gone down
 			/// </summary>
@@ -60,7 +63,7 @@ namespace Bitz
 			uint32_t _ID = -1;
 			uint32_t _UsageCount = 0;
 
-			static uint32_t _NextID;
+			static std::atomic<uint32_t> _NextID;
 		};
 	}
 }

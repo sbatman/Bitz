@@ -15,6 +15,7 @@
 #include <memory>
 #include <fstream>
 #include <limits>
+#include <atomic>
 
 typedef uint8_t byte;
 
@@ -57,6 +58,8 @@ typedef double double_t;
 #include <tchar.h>
 
 #endif
+
+#include "Settings.h"
 
 //GLM Include
 #include "../Support Libraries/glm/glm/glm.hpp"

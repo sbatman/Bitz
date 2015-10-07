@@ -3,20 +3,18 @@
 #include "ContentManager.h"
 #include "../Serialize/Packet.h"
 #include "IO.h"
-//#include "libs/lodepng/lodepng.h"
 
 namespace Bitz
 {
 	namespace Content
 	{
-		uint32_t TextureData::_NextID = 0;
+		std::atomic<uint32_t> TextureData::_NextID = 0;
 
-		std::vector<TextureData *> TextureData::_LoadedTextureData;
+		std::vector<TextureData_Ptr> TextureData::_LoadedTextureData;
 
 		TextureData::TextureData()
 		{
-			_ID = _NextID++;
-			_LoadedTextureData.push_back(this);
+			_ID = _NextID++;			
 		}
 
 		TextureData::~TextureData()
@@ -39,7 +37,7 @@ namespace Bitz
 			return _ID;
 		}
 
-		TextureData * TextureData::Load(const std::string fileName)
+		TextureData_Ptr TextureData::Load(const std::string fileName)
 		{
 			int32_t width = 0, height = 0;
 			uint8_t * byteArray;
@@ -51,8 +49,8 @@ namespace Bitz
 			height = *((int32_t *)objects[1].Ptr);
 			byteArray = ((uint8_t *)objects[2].Ptr);
 
-			TextureData * returnTextureData = new TextureData();
-
+			TextureData_Ptr returnTextureData = TextureData_Ptr(new TextureData());
+			_LoadedTextureData.push_back(returnTextureData);
 			returnTextureData->_PixelData = new uint8_t[width*height * 4];
 
 			Memcpy(returnTextureData->_PixelData, width*height * 4, byteArray, width*height * 4);
@@ -86,7 +84,7 @@ namespace Bitz
 
 		void TextureData::ClearAllOpenGLIDs()
 		{
-			for (TextureData* tex : _LoadedTextureData)tex->SetOpenglTextureID(-1);
+			for (TextureData_Ptr tex : _LoadedTextureData)tex->SetOpenglTextureID(-1);
 		}
 	}
 }

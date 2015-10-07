@@ -9,7 +9,7 @@ namespace Bitz
 	{
 		class GraphicsManager;
 		class RenderEngine;
-
+		
 		namespace Drawables
 		{
 			/// <summary>
@@ -41,6 +41,7 @@ namespace Bitz
 				virtual void SetTexture(Texture* newTexture)
 				{
 					_Texture = newTexture;
+					
 				}
 				virtual Texture * GetTexture() const
 				{

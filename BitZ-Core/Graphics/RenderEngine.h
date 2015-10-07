@@ -40,11 +40,11 @@ namespace Bitz
 			{
 				uint32_t VertCountStart = 0;
 				uint32_t VertCountEnd = 0;
-				Content::TextureData * Texture = nullptr;
+				Content::TextureData_Ptr Texture = nullptr;
 				Drawables::IDrawable::RenderMode Mode;
 				Drawables::IDrawable * InitialDrawable;
 
-				DrawInterval(uint32_t start, uint32_t end, Content::TextureData * texture, Drawables::IDrawable::RenderMode mode, Drawables::IDrawable * drawable)
+				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Drawables::IDrawable * drawable)
 				{
 					VertCountStart = start;
 					VertCountEnd = end;
@@ -106,7 +106,7 @@ namespace Bitz
 			/// <summary>
 			/// The currently active texture
 			/// </summary>
-			Content::TextureData * _ActiveTexture;
+			Content::TextureData_Ptr _ActiveTexture;
 			/// <summary>
 			/// Whether rendering with a texture is currently enabled
 			/// </summary>
@@ -119,7 +119,7 @@ namespace Bitz
 			/// <summary>
 			/// Sets the active texture used for rendering
 			/// </summary>
-			void SetActiveTexture(Content::TextureData * activeTexture);
+			void SetActiveTexture(Content::TextureData_Ptr activeTexture);
 		};
 	}
 }

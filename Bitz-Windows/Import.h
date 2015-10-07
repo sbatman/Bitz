@@ -29,6 +29,7 @@
 
 //Debug
 #include "../Bitz-Core/Debug/Logging.h"
+#include "../BitZ-Core/Debug/Console.h"
 
 //Math
 #include "../Bitz-Core/Math/Math.h"

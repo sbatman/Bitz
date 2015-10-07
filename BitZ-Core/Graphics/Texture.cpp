@@ -64,7 +64,7 @@ namespace Bitz
 
 		Texture* GFX::Texture::Load(std::string const fileName)
 		{
-			Content::TextureData * data = Content::TextureData::Load(Bitz::Content::ContentManager::GetGraphicsRoot() + fileName);
+			Content::TextureData_Ptr data = Content::TextureData::Load(Bitz::Content::ContentManager::GetGraphicsRoot() + fileName);
 			GFX::Texture * returnTexture = new Texture();
 			returnTexture->_Data = data;
 			returnTexture->_Data->IncrementUsageCount();

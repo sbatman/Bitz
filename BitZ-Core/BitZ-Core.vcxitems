@@ -168,6 +168,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Box2D\Rope\b2Rope.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Physics\I2DPhysicsEnabled.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Serialize\Packet.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Settings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Consts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility.h" />

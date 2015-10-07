@@ -30,6 +30,9 @@ namespace Bitz
 			_ActiveTexture = nullptr;
 			_TexturingEnabled = false;
 			_NormalsEnabled = false;
+
+			if(Settings::DEBUG_LOGGING_GRAPHICS) Debug::Logging::Log(Debug::Logging::ErrorType::Notice,"Created Render Engine");
+
 		}
 
 		RenderEngine::~RenderEngine()
@@ -54,6 +57,7 @@ namespace Bitz
 			_CurrentWindow = nullptr;
 			_ActiveTexture = nullptr;
 			Content::TextureData::ClearAllOpenGLIDs();
+			if (Settings::DEBUG_LOGGING_GRAPHICS) Debug::Logging::Log(Debug::Logging::ErrorType::Notice, "Destroyed Render Engine");
 		}
 
 		void RenderEngine::Init()
@@ -116,7 +120,7 @@ namespace Bitz
 			idrawable->PopulateTexArray(_TexCache, &_TexCachePos);
 			idrawable->PopulateNormArray(_NormCache, &_NormCachePos);
 
-			Content::TextureData * data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
+			Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
 
 			if (_DrawIntervals.empty())
 			{
@@ -176,6 +180,8 @@ namespace Bitz
 
 			if (_DrawIntervals.size() == 0)return;
 
+			if(Settings::DEBUG_LOGGING_GRAPHICS)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
+
 			_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
 		
 			for (uint32_t i = 0; i < _DrawIntervals.size(); i++)
@@ -208,7 +214,7 @@ namespace Bitz
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
-		void RenderEngine::SetActiveTexture(Content::TextureData * activeTexture)
+		void RenderEngine::SetActiveTexture(Content::TextureData_Ptr activeTexture)
 		{
 			if (_ActiveTexture == activeTexture)return;
 

@@ -51,7 +51,7 @@ namespace Bitz
 
 		private:
 
-			Content::TextureData* _Data;
+			Content::TextureData_Ptr _Data;
 		};
 	}
 }
