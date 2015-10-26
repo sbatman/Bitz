@@ -80,6 +80,20 @@ namespace Bitz
 				return Vector4<T>(X * other.X, Y * other.Y, Z * other.Z, W * other.W);
 			}
 
+			////
+
+			Vector4<T> __FASTCALL operator / (const T other)
+			{
+				return Vector4<T>(X / other, Y / other, Z / other, W / other);
+			}
+
+			Vector4<T> __FASTCALL operator*(const T other)
+			{
+				return Vector4<T>(X * other, Y * other, Z * other, W * other);
+			}
+
+			////
+
 			T __FASTCALL Length() const
 			{
 				return static_cast<T>(sqrt((X*X) + (Y*Y) + (Z*Z) + (W*W)));

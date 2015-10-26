@@ -30,7 +30,7 @@ I2DPhysicsEnabled::~I2DPhysicsEnabled()
 Vector2F I2DPhysicsEnabled::GetPosition() const
 {
 	if (_PhysBody == nullptr) return _Position;
-	return Vector2F(_PhysBody->GetPosition().x * PhysicsPixelsToMeter, _PhysBody->GetPosition().y * PhysicsPixelsToMeter);
+	return Vector2F(_PhysBody->GetPosition()) * PhysicsPixelsToMeter;
 }
 
 void I2DPhysicsEnabled::SetPosition(const Vector2F newPosition)

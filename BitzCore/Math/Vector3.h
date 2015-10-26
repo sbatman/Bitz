@@ -1,5 +1,6 @@
 #pragma once
 #include "../Common.h"
+#include "../Physics/Box2D/Common/b2Math.h"
 
 namespace Bitz
 {
@@ -42,6 +43,13 @@ namespace Bitz
 				Z = instanceToCopy.Z;
 			}
 
+			Vector3(const b2Vec3 vec3)
+			{
+				X = vec3.x;
+				Y = vec3.y;
+				Z = vec3.z;
+			}
+
 			~Vector3()
 			{
 			}
@@ -73,6 +81,20 @@ namespace Bitz
 			{
 				return Vector3<T>(X * other.X, Y * other.Y, Z * other.Z);
 			}
+
+			////
+
+			Vector3<T> __FASTCALL operator/(const T other)
+			{
+				return Vector3<T>(X / other.X, Y / other.Y, Z / other.Z);
+			}
+
+			Vector3<T> __FASTCALL operator*(const T other)
+			{
+				return Vector3<T>(X * other, Y * other, Z * other);
+			}
+
+			////
 
 			T __FASTCALL Length() const
 			{
