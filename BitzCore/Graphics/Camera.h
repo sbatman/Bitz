@@ -47,6 +47,15 @@ namespace Bitz
 			/// Gets the current camera mode
 			/// </summary>
 			CameraMode GetMode() const;
+			/// <summary>
+			/// Gets the current zoom multiplier
+			/// </summary>
+			float_t GetZoom() const;
+
+			/// <summary>
+			/// Gets the current zoom level (its a scaling factor >1.0 to zoom in <1.0 to zoom out) default : 1.0f
+			/// </summary>
+			void SetZoom(const float_t newZoom);
 
 		protected:
 			/// <summary>
@@ -72,6 +81,10 @@ namespace Bitz
 			/// The current fov
 			/// </summary>
 			float_t _FOV;
+			/// <summary>
+			/// The current zoom Level
+			/// </summary>
+			float_t _Zoom;
 			/// <summary>
 			/// Whether or not the next apply should force a call to make active,
 			/// Important if the internal camera state/mode has changed.

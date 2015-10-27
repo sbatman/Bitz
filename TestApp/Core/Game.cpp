@@ -10,6 +10,9 @@ GSTest1 * Game::GameState_Test1 = nullptr;
 GSTest2 * Game::GameState_Test2 = nullptr;
 GSTest3 * Game::GameState_Test3 = nullptr;
 
+float zoomtest = 1;
+float zoomtestdirection = 0.01f;
+
 Game::Game() : Bitz::GameLogic::GameCore("Explore")
 {
 	ContentManager::Init("Content/", "Content/", "Content/");
@@ -21,6 +24,18 @@ Game::~Game()
 
 bool Game::Update()
 {
+	zoomtest += zoomtestdirection;
+	if (zoomtest > 1.3f)
+	{
+		zoomtest = 1.3f;
+		zoomtestdirection = -zoomtestdirection;
+	}
+	if (zoomtest < 0.5f)
+	{
+		zoomtest = 0.5f;
+		zoomtestdirection = -zoomtestdirection;
+	}
+	RenderState2d->GetActiveCamera()->SetZoom(zoomtest);
 	return true;
 }
 
@@ -36,6 +51,7 @@ bool Game::Init()
 	RenderState2d = new GraphicsStates::GS2D();
 	RenderState2d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 0));
 	RenderState2d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ADDATIVE);
+	
 
 	/*if (GameState_Test1 == nullptr)
 	{

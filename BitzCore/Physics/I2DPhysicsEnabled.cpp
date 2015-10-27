@@ -20,9 +20,9 @@ I2DPhysicsEnabled::~I2DPhysicsEnabled()
 	if (_PhysBody != nullptr)
 	{
 		b2World* world = _PhysBody->GetWorld();
-		if (_PhysFixture != nullptr) _PhysBody->DestroyFixture(_PhysFixture);
+		if (_PhysFixture != nullptr && world != nullptr) _PhysBody->DestroyFixture(_PhysFixture);
 		_PhysFixture = nullptr;
-		world->DestroyBody(_PhysBody);
+		if(world !=nullptr)world->DestroyBody(_PhysBody);
 		_PhysBody = nullptr;
 	}
 }

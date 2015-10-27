@@ -36,6 +36,12 @@ void Bitz::GFX::Camera::MakeActive() const
 	{
 		glMatrixMode(GL_PROJECTION);
 		glm::mat4 projection = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.001f, 1000.0f);
+		if (abs(_Zoom - 1) > 0.001f)
+		{
+			projection = glm::translate(projection, glm::tvec3<float, glm::precision::defaultp>(GraphicsManager::GetScreenSize().X *0.5f, GraphicsManager::GetScreenSize().Y *0.5f, 0));
+			projection = glm::scale(projection, glm::tvec3<float, glm::precision::defaultp>(_Zoom));
+			projection = glm::translate(projection, -glm::tvec3<float, glm::precision::defaultp>(GraphicsManager::GetScreenSize().X *0.5f, GraphicsManager::GetScreenSize().Y *0.5f, 0));
+		}
 		glLoadMatrixf(glm::value_ptr(projection));
 	}
 	break;
@@ -43,6 +49,12 @@ void Bitz::GFX::Camera::MakeActive() const
 	{
 		glMatrixMode(GL_PROJECTION);
 		glm::mat4 projection = glm::ortho(0.0, (double_t)GraphicsManager::GetScreenSize().X, (double_t)GraphicsManager::GetScreenSize().Y, 0.0, 0.0, 1.0);
+		if (abs(_Zoom - 1) > 0.001f)
+		{
+			projection = glm::translate(projection, glm::tvec3<float, glm::precision::defaultp>(GraphicsManager::GetScreenSize().X *0.5f, GraphicsManager::GetScreenSize().Y *0.5f, 0));
+			projection = glm::scale(projection, glm::tvec3<float, glm::precision::defaultp>(_Zoom));
+			projection = glm::translate(projection, -glm::tvec3<float, glm::precision::defaultp>(GraphicsManager::GetScreenSize().X *0.5f, GraphicsManager::GetScreenSize().Y *0.5f, 0));
+		}
 		glLoadMatrixf(glm::value_ptr(projection));
 	}
 	break;
@@ -52,14 +64,28 @@ void Bitz::GFX::Camera::MakeActive() const
 
 void Bitz::GFX::Camera::SetFOV(const float_t newValue)
 {
+	if (_FOV == newValue) return;
 	_FOV = newValue;
 	if (_FOV < 1)_FOV = 1;
 	if (_FOV > 360)_FOV = 360;
 	_ForceMakeActiveOnApply = true;
 }
 
+float_t Bitz::GFX::Camera::GetZoom() const
+{
+	return _Zoom;
+}
+
+void Bitz::GFX::Camera::SetZoom(const float_t newZoom)
+{
+	if (_Zoom == newZoom) return;
+	_Zoom = newZoom;
+	_ForceMakeActiveOnApply = true;
+}
+
 void Bitz::GFX::Camera::SetMode(const Camera::CameraMode newMode)
 {
+	if (_CurrentMode == newMode) return;
 	_CurrentMode = newMode;
 	_ForceMakeActiveOnApply = true;
 }
