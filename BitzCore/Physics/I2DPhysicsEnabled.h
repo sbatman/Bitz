@@ -1,5 +1,5 @@
 #pragma once
-#include "../Interfaces.h"
+#include "../Interfaces/Core.h"
 #include "Box2D/Box2D.h"
 #include "../Math/Math.h"
 

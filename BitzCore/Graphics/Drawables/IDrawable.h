@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Common.h"
 #include "../Texture.h"
-#include "../../Interfaces.h"
+#include "../../Interfaces/Core.h"
 
 namespace Bitz
 {

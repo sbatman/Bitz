@@ -1,6 +1,6 @@
 #pragma once
 #include "../../Common.h"
-#include "../../Interfaces.h"
+#include "../../Interfaces/Core.h"
 #include "../Texture.h"
 #include "IDrawable.h"
 

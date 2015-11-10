@@ -1,6 +1,6 @@
 #pragma once
 #include "../Time/Timer.h"
-#include "../Interfaces.h"
+#include "../Interfaces/Core.h"
 
 namespace Bitz
 {
