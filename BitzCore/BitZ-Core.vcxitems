@@ -17,7 +17,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Interfaces\IDisposable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Interfaces\IAnchorable.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Layout\Container.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Layout\Anchor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\ContentManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\IO.cpp" />
@@ -95,7 +94,6 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Interfaces\IDisposable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Interfaces\IAnchorable.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Layout\Container.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Layout\Anchor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\ContentManager.h" />

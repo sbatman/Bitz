@@ -11,6 +11,7 @@ namespace Bitz
 
 		Anchor::~Anchor()
 		{
+			if (!IsDisposed()) Dispose();
 		}
 
 		void Anchor::SetPosition(const Math::Vector2F newPosition)
