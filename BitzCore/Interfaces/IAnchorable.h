@@ -3,43 +3,35 @@
 #include "Common.h"
 #include "Math\Math.h"
 #include "../Interfaces/Core.h"
-#include "../Layout/Anchor.h"
+#include "IDisposable.h"
 
 namespace Bitz
 {
-	using namespace Math;
+	namespace Layout
+	{
+		class Anchor;
+
+		typedef std::shared_ptr<Anchor> Anchor_Ptr;
+	}
 
 	namespace Interfaces
 	{
-
-		class IAnchorable : public IPositionable2DF
+		class IAnchorable : 
+			public IPositionable2DF,
+			public IDisposable
 		{
 		public:
-			virtual ~IAnchorable() {}
-			virtual Bitz::Layout::Anchor_Ptr GetParentAnchor()
-			{
-				return _ParentAnchor;
-			}
-			virtual void SetParentAnchor(Bitz::Layout::Anchor_Ptr newParentAnchor)
-			{
-				_ParentAnchor = newParentAnchor;
-			}
-			virtual Vector2F GetOffset()
-			{
-				return _Offset;
-			}
-			virtual void SetOffset(Vector2F newOffset)
-			{
-				_Position = _ParentAnchor->GetPosition() + _Offset;
-				_Offset = newOffset;
-			}
-			virtual void TriggerPositonUpdate()
-			{
-				_Position = _ParentAnchor->GetPosition() + _Offset;
-			}
+			IAnchorable();
+			virtual ~IAnchorable() = 0;
+			virtual Layout::Anchor_Ptr GetParentAnchor() const;
+			virtual void SetParentAnchor(const Layout::Anchor_Ptr newParentAnchor);
+			virtual Vector2F GetOffset() const;
+			virtual void SetOffset(const Math::Vector2F newOffset);
+			virtual void TriggerPositonUpdate();
+			virtual void Dispose() override;
 		private:
-			Bitz::Layout::Anchor_Ptr _ParentAnchor = nullptr;
-			Vector2F _Offset = Vector2F(0);
+			Layout::Anchor_Ptr _ParentAnchor;
+			Math::Vector2F _Offset;
 		};
 
 		typedef std::shared_ptr<IAnchorable> IAnchorable_Ptr;
