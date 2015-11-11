@@ -52,6 +52,12 @@ namespace Bitz
 					Mode = mode;
 					InitialDrawable = drawable;
 				}
+
+				~DrawInterval()
+				{
+					Texture = nullptr;
+					InitialDrawable = nullptr;
+				}
 			};
 
 			/// <summary>

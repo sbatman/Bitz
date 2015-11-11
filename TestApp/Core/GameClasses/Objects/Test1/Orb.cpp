@@ -17,7 +17,7 @@ Orb::Orb()
 	_AccX = ((rand() % 400) - 200) / 100.0f;
 	_AccY = ((rand() % 400) - 200) / 100.0f;
 
-	SetColour(Vector4F(1.0f, 1.0f, 1.0f, 1.0f));
+	SetColour(Vector4F(1.0f, 1.0f, 1.0f, 0.1f));
 
 	SetTexture(GetDefaultTexture());
 }
@@ -62,7 +62,7 @@ void Orb::Update(int32_t xLimit, int32_t yLimit, int32_t targetX, int32_t target
 
 	SetPosition(_PosX, _PosY);
 
-	if (((xRange*xRange) + (yRange*yRange)) > (300 * 300))
+	if (((xRange*xRange) + (yRange*yRange)) > (500 * 500))
 	{
 		_AccX *= 0.98f;
 		_AccY *= 0.98f;

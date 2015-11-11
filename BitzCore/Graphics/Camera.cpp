@@ -7,6 +7,7 @@ Bitz::GFX::Camera::Camera()
 	_ForceMakeActiveOnApply = false;
 	_CurrentMode = CameraMode::Perspective;
 	_FOV = 75;
+	_Zoom = 1;
 }
 
 Bitz::GFX::Camera::~Camera()

@@ -1,7 +1,7 @@
 #include "GSTest1.h"
 #include "../../../Game.h"
 
-#define ORBCOUNT 1000
+#define ORBCOUNT 30000
 
 using namespace Bitz::Math;
 using namespace Bitz::GFX;
@@ -18,12 +18,10 @@ GSTest1::~GSTest1()
 
 void GSTest1::OnEnter(GameState *)
 {
-
-
 	for (auto x = 0; x < ORBCOUNT; x++)
 	{
 		auto o = std::shared_ptr<Orb>(new Orb());
-		o->SetColour(Vector4F(1.0f, (x % 150) / 255.0f, 0.0f, 1.0f));
+		o->SetColour(Vector4F(1.0f, (x % 150) / 255.0f, 0.0f, 0.05f));
 		_TestOrbs.push_back(o);
 	}
 }
