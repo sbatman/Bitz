@@ -122,14 +122,18 @@ namespace Bitz
 						if (_LogToFile)
 						{
 							fprintf(_OutputFile->Handle.get(), "%s:\t%s\n", Logging::ErrorTypeAsString[(int)event.type].c_str(), event.message.c_str());
-							fflush(_OutputFile->Handle.get());
 						}
 						if (_LogToBlackHole)
 						{
 						}
 					}
+					if (_LogToFile)
+					{
+						fflush(_OutputFile->Handle.get());
+					}
 					delete _LogsInProcessing;
 					_LogsInProcessing = nullptr;
+
 					std::this_thread::sleep_for(std::chrono::milliseconds(0));
 				}
 				else {

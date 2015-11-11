@@ -31,7 +31,7 @@ bool Game::Draw()
 
 bool Game::Init()
 {
-	Bitz::Debug::Logging::EnableLogToConsole();
+	Bitz::Debug::Logging::EnableLogToBlackHole();
 
 	RenderState2d = new GraphicsStates::GS2D();
 	RenderState2d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 0));
