@@ -8,6 +8,10 @@ namespace Bitz
 
 	namespace Debug
 	{
+		/// <summary>
+		/// The Logging class accepts log messages from acorss the game and engine and 
+		/// managest them to their correct destination, disk, console, nowhere
+		/// </summary>
 		class Logging
 		{
 			friend Bitz::Core;

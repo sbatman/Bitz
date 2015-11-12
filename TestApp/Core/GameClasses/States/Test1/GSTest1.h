@@ -8,7 +8,7 @@ public:
 	GSTest1();
 	~GSTest1();
 protected:
-	virtual void OnEnter(GameState * preceedingState) override;
+	virtual void OnEnter(Bitz::GameLogic::GameState_Ptr preceedingState) override;
 	virtual void OnExit() override;
 	virtual void OnUpdate() override;
 	virtual void OnDraw() override;

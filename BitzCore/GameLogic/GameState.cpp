@@ -26,7 +26,7 @@ namespace Bitz
 			return _Current;
 		}
 
-		void GameState::Enter(GameState * preceedingState)
+		void GameState::Enter(GameState_Ptr preceedingState)
 		{
 			_EntryTimer = new Time::Timer();
 			_EntryTimer->Start();
@@ -62,7 +62,7 @@ namespace Bitz
 			return _NextGameState != nullptr;
 		}
 
-		GameState * GameState::GetNextGameState() const
+		GameState_Ptr GameState::GetNextGameState() const
 		{
 			return _NextGameState;
 		}

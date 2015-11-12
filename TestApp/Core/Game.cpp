@@ -6,9 +6,9 @@ using namespace Bitz::GFX;
 
 GraphicsStates::GS2D * Game::RenderState2d;
 
-GSTest1 * Game::GameState_Test1 = nullptr;
-GSTest2 * Game::GameState_Test2 = nullptr;
-GSTest3 * Game::GameState_Test3 = nullptr;
+std::shared_ptr<GSTest1> Game::GameState_Test1 = nullptr;
+std::shared_ptr<GSTest2> Game::GameState_Test2 = nullptr;
+std::shared_ptr<GSTest3> Game::GameState_Test3 = nullptr;
 
 Game::Game() : Bitz::GameLogic::GameCore("Explore")
 {
@@ -40,19 +40,19 @@ bool Game::Init()
 
 	if (GameState_Test1 == nullptr)
 	{
-		GameState_Test1 = new GSTest1();
-		Bitz::GameLogic::GameStateService::StartState(GameState_Test1);
+		GameState_Test1 = std::make_shared<GSTest1>();
+		Bitz::GameLogic::GameStateService::StartState(static_cast<Bitz::GameLogic::GameState_Ptr>(GameState_Test1));
 	}
 	
 	/*if (GameState_Test2 == nullptr)
 	{
-		GameState_Test2 = new GSTest2();
+		GameState_Test2 = std::make_shared<GSTest2>();
 		Bitz::GameLogic::GameStateService::StartState(GameState_Test2);
 	}*/
 
 	//if (GameState_Test3 == nullptr)
 	//{
-	//	GameState_Test3 = new GSTest3();
+	//	GameState_Test3 = std::make_shared<GSTest3>();
 	//	Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
 	//}
 	return true;
@@ -81,21 +81,18 @@ bool Game::OnExit()
 	if (GameState_Test1 != nullptr)
 	{
 		Bitz::GameLogic::GameStateService::EndState(GameState_Test1);
-		delete GameState_Test1;
 		GameState_Test1 = nullptr;
 	}
 	
 	if (GameState_Test2 != nullptr)
 	{
 		Bitz::GameLogic::GameStateService::EndState(GameState_Test2);
-		delete GameState_Test2;
 		GameState_Test2 = nullptr;
 	}
 
 	if (GameState_Test3 != nullptr)
 	{
 		Bitz::GameLogic::GameStateService::EndState(GameState_Test3);
-		delete GameState_Test3;
 		GameState_Test3 = nullptr;
 	}
 

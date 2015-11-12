@@ -7,6 +7,9 @@ namespace Bitz
 	namespace GameLogic
 	{
 		class GameStateService;
+		class GameState;
+
+		typedef std::shared_ptr<GameState> GameState_Ptr;
 
 		/// <summary>
 		/// The GameState class acts as a backbone of the games logic paths, each of the possible states
@@ -23,11 +26,11 @@ namespace Bitz
 
 			Time::Timer * GetTimeSinceEnter() const;
 			bool IsCurrent() const;
-			GameState * GetNextGameState() const;
+			GameState_Ptr GetNextGameState() const;
 
 		protected:
 			virtual bool IsComplete() const;
-			virtual void OnEnter(GameState * preceedingState) = 0;
+			virtual void OnEnter(GameState_Ptr preceedingState) = 0;
 			virtual void OnExit() = 0;
 			virtual void OnUpdate() = 0;
 			virtual void OnDraw() = 0;
@@ -35,9 +38,9 @@ namespace Bitz
 		private:
 			Time::Timer * _EntryTimer;
 			bool _Current;
-			GameState * _NextGameState = nullptr;
+			GameState_Ptr _NextGameState = nullptr;
 
-			void Enter(GameState * preceedingState);
+			void Enter(GameState_Ptr preceedingState);
 			void Exit();
 			void InternalUpdate() override;
 			void Draw();

@@ -25,7 +25,7 @@ typedef uint8_t byte;
 #define __FASTCALL
 
 #define GLEW_NO_GLU true
-#define GLEW_STATIC true
+#define GLEW_STATIC
 #include "Libs/Glew/glew.h"
 
 typedef float float_t;
@@ -51,7 +51,7 @@ typedef double double_t;
 
 #define __FASTCALL __fastcall
 
-#define GLEW_STATIC true
+#define GLEW_STATIC
 #include "Libs/Glew/glew.h"
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>

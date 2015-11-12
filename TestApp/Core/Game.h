@@ -22,7 +22,7 @@ protected:
 	virtual bool OnExit() override;
 
 private:
-	static GSTest1 * GameState_Test1;
-	static GSTest2 * GameState_Test2;
-	static GSTest3 * GameState_Test3;
+	static std::shared_ptr<GSTest1> GameState_Test1;
+	static std::shared_ptr<GSTest2> GameState_Test2;
+	static std::shared_ptr<GSTest3> GameState_Test3;
 };

@@ -16,7 +16,7 @@ GSTest1::~GSTest1()
 {
 }
 
-void GSTest1::OnEnter(GameState *)
+void GSTest1::OnEnter(Bitz::GameLogic::GameState_Ptr)
 {
 	for (auto x = 0; x < ORBCOUNT; x++)
 	{
