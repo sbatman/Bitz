@@ -17,6 +17,8 @@
 #include <limits>
 #include <atomic>
 
+const float EPSILON = 0.00001f;
+
 typedef uint8_t byte;
 
 //OpenGL Includes

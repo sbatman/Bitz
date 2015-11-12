@@ -51,6 +51,14 @@ namespace Bitz
 			/// Gets the current zoom multiplier
 			/// </summary>
 			float_t GetZoom() const;
+			/// <summary>
+			/// Gets the current cached projection matrix
+			/// </summary>
+			glm::mat4 GetProjectionMatrix() const;
+			/// <summary>
+			/// Gets the current cached view matrix
+			/// </summary>
+			glm::mat4 GetViewMatrix() const;
 
 			/// <summary>
 			/// Gets the current zoom level (its a scaling factor >1.0 to zoom in <1.0 to zoom out) default : 1.0f
@@ -66,7 +74,8 @@ namespace Bitz
 			/// This logic applies when this camera whasnt the last camera used, allows the seperation of
 			/// some of the apply logic to reduce opwngl calls
 			/// </summary>
-			void MakeActive() const;
+			void MakeActive();
+
 
 		private:
 			/// <summary>
@@ -90,6 +99,9 @@ namespace Bitz
 			/// Important if the internal camera state/mode has changed.
 			/// </summary>
 			bool _ForceMakeActiveOnApply;
+
+			glm::mat4 _ProjectionMatrix;
+			glm::mat4 _ViewMatrix;
 		};
 	}
 }

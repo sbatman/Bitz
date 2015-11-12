@@ -8,7 +8,7 @@ namespace Bitz
 	{
 		GameState::GameState(std::string name)
 		{
-			assert(name.length() > 0 && "Not providing a name for a GameState is bbad practice");
+			assert(name.length() > 0 && "Not providing a name for a GameState is bad practice");
 			_Name = name;
 		}
 
@@ -26,7 +26,7 @@ namespace Bitz
 			return _Current;
 		}
 
-		void GameState::Enter(GameState_Ptr preceedingState)
+		void GameState::Enter(const GameState_Ptr preceedingState)
 		{
 			_EntryTimer = new Time::Timer();
 			_EntryTimer->Start();
