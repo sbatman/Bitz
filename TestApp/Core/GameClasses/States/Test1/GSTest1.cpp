@@ -37,7 +37,7 @@ void GSTest1::OnUpdate()
 	int yLimit = Bitz::GFX::GraphicsManager::GetScreenSize().Y;
 	if (xLimit != 0 && yLimit != 0)
 	{
-		for (std::shared_ptr<Orb> o : _TestOrbs)o->Update(xLimit, yLimit, xLimit*0.5f, yLimit *0.5f);
+		for (std::shared_ptr<Orb> o : _TestOrbs)o->Update(xLimit, yLimit, static_cast<float_t>(xLimit*0.5f), static_cast<float_t>(yLimit*0.5f));
 	}
 }
 

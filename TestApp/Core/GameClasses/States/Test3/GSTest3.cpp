@@ -16,7 +16,7 @@ GSTest3::~GSTest3()
 {
 }
 
-void GSTest3::OnEnter(Bitz::GameLogic::GameState_Ptr)
+void GSTest3::OnEnter(const Bitz::GameLogic::GameState_Ptr)
 {
 	_Background = Background_Ptr(new  Background());
 	_Background->SetPosition(Vector2F(0));

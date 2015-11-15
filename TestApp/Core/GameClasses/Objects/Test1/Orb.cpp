@@ -45,8 +45,8 @@ void Orb::Update(int32_t xLimit, int32_t yLimit, int32_t targetX, int32_t target
 		yRange = _PosY - targetPosy;
 	}
 
-	_AccX += (xRange) / 1000.0f;
-	_AccY += (yRange) / 1000.0f;
+	_AccX += xRange / 1000.0f;
+	_AccY += yRange / 1000.0f;
 
 	if (((_PosX - _AccX) + _Size) <= 0 || (_PosX - _AccX) >= (xLimit - _Size))
 	{

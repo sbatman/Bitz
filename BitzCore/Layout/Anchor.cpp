@@ -25,12 +25,12 @@ namespace Bitz
 			for (Interfaces::IAnchorable_Ptr a : _Anchorables)a->TriggerPositonUpdate();
 		}
 
-		void Anchor::AddDependent(Interfaces::IAnchorable_Ptr newDependednt)
+		void Anchor::AddDependent(const Interfaces::IAnchorable_Ptr newDependednt)
 		{
 			_Anchorables.push_back(newDependednt);
 		}
 
-		void Anchor::RemoveDependent(Interfaces::IAnchorable_Ptr newDependednt)
+		void Anchor::RemoveDependent(const Interfaces::IAnchorable_Ptr newDependednt)
 		{
 			_Anchorables.erase(std::remove(_Anchorables.begin(), _Anchorables.end(), newDependednt), _Anchorables.end());
 		}

@@ -99,8 +99,13 @@ namespace Bitz
 			/// Important if the internal camera state/mode has changed.
 			/// </summary>
 			bool _ForceMakeActiveOnApply;
-
+			/// <summary>
+			/// Cooked Projection Matrix
+			/// </summary>
 			glm::mat4 _ProjectionMatrix;
+			/// <summary>
+			/// Cooked View Matrix
+			/// </summary>
 			glm::mat4 _ViewMatrix;
 		};
 	}

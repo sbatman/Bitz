@@ -88,6 +88,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Box2D\Rope\b2Rope.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Physics\I2DPhysicsEnabled.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Serialize\Packet.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\ShaderService.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Time\Timer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility.cpp" />
   </ItemGroup>
@@ -176,6 +178,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Physics\I2DPhysicsEnabled.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Serialize\Packet.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Settings.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\ShaderService.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Shader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Consts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility.h" />

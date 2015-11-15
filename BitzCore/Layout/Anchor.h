@@ -28,8 +28,8 @@ namespace Bitz
 			~Anchor();
 			virtual void SetPosition(const Math::Vector2F newPosition);
 			virtual void UpdateDependents();
-			virtual void AddDependent(Interfaces::IAnchorable_Ptr newDependednt);
-			virtual void RemoveDependent(Interfaces::IAnchorable_Ptr newDependednt);
+			virtual void AddDependent(const Interfaces::IAnchorable_Ptr newDependednt);
+			virtual void RemoveDependent(const Interfaces::IAnchorable_Ptr newDependednt);
 			virtual void Dispose() override;
 
 		private:
