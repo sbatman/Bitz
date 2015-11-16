@@ -14,5 +14,10 @@ namespace Bitz
 		{
 			return _CurrentBlendState;
 		}
+
+		Shaders::Shader_Ptr GraphicsStates::BaseGS::GetStockShader()
+		{
+			return _StockShader;
+		}
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Common.h"
 #include "../Camera.h"
+#include "../Shaders/Shader.h"
 
 namespace Bitz
 {
@@ -20,9 +21,11 @@ namespace Bitz
 
 				void SetActiveBlendState(BlendStates newBlendState);
 				BlendStates GetActiveBlendState();
+				Shaders::Shader_Ptr GetStockShader();
 
 			protected:
 				BlendStates _CurrentBlendState;
+				Shaders::Shader_Ptr _StockShader;
 			};
 		}
 	}

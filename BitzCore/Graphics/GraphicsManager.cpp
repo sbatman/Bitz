@@ -98,7 +98,7 @@ namespace Bitz
 
 			_CurrentGraphicsState = graphicsState;
 
-			_ActiveRenderEngine->Begin();
+			_ActiveRenderEngine->Begin(graphicsState->GetStockShader());
 
 			assert(graphicsState != nullptr&& "Begin Render must be called with a graphics state");
 			assert(_CurrentGraphicsState->GetActiveCamera() != nullptr&& "The current camera must be set before attempting to draw");

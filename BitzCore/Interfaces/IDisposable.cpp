@@ -9,6 +9,10 @@ namespace Bitz
 			_IsDisposed = false;
 		}
 
+		IDisposable::~IDisposable()
+		{
+		}
+
 		bool IDisposable::IsDisposed()const
 		{
 			return _IsDisposed;

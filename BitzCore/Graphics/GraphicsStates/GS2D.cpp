@@ -1,5 +1,6 @@
 #include "../../Common.h"
 #include "GS2D.h"
+#include "../Shaders/Stock2D.h"
 
 namespace Bitz
 {
@@ -10,11 +11,13 @@ namespace Bitz
 			_ActiveCamera = new Camera();
 			_ActiveCamera->SetMode(Camera::CameraMode::Ortho);
 			_CurrentBlendState = BlendStates::ALPHA;
+			_StockShader = Shaders::Shader_Ptr(new Shaders::Stock2D());
 		}
 
 		GraphicsStates::GS2D::~GS2D()
 		{
 			delete _ActiveCamera;
+			_StockShader = nullptr;
 		}
 
 		void GraphicsStates::GS2D::EnterState()

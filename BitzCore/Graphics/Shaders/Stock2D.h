@@ -7,11 +7,10 @@ namespace Bitz
 	{
 		namespace Shaders
 		{
-			class Standard : public Shader
+			class Stock2D : public Shader
 			{
 			public:
-				Standard();
-				~Standard();
+				Stock2D();
 			};
 		}
 	}
