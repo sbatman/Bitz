@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "ShaderService.h"
 
 namespace Bitz
 {
@@ -6,17 +7,56 @@ namespace Bitz
 	{
 		namespace Shaders
 		{
+			static int32_t _LastAllocatedID = 0;
+
 			Shader::~Shader()
 			{
+				if (!IsDisposed())	Dispose();
 			}
 
 			bool Shader::IsCompiled() const
 			{
 				return _Compiled;
 			}
+
 			int32_t Shader::GetID() const
 			{
 				return _ID;
+			}
+
+			Shader::Shader(const std::string vertexShader, const std::string fragmentShader)
+			{
+				ShaderService::RegisterShader(Shader_Ptr(this));
+				SetGLSL(vertexShader, fragmentShader);
+			}
+
+			Shader::Shader()
+			{
+				ShaderService::RegisterShader(Shader_Ptr(this));
+			}
+
+			void Shader::SetGLSL(const std::string vertexShader, const std::string fragmentShader)
+			{
+				_ID = _LastAllocatedID++;
+				_FragementShaderLength = fragmentShader.length() + 1;
+				_VertexShaderLength = vertexShader.length() + 1;
+
+				if (_FragementSource != nullptr)delete _FragementSource;
+				if (_VertexSource != nullptr)delete _VertexSource;
+
+				_VertexSource = new char[_VertexShaderLength];
+				_FragementSource = new char[_FragementShaderLength];
+
+				vertexShader.copy(_VertexSource, vertexShader.length() + 1, 0);
+				fragmentShader.copy(_FragementSource, fragmentShader.length() + 1, 0);
+			}
+
+			void Shader::Dispose()
+			{
+				ShaderService::UnRegisterShader(Shader_Ptr(this));
+				if (_Program != -1)glDeleteProgram(_Program);
+				if (_FragementSource != nullptr)delete _FragementSource;
+				if (_VertexSource != nullptr)delete _VertexSource;
 			}
 
 			void Shader::Enable()
@@ -37,6 +77,9 @@ namespace Bitz
 
 			bool Shader::Compile()
 			{
+				assert(_VertexSource != nullptr&& "Vertex Shader is null");
+				assert(_FragementSource != nullptr&& "Fragement Shader is null");
+
 				_Program = glCreateProgram();
 				_VertexShader = glCreateShader(GL_VERTEX_SHADER);
 				_FragementShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -70,14 +113,14 @@ namespace Bitz
 				return _Compiled;
 			}
 
-			bool Shader::ShaderCompileSuccessful(int32_t obj)
+			bool Shader::ShaderCompileSuccessful(const int32_t obj)
 			{
 				int status;
 				glGetShaderiv(obj, GL_COMPILE_STATUS, &status);
 				return status == GL_TRUE;
 			}
 
-			bool Shader::ShaderLinkSuccessful(int32_t obj)
+			bool Shader::ShaderLinkSuccessful(const int32_t obj)
 			{
 				int status;
 				glGetProgramiv(obj, GL_LINK_STATUS, &status);

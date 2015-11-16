@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Window.h"
 #include "Drawables\IDrawable.h"
+#include "Shaders\Shader.h"
 
 namespace Bitz
 {
@@ -17,7 +18,7 @@ namespace Bitz
 
 			void Init();
 			void Update();
-			void Begin();
+			void Begin(Shaders::Shader_Ptr activeShader = nullptr);
 			void End();
 			void Present();
 			void Clear(Vector3F colour);
@@ -100,6 +101,10 @@ namespace Bitz
 			/// The current window used for rendering
 			/// </summary>
 			Window * _CurrentWindow;
+			/// <summary>
+			/// The currently active shader used for this pass of rendering
+			/// </summary>
+			Shaders::Shader_Ptr _ActiveShader;
 
 			/// <summary>
 			/// The draw intervals that will be used for this draw pass

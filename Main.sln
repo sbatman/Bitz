@@ -122,8 +122,6 @@ Global
 		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Android-x86.ActiveCfg = Release|x86
 		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Windows-x64.ActiveCfg = Release|x86
 		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Windows-x86.ActiveCfg = Release|x86
-		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Windows-x86.Build.0 = Release|x86
-		{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}.Release|Windows-x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

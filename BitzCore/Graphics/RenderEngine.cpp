@@ -1,9 +1,10 @@
-#include "../Common.h"
+#include "..\Common.h"
 #include "RenderEngine.h"
 #include "Drawables\Model.h"
 #include "Drawables\Sprite.h"
-#include "../Content/TextureData.h"
-#include "../Debug/Logging.h"
+#include "..\Content\TextureData.h"
+#include "..\Debug\Logging.h"
+#include "Shaders\ShaderService.h"
 
 namespace Bitz
 {
@@ -31,7 +32,7 @@ namespace Bitz
 			_TexturingEnabled = false;
 			_NormalsEnabled = false;
 
-			if(Settings::DEBUG_LOGGING_GRAPHICS) Debug::Logging::Log(Debug::Logging::ErrorType::Notice,"Created Render Engine");
+			if (Settings::DEBUG_LOGGING_GRAPHICS) Debug::Logging::Log(Debug::Logging::ErrorType::Notice, "Created Render Engine");
 
 		}
 
@@ -90,8 +91,10 @@ namespace Bitz
 			_CurrentWindow->Update();
 		}
 
-		void RenderEngine::Begin()
+		void RenderEngine::Begin(Shaders::Shader_Ptr activeShader)
 		{
+			_ActiveShader = activeShader != nullptr ? activeShader : Shaders::ShaderService::GetStandardShader();
+
 			_VertCachePos = 0;
 			_ColCachePos = 0;
 			_TexCachePos = 0;
@@ -180,10 +183,10 @@ namespace Bitz
 
 			if (_DrawIntervals.size() == 0)return;
 
-			if(Settings::DEBUG_LOGGING_GRAPHICS)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
+			if (Settings::DEBUG_LOGGING_GRAPHICS)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
 
 			_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
-		
+
 			for (uint32_t i = 0; i < _DrawIntervals.size(); i++)
 			{
 				SetActiveTexture(_DrawIntervals[i].Texture);
