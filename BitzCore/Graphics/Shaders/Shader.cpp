@@ -8,10 +8,11 @@ namespace Bitz
 		namespace Shaders
 		{
 			static int32_t _LastAllocatedID = 0;
+			Shader_Ptr _Myself = nullptr;
 
 			Shader::~Shader()
 			{
-				if (!IsDisposed())	Dispose();
+				AttemptDispose();
 			}
 
 			bool Shader::IsCompiled() const
@@ -26,13 +27,15 @@ namespace Bitz
 
 			Shader::Shader(const std::string vertexShader, const std::string fragmentShader)
 			{
-				ShaderService::RegisterShader(Shader_Ptr(this));
+				_Myself = Shader_Ptr(this);
+				ShaderService::RegisterShader(_Myself);
 				SetGLSL(vertexShader, fragmentShader);
 			}
 
 			Shader::Shader()
 			{
-				ShaderService::RegisterShader(Shader_Ptr(this));
+				_Myself = Shader_Ptr(this);
+				ShaderService::RegisterShader(_Myself);
 			}
 
 			void Shader::SetGLSL(const std::string vertexShader, const std::string fragmentShader)
@@ -48,17 +51,19 @@ namespace Bitz
 				_FragementSource = new char[_FragementShaderLength];
 
 				vertexShader.copy(_VertexSource, _VertexShaderLength, 0);
-				_VertexSource[_VertexShaderLength-1] = 0;
+				_VertexSource[_VertexShaderLength - 1] = 0;
 				fragmentShader.copy(_FragementSource, _FragementShaderLength, 0);
-				_FragementSource[_FragementShaderLength-1] = 0;
+				_FragementSource[_FragementShaderLength - 1] = 0;
 			}
 
 			void Shader::Dispose()
 			{
-				ShaderService::UnRegisterShader(Shader_Ptr(this));
+				if (_Myself == nullptr)return;
+				_Myself = nullptr;
+				ShaderService::UnRegisterShader(_Myself);
 				if (_Program != -1)glDeleteProgram(_Program);
 				if (_FragementSource != nullptr)delete _FragementSource;
-				if (_VertexSource != nullptr)delete _VertexSource;
+				if (_VertexSource != nullptr)delete _VertexSource;				
 			}
 
 			void Shader::Enable()
@@ -92,7 +97,7 @@ namespace Bitz
 				glCompileShader(_FragementShader);
 				glAttachShader(_Program, _VertexShader);
 				glAttachShader(_Program, _FragementShader);
-				
+
 				bool vCompileOK = ShaderCompileSuccessful(_VertexShader);
 				if (!vCompileOK)
 				{
@@ -138,8 +143,8 @@ namespace Bitz
 			{
 				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
 				if (loc != -1)
-				{					
-					glUniformMatrix4fv(loc, 1,0, &matrix[0][0]);
+				{
+					glUniformMatrix4fv(loc, 1, 0, &matrix[0][0]);
 				}
 			}
 		}

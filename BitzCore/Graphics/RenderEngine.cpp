@@ -98,10 +98,9 @@ namespace Bitz
 
 			if (!_ActiveShader->IsCompiled())_ActiveShader->Compile();
 			_ActiveShader->Enable();
+
 			_VertGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Position");
-			int err = glGetError();
 			_ColGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Color");
-			err = glGetError();
 			_NormGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Normal");
 			_TexGLCacheLoc = _ActiveShader->GetAttributeLocation("in_TexCoordinate");
 
@@ -131,10 +130,10 @@ namespace Bitz
 				return;
 			}
 
-			idrawable->PopulateVertArray(_VertCache, &_VertCachePos);
-			idrawable->PopulateColArray(_ColCache, &_ColCachePos);
-			idrawable->PopulateTexArray(_TexCache, &_TexCachePos);
-			idrawable->PopulateNormArray(_NormCache, &_NormCachePos);
+			if (_VertGLCacheLoc != -1)idrawable->PopulateVertArray(_VertCache, &_VertCachePos);
+			if (_ColGLCacheLoc != -1)idrawable->PopulateColArray(_ColCache, &_ColCachePos);
+			if (_NormGLCacheLoc != -1)idrawable->PopulateNormArray(_NormCache, &_NormCachePos);
+			if (_TexGLCacheLoc != -1)idrawable->PopulateTexArray(_TexCache, &_TexCachePos);
 
 			Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
 
@@ -290,7 +289,7 @@ namespace Bitz
 				_TexturingEnabled = true;
 				glEnable(GL_TEXTURE_2D);
 			}
-			int err=glGetError();
+			int err = glGetError();
 			assert(err == GL_NO_ERROR);
 		}
 

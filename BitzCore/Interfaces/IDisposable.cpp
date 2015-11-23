@@ -22,8 +22,8 @@ namespace Bitz
 		{
 			if (!_IsDisposed)
 			{
-				Dispose();
 				_IsDisposed = true;
+				Dispose();
 			}
 		}
 	}
