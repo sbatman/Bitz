@@ -44,14 +44,16 @@ namespace Bitz
 				Content::TextureData_Ptr Texture = nullptr;
 				Drawables::IDrawable::RenderMode Mode;
 				Drawables::IDrawable * InitialDrawable;
+				Shaders::Shader_Ptr _CustomShader = nullptr;
 
-				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Drawables::IDrawable * drawable)
+				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Drawables::IDrawable * drawable, Shaders::Shader_Ptr customShader = nullptr)
 				{
 					VertCountStart = start;
 					VertCountEnd = end;
 					Texture = texture;
 					Mode = mode;
 					InitialDrawable = drawable;
+					_CustomShader = customShader;
 				}
 
 				~DrawInterval()
@@ -105,7 +107,6 @@ namespace Bitz
 			/// The currently active shader used for this pass of rendering
 			/// </summary>
 			Shaders::Shader_Ptr _ActiveShader;
-
 			/// <summary>
 			/// The draw intervals that will be used for this draw pass
 			/// </summary>
@@ -126,6 +127,12 @@ namespace Bitz
 			/// Whether rendering with normal corrdinates is currently enabled
 			/// </summary>
 			bool _NormalsEnabled;
+
+			int _VertGLCacheLoc = -1;
+			int _ColGLCacheLoc = -1;
+			int _NormGLCacheLoc = -1;
+			int _TexGLCacheLoc = -1;
+			
 
 			/// <summary>
 			/// Sets the active texture used for rendering

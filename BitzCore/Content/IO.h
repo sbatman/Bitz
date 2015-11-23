@@ -42,6 +42,7 @@ namespace Bitz
 			static void CloseFile(FileHandle_Ptr file);
 
 			static std::vector<byte> ReadAllBytes(std::string filename);
+			static std::vector<char> ReadAllChars(std::string filename);
 
 		protected:
 			static void CloseAllOpen();

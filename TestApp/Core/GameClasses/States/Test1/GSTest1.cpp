@@ -1,7 +1,7 @@
 #include "GSTest1.h"
 #include "../../../Game.h"
 
-#define ORBCOUNT 10000
+#define ORBCOUNT 1000
 
 using namespace Bitz::Math;
 using namespace Bitz::GFX;

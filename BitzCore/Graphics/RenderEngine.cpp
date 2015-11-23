@@ -5,6 +5,7 @@
 #include "..\Content\TextureData.h"
 #include "..\Debug\Logging.h"
 #include "Shaders\ShaderService.h"
+#include "GraphicsManager.h"
 
 namespace Bitz
 {
@@ -95,6 +96,18 @@ namespace Bitz
 		{
 			_ActiveShader = activeShader != nullptr ? activeShader : Shaders::ShaderService::GetStandardShader();
 
+			if (!_ActiveShader->IsCompiled())_ActiveShader->Compile();
+			_ActiveShader->Enable();
+			_VertGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Position");
+			int err = glGetError();
+			_ColGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Color");
+			err = glGetError();
+			_NormGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Normal");
+			_TexGLCacheLoc = _ActiveShader->GetAttributeLocation("in_TexCoordinate");
+
+			_ActiveShader->SetVariable("ProjectionMatrix", GraphicsManager::GetCurrentCamera()->GetProjectionMatrix());
+			_ActiveShader->SetVariable("ViewMatrix", GraphicsManager::GetCurrentCamera()->GetViewMatrix());
+
 			_VertCachePos = 0;
 			_ColCachePos = 0;
 			_TexCachePos = 0;
@@ -177,9 +190,26 @@ namespace Bitz
 
 		void RenderEngine::End()
 		{
-			glVertexPointer(3, GL_FLOAT, 0, _VertCache);
-			glColorPointer(4, GL_FLOAT, 0, _ColCache);
-			glTexCoordPointer(2, GL_FLOAT, 0, _TexCache);
+			if (_VertGLCacheLoc != -1)
+			{
+				glVertexAttribPointer(_VertGLCacheLoc, 3, GL_FLOAT, false, 0, _VertCache);
+				glEnableVertexAttribArray(_VertGLCacheLoc);
+			}
+			if (_ColGLCacheLoc != -1)
+			{
+				glVertexAttribPointer(_ColGLCacheLoc, 4, GL_FLOAT, false, 0, _ColCache);
+				glEnableVertexAttribArray(_ColGLCacheLoc);
+			}
+			if (_NormGLCacheLoc != -1)
+			{
+				glVertexAttribPointer(_NormGLCacheLoc, 3, GL_FLOAT, false, 0, _NormCache);
+				glEnableVertexAttribArray(_NormGLCacheLoc);
+			}
+			if (_TexGLCacheLoc != -1)
+			{
+				glVertexAttribPointer(_TexGLCacheLoc, 2, GL_FLOAT, false, 0, _TexCache);
+				glEnableVertexAttribArray(_TexGLCacheLoc);
+			}
 
 			if (_DrawIntervals.size() == 0)return;
 
@@ -260,8 +290,8 @@ namespace Bitz
 				_TexturingEnabled = true;
 				glEnable(GL_TEXTURE_2D);
 			}
-
-			assert(glGetError() == GL_NO_ERROR);
+			int err=glGetError();
+			assert(err == GL_NO_ERROR);
 		}
 
 		Vector2I RenderEngine::GetSize() const

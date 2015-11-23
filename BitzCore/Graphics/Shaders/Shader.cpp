@@ -43,12 +43,14 @@ namespace Bitz
 
 				if (_FragementSource != nullptr)delete _FragementSource;
 				if (_VertexSource != nullptr)delete _VertexSource;
-
+#pragma warning( disable : 4996 ) 
 				_VertexSource = new char[_VertexShaderLength];
 				_FragementSource = new char[_FragementShaderLength];
 
-				vertexShader.copy(_VertexSource, vertexShader.length() + 1, 0);
-				fragmentShader.copy(_FragementSource, fragmentShader.length() + 1, 0);
+				vertexShader.copy(_VertexSource, _VertexShaderLength, 0);
+				_VertexSource[_VertexShaderLength-1] = 0;
+				fragmentShader.copy(_FragementSource, _FragementShaderLength, 0);
+				_FragementSource[_FragementShaderLength-1] = 0;
 			}
 
 			void Shader::Dispose()
@@ -90,14 +92,14 @@ namespace Bitz
 				glCompileShader(_FragementShader);
 				glAttachShader(_Program, _VertexShader);
 				glAttachShader(_Program, _FragementShader);
-
+				
 				bool vCompileOK = ShaderCompileSuccessful(_VertexShader);
 				if (!vCompileOK)
 				{
 					GLsizei logLength = 0;
 					glGetShaderiv(_VertexShader, GL_INFO_LOG_LENGTH, &logLength);
 					GLchar* log_string = new GLchar[logLength + 1];
-					glGetShaderInfoLog(_Program, logLength, 0, log_string);
+					glGetShaderInfoLog(_VertexShader, logLength, 0, log_string);
 					printf("Vertex shader failure :%s", log_string);
 				}
 				bool fCompileOK = ShaderCompileSuccessful(_FragementShader);
@@ -106,7 +108,7 @@ namespace Bitz
 					GLsizei logLength = 0;
 					glGetShaderiv(_FragementShader, GL_INFO_LOG_LENGTH, &logLength);
 					GLchar* log_string = new char[logLength + 1];
-					glGetShaderInfoLog(_Program, logLength, 0, log_string);
+					glGetShaderInfoLog(_FragementShader, logLength, 0, log_string);
 					printf("Fragment shader failure :%s", log_string);
 				}
 				_Compiled = vCompileOK && fCompileOK;
@@ -127,6 +129,19 @@ namespace Bitz
 				return status == GL_TRUE;
 			}
 
+			int32_t Shader::GetAttributeLocation(std::string attributeName)const
+			{
+				return glGetAttribLocation(_Program, attributeName.c_str());
+			}
+
+			void Shader::SetVariable(std::string variableName, glm::mat4 matrix)
+			{
+				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{					
+					glUniformMatrix4fv(loc, 1,0, &matrix[0][0]);
+				}
+			}
 		}
 	}
 }

@@ -20,6 +20,9 @@ namespace Bitz
 				void virtual Disable();
 				void virtual Dispose() override;
 
+				int32_t virtual GetAttributeLocation(std::string attributeName) const;
+				void virtual SetVariable(std::string variableName, glm::mat4 matrix);
+
 			protected:
 				Shader();
 				void SetGLSL(const std::string vertexShader, const std::string fragmentShader);
