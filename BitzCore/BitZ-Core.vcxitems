@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\ShaderService.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Stock3D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Interfaces\IDisposable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Interfaces\IAnchorable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Layout\Anchor.cpp" />
@@ -97,6 +98,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Shader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\ShaderService.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Stock3D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Interfaces\IDisposable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Interfaces\IAnchorable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Layout\Anchor.h" />

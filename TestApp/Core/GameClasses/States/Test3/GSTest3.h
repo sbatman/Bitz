@@ -1,6 +1,5 @@
 #pragma once
 #include "../../../Common.h"
-#include "../../Objects/Test3/Background.h"
 
 class GSTest3 : public Bitz::GameLogic::GameState
 {

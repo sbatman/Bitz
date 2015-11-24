@@ -94,6 +94,16 @@ namespace Bitz
 				return Vector3<T>(X * other, Y * other, Z * other);
 			}
 
+			bool __FASTCALL operator==(const Vector3<T>& other) const
+			{
+				return X == other.X && Y == other.Y && Z == other.Z;
+			}
+
+			bool __FASTCALL operator!=(const Vector3<T>& other) const
+			{
+				return !(*this == other);
+			}
+
 			////
 
 			T __FASTCALL Length() const
