@@ -29,9 +29,13 @@ namespace Bitz
 				virtual ~IDrawable()
 				{
 					if (_VertArray != nullptr)delete[] _VertArray;
+					_VertArray = nullptr;
 					if (_ColArray != nullptr)delete[] _ColArray;
+					_ColArray = nullptr;
 					if (_TexArray != nullptr)delete[] _TexArray;
+					_TexArray = nullptr;
 					if (_NormArray != nullptr)delete[] _NormArray;
+					_NormArray = nullptr;
 				}
 				virtual void PopulateVertArray(float_t * vertArray, int32_t * startPosition) = 0;
 				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) = 0;
@@ -47,7 +51,7 @@ namespace Bitz
 				{
 					return _Texture;
 				}
-				virtual bool ShouldDraw() const
+				virtual bool ShouldDraw()
 				{
 					return _Visible && _VertCount > 0;
 				}

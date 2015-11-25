@@ -1,5 +1,6 @@
 #include "../../Common.h"
 #include "GS3D.h"
+#include "../Shaders/Stock3D.h"
 
 namespace Bitz
 {
@@ -10,6 +11,7 @@ namespace Bitz
 			_ActiveCamera = new Camera();
 			_ActiveCamera->SetMode(Camera::CameraMode::Perspective);
 			_CurrentBlendState = BlendStates::ALPHA;
+			_StockShader = Shaders::Shader_Ptr(new Shaders::Stock3D());
 		}
 
 		GraphicsStates::GS3D::~GS3D()

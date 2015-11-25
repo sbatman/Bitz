@@ -39,7 +39,7 @@ bool Game::Init()
 	RenderState2d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ADDATIVE);
 
 	RenderState3d = new GraphicsStates::GS3D();
-	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 0));
+	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(-2, -1, -10));
 	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ALPHA);
 	
 

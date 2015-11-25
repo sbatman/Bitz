@@ -21,7 +21,6 @@ namespace Bitz
 
 			Model::~Model()
 			{
-				delete[] _VertArray;
 			}
 
 			uint32_t Model::GetVertCount() const
