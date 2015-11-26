@@ -9,7 +9,6 @@ using namespace Bitz::GFX;
 
 std::shared_ptr<Cube> testCube = std::shared_ptr<Cube>(new Cube());
 
-
 GSTest3::GSTest3() : Bitz::GameLogic::GameState("Main")
 {
 	testCube->SetSize(Vector3F(1.0f));
@@ -33,6 +32,7 @@ void GSTest3::OnExit()
 
 void GSTest3::OnUpdate()
 {
+
 }
 
 void GSTest3::OnDraw()

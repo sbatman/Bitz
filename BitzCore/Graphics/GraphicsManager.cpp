@@ -96,13 +96,13 @@ namespace Bitz
 
 			if (_ActiveRenderEngine == nullptr) return;
 
+			assert(graphicsState != nullptr&& "Begin Render must be called with a graphics state");
+			assert(graphicsState->GetActiveCamera() != nullptr&& "The current camera must be set before attempting to draw");
+			assert(!_InRenderScope&& "Begin render has already been called");
+
 			_CurrentGraphicsState = graphicsState;
 
 			_ActiveRenderEngine->Begin(graphicsState->GetStockShader());
-
-			assert(graphicsState != nullptr&& "Begin Render must be called with a graphics state");
-			assert(_CurrentGraphicsState->GetActiveCamera() != nullptr&& "The current camera must be set before attempting to draw");
-			assert(!_InRenderScope&& "Begin render has already been called");
 
 			_InRenderScope = true;
 

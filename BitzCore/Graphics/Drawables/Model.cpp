@@ -109,13 +109,14 @@ namespace Bitz
 				Memcpy(_TexArray, dataSize*sizeof(float_t), texcords, dataSize*sizeof(float_t));
 			}
 
-			void Model::ApplyTransformation()
+			glm::mat4 Model::GetTransformation() const
 			{
-				if (_Rotation.X != 0)glRotatef(_Rotation.X, 1, 0, 0);
-				if (_Rotation.Y != 0)glRotatef(_Rotation.Y, 0, 1, 0);
-				if (_Rotation.Z != 0)glRotatef(_Rotation.Z, 0, 0, 1);
-
-				glTranslatef(_Position.X, _Position.Y, _Position.Z);
+				glm::mat4 matrix;
+				if (_Rotation.X != 0)glm::rotate(matrix, _Rotation.X, glm::vec3(1, 0, 0));
+				if (_Rotation.Y != 0)glm::rotate(matrix, _Rotation.Y, glm::vec3(0, 1, 0));
+				if (_Rotation.Z != 0)glm::rotate(matrix, _Rotation.Z, glm::vec3(0, 0, 1));
+				glm::translate(matrix, glm::vec3(_Position.X, _Position.Y, _Position.Z));
+				return matrix;
 			}
 		}
 	}

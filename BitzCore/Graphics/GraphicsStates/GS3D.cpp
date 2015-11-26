@@ -32,7 +32,7 @@ namespace Bitz
 			case BlendStates::ALPHA:
 				glEnable(GL_BLEND);
 				glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-				glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+				glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE);
 				break;
 			case BlendStates::ADDATIVE:
 				glEnable(GL_BLEND);

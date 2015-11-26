@@ -83,6 +83,9 @@ namespace Bitz
 			assert(glGetError() == GL_NO_ERROR);
 
 			glEnable(GL_MULTISAMPLE);
+			glEnable(GL_CULL_FACE);
+			glCullFace(GL_BACK);
+			glFrontFace(GL_CCW);
 
 			assert(glGetError() == GL_NO_ERROR);
 		}
