@@ -22,7 +22,6 @@ namespace Bitz
 		void GraphicsStates::GS3D::EnterState()
 		{
 			glClear(GL_DEPTH_BUFFER_BIT);
-			glEnable(GL_NORMALIZE);
 			switch (_CurrentBlendState)
 			{
 			case BlendStates::NONE:
@@ -42,7 +41,6 @@ namespace Bitz
 
 		void GraphicsStates::GS3D::ExitState()
 		{
-			glDisable(GL_NORMALIZE);
 			if (_CurrentBlendState != BlendStates::NONE)glDisable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
 		}

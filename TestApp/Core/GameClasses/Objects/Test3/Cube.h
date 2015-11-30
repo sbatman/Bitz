@@ -7,8 +7,6 @@ class Cube : public Bitz::GFX::Drawables::Model
 public:
 	Cube();
 	~Cube();
-	void SetSize(const Bitz::Math::Vector3F newSize) override;
-	void SetPosition(const Bitz::Math::Vector3F newPosition) override;
 	virtual bool ShouldDraw() override;
 private:
 	bool _VertArrayDirty;

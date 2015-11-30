@@ -3,9 +3,7 @@
 Cube::Cube()
 {
 	_VertArrayDirty = true;
-
 }
-
 
 Cube::~Cube()
 {
@@ -72,18 +70,6 @@ void Cube::CopyTri(float_t * vertList, const float_t* p1, const float_t* p2, con
 	Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p1, sizeof(float_t) * 3);	(*arrayPosition) += 3;
 	Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p2, sizeof(float_t) * 3);	(*arrayPosition) += 3;
 	Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p3, sizeof(float_t) * 3);	(*arrayPosition) += 3;
-}
-
-void Cube::SetSize(const Bitz::Math::Vector3F newSize)
-{
-	if (_Size != newSize) _VertArrayDirty = true;
-	_Size = newSize;
-}
-
-void Cube::SetPosition(const Bitz::Math::Vector3F newPosition)
-{
-	if (_Position != newPosition) _VertArrayDirty = true;
-	_Position = newPosition;
 }
 
 bool Cube::ShouldDraw()

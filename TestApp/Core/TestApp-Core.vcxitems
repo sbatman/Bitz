@@ -22,6 +22,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Crate.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Ground.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\States\Test3\GSTest3.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test3\VoxelGrid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
@@ -33,5 +34,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Crate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test2\Phys_Ground.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\States\Test3\GSTest3.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClasses\Objects\Test3\VoxelGrid.h" />
   </ItemGroup>
 </Project>
