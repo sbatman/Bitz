@@ -68,7 +68,7 @@ namespace Bitz
 					if ((elapsedMS - _LastUpdate) > _MSPerUpdate)
 					{
 						_LastUpdate += _MSPerUpdate;
-						GameLogic::GameStateService::Update();
+						GameLogic::GameStateService::Update(_MSPerUpdate);
 						if (!_CurrentGameCore->Update())
 						{
 							_Running = false;

@@ -13,9 +13,9 @@ namespace Bitz
 			_ActiveGameStates.clear();
 		}
 
-		void GameStateService::Update()
+		void GameStateService::Update(double ms)
 		{
-			for (GameState_Ptr s : _ActiveGameStates) s->Update();
+			for (GameState_Ptr s : _ActiveGameStates) s->Update(ms);
 
 			for (GameState_Ptr s : _ActiveGameStates)
 			{

@@ -38,7 +38,7 @@ namespace Bitz
 
 			protected:
 
-				virtual glm::mat4 ApplyTransformation() const;
+				virtual glm::mat4 GetTransformation() const;
 
 			private:
 			};

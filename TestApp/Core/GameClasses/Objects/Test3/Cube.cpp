@@ -16,35 +16,27 @@ void Cube::UpdateVertArray()
 	_VertArrayDirty = false;
 	float_t vertArray[6 * 2 * 3 * 3] = { 0 };
 
-	float_t halfSizeX = _Size.X*0.5f;
-	float_t halfSizeY = _Size.Y*0.5f;
-	float_t halfSizeZ = _Size.Z*0.5f;
-
-	float x = GetPosition().X;
-	float y = GetPosition().Y;
-	float z = GetPosition().Z;
-
-	float_t _tlf[3] = { x - halfSizeX, y - halfSizeY, z - halfSizeZ };
-	float_t _trf[3] = { x + halfSizeX, y - halfSizeY, z - halfSizeZ };
-	float_t _blf[3] = { x - halfSizeX, y + halfSizeY, z - halfSizeZ };
-	float_t _brf[3] = { x + halfSizeX, y + halfSizeY, z - halfSizeZ };
-	float_t _tlb[3] = { x - halfSizeX, y - halfSizeY, z + halfSizeZ };
-	float_t _trb[3] = { x + halfSizeX, y - halfSizeY, z + halfSizeZ };
-	float_t _blb[3] = { x - halfSizeX, y + halfSizeY, z + halfSizeZ };
-	float_t _brb[3] = { x + halfSizeX, y + halfSizeY, z + halfSizeZ };
+	float_t _tlf[3] = { -0.5f,  -0.5f,  -0.5f };
+	float_t _trf[3] = { 0.5f, -0.5f,  -0.5f };
+	float_t _blf[3] = { -0.5f,   0.5f,  -0.5f };
+	float_t _brf[3] = { 0.5f,   0.5f, -0.5f };
+	float_t _tlb[3] = { -0.5f,  -0.5f,   0.5f };
+	float_t _trb[3] = { 0.5f,  -0.5f,   0.5f };
+	float_t _blb[3] = { -0.5f,   0.5f,   0.5f };
+	float_t _brb[3] = { 0.5f,   0.5f,   0.5f };
 
 	int verpos = 0;
 
 	//FRONT
-	CopyTri(vertArray, _tlf, _blf, _trf, &verpos);  
-	CopyTri(vertArray, _blf, _brf, _trf, &verpos);  
+	CopyTri(vertArray, _tlf, _blf, _trf, &verpos);
+	CopyTri(vertArray, _blf, _brf, _trf, &verpos);
 
 	//LEFT	
-	CopyTri(vertArray, _tlb, _blb, _tlf, &verpos);  
-	CopyTri(vertArray, _blb, _blf, _tlf, &verpos);	
+	CopyTri(vertArray, _tlb, _blb, _tlf, &verpos);
+	CopyTri(vertArray, _blb, _blf, _tlf, &verpos);
 
 	//RIGHT	
-	CopyTri(vertArray, _trf, _brf, _trb, &verpos);  
+	CopyTri(vertArray, _trf, _brf, _trb, &verpos);
 	CopyTri(vertArray, _brf, _brb, _trb, &verpos);
 
 	//Back	

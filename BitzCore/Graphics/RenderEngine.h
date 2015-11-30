@@ -43,23 +43,27 @@ namespace Bitz
 				uint32_t VertCountEnd = 0;
 				Content::TextureData_Ptr Texture = nullptr;
 				Drawables::IDrawable::RenderMode Mode;
-				Drawables::IDrawable * InitialDrawable;
-				Shaders::Shader_Ptr _CustomShader = nullptr;
+				Shaders::Shader_Ptr CustomShader = nullptr;
+				glm::mat4 Matrix;
 
-				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Drawables::IDrawable * drawable, Shaders::Shader_Ptr customShader = nullptr)
+				DrawInterval()
+				{
+
+				}
+
+				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Shaders::Shader_Ptr customShader = nullptr, glm::mat4 matrix = glm::mat4())
 				{
 					VertCountStart = start;
 					VertCountEnd = end;
 					Texture = texture;
 					Mode = mode;
-					InitialDrawable = drawable;
-					_CustomShader = customShader;
+					CustomShader = customShader;
+					Matrix = matrix;
 				}
 
 				~DrawInterval()
 				{
 					Texture = nullptr;
-					InitialDrawable = nullptr;
 				}
 			};
 
@@ -95,6 +99,9 @@ namespace Bitz
 			/// The position along the vertex normal array that has been populated this draw
 			/// </summary>
 			int32_t _NormCachePos;
+
+			std::vector<glm::mat4> _MatCache;
+
 			/// <summary>
 			/// The current Context that is being used for rendering
 			/// </summary>
@@ -132,6 +139,7 @@ namespace Bitz
 			int _ColGLCacheLoc = -1;
 			int _NormGLCacheLoc = -1;
 			int _TexGLCacheLoc = -1;
+			int _MatGLCacheLoc = -1;
 			
 
 			/// <summary>

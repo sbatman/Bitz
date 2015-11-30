@@ -21,7 +21,7 @@ namespace Bitz
 			static bool IsGameStateActive(GameState_Ptr state);
 		private:
 			static void StaticDispose();
-			static void Update();
+			static void Update(double ms);
 			static void Draw();
 			static std::vector<GameState_Ptr> _ActiveGameStates;
 		};

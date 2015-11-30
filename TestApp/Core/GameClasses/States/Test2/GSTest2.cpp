@@ -29,7 +29,7 @@ void GSTest2::OnExit()
 	delete _PhyWorld;
 }
 
-void GSTest2::OnUpdate()
+void GSTest2::OnUpdate(double ms)
 {
 	_PhyWorld->Step(1.0f / 60.0f, 6, 2);
 

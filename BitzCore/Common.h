@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cmath>
+#define _USE_MATH_DEFINES 
+#include <math.h>
 #include <float.h>
 #include <stdio.h>
 #include <cstdio>

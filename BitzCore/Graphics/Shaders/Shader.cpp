@@ -145,6 +145,7 @@ namespace Bitz
 				if (loc != -1)
 				{
 					glUniformMatrix4fv(loc, 1, 0, &matrix[0][0]);
+					assert(glGetError() == GL_NO_ERROR);
 				}
 			}
 		}

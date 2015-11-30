@@ -31,7 +31,7 @@ void GSTest1::OnExit()
 	for (std::shared_ptr<Orb> o : _TestOrbs)o = nullptr;
 }
 
-void GSTest1::OnUpdate()
+void GSTest1::OnUpdate(double ms)
 {
 	int xLimit = Bitz::GFX::GraphicsManager::GetScreenSize().X;
 	int yLimit = Bitz::GFX::GraphicsManager::GetScreenSize().Y;

@@ -23,7 +23,7 @@ namespace Bitz
 				_Size = newSize;
 			}
 		protected:
-			T _Size = T();
+			T _Size = T(1);
 		};
 
 		template <class T>
@@ -125,9 +125,9 @@ namespace Bitz
 			/// <summary>
 			/// Calls the class Internale Update function if the update isn't paused
 			/// </summary>
-			virtual void Update()
+			virtual void Update(double ms)
 			{
-				if (!_UpdatePaused)InternalUpdate();
+				if (!_UpdatePaused)InternalUpdate(ms);
 			}
 			/// <summary>
 			/// Returns whether the class update function is paused
@@ -147,7 +147,7 @@ namespace Bitz
 			}
 		protected:
 			bool _UpdatePaused = false;
-			virtual void InternalUpdate() = 0;
+			virtual void InternalUpdate(double ms) = 0;
 		};
 
 		/// <summary>

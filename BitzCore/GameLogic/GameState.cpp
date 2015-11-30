@@ -47,9 +47,9 @@ namespace Bitz
 			OnExit();
 		}
 
-		void GameState::InternalUpdate()
+		void GameState::InternalUpdate(double ms)
 		{
-			OnUpdate();
+			OnUpdate(ms);
 		}
 
 		void GameState::Draw()

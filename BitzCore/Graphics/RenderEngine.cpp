@@ -72,16 +72,6 @@ namespace Bitz
 
 			assert(glGetError() == GL_NO_ERROR);
 
-			glMatrixMode(GL_MODELVIEW);
-
-			assert(glGetError() == GL_NO_ERROR);
-
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glEnableClientState(GL_COLOR_ARRAY);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-			assert(glGetError() == GL_NO_ERROR);
-
 			glEnable(GL_MULTISAMPLE);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_BACK);
@@ -97,6 +87,7 @@ namespace Bitz
 
 		void RenderEngine::Begin(Shaders::Shader_Ptr activeShader)
 		{
+			if (_ActiveShader != nullptr)_ActiveShader->Disable();
 			_ActiveShader = activeShader != nullptr ? activeShader : Shaders::ShaderService::GetStandardShader();
 
 			if (!_ActiveShader->IsCompiled())_ActiveShader->Compile();
@@ -140,18 +131,21 @@ namespace Bitz
 
 			Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
 
+			bool is3D = idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD;
+			glm::mat4 matrix = is3D ? (static_cast<Drawables::Model *>(idrawable))->GetTransformation() : glm::mat4();
+
 			if (_DrawIntervals.empty())
 			{
-				DrawInterval interval = { uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, idrawable };
+				DrawInterval interval = { uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode,nullptr ,matrix };
 				_DrawIntervals.push_back(interval);
 			}
 			else	if (_DrawIntervals.back().Texture != data
 				|| _DrawIntervals.back().Mode != idrawable->_RenderMode
-				|| idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD)
+				|| is3D)
 			{
 				_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
+				DrawInterval interval = { uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode,nullptr , matrix };
 
-				DrawInterval interval = { uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, idrawable };
 				_DrawIntervals.push_back(interval);
 			}
 			_RenderedVertCount += idrawable->GetVertCount();
@@ -224,16 +218,13 @@ namespace Bitz
 				SetActiveTexture(_DrawIntervals[i].Texture);
 				if (_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
 				{
-					Drawables::Model * model = static_cast<Drawables::Model *>(_DrawIntervals[i].InitialDrawable);
-					glPushMatrix();
-					model->ApplyTransformation();
+					_ActiveShader->SetVariable("ModelMatrix", _DrawIntervals[i].Matrix);
 				}
 				glDrawArrays(GL_TRIANGLES, _DrawIntervals[i].VertCountStart, _DrawIntervals[i].VertCountEnd - _DrawIntervals[i].VertCountStart);
-				if (_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
-				{
-					glPopMatrix();
-				}
+				
 			}
+			_ActiveShader->Disable();
+			_ActiveShader = nullptr;
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
