@@ -37,9 +37,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\texture.Gdat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Content\box.Gdat" />
     <None Include="Content\particle.Gdat" />
     <None Include="Content\purple.Gdat" />
+    <None Include="Content\texture.Gdat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BitzWindows\Bitz-Windows.vcxproj">

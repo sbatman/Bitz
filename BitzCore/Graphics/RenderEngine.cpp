@@ -270,12 +270,17 @@ namespace Bitz
 				activeTexture->SetOpenglTextureID(texID);
 				glBindTexture(GL_TEXTURE_2D, texID);
 
+				//do something sensible with this
+				GLfloat largest_supported_anisotropy;
+				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest_supported_anisotropy);
+				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest_supported_anisotropy);
+
 				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, activeTexture->GetWidth(), activeTexture->GetHeight(),
-					0, GL_RGBA, GL_UNSIGNED_BYTE, activeTexture->_PixelData);
+					0, GL_BGRA, GL_UNSIGNED_BYTE, activeTexture->_PixelData);
 			}
 
 			if (!_TexturingEnabled)
