@@ -36,7 +36,15 @@ namespace Bitz
 				virtual void PopulateTexArray(float_t * texArray, int32_t * startPosition) override;
 				virtual void PopulateNormArray(float_t * normArray, int32_t * startPosition) override;
 
+				virtual void SetNormalTexture(const Texture_Ptr newTexture);
+				virtual void SetSpecularTexture(const Texture_Ptr newTexture);
+
+				virtual Texture_Ptr GetNormalTexture() const;
+				virtual Texture_Ptr GetSpecularTexture() const;
+
 			protected:
+				Texture_Ptr _NormalTexture = nullptr;
+				Texture_Ptr _SpecularTexture = nullptr;
 
 				virtual glm::mat4 GetTransformation() const;
 

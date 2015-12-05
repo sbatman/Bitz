@@ -29,7 +29,7 @@ namespace Bitz
 			_TexCache = new float_t[BUFFERVERTCOUNT * 2];
 			_NormCache = new float_t[BUFFERVERTCOUNT * 3];
 
-			_ActiveTexture = nullptr;
+			for (int i = 0;i < MAXTEXTUREUNITS;i++)_ActiveTexture[i] = nullptr;
 			_TexturingEnabled = false;
 			_NormalsEnabled = false;
 
@@ -57,7 +57,7 @@ namespace Bitz
 			_CurrentRenderingContext = nullptr;
 			delete _CurrentWindow;
 			_CurrentWindow = nullptr;
-			_ActiveTexture = nullptr;
+			for (int i = 0;i < MAXTEXTUREUNITS;i++)_ActiveTexture[i] = nullptr;
 			Content::TextureData::ClearAllOpenGLIDs();
 			if (Settings::DEBUG_LOGGING_GRAPHICS) Debug::Logging::Log(Debug::Logging::ErrorType::Notice, "Destroyed Render Engine");
 		}
@@ -132,22 +132,36 @@ namespace Bitz
 			Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
 
 			bool is3D = idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD;
-			glm::mat4 matrix = is3D ? (static_cast<Drawables::Model *>(idrawable))->GetTransformation() : glm::mat4();
+
+			DrawInterval interval;
 
 			if (_DrawIntervals.empty())
 			{
-				DrawInterval interval = { uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode,nullptr ,matrix };
-				_DrawIntervals.push_back(interval);
+				if (is3D)
+				{
+					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
+					interval = DrawInterval(uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetNormalTexture()->_Data, theModel->GetSpecularTexture()->_Data);
+				}
+				else
+				{
+					interval = { uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode,nullptr , glm::mat4() };
+				}
 			}
-			else	if (_DrawIntervals.back().Texture != data
-				|| _DrawIntervals.back().Mode != idrawable->_RenderMode
-				|| is3D)
+			else if (_DrawIntervals.back().Texture[0] != data || _DrawIntervals.back().Mode != idrawable->_RenderMode || is3D)
 			{
 				_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
-				DrawInterval interval = { uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode,nullptr , matrix };
+				if (is3D)
+				{
+					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
+					interval = DrawInterval(uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetNormalTexture()->_Data, theModel->GetSpecularTexture()->_Data);
+				}
+				else
+				{
+					interval = { uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode,nullptr , glm::mat4() };
+				}
 
-				_DrawIntervals.push_back(interval);
 			}
+			_DrawIntervals.push_back(interval);
 			_RenderedVertCount += idrawable->GetVertCount();
 
 			assert(glGetError() == GL_NO_ERROR);
@@ -207,6 +221,8 @@ namespace Bitz
 				glEnableVertexAttribArray(_TexGLCacheLoc);
 			}
 
+			for (int i = 0;i < MAXTEXTUREUNITS;i++)	_ActiveShader->SetVariable(fmt::format("Texture{0}", i), i);
+
 			if (_DrawIntervals.size() == 0)return;
 
 			if (Settings::DEBUG_LOGGING_GRAPHICS)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
@@ -215,13 +231,20 @@ namespace Bitz
 
 			for (uint32_t i = 0; i < _DrawIntervals.size(); i++)
 			{
-				SetActiveTexture(_DrawIntervals[i].Texture);
+				int texUnit = 0;
+				for (auto tex : _DrawIntervals[i].Texture)
+				{
+					SetActiveTexture(tex, texUnit++);
+				}
+
 				if (_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
 				{
+
 					_ActiveShader->SetVariable("ModelMatrix", _DrawIntervals[i].Matrix);
+
 				}
 				glDrawArrays(GL_TRIANGLES, _DrawIntervals[i].VertCountStart, _DrawIntervals[i].VertCountEnd - _DrawIntervals[i].VertCountStart);
-				
+
 			}
 			_ActiveShader->Disable();
 			_ActiveShader = nullptr;
@@ -240,13 +263,15 @@ namespace Bitz
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
-		void RenderEngine::SetActiveTexture(Content::TextureData_Ptr activeTexture)
+		void RenderEngine::SetActiveTexture(Content::TextureData_Ptr activeTexture, int textureUnitID)
 		{
-			if (_ActiveTexture == activeTexture)return;
+			if (_ActiveTexture[textureUnitID] == activeTexture)return;
+
+			glActiveTexture(GL_TEXTURE0 + textureUnitID);
 
 			if (activeTexture == nullptr)
 			{
-				_ActiveTexture = nullptr;
+				_ActiveTexture[textureUnitID] = nullptr;
 				glBindTexture(GL_TEXTURE_2D, 0);
 				_TexturingEnabled = false;
 				if (_TexturingEnabled)
@@ -260,7 +285,7 @@ namespace Bitz
 
 			if (activeTexture->GetOpenglTextureID() != -1)
 			{
-				_ActiveTexture = activeTexture;
+				_ActiveTexture[textureUnitID] = activeTexture;
 				glBindTexture(GL_TEXTURE_2D, activeTexture->GetOpenglTextureID());
 			}
 			else

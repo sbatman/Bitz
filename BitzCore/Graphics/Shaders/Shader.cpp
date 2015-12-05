@@ -63,7 +63,7 @@ namespace Bitz
 				ShaderService::UnRegisterShader(_Myself);
 				if (_Program != -1)glDeleteProgram(_Program);
 				if (_FragementSource != nullptr)delete _FragementSource;
-				if (_VertexSource != nullptr)delete _VertexSource;				
+				if (_VertexSource != nullptr)delete _VertexSource;
 			}
 
 			void Shader::Enable()
@@ -145,6 +145,15 @@ namespace Bitz
 				if (loc != -1)
 				{
 					glUniformMatrix4fv(loc, 1, 0, &matrix[0][0]);
+					assert(glGetError() == GL_NO_ERROR);
+				}
+			}
+			void Shader::SetVariable(std::string variableName, int32_t value)
+			{
+				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{
+					glUniform1i(loc, value);
 					assert(glGetError() == GL_NO_ERROR);
 				}
 			}

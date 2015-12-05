@@ -41,6 +41,7 @@ void VoxelGrid::UpdateVertArray()
 	if (_PopulatedVoxelCount == 0)return;
 	int verpos = 0;
 	float_t * vertArray = new float_t[6 * 2 * 3 * 3 * _PopulatedVoxelCount];
+	float_t * normalArray = new float_t[6 * 2 * 3 * 3 * _PopulatedVoxelCount];
 
 	float centerOffsetX = _Dimentions.X*0.5f;
 	float centerOffsetY = _Dimentions.Y*0.5f;
@@ -64,7 +65,22 @@ void VoxelGrid::UpdateVertArray()
 					float_t _blb[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) + 0.5f };
 					float_t _brb[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) + 0.5f };
 
+					float normals[9 * 12] = {
+						0, 0, -1, 0, 0, -1, 0, 0, -1, //front
+						0, 0, -1, 0, 0, -1, 0, 0, -1, //front
+						-1, 0, 0, -1, 0, 0, -1, 0, 0, //left
+						-1, 0, 0, -1, 0, 0, -1, 0, 0, //left
+						1, 0, 0, 1, 0, 0, 1, 0, 0, //right
+						1, 0, 0, 1, 0, 0, 1, 0, 0, //right
+						0, 0, 1, 0, 0, 1, 0, 0, 1, //back
+						0, 0, 1, 0, 0, 1, 0, 0, 1,//back
+						0, -1, 0, 0, -1, 0, 0, -1, 0, //top
+						0, -1, 0, 0, -1, 0, 0, -1, 0, //top
+						0, 1, 0, 0, 1, 0, 0, 1, 0, //bottom
+						0, 1, 0, 0, 1, 0, 0, 1, 0 //bottom
+					};
 
+					Memcpy(normalArray + verpos, 9 * 12 * sizeof(float_t), normals, 9 * 12 * sizeof(float_t));
 
 					//FRONT
 					CopyTri(vertArray, _tlf, _blf, _trf, &verpos);
@@ -78,7 +94,8 @@ void VoxelGrid::UpdateVertArray()
 					CopyTri(vertArray, _trf, _brf, _trb, &verpos);
 					CopyTri(vertArray, _brf, _brb, _trb, &verpos);
 
-					//Back	
+					//Back
+
 					CopyTri(vertArray, _trb, _brb, _tlb, &verpos);
 					CopyTri(vertArray, _brb, _blb, _tlb, &verpos);
 
@@ -96,8 +113,9 @@ void VoxelGrid::UpdateVertArray()
 	}
 
 	SetVerts(vertArray, 36 * _PopulatedVoxelCount);
-
+	SetNormals(normalArray, 36 * _PopulatedVoxelCount);
 	delete vertArray;
+	delete normalArray;
 
 	UpdateTextureArray();
 }

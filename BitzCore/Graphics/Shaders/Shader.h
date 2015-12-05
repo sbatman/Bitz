@@ -22,6 +22,7 @@ namespace Bitz
 
 				int32_t virtual GetAttributeLocation(std::string attributeName) const;
 				void virtual SetVariable(std::string variableName, glm::mat4 matrix);
+				void virtual SetVariable(std::string variableName, int32_t value);
 
 			protected:
 				Shader();

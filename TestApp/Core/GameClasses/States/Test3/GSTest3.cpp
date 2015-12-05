@@ -27,16 +27,18 @@ GSTest3::GSTest3() : Bitz::GameLogic::GameState("Main")
 	testGrid->SetVisible(true);
 	testGrid->SetPosition(Vector3F(0, 0, 0));
 	testGrid->SetTexture(Bitz::Content::ContentManager::Load<Texture>("texture.Gdat"));
+	testGrid->SetNormalTexture(Bitz::Content::ContentManager::Load<Texture>("texture_n.Gdat"));
+	testGrid->SetSpecularTexture(Bitz::Content::ContentManager::Load<Texture>("texture_s.Gdat"));
 	testGrid->SetSize(Vector3F(0.3f));
 
 	VoxelGrid::Voxel vox;
 	vox.Type = 1;
 	for (int x = 0;x < 10;x++)
 	{
-		if (x > 4 && x < 8)continue;
+		if (x > 3 && x < 6)continue;
 		for (int y = 0;y < 10;y++)
 		{
-			if (y > 4 && y < 8)continue;
+			if (y > 3 && y < 6)continue;
 			for (int z = 0;z < 10;z++)
 			{
 				testGrid->SetVoxel(Vector3I(x, y, z), vox);

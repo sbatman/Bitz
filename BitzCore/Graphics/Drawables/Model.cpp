@@ -32,7 +32,7 @@ namespace Bitz
 			{
 				assert(_VertArray != nullptr);
 				int size = _VertCount * DIMENTIONS * sizeof(float);
-				Memcpy(vertArray+(*startPosition), size, _VertArray, size);
+				Memcpy(vertArray + (*startPosition), size, _VertArray, size);
 				(*startPosition) += (_VertCount * DIMENTIONS);
 			}
 
@@ -51,7 +51,7 @@ namespace Bitz
 			{
 				assert(_TexArray != nullptr);
 				int size = _VertCount * 2 * sizeof(float);
-				Memcpy(texArray+(*startPosition), size, _TexArray, size);
+				Memcpy(texArray + (*startPosition), size, _TexArray, size);
 				(*startPosition) += (_VertCount * 2);
 			}
 
@@ -61,6 +61,26 @@ namespace Bitz
 				int size = _VertCount * 3 * sizeof(float);
 				Memcpy(normArray + (*startPosition), size, _NormArray, size);
 				(*startPosition) += (_VertCount * 3);
+			}
+
+			void Model::SetNormalTexture(const Texture_Ptr newTexture)
+			{
+				_NormalTexture = newTexture;
+			}
+
+			void Model::SetSpecularTexture(const Texture_Ptr newTexture)
+			{
+				_SpecularTexture = newTexture;
+			}
+
+			Texture_Ptr Model::GetNormalTexture() const
+			{
+				return _NormalTexture;
+			}
+
+			Texture_Ptr Model::GetSpecularTexture() const
+			{
+				return _SpecularTexture;
 			}
 
 			void Model::SetVerts(const float_t * verts, const  int32_t count)
@@ -112,11 +132,11 @@ namespace Bitz
 			glm::mat4 Model::GetTransformation() const
 			{
 				glm::mat4 matrix;
-				
-				if (_Rotation.X != 0)matrix=glm::rotate(matrix, _Rotation.X, glm::vec3(1, 0, 0));
-				if (_Rotation.Y != 0)matrix=glm::rotate(matrix, _Rotation.Y, glm::vec3(0, 1, 0));
-				if (_Rotation.Z != 0)matrix=glm::rotate(matrix, _Rotation.Z, glm::vec3(0, 0, 1));
-				matrix=glm::translate(matrix, glm::vec3(-_Position.X, -_Position.Y, -_Position.Z));
+
+				if (_Rotation.X != 0)matrix = glm::rotate(matrix, _Rotation.X, glm::vec3(1, 0, 0));
+				if (_Rotation.Y != 0)matrix = glm::rotate(matrix, _Rotation.Y, glm::vec3(0, 1, 0));
+				if (_Rotation.Z != 0)matrix = glm::rotate(matrix, _Rotation.Z, glm::vec3(0, 0, 1));
+				matrix = glm::translate(matrix, glm::vec3(-_Position.X, -_Position.Y, -_Position.Z));
 				matrix = glm::scale(matrix, glm::vec3(_Size.X, _Size.Y, _Size.Z));
 				return matrix;
 			}

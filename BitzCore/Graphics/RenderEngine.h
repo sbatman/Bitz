@@ -31,6 +31,7 @@ namespace Bitz
 			bool IsEnabledTexturing() const;
 
 			const uint32_t BUFFERVERTCOUNT = 100000;
+			const uint16_t MAXTEXTUREUNITS = GL_MAX_TEXTURE_UNITS - GL_TEXTURE0;
 
 		private:
 			/// <summary>
@@ -41,7 +42,7 @@ namespace Bitz
 			{
 				uint32_t VertCountStart = 0;
 				uint32_t VertCountEnd = 0;
-				Content::TextureData_Ptr Texture = nullptr;
+				std::vector<Content::TextureData_Ptr> Texture;
 				Drawables::IDrawable::RenderMode Mode;
 				Shaders::Shader_Ptr CustomShader = nullptr;
 				glm::mat4 Matrix;
@@ -51,11 +52,13 @@ namespace Bitz
 
 				}
 
-				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Shaders::Shader_Ptr customShader = nullptr, glm::mat4 matrix = glm::mat4())
+				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Shaders::Shader_Ptr customShader = nullptr, glm::mat4 matrix = glm::mat4(), Content::TextureData_Ptr normalTexture = nullptr, Content::TextureData_Ptr specularTexture = nullptr)
 				{
 					VertCountStart = start;
 					VertCountEnd = end;
-					Texture = texture;
+					Texture.push_back(texture);
+					Texture.push_back(normalTexture);
+					Texture.push_back(specularTexture);
 					Mode = mode;
 					CustomShader = customShader;
 					Matrix = matrix;
@@ -63,7 +66,7 @@ namespace Bitz
 
 				~DrawInterval()
 				{
-					Texture = nullptr;
+					
 				}
 			};
 
@@ -125,7 +128,7 @@ namespace Bitz
 			/// <summary>
 			/// The currently active texture
 			/// </summary>
-			Content::TextureData_Ptr _ActiveTexture;
+			Content::TextureData_Ptr _ActiveTexture[GL_MAX_TEXTURE_UNITS - GL_TEXTURE0];
 			/// <summary>
 			/// Whether rendering with a texture is currently enabled
 			/// </summary>
@@ -140,12 +143,12 @@ namespace Bitz
 			int _NormGLCacheLoc = -1;
 			int _TexGLCacheLoc = -1;
 			int _MatGLCacheLoc = -1;
-			
+
 
 			/// <summary>
 			/// Sets the active texture used for rendering
 			/// </summary>
-			void SetActiveTexture(Content::TextureData_Ptr activeTexture);
+			void SetActiveTexture(Content::TextureData_Ptr activeTexture, int textureUnitID = 0);
 		};
 	}
 }

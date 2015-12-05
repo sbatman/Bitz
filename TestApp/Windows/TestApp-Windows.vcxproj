@@ -42,10 +42,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\texture_n.Gdat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\texture_s.Gdat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Content\box.Gdat" />
     <None Include="Content\particle.Gdat" />
     <None Include="Content\purple.Gdat" />
     <None Include="Content\texture.Gdat" />
+    <None Include="Content\texture_n.Gdat" />
+    <None Include="Content\texture_s.Gdat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BitzWindows\Bitz-Windows.vcxproj">
