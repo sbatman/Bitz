@@ -26,7 +26,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp_Android.NativeActiv
 EndProject
 Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "TestApp_Android.Packaging", "TestApp\Android\Packaging\TestApp_Android.Packaging.androidproj", "{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE60C9DD-E5DB-4532-886F-3C1F92F4F49E}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		TestApp\Core\TestApp-Core.vcxitems*{45922089-ca82-48d3-ab2d-2cd47d9e3a32}*SharedItemsImports = 4
 		TestApp\Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4

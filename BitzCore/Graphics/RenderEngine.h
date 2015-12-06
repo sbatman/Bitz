@@ -26,11 +26,8 @@ namespace Bitz
 			void Render(Drawables::IDrawable* idrawable);
 			void SetSize(Vector2I newSize);
 			Vector2I GetSize() const;
-			void EnableNormals(bool enabled);
-			bool IsEnabledNormals() const;
-			bool IsEnabledTexturing() const;
 
-			const uint32_t BUFFERVERTCOUNT = 100000;
+			const uint32_t BUFFERVERTCOUNT = 1000000;
 			const uint16_t MAXTEXTUREUNITS = GL_MAX_TEXTURE_UNITS - GL_TEXTURE0;
 
 		private:
@@ -129,14 +126,6 @@ namespace Bitz
 			/// The currently active texture
 			/// </summary>
 			Content::TextureData_Ptr _ActiveTexture[GL_MAX_TEXTURE_UNITS - GL_TEXTURE0];
-			/// <summary>
-			/// Whether rendering with a texture is currently enabled
-			/// </summary>
-			bool _TexturingEnabled;
-			/// <summary>
-			/// Whether rendering with normal corrdinates is currently enabled
-			/// </summary>
-			bool _NormalsEnabled;
 
 			int _VertGLCacheLoc = -1;
 			int _ColGLCacheLoc = -1;

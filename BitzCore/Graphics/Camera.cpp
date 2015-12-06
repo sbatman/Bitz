@@ -37,7 +37,7 @@ void Bitz::GFX::Camera::MakeActive()
 	case Perspective:
 	{
 		glMatrixMode(GL_PROJECTION);
-		_ProjectionMatrix = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.001f, 1000.0f);
+		_ProjectionMatrix = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.5f, 1000.0f);
 		if (abs(_Zoom - 1) > EPSILON)
 		{
 			_ProjectionMatrix = glm::translate(_ProjectionMatrix, glm::tvec3<float, glm::precision::defaultp>(GraphicsManager::GetScreenSize().X *0.5f, GraphicsManager::GetScreenSize().Y *0.5f, 0));

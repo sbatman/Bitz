@@ -126,17 +126,7 @@ namespace Bitz
 
 			if (_ActiveRenderEngine == nullptr) return;
 
-			if (_CurrentGraphicsState->IsNormalsEnabled())
-			{
-				_ActiveRenderEngine->EnableNormals(true);
-			}
-
 			_ActiveRenderEngine->End();
-
-			if (_CurrentGraphicsState->IsNormalsEnabled())
-			{
-				_ActiveRenderEngine->EnableNormals(false);
-			}
 
 			_CurrentGraphicsState->ExitState();
 			_CurrentGraphicsState = nullptr;

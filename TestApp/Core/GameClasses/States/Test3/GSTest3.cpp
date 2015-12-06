@@ -10,7 +10,7 @@ using namespace Bitz::GFX;
 
 std::shared_ptr<Cube> testCube = std::shared_ptr<Cube>(new Cube());
 std::shared_ptr<Cube> testCube1 = std::shared_ptr<Cube>(new Cube());
-std::shared_ptr<VoxelGrid> testGrid = std::shared_ptr<VoxelGrid>(new VoxelGrid(Vector3I(10, 10, 10)));
+std::shared_ptr<VoxelGrid> testGrid = std::shared_ptr<VoxelGrid>(new VoxelGrid(Vector3I(50, 50, 10)));
 
 float rotation = 0;
 
@@ -29,22 +29,25 @@ GSTest3::GSTest3() : Bitz::GameLogic::GameState("Main")
 	testGrid->SetTexture(Bitz::Content::ContentManager::Load<Texture>("texture.Gdat"));
 	testGrid->SetNormalTexture(Bitz::Content::ContentManager::Load<Texture>("texture_n.Gdat"));
 	testGrid->SetSpecularTexture(Bitz::Content::ContentManager::Load<Texture>("texture_s.Gdat"));
-	testGrid->SetSize(Vector3F(0.3f));
+	testGrid->SetSize(Vector3F(0.4f));
+	
 
 	VoxelGrid::Voxel vox;
 	vox.Type = 1;
-	for (int x = 0;x < 10;x++)
+	for (int x = 0;x < 50;x++)
 	{
-		if (x > 3 && x < 6)continue;
-		for (int y = 0;y < 10;y++)
+		if (x%2==0)continue;
+		for (int y = 0;y < 50;y++)
 		{
-			if (y > 3 && y < 6)continue;
+			if (y % 2 ==0)continue;
 			for (int z = 0;z < 10;z++)
 			{
 				testGrid->SetVoxel(Vector3I(x, y, z), vox);
 			}
 		}
 	}
+	vox.Type = -1;
+	testGrid->SetVoxel(Vector3I(0,0,9), vox);
 
 }
 
@@ -69,7 +72,7 @@ void GSTest3::OnUpdate(double ms)
 		rotation -= M_PI *2;
 	}
 
-	testGrid->SetRotation(Vector3F(rotation, 0, 0));
+	testGrid->SetRotation(Vector3F(M_PI*0.5+(sinf(rotation)*0.5f), 0, rotation));
 }
 
 void GSTest3::OnDraw()

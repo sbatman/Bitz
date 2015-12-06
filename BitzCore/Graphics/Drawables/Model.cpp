@@ -38,12 +38,10 @@ namespace Bitz
 
 			void Model::PopulateColArray(float_t* colArray, int32_t* startPosition)
 			{
-				for (auto i = 0; i < (_VertCount * 4); i += 4)
+				float_t tempArray[16] = { _Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W };
+				for (auto i = 0; i < (_VertCount); i++)
 				{
-					colArray[(*startPosition)++] = _Colour.X;
-					colArray[(*startPosition)++] = _Colour.Y;
-					colArray[(*startPosition)++] = _Colour.Z;
-					colArray[(*startPosition)++] = _Colour.W;
+					Memcpy(&colArray[16 * i], 16 * sizeof(float_t), tempArray, 16 * sizeof(float_t));
 				}
 			}
 

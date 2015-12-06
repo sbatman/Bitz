@@ -36,7 +36,7 @@ namespace Bitz
 				break;
 			}
 			glEnable(GL_DEPTH_TEST);
-			glDepthFunc(GL_LEQUAL);
+			glDepthFunc(GL_LESS);
 		}
 
 		void GraphicsStates::GS3D::ExitState()

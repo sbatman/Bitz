@@ -30,8 +30,6 @@ namespace Bitz
 			_NormCache = new float_t[BUFFERVERTCOUNT * 3];
 
 			for (int i = 0;i < MAXTEXTUREUNITS;i++)_ActiveTexture[i] = nullptr;
-			_TexturingEnabled = false;
-			_NormalsEnabled = false;
 
 			if (Settings::DEBUG_LOGGING_GRAPHICS) Debug::Logging::Log(Debug::Logging::ErrorType::Notice, "Created Render Engine");
 
@@ -72,7 +70,7 @@ namespace Bitz
 
 			assert(glGetError() == GL_NO_ERROR);
 
-			glEnable(GL_MULTISAMPLE);
+			//glEnable(GL_MULTISAMPLE);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_BACK);
 			glFrontFace(GL_CCW);
@@ -174,30 +172,6 @@ namespace Bitz
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
-		void RenderEngine::EnableNormals(bool enabled)
-		{
-			if (enabled)
-			{
-				glEnableClientState(GL_NORMAL_ARRAY);
-				glNormalPointer(GL_FLOAT, 0, _NormCache);
-			}
-			else
-			{
-				glDisableClientState(GL_NORMAL_ARRAY);
-			}
-			assert(glGetError() == GL_NO_ERROR);
-		}
-
-		bool RenderEngine::IsEnabledNormals() const
-		{
-			return _NormalsEnabled;
-		}
-
-		bool RenderEngine::IsEnabledTexturing() const
-		{
-			return _TexturingEnabled;
-		}
-
 		void RenderEngine::End()
 		{
 			if (_VertGLCacheLoc != -1)
@@ -225,7 +199,7 @@ namespace Bitz
 
 			if (_DrawIntervals.size() == 0)return;
 
-			if (Settings::DEBUG_LOGGING_GRAPHICS)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
+			if (Settings::DEBUG_LOGGING_GRAPHICS_VERBOSE)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
 
 			_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
 
@@ -273,12 +247,7 @@ namespace Bitz
 			{
 				_ActiveTexture[textureUnitID] = nullptr;
 				glBindTexture(GL_TEXTURE_2D, 0);
-				_TexturingEnabled = false;
-				if (_TexturingEnabled)
-				{
-					_TexturingEnabled = false;
-					glDisable(GL_TEXTURE_2D);
-				}
+
 				assert(glGetError() == GL_NO_ERROR);
 				return;
 			}
@@ -308,11 +277,6 @@ namespace Bitz
 					0, GL_BGRA, GL_UNSIGNED_BYTE, activeTexture->_PixelData);
 			}
 
-			if (!_TexturingEnabled)
-			{
-				_TexturingEnabled = true;
-				glEnable(GL_TEXTURE_2D);
-			}
 			int err = glGetError();
 			assert(err == GL_NO_ERROR);
 		}

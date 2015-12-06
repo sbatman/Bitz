@@ -14,6 +14,7 @@ std::shared_ptr<GSTest3> Game::GameState_Test3 = nullptr;
 Game::Game() : Bitz::GameLogic::GameCore("Explore")
 {
 	ContentManager::Init("Content/", "Content/", "Content/");
+	Bitz::Debug::Logging::EnableLogToConsole();
 }
 
 Game::~Game()
@@ -39,7 +40,7 @@ bool Game::Init()
 	RenderState2d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ADDATIVE);
 
 	RenderState3d = new GraphicsStates::GS3D();
-	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, -10));
+	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, -20));
 	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ALPHA);	
 
 	//if (GameState_Test1 == nullptr)
