@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Common.h"
 #include "../../Interfaces/IDisposable.h"
+#include "../../Math/Math.h"
 
 namespace Bitz
 {
@@ -23,6 +24,10 @@ namespace Bitz
 				int32_t virtual GetAttributeLocation(std::string attributeName) const;
 				void virtual SetVariable(std::string variableName, glm::mat4 matrix);
 				void virtual SetVariable(std::string variableName, int32_t value);
+				void virtual SetVariable(std::string variableName, Bitz::Math::Vector3F value);
+				void virtual SetVariable(std::string variableName, glm::vec3 value);
+				void virtual SetVariable(std::string variableName, Bitz::Math::Vector4F value);
+				void virtual SetVariable(std::string variableName, glm::vec4 value);
 
 			protected:
 				Shader();

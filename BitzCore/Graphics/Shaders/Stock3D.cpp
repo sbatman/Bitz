@@ -39,8 +39,11 @@ namespace Bitz
 
 				fragmentShader += "precision highp float;																								\n";
 				fragmentShader += "																														\n";
-				fragmentShader += "uniform sampler2D Texture0;																							\n";
-				fragmentShader += "uniform sampler2D Texture1;																							\n";
+				fragmentShader += "uniform sampler2D Texture0;		//diffuse																			\n";
+				fragmentShader += "uniform sampler2D Texture1;		//normal																			\n";
+				fragmentShader += "uniform sampler2D Texture2;		//specular																			\n";
+				fragmentShader += "uniform vec3 LightDirection;																							\n";
+				fragmentShader += "uniform mat4 ModelMatrix;																							\n";
 				fragmentShader += "																														\n";
 				fragmentShader += "in vec3 out_Position;																								\n";
 				fragmentShader += "in vec3 out_Normal;																									\n";
@@ -49,18 +52,26 @@ namespace Bitz
 				fragmentShader += "																														\n";
 				fragmentShader += "void main()																											\n";
 				fragmentShader += "{																													\n";
-				fragmentShader += "	vec3 LightDirection = vec3(0.8,0.6, 1.0);																			\n";
-				fragmentShader += "	vec4 LightColor = vec4(1.0,1.0,1.0,1.5);																			\n";
-				fragmentShader += "	vec4 AmbientColor = vec4(1.0,1.0,1.0,0.2);																			\n";
+				fragmentShader += "	vec3 specular = vec3(0.0);																							\n";
+				fragmentShader += "	vec4 LightColor = vec4(1.0,1.0,1.0,0.4);																			\n";
+				fragmentShader += "	vec4 AmbientColor = vec4(1.0,1.0,1.0,0.1);																			\n";
+				fragmentShader += "	mat3 NormalMatrix = transpose(inverse(mat3(ModelMatrix)));															\n";
+				fragmentShader += "																														\n";
+				fragmentShader += "	vec4 TextureColour = texture2D(Texture0, out_TexCoordinate);														\n";
+				fragmentShader += "	vec4 SpecularColour = texture2D(Texture2, out_TexCoordinate);														\n";
 				fragmentShader += "	vec3 Normal = 2.0 * texture2D(Texture1, out_TexCoordinate).xyz - 1.0;												\n";
 				fragmentShader += "	vec3 NormalizedLightDirection = normalize(LightDirection);															\n";
-				fragmentShader += "	vec3 NormalizedNormal = normalize(Normal)* out_Normal;																\n";
+				fragmentShader += "	vec3 NormalizedNormal = normalize(NormalMatrix * out_Normal * Normal);												\n";
+				fragmentShader += "	vec3 ReflectingVector = reflect(-NormalizedLightDirection , NormalizedNormal);										\n";
+				fragmentShader += "																														\n";
 				fragmentShader += "																														\n";
 				fragmentShader += "	vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(NormalizedNormal, NormalizedLightDirection), 0.0);			\n";
 				fragmentShader += "	vec3 Ambient = AmbientColor.rgb * AmbientColor.a;																	\n";
-				fragmentShader += "	vec4 TextureColour = texture2D(Texture0, out_TexCoordinate);														\n";
+				fragmentShader += "	if(max(dot(NormalizedLightDirection,NormalizedNormal),0.0)>0.0)														\n";
+				fragmentShader += "		specular = vec3(4)* SpecularColour.rgb * pow(max(dot(ReflectingVector,normalize(-out_Position)),0.0),200);																			\n";
+				
 				fragmentShader += "																														\n";
-				fragmentShader += "	gl_FragColor =  TextureColour*vec4(Ambient+Diffuse ,1.0)*out_Color;													\n";
+				fragmentShader += "	gl_FragColor =  TextureColour* vec4( Diffuse+Ambient+specular ,1.0)*out_Color;													\n";
 				fragmentShader += "}																													\n";
 
 

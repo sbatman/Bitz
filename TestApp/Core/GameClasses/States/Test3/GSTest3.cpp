@@ -66,13 +66,13 @@ void GSTest3::OnExit()
 
 void GSTest3::OnUpdate(double ms)
 {
-	rotation += 0.0005f*ms;
+	rotation += 0.00025f*ms;
 	if (rotation > M_PI * 2)
 	{
 		rotation -= M_PI *2;
 	}
 
-	testGrid->SetRotation(Vector3F(M_PI*0.5+(sinf(rotation)*0.5f), 0, rotation));
+	testGrid->SetRotation(Vector3F(M_PI*0.5+(sinf(rotation)*0.1f), 0, rotation));
 }
 
 void GSTest3::OnDraw()

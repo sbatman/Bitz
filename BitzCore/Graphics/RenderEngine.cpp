@@ -161,7 +161,6 @@ namespace Bitz
 			}
 			_DrawIntervals.push_back(interval);
 			_RenderedVertCount += idrawable->GetVertCount();
-
 			assert(glGetError() == GL_NO_ERROR);
 		}
 
@@ -215,6 +214,10 @@ namespace Bitz
 				{
 
 					_ActiveShader->SetVariable("ModelMatrix", _DrawIntervals[i].Matrix);
+					
+					glm::vec4 lightDirection = glm::vec4(0.2f,0.0f,1.0f, 1.0f);
+
+					_ActiveShader->SetVariable("LightDirection", glm::vec3(lightDirection.x, lightDirection.y, lightDirection.z));
 
 				}
 				glDrawArrays(GL_TRIANGLES, _DrawIntervals[i].VertCountStart, _DrawIntervals[i].VertCountEnd - _DrawIntervals[i].VertCountStart);

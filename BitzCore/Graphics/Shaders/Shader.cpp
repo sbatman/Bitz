@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include "ShaderService.h"
 
+
 namespace Bitz
 {
 	namespace GFX
@@ -154,6 +155,42 @@ namespace Bitz
 				if (loc != -1)
 				{
 					glUniform1i(loc, value);
+					assert(glGetError() == GL_NO_ERROR);
+				}
+			}
+			void Shader::SetVariable(std::string variableName, Bitz::Math::Vector3F value)
+			{
+				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{
+					glUniform3f(loc, value.X, value.Y, value.Z);
+					assert(glGetError() == GL_NO_ERROR);
+				}
+			}
+			void Shader::SetVariable(std::string variableName, glm::vec3 value)
+			{
+				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{
+					glUniform3fv(loc,1, glm::value_ptr(value));
+					assert(glGetError() == GL_NO_ERROR);
+				}
+			}
+			void Shader::SetVariable(std::string variableName, Bitz::Math::Vector4F value)
+			{
+				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{
+					glUniform4f(loc, value.X, value.Y, value.Z, value.W);
+					assert(glGetError() == GL_NO_ERROR);
+				}
+			}
+			void Shader::SetVariable(std::string variableName, glm::vec4 value)
+			{
+				GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{
+					glUniform4fv(loc,1, glm::value_ptr(value));
 					assert(glGetError() == GL_NO_ERROR);
 				}
 			}
