@@ -132,6 +132,7 @@ namespace Bitz
 			bool is3D = idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD;
 
 			DrawInterval interval;
+			bool intervalGenerated = false;
 
 			if (_DrawIntervals.empty())
 			{
@@ -139,10 +140,12 @@ namespace Bitz
 				{
 					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
 					interval = DrawInterval(uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetNormalTexture()->_Data, theModel->GetSpecularTexture()->_Data);
+					intervalGenerated = true;
 				}
 				else
 				{
-					interval = { uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode,nullptr , glm::mat4() };
+					interval = DrawInterval( uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode,nullptr , glm::mat4() );
+					intervalGenerated = true;
 				}
 			}
 			else if (_DrawIntervals.back().Texture[0] != data || _DrawIntervals.back().Mode != idrawable->_RenderMode || is3D)
@@ -152,14 +155,16 @@ namespace Bitz
 				{
 					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
 					interval = DrawInterval(uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetNormalTexture()->_Data, theModel->GetSpecularTexture()->_Data);
+					intervalGenerated = true;
 				}
 				else
 				{
-					interval = { uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode,nullptr , glm::mat4() };
+					interval = DrawInterval( uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode,nullptr , glm::mat4() );
+					intervalGenerated = true;
 				}
 
 			}
-			_DrawIntervals.push_back(interval);
+			if(intervalGenerated)_DrawIntervals.push_back(interval);
 			_RenderedVertCount += idrawable->GetVertCount();
 			assert(glGetError() == GL_NO_ERROR);
 		}
