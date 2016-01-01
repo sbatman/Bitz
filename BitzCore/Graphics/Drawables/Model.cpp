@@ -17,6 +17,7 @@ namespace Bitz
 				_RenderMode = ThreeD;
 				_Position = Vector3F(0);
 				_Size = Vector3F(1);
+				SetColour(Vector4F(1.0f, 1.0f, 1.0f, 1.0f));
 			}
 
 			Model::~Model()
@@ -31,18 +32,17 @@ namespace Bitz
 			void Model::PopulateVertArray(float_t * vertArray, int32_t * startPosition)
 			{
 				assert(_VertArray != nullptr);
-				int size = _VertCount * DIMENTIONS * sizeof(float);
+				int size = _VertCount * DIMENTIONS * sizeof(float_t);
 				Memcpy(vertArray + (*startPosition), size, _VertArray, size);
 				(*startPosition) += (_VertCount * DIMENTIONS);
 			}
 
 			void Model::PopulateColArray(float_t* colArray, int32_t* startPosition)
 			{
-				float_t tempArray[16] = { _Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W };
-				for (auto i = 0; i < (_VertCount); i++)
-				{
-					Memcpy(&colArray[16 * i], 16 * sizeof(float_t), tempArray, 16 * sizeof(float_t));
-				}
+				assert(_ColArray != nullptr);
+				int size = _VertCount * 4 * sizeof(float_t);
+				Memcpy(colArray + (*startPosition), size, _ColArray, size);
+				(*startPosition) += (_VertCount * 4);
 			}
 
 			void Model::PopulateTexArray(float_t* texArray, int32_t* startPosition)
@@ -99,7 +99,7 @@ namespace Bitz
 				{
 					_TexArray = new float[_VertCount * 2]{ 0 };
 				}
-
+				SetColour(_Colour);
 				Memcpy(_VertArray, dataSize*sizeof(float_t), verts, dataSize*sizeof(float_t));
 			}
 
@@ -111,7 +111,7 @@ namespace Bitz
 				if (_NormArray != nullptr)delete[] _NormArray;
 
 				_NormArray = new float[dataSize];
-
+				
 				Memcpy(_NormArray, dataSize*sizeof(float_t), norms, dataSize*sizeof(float_t));
 			}
 
@@ -125,6 +125,37 @@ namespace Bitz
 				_TexArray = new float[dataSize];
 
 				Memcpy(_TexArray, dataSize*sizeof(float_t), texcords, dataSize*sizeof(float_t));
+			}
+
+			void Model::SetColour(const Vector4F newColour)
+			{
+				if (_VertCount == 0)return;
+				bool arrayUpdated = false;
+				if (_ColArray == nullptr)
+				{
+					_ColArray = new float_t[12 * _VertCount];
+					arrayUpdated = true;
+				}
+				else if (_ColArray != nullptr)
+				{
+					delete _ColArray;
+					_ColArray = new float_t[12 * _VertCount];
+					arrayUpdated = true;
+				}
+
+				if (_Colour == newColour && !arrayUpdated)return;
+
+				_Colour = newColour;
+				float_t tempArray[12] = { _Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W ,_Colour.X ,_Colour.Y,_Colour.Z,_Colour.W};
+				for (auto i = 0; i < _VertCount; i++)
+				{
+					Memcpy(&_ColArray[12 * i], 12 * sizeof(float_t), tempArray, 12 * sizeof(float_t));
+				}
+			}
+
+			void Model::SetAlpha(const float newAlpha)
+			{
+				_Colour.W = newAlpha;
 			}
 
 			glm::mat4 Model::GetTransformation() const

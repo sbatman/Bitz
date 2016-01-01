@@ -30,6 +30,8 @@ namespace Bitz
 				virtual void SetVerts(const float_t * verts, const int32_t count);
 				virtual void SetNormals(const float_t * norms, const  int32_t count);
 				virtual void SetTexCords(const float_t * texcords, const  int32_t count);
+				virtual void SetColour(const Vector4F newColour) override;
+				virtual void SetAlpha(const float newAlpha) override;
 
 				virtual void PopulateVertArray(float_t * vertArray, int32_t * statPosition) override;
 				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) override;

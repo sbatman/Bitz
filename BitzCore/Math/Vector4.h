@@ -94,7 +94,7 @@ namespace Bitz
 
 			bool __FASTCALL operator==(const Vector4<T>& other) const
 			{
-				return X == other.X && Y == other.Y && Z == other.Z && w == other.W;
+				return X == other.X && Y == other.Y && Z == other.Z && W == other.W;
 			}
 
 			bool __FASTCALL operator!=(const Vector4<T>& other) const

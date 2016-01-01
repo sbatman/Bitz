@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetPacker", "Tools\AssetP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitzAndroid", "BitzAndroid\Bitz-Android.vcxproj", "{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZCore", "BitzCore\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZCore", "BitZCore\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitzWindows", "BitzWindows\Bitz-Windows.vcxproj", "{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}"
 EndProject
@@ -36,10 +36,8 @@ Global
 		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		TestApp\Core\TestApp-Core.vcxitems*{45922089-ca82-48d3-ab2d-2cd47d9e3a32}*SharedItemsImports = 4
 		TestApp\Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
 		BitzCore\BitZ-Core.vcxitems*{66a88188-accc-4d4a-a032-abdb1470e5f9}*SharedItemsImports = 4
-		BitzCore\BitZ-Core.vcxitems*{1cd5569c-d9a4-4c69-840b-ae93fa7d3acc}*SharedItemsImports = 4
 		BitzCore\BitZ-Core.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
 		TestApp\Core\TestApp-Core.vcxitems*{37f790c2-09b6-4f14-ada6-423bf78d0351}*SharedItemsImports = 9
 	EndGlobalSection

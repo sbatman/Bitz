@@ -9,7 +9,7 @@ public:
 	struct Voxel
 	{
 		int32_t Type=-1;
-		Bitz::Math::Vector4F Colour;
+		Bitz::Math::Vector4B Colour;
 	};
 
 	VoxelGrid(Bitz::Math::Vector3I dimentions);

@@ -157,6 +157,7 @@ void VoxelGrid::UpdateVertArray()
 	SetVerts(vertArray, facesDrawn * 6);
 	SetNormals(normalArray, facesDrawn * 6);
 	SetTexCords(texArray, facesDrawn * 6);
+	SetColour(Bitz::Math::Vector4F(1.0f, 0.0f, 1.0f, 1.0f));
 	delete vertArray;
 	delete normalArray;
 	delete texArray;
