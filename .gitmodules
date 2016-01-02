@@ -1,3 +1,3 @@
 [submodule "Support Libraries/glm"]
 	path = Support Libraries/glm
-	url = git@github.com:sbatman/glm.git
+	url = https://github.com/sbatman/glm.git
