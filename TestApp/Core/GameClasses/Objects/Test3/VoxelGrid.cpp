@@ -44,6 +44,7 @@ void VoxelGrid::UpdateVertArray()
 	float_t * vertArray = new float_t[6 * 2 * 3 * 3 * _PopulatedVoxelCount];
 	float_t * normalArray = new float_t[6 * 2 * 3 * 3 * _PopulatedVoxelCount];
 	float_t * texArray = new float_t[6 * 2 * 3 * 2 * _PopulatedVoxelCount];
+	float_t * colArray = new float_t[6 * 2 * 3 * 4 * _PopulatedVoxelCount];
 
 	float_t tex[12] = { 0,0, 0,1, 1,0, 0,1, 1,1, 1,0 };
 
@@ -59,9 +60,9 @@ void VoxelGrid::UpdateVertArray()
 		{
 			for (int z = 0;z < _Dimentions.Z;z++)
 			{
-				if (GetVoxelAtPosition(x, y, z).Type != -1)
+				Voxel targetVoxel = GetVoxelAtPosition(x, y, z);
+				if (targetVoxel.Type != -1)
 				{
-
 					float_t _tlf[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) - 0.5f };
 					float_t _trf[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) - 0.5f };
 					float_t _blf[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) - 0.5f };
@@ -70,6 +71,13 @@ void VoxelGrid::UpdateVertArray()
 					float_t _trb[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) + 0.5f };
 					float_t _blb[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) + 0.5f };
 					float_t _brb[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) + 0.5f };
+
+					float_t colors[12] =
+					{
+						targetVoxel.Colour.X/255.0f ,targetVoxel.Colour.Y/255.0f,targetVoxel.Colour.Z/255.0f,targetVoxel.Colour.W/255.0f,
+						targetVoxel.Colour.X/255.0f ,targetVoxel.Colour.Y/255.0f,targetVoxel.Colour.Z/255.0f,targetVoxel.Colour.W/255.0f,
+						targetVoxel.Colour.X/255.0f ,targetVoxel.Colour.Y/255.0f,targetVoxel.Colour.Z/255.0f,targetVoxel.Colour.W/255.0f
+					};
 
 					float normals[9 * 12] = {
 						0, 0, -1, 0, 0, -1, 0, 0, -1, //front
@@ -90,9 +98,12 @@ void VoxelGrid::UpdateVertArray()
 					{
 						//FRONT
 						Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), normals, 9 * 2 * sizeof(float_t));
+						Memcpy(&colArray[facesDrawn * 24], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _tlf, _blf, _trf, &verpos);
+						Memcpy(&colArray[(facesDrawn * 24)+12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _blf, _brf, _trf, &verpos);
-						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
+						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);						
+						
 						facesDrawn++;
 					}
 
@@ -100,7 +111,9 @@ void VoxelGrid::UpdateVertArray()
 					{
 						//LEFT	
 						Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[2 * 9], 9 * 2 * sizeof(float_t));
+						Memcpy(&colArray[facesDrawn * 24], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _tlb, _blb, _tlf, &verpos);
+						Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _blb, _blf, _tlf, &verpos);
 						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 						facesDrawn++;
@@ -110,7 +123,9 @@ void VoxelGrid::UpdateVertArray()
 					{
 						//RIGHT	
 						Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[4 * 9], 9 * 2 * sizeof(float_t));
+						Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _trf, _brf, _trb, &verpos);
+						Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _brf, _brb, _trb, &verpos);
 						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 						facesDrawn++;
@@ -120,7 +135,9 @@ void VoxelGrid::UpdateVertArray()
 					{
 						//Back
 						Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[6 * 9], 9 * 2 * sizeof(float_t));
+						Memcpy(&colArray[(facesDrawn * 24) ], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _trb, _brb, _tlb, &verpos);
+						Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _brb, _blb, _tlb, &verpos);
 						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 						
@@ -131,7 +148,9 @@ void VoxelGrid::UpdateVertArray()
 					{
 						//Top	
 						Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[8 * 9], 9 * 2 * sizeof(float_t));
+						Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _tlb, _tlf, _trb, &verpos);
+						Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _tlf, _trf, _trb, &verpos);
 						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 						
@@ -142,7 +161,9 @@ void VoxelGrid::UpdateVertArray()
 					{
 						//Bottom	
 						Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[10 * 9], 9 * 2 * sizeof(float_t));
+						Memcpy(&colArray[(facesDrawn * 24) ], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _blf, _blb, _brf, &verpos);
+						Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 						CopyTri(vertArray, _blb, _brb, _brf, &verpos);
 						Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 						
@@ -154,13 +175,16 @@ void VoxelGrid::UpdateVertArray()
 		}
 	}
 
-	SetVerts(vertArray, facesDrawn * 6);
-	SetNormals(normalArray, facesDrawn * 6);
-	SetTexCords(texArray, facesDrawn * 6);
-	SetColour(Bitz::Math::Vector4F(1.0f, 0.0f, 1.0f, 1.0f));
+	SetVertArray(vertArray, facesDrawn * 6);
+	SetNormalArray(normalArray, facesDrawn * 6);
+	SetTexCordArray(texArray, facesDrawn * 6);
+	SetColourArray(colArray, facesDrawn * 6);
+	//SetColour
+
 	delete vertArray;
 	delete normalArray;
 	delete texArray;
+	delete colArray;
 }
 
 void VoxelGrid::CopyTri(float_t * vertList, const float_t* p1, const float_t* p2, const float_t* p3, int* arrayPosition)
@@ -168,6 +192,7 @@ void VoxelGrid::CopyTri(float_t * vertList, const float_t* p1, const float_t* p2
 	Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p1, sizeof(float_t) * 3);	(*arrayPosition) += 3;
 	Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p2, sizeof(float_t) * 3);	(*arrayPosition) += 3;
 	Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p3, sizeof(float_t) * 3);	(*arrayPosition) += 3;
+	
 }
 
 bool VoxelGrid::ShouldDraw()
@@ -183,8 +208,8 @@ Bitz::Math::Vector3I VoxelGrid::GetDimentions() const
 
 void VoxelGrid::SetVoxel(Bitz::Math::Vector3I position, Voxel newVoxel)
 {
-	if (position.X < 0 || position.Y < 0 || position.Z < 0) throw std::exception("Voxel position not valid");
-	if (position.X >= _Dimentions.X || position.Y >= _Dimentions.Y || position.Z >= _Dimentions.Z) throw std::exception("Voxel position not valid");
+	if (position.X < 0 || position.Y < 0 || position.Z < 0) throw std::invalid_argument("Voxel position not valid");
+	if (position.X >= _Dimentions.X || position.Y >= _Dimentions.Y || position.Z >= _Dimentions.Z) throw std::invalid_argument("Voxel position not valid");
 
 	_VoxelStore[position.X + (position.Y*_Dimentions.X) + (position.Z*_Dimentions.X*_Dimentions.Y)] = newVoxel;
 

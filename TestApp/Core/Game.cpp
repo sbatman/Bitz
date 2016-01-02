@@ -50,11 +50,11 @@ bool Game::Init()
 		Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
 	}
 
-	if (GameState_Test1 == nullptr)
-	{
-		GameState_Test1 = std::make_shared<GSTest1>();
-		Bitz::GameLogic::GameStateService::StartState(static_cast<Bitz::GameLogic::GameState_Ptr>(GameState_Test1));
-	}
+	//if (GameState_Test1 == nullptr)
+	//{
+	//	GameState_Test1 = std::make_shared<GSTest1>();
+	//	Bitz::GameLogic::GameStateService::StartState(static_cast<Bitz::GameLogic::GameState_Ptr>(GameState_Test1));
+	//}
 	
 	/*if (GameState_Test2 == nullptr)
 	{

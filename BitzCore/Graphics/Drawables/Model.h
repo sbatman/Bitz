@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../Common.h"
 #include "../../Interfaces/Core.h"
 #include "IDrawable.h"
@@ -27,16 +28,11 @@ namespace Bitz
 
 				virtual uint32_t GetVertCount() const override;
 
-				virtual void SetVerts(const float_t * verts, const int32_t count);
-				virtual void SetNormals(const float_t * norms, const  int32_t count);
-				virtual void SetTexCords(const float_t * texcords, const  int32_t count);
+		
 				virtual void SetColour(const Vector4F newColour) override;
 				virtual void SetAlpha(const float newAlpha) override;
 
-				virtual void PopulateVertArray(float_t * vertArray, int32_t * statPosition) override;
-				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) override;
-				virtual void PopulateTexArray(float_t * texArray, int32_t * startPosition) override;
-				virtual void PopulateNormArray(float_t * normArray, int32_t * startPosition) override;
+			
 
 				virtual void SetNormalTexture(const Texture_Ptr newTexture);
 				virtual void SetSpecularTexture(const Texture_Ptr newTexture);
@@ -45,6 +41,15 @@ namespace Bitz
 				virtual Texture_Ptr GetSpecularTexture() const;
 
 			protected:
+				virtual void SetVertArray(const float_t * verts, const int32_t count);
+				virtual void SetNormalArray(const float_t * norms, const  int32_t count);
+				virtual void SetTexCordArray(const float_t * texcords, const  int32_t count);
+				virtual void SetColourArray(const float_t * colours, const  int32_t count);
+				virtual void PopulateVertArray(float_t * vertArray, int32_t * statPosition) override;
+				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) override;
+				virtual void PopulateTexArray(float_t * texArray, int32_t * startPosition) override;
+				virtual void PopulateNormArray(float_t * normArray, int32_t * startPosition) override;
+
 				Texture_Ptr _NormalTexture = nullptr;
 				Texture_Ptr _SpecularTexture = nullptr;
 

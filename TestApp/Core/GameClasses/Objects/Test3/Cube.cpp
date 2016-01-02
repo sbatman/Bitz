@@ -49,7 +49,7 @@ void Cube::UpdateVertArray()
 	CopyTri(vertArray, _blf, _blb, _brf, &verpos);
 	CopyTri(vertArray, _blb, _brb, _brf, &verpos);
 
-	SetVerts(vertArray, 36);
+	SetVertArray(vertArray, 36);
 
 	UpdateTextureArray();
 }
@@ -62,7 +62,7 @@ void Cube::UpdateTextureArray()
 
 	for (int i = 0;i < 6;i++)Memcpy(texArray + (i * 12), sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
-	SetTexCords(texArray, 36);
+	SetTexCordArray(texArray, 36);
 }
 
 void Cube::CopyTri(float_t * vertList, const float_t* p1, const float_t* p2, const float_t* p3, int* arrayPosition)

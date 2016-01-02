@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetPacker", "Tools\AssetP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitzAndroid", "BitzAndroid\Bitz-Android.vcxproj", "{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZCore", "BitZCore\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZCore", "BitzCore\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitzWindows", "BitzWindows\Bitz-Windows.vcxproj", "{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}"
 EndProject

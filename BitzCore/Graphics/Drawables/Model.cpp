@@ -81,7 +81,7 @@ namespace Bitz
 				return _SpecularTexture;
 			}
 
-			void Model::SetVerts(const float_t * verts, const  int32_t count)
+			void Model::SetVertArray(const float_t * verts, const  int32_t count)
 			{
 				_VertCount = count;
 				int32_t dataSize = _VertCount * DIMENTIONS;
@@ -103,7 +103,7 @@ namespace Bitz
 				Memcpy(_VertArray, dataSize*sizeof(float_t), verts, dataSize*sizeof(float_t));
 			}
 
-			void Model::SetNormals(const float_t * norms, const  int32_t count)
+			void Model::SetNormalArray(const float_t * norms, const  int32_t count)
 			{
 				assert(_VertCount == count && "Number of normals set must not be less than or exceed the number of verts present in the model");
 				int32_t dataSize = count * DIMENTIONS;
@@ -115,7 +115,7 @@ namespace Bitz
 				Memcpy(_NormArray, dataSize*sizeof(float_t), norms, dataSize*sizeof(float_t));
 			}
 
-			void Model::SetTexCords(const float_t * texcords, const  int32_t count)
+			void Model::SetTexCordArray(const float_t * texcords, const  int32_t count)
 			{
 				assert(_VertCount == count && "Number of TexCorrds set must not be less than or exceed the number of verts present in the model");
 				int32_t dataSize = count * 2;
@@ -125,6 +125,18 @@ namespace Bitz
 				_TexArray = new float[dataSize];
 
 				Memcpy(_TexArray, dataSize*sizeof(float_t), texcords, dataSize*sizeof(float_t));
+			}
+
+			void Model::SetColourArray(const float_t * colours, const  int32_t count)
+			{
+				assert(_VertCount == count && "Number of Colours set must not be less than or exceed the number of verts present in the model");
+				int32_t dataSize = count * 4;
+
+				if (_ColArray != nullptr)delete[] _ColArray;
+
+				_ColArray = new float[dataSize];
+
+				Memcpy(_ColArray, dataSize*sizeof(float_t), colours, dataSize*sizeof(float_t));
 			}
 
 			void Model::SetColour(const Vector4F newColour)
