@@ -10,7 +10,7 @@ using namespace Bitz::GFX;
 
 std::shared_ptr<Cube> testCube = std::shared_ptr<Cube>(new Cube());
 std::shared_ptr<Cube> testCube1 = std::shared_ptr<Cube>(new Cube());
-std::shared_ptr<VoxelGrid> testGrid = std::shared_ptr<VoxelGrid>(new VoxelGrid(Vector3I(50, 50, 10)));
+std::shared_ptr<VoxelGrid> testGrid = std::shared_ptr<VoxelGrid>(new VoxelGrid(Vector3I(30, 30, 10)));
 
 float rotation = 0;
 
@@ -34,23 +34,23 @@ GSTest3::GSTest3() : Bitz::GameLogic::GameState("Main")
 
 	VoxelGrid::Voxel vox;
 	vox.Type = 1;
-	for (int x = 0;x < 50;x++)
+	for (int x = 0;x < 30;x++)
 	{
 		if (x % 2 == 0)continue;
-		for (int y = 0;y < 50;y++)
+		for (int y = 0;y < 30;y++)
 		{
 			if (y % 2 == 0)continue;
 			for (int z = 0;z < 10;z++)
 			{
 				if (y % 4 == 1)
 				{
-					vox.Colour = Vector4B(128, 128, 255, 255);
+					vox.Colour = Vector4B(180, 180, 255, 255);
 				}
 				else
 				{
-					vox.Colour = Vector4B(255, 128, 128, 255);
+					vox.Colour = Vector4B(255, 180, 180, 255);
 				}
-				if (x % 4 == 1)vox.Colour.Y = 0;
+				if (x % 4 == 1)vox.Colour.Y = 128;
 				testGrid->SetVoxel(Vector3I(x, y, z), vox);
 			}
 		}
@@ -75,7 +75,7 @@ void GSTest3::OnExit()
 
 void GSTest3::OnUpdate(double ms)
 {
-	rotation += 0.00025f*ms;
+	rotation += 0.00015f*ms;
 	if (rotation > M_PI * 2)
 	{
 		rotation -= M_PI * 2;

@@ -68,12 +68,13 @@ namespace Bitz
 				fragmentShader += "	vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(NormalizedNormal, NormalizedLightDirection), 0.0);			\n";
 				fragmentShader += "	vec3 Ambient = AmbientColor.rgb * AmbientColor.a;																	\n";
 				fragmentShader += "	if(max(dot(NormalizedLightDirection,NormalizedNormal),0.0)>0.0)														\n";
-				fragmentShader += "		specular = vec3(4)* SpecularColour.rgb * pow(max(dot(ReflectingVector,normalize(-out_Position)),0.0),200);																			\n";
-				
+				fragmentShader += "		specular = vec3(4)* SpecularColour.rgb * pow(max(dot(ReflectingVector,normalize(-out_Position)),0.0),200);		\n";
 				fragmentShader += "																														\n";
-				fragmentShader += "	gl_FragColor =  TextureColour* vec4( Diffuse+Ambient+specular ,1.0)*out_Color;													\n";
+				fragmentShader += "	vec4 gamma = vec4(1.0 / 2.2,1.0 / 2.2,1.0 / 2.2,1.0);																\n";
+				fragmentShader += "	vec4 resultColor = pow(TextureColour, gamma)* vec4( Diffuse+Ambient+specular ,1.0)*out_Color;						\n";
+				fragmentShader += "																														\n";
+				fragmentShader += "	gl_FragColor = resultColor;																							\n";
 				fragmentShader += "}																													\n";
-
 
 				this->SetGLSL(vertexShader, fragmentShader);
 			}
