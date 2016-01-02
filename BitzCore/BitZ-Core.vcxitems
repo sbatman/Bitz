@@ -15,6 +15,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Drawables\VoxelGrid.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\ShaderService.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Stock3D.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Drawables\VoxelGrid.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Shader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\ShaderService.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Shaders\Stock3D.h" />

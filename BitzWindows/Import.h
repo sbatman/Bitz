@@ -21,6 +21,7 @@
 #include "../BitzCore/Graphics//GraphicsStates/GS3D.h"
 #include "../BitzCore/Graphics/Drawables/Sprite.h"
 #include "../BitzCore/Graphics/Drawables/Model.h"
+#include "../BitzCore/Graphics/Drawables/VoxelGrid.h"
 #include "../BitzCore/Graphics/Shaders/Shader.h"
 #include "Graphics\Window.h"
 

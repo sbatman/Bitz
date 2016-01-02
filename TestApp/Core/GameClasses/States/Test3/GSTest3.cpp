@@ -1,38 +1,25 @@
 #include "GSTest3.h"
 #include "../../../Game.h"
-#include "../../Objects/Test3/Cube.h"
-#include "../../Objects/Test3/VoxelGrid.h"
 
 #define ORBCOUNT 1000
 
 using namespace Bitz::Math;
 using namespace Bitz::GFX;
 
-std::shared_ptr<Cube> testCube = std::shared_ptr<Cube>(new Cube());
-std::shared_ptr<Cube> testCube1 = std::shared_ptr<Cube>(new Cube());
-std::shared_ptr<VoxelGrid> testGrid = std::shared_ptr<VoxelGrid>(new VoxelGrid(Vector3I(30, 30, 10)));
+std::shared_ptr<Drawables::VoxelGrid> testGrid = std::make_shared<Drawables::VoxelGrid>(Vector3I(30, 30, 10));
 
 float rotation = 0;
 
-GSTest3::GSTest3() : Bitz::GameLogic::GameState("Main")
+GSTest3::GSTest3() : GameState("Main")
 {
-	testCube->SetVisible(true);
-	testCube->SetPosition(Vector3F(0, -1, 0));
-	testCube->SetTexture(Bitz::Content::ContentManager::Load<Texture>("box.Gdat"));
-
-	testCube1->SetVisible(true);
-	testCube1->SetPosition(Vector3F(-1, -1, 0));
-	testCube1->SetTexture(Bitz::Content::ContentManager::Load<Texture>("box.Gdat"));
-
 	testGrid->SetVisible(true);
 	testGrid->SetPosition(Vector3F(0, 0, 0));
 	testGrid->SetTexture(Bitz::Content::ContentManager::Load<Texture>("texture.Gdat"));
 	testGrid->SetNormalTexture(Bitz::Content::ContentManager::Load<Texture>("texture_n.Gdat"));
 	testGrid->SetSpecularTexture(Bitz::Content::ContentManager::Load<Texture>("texture_s.Gdat"));
 	testGrid->SetSize(Vector3F(0.4f));
-
-
-	VoxelGrid::Voxel vox;
+	
+	Drawables::VoxelGrid::Voxel vox;
 	vox.Type = 1;
 	for (int x = 0;x < 30;x++)
 	{
@@ -88,8 +75,6 @@ void GSTest3::OnDraw()
 {
 	GraphicsManager::BeginRender(Game::RenderState3d);
 
-	//	GraphicsManager::Render(testCube);
-	//	GraphicsManager::Render(testCube1);
 	GraphicsManager::Render(testGrid);
 	GraphicsManager::EndRender();
 }

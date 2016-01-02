@@ -8,5 +8,7 @@
     <None Include="Content\box.Gdat" />
     <None Include="Content\purple.Gdat" />
     <None Include="Content\texture.Gdat" />
+    <None Include="Content\texture_n.Gdat" />
+    <None Include="Content\texture_s.Gdat" />
   </ItemGroup>
 </Project>

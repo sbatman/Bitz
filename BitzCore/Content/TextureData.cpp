@@ -1,4 +1,3 @@
-#include "../Common.h"
 #include "TextureData.h"
 #include "ContentManager.h"
 #include "../Serialize/Packet.h"
