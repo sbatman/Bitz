@@ -61,9 +61,8 @@ namespace Bitz
 				fragmentShader += "	vec4 SpecularColour = texture2D(Texture2, out_TexCoordinate);														\n";
 				fragmentShader += "	vec3 Normal = 2.0 * texture2D(Texture1, out_TexCoordinate).xyz - 1.0;												\n";
 				fragmentShader += "	vec3 NormalizedLightDirection = normalize(LightDirection);															\n";
-				fragmentShader += "	vec3 NormalizedNormal = normalize(NormalMatrix * out_Normal * Normal);												\n";
+				fragmentShader += "	vec3 NormalizedNormal = normalize(NormalMatrix * out_Normal);														\n";
 				fragmentShader += "	vec3 ReflectingVector = reflect(-NormalizedLightDirection , NormalizedNormal);										\n";
-				fragmentShader += "																														\n";
 				fragmentShader += "																														\n";
 				fragmentShader += "	vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(NormalizedNormal, NormalizedLightDirection), 0.0);			\n";
 				fragmentShader += "	vec3 Ambient = AmbientColor.rgb * AmbientColor.a;																	\n";

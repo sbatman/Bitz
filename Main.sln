@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetPacker", "Tools\AssetP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitzAndroid", "BitzAndroid\Bitz-Android.vcxproj", "{1CD5569C-D9A4-4C69-840B-AE93FA7D3ACC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZCore", "BitZCore\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitZCore", "BitzCore\BitZ-Core.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitzWindows", "BitzWindows\Bitz-Windows.vcxproj", "{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}"
 EndProject
@@ -27,14 +27,8 @@ EndProject
 Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "TestApp_Android.Packaging", "TestApp\Android\Packaging\TestApp_Android.Packaging.androidproj", "{7DDFDD90-04CD-4053-AF92-05A1090CE7F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE60C9DD-E5DB-4532-886F-3C1F92F4F49E}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
 EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		TestApp\Core\TestApp-Core.vcxitems*{03df354a-c732-459d-b722-956f7e7bd180}*SharedItemsImports = 4
 		BitzCore\BitZ-Core.vcxitems*{66a88188-accc-4d4a-a032-abdb1470e5f9}*SharedItemsImports = 4
