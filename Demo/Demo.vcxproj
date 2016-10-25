@@ -59,9 +59,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Scripts\test.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Content\box.Gdat" />
     <None Include="Content\particle.Gdat" />
     <None Include="Content\purple.Gdat" />
+    <None Include="Content\Scripts\test.py" />
     <None Include="Content\texture.Gdat" />
     <None Include="Content\texture_n.Gdat" />
     <None Include="Content\texture_s.Gdat" />
@@ -79,6 +85,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Source\Bitz-Windows.vcxproj">
       <Project>{66a88188-accc-4d4a-a032-abdb1470e5f9}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -136,21 +144,25 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>..\Support Libraries\SPython\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>..\Support Libraries\SPython\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>..\Support Libraries\SPython\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>..\Support Libraries\SPython\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

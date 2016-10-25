@@ -1,0 +1,2 @@
+def testFunction():
+	Print("Hello")

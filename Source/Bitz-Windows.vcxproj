@@ -98,6 +98,7 @@
     <ClCompile Include="Physics\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="Physics\Box2D\Rope\b2Rope.cpp" />
     <ClCompile Include="Physics\I2DPhysicsEnabled.cpp" />
+    <ClCompile Include="GameLogic\Scripting\PythonAgent.cpp" />
     <ClCompile Include="Serialize\Packet.cpp" />
     <ClCompile Include="Time\Timer.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Physics\Box2D\Dynamics\Joints\b2WheelJoint.h" />
     <ClInclude Include="Physics\Box2D\Rope\b2Rope.h" />
     <ClInclude Include="Physics\I2DPhysicsEnabled.h" />
+    <ClInclude Include="GameLogic\Scripting\PythonAgent.h" />
     <ClInclude Include="Serialize\Packet.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Time\Consts.h" />
@@ -252,18 +254,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>../Support Libraries/Spython/libs/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../Support Libraries/Spython/include/Stackless;../Support Libraries/Spython/include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>../Support Libraries/Spython/libs/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../Support Libraries/Spython/include/Stackless;../Support Libraries/Spython/include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <LibraryPath>../Support Libraries/Spython/libs/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../Support Libraries/Spython/include/Stackless;../Support Libraries/Spython/include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>../Support Libraries/Spython/include/Stackless;../Support Libraries/Spython/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../Support Libraries/Spython/libs/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -281,7 +291,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
   </ItemDefinitionGroup>
@@ -301,7 +311,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -323,7 +333,7 @@
     </Link>
     <Lib>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -348,7 +358,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

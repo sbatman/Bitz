@@ -10,11 +10,13 @@ GraphicsStates::GS3D * Game::RenderState3d;
 std::shared_ptr<GSTest1> Game::GameState_Test1 = nullptr;
 std::shared_ptr<GSTest2> Game::GameState_Test2 = nullptr;
 std::shared_ptr<GSTest3> Game::GameState_Test3 = nullptr;
+PythonAgent * PAgent = nullptr;
 
 Game::Game() : Bitz::GameLogic::GameCore("Explore")
 {
 	ContentManager::Init("Content/", "Content/", "Content/");
 	Bitz::Debug::Logging::EnableLogToConsole();
+	PAgent = new PythonAgent("Content/Scripts/test.py");
 }
 
 Game::~Game()
@@ -41,7 +43,9 @@ bool Game::Init()
 
 	RenderState3d = new GraphicsStates::GS3D();
 	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, -30));
-	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ALPHA);	
+	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ALPHA);
+
+
 
 
 	if (GameState_Test3 == nullptr)
@@ -88,7 +92,7 @@ bool Game::OnExit()
 		Bitz::GameLogic::GameStateService::EndState(GameState_Test1);
 		GameState_Test1 = nullptr;
 	}
-	
+
 	if (GameState_Test2 != nullptr)
 	{
 		Bitz::GameLogic::GameStateService::EndState(GameState_Test2);
