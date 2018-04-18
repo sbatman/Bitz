@@ -49,12 +49,11 @@ namespace Bitz
 
 				}
 
-				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Shaders::Shader_Ptr customShader = nullptr, glm::mat4 matrix = glm::mat4(), Content::TextureData_Ptr normalTexture = nullptr, Content::TextureData_Ptr specularTexture = nullptr)
+				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Shaders::Shader_Ptr customShader = nullptr, glm::mat4 matrix = glm::mat4(), Content::TextureData_Ptr specularTexture = nullptr)
 				{
 					VertCountStart = start;
 					VertCountEnd = end;
 					Texture.push_back(texture);
-					Texture.push_back(normalTexture);
 					Texture.push_back(specularTexture);
 					Mode = mode;
 					CustomShader = customShader;

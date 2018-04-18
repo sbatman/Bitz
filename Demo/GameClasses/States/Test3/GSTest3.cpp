@@ -1,8 +1,6 @@
 #include "GSTest3.h"
 #include "../../../Game.h"
 
-#define ORBCOUNT 1000
-
 using namespace Bitz::Math;
 using namespace Bitz::GFX;
 
@@ -15,7 +13,6 @@ GSTest3::GSTest3() : GameState("Main")
 	testGrid->SetVisible(true);
 	testGrid->SetPosition(Vector3F(0, 0, 0));
 	testGrid->SetTexture(Bitz::Content::ContentManager::Load<Texture>("texture.Gdat"));
-	testGrid->SetNormalTexture(Bitz::Content::ContentManager::Load<Texture>("texture_n.Gdat"));
 	testGrid->SetSpecularTexture(Bitz::Content::ContentManager::Load<Texture>("texture_s.Gdat"));
 	testGrid->SetSize(Vector3F(0.4f));
 	
@@ -23,10 +20,10 @@ GSTest3::GSTest3() : GameState("Main")
 	vox.Type = 1;
 	for (int x = 0;x < 30;x++)
 	{
-		if (x % 2 == 0)continue;
+		if (x % 4 == 0)continue;
 		for (int y = 0;y < 30;y++)
 		{
-			if (y % 2 == 0)continue;
+			if (y % 4 == 0)continue;
 			for (int z = 0;z < 10;z++)
 			{
 				if (y % 4 == 1)

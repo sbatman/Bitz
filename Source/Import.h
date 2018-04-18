@@ -11,7 +11,6 @@
 #include "GameLogic/GameCore.h"
 #include "GameLogic/GameState.h"
 #include "GameLogic/GameStateService.h"
-#include "GameLogic/Scripting/PythonAgent.h"
 
 //Graphics
 #include "Graphics/Window.h"

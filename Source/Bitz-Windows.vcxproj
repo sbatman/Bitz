@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -98,7 +98,6 @@
     <ClCompile Include="Physics\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="Physics\Box2D\Rope\b2Rope.cpp" />
     <ClCompile Include="Physics\I2DPhysicsEnabled.cpp" />
-    <ClCompile Include="GameLogic\Scripting\PythonAgent.cpp" />
     <ClCompile Include="Serialize\Packet.cpp" />
     <ClCompile Include="Time\Timer.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -192,7 +191,6 @@
     <ClInclude Include="Physics\Box2D\Dynamics\Joints\b2WheelJoint.h" />
     <ClInclude Include="Physics\Box2D\Rope\b2Rope.h" />
     <ClInclude Include="Physics\I2DPhysicsEnabled.h" />
-    <ClInclude Include="GameLogic\Scripting\PythonAgent.h" />
     <ClInclude Include="Serialize\Packet.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Time\Consts.h" />
@@ -204,33 +202,33 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BitzWindows</RootNamespace>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>Bitz</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -254,8 +252,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\Obj\$(ProjectName)\$(Configuration)\</IntDir>
-    <LibraryPath>../Support Libraries/Spython/libs/;$(LibraryPath)</LibraryPath>
-    <IncludePath>../Support Libraries/Spython/include/Stackless;../Support Libraries/Spython/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Build\Bin\$(ProjectName)\$(Configuration)\</OutDir>
@@ -291,7 +289,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
   </ItemDefinitionGroup>

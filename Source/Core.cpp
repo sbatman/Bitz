@@ -55,18 +55,16 @@ namespace Bitz
 					GFX::GraphicsManager::Update();
 					double_t elapsedMS = _RunningTimer.GetElapsedMS();
 
-					if (_LastDraw > elapsedMS)
-					{
-						_LastDraw = elapsedMS;
-					}
-					if (_LastUpdate > elapsedMS)
-					{
-						_LastUpdate = elapsedMS;
-					}
+					if (_LastDraw > elapsedMS)_LastDraw = elapsedMS;
+					if (_LastUpdate > elapsedMS)_LastUpdate = elapsedMS;
 
-					if ((elapsedMS - _LastUpdate) > _MSPerUpdate)
+					double updateDiff = (elapsedMS - _LastUpdate);
+					double drawDiff = (elapsedMS - _LastDraw);
+
+					while(updateDiff > _MSPerUpdate)
 					{
 						_LastUpdate += _MSPerUpdate;
+						updateDiff = (elapsedMS - _LastUpdate);
 						GameLogic::GameStateService::Update(_MSPerUpdate);
 						if (!_CurrentGameCore->Update())
 						{
@@ -75,7 +73,7 @@ namespace Bitz
 							break;
 						}
 					}
-					else if ((elapsedMS - _LastDraw) > _MSPerDraw) //The else is to ensure the update always gets preference, only doing the draw if the update wasnt required
+					if (drawDiff > _MSPerDraw)
 					{
 						_LastDraw += _MSPerDraw;
 						if (!_PauseRender)

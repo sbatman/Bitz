@@ -10,13 +10,11 @@ GraphicsStates::GS3D * Game::RenderState3d;
 std::shared_ptr<GSTest1> Game::GameState_Test1 = nullptr;
 std::shared_ptr<GSTest2> Game::GameState_Test2 = nullptr;
 std::shared_ptr<GSTest3> Game::GameState_Test3 = nullptr;
-PythonAgent * PAgent = nullptr;
 
 Game::Game() : Bitz::GameLogic::GameCore("Explore")
 {
 	ContentManager::Init("Content/", "Content/", "Content/");
 	Bitz::Debug::Logging::EnableLogToConsole();
-	PAgent = new PythonAgent("Content/Scripts/test.py");
 }
 
 Game::~Game()
@@ -45,26 +43,23 @@ bool Game::Init()
 	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, -30));
 	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ALPHA);
 
-
-
-
 	if (GameState_Test3 == nullptr)
 	{
 		GameState_Test3 = std::make_shared<GSTest3>();
 		Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
 	}
-	//
+	
 	//if (GameState_Test1 == nullptr)
 	//{
 	//	GameState_Test1 = std::make_shared<GSTest1>();
 	//	Bitz::GameLogic::GameStateService::StartState(static_cast<Bitz::GameLogic::GameState_Ptr>(GameState_Test1));
 	//}
-	//
-	//if (GameState_Test2 == nullptr)
-	//{
-	//	GameState_Test2 = std::make_shared<GSTest2>();
-	//	Bitz::GameLogic::GameStateService::StartState(GameState_Test2);
-	//}
+	
+	/*if (GameState_Test2 == nullptr)
+	{
+		GameState_Test2 = std::make_shared<GSTest2>();
+		Bitz::GameLogic::GameStateService::StartState(GameState_Test2);
+	}*/
 
 	return true;
 }

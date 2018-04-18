@@ -139,7 +139,7 @@ namespace Bitz
 				if (is3D)
 				{
 					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
-					interval = DrawInterval(uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetNormalTexture()->_Data, theModel->GetSpecularTexture()->_Data);
+					interval = DrawInterval(uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetSpecularTexture()->_Data);
 					intervalGenerated = true;
 				}
 				else
@@ -154,7 +154,7 @@ namespace Bitz
 				if (is3D)
 				{
 					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
-					interval = DrawInterval(uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetNormalTexture()->_Data, theModel->GetSpecularTexture()->_Data);
+					interval = DrawInterval(uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetSpecularTexture()->_Data);
 					intervalGenerated = true;
 				}
 				else

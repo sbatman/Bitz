@@ -61,19 +61,9 @@ namespace Bitz
 				(*startPosition) += (_VertCount * 3);
 			}
 
-			void Model::SetNormalTexture(const Texture_Ptr newTexture)
-			{
-				_NormalTexture = newTexture;
-			}
-
 			void Model::SetSpecularTexture(const Texture_Ptr newTexture)
 			{
 				_SpecularTexture = newTexture;
-			}
-
-			Texture_Ptr Model::GetNormalTexture() const
-			{
-				return _NormalTexture;
 			}
 
 			Texture_Ptr Model::GetSpecularTexture() const
