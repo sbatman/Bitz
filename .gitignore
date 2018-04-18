@@ -3,3 +3,11 @@
 /Build
 *.sdf
 *.opensdf
+/ipch/BITZ-ANDROID-375bdf73/*.ipch
+*.ipch
+/packages
+/Tools/AssetPacker/obj
+/Tools/AssetPacker/bin
+/TestApp/Android/Packaging/ARM/Release
+/TestApp/Android/Packaging/ARM/Debug
+/TestApp/Android/Packaging/x86/Debug
