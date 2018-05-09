@@ -17,12 +17,11 @@ namespace Bitz
 			ReleaseDC(_HWND, _HDC);
 		}
 
-		void GFX::GLContext::Init(HWND hwnd)
+		void GFX::GLContext::Init(const HWND hwnd)
 		{
 			_HWND = hwnd;
 			_HDC = GetDC(_HWND);
 			PIXELFORMATDESCRIPTOR pfd;
-			int32_t iFormat;
 
 			// set the pixel format for the DC
 			ZeroMemory(&pfd, sizeof(pfd));
@@ -33,14 +32,14 @@ namespace Bitz
 			pfd.cColorBits = 24;
 			pfd.cDepthBits = 24;
 			pfd.iLayerType = PFD_MAIN_PLANE;
-			iFormat = ChoosePixelFormat(_HDC, &pfd);
+			const auto iFormat = ChoosePixelFormat(_HDC, &pfd);
 			SetPixelFormat(_HDC, iFormat, &pfd);
 
 			// create and enable the render context (RC)
 			_HRC = wglCreateContext(_HDC);
 		}
 
-		void GFX::GLContext::MakeCurrent()
+		void GFX::GLContext::MakeCurrent() const
 		{
 			wglMakeCurrent(_HDC, _HRC);
 		}
@@ -56,7 +55,7 @@ namespace Bitz
 			glClearColor(colour.X, colour.Y, colour.Z, 255);
 		}
 
-		void GFX::GLContext::FinishRender()
+		void GFX::GLContext::FinishRender() const
 		{
 			SwapBuffers(_HDC);
 		}

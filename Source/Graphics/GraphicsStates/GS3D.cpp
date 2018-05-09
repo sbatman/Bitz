@@ -8,15 +8,16 @@ namespace Bitz
 	{
 		GraphicsStates::GS3D::GS3D()
 		{
-			_ActiveCamera = new Camera();
-			_ActiveCamera->SetMode(Camera::CameraMode::Perspective);
+			_ActiveCamera = std::make_shared<Camera>();
+			_ActiveCamera->SetMode(Camera::CameraMode::PERSPECTIVE);
 			_CurrentBlendState = BlendStates::ALPHA;
-			_StockShader = Shaders::Shader_Ptr(new Shaders::Stock3D());
+			_StockShader = std::static_pointer_cast<Shaders::Shader>(std::make_shared<Shaders::Stock3D>());
 		}
 
 		GraphicsStates::GS3D::~GS3D()
 		{
-			delete _ActiveCamera;
+			_ActiveCamera = nullptr;
+			_StockShader = nullptr;
 		}
 
 		void GraphicsStates::GS3D::EnterState()
@@ -45,7 +46,7 @@ namespace Bitz
 			glDisable(GL_DEPTH_TEST);
 		}
 
-		Camera* GraphicsStates::GS3D::GetActiveCamera() const
+		Camera_Ptr GraphicsStates::GS3D::GetActiveCamera() const
 		{
 			return _ActiveCamera;
 		}

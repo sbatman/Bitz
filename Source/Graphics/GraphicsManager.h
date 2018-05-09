@@ -59,7 +59,7 @@ namespace Bitz
 			/// Returns the current active camera
 			/// </summary>
 			/// <returns>A pointer to the camera currently active in the graphics manager</returns>
-			static Camera * GetCurrentCamera();
+			static Camera_Ptr GetCurrentCamera();
 			/// <summary>
 			/// Gets the number of frames completed by the graphics manager
 			/// </summary>
@@ -168,7 +168,7 @@ namespace Bitz
 			/// <summary>
 			/// The last active camera saved for some optimisations like projection matix baking
 			/// </summary>
-			static Camera * _LastActiveCamera;
+			static Camera_Ptr _LastActiveCamera;
 			/// <summary>
 			/// A pointer to the active render engine
 			/// </summary>

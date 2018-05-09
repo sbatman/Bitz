@@ -13,9 +13,9 @@ namespace Bitz
 			GLContext();
 			~GLContext();
 			void Init(HWND hwnd);
-			void MakeCurrent();
-			void Clear(Bitz::Math::Vector3F colour);
-			void FinishRender();
+			void MakeCurrent() const;
+			static void Clear(Bitz::Math::Vector3F colour);
+			void FinishRender() const;
 
 			HDC GetHDC() const;
 		private:

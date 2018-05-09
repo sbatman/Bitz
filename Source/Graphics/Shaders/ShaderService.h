@@ -13,7 +13,6 @@ namespace Bitz
 			class Shader;
 			typedef std::shared_ptr<Shader> Shader_Ptr;
 
-
 			class ShaderService
 			{
 				friend Shader;

@@ -22,7 +22,7 @@ namespace Bitz
 		RenderEngine * GraphicsManager::_ActiveRenderEngine = nullptr;
 		Window * GraphicsManager::_ActiveWindow = nullptr;
 
-		Camera * GraphicsManager::_LastActiveCamera = nullptr;
+		Camera_Ptr GraphicsManager::_LastActiveCamera = nullptr;
 
 		void GraphicsManager::Init(Window * window)
 		{
@@ -104,7 +104,7 @@ namespace Bitz
 
 			_CurrentGraphicsState->EnterState();
 
-			Camera * camera = _CurrentGraphicsState->GetActiveCamera();
+			Camera_Ptr camera = _CurrentGraphicsState->GetActiveCamera();
 
 			if (_LastActiveCamera != camera)
 			{
@@ -151,7 +151,7 @@ namespace Bitz
 			_ActiveRenderEngine->Render(idrawable.get());
 		}
 
-		Camera* GraphicsManager::GetCurrentCamera()
+		Camera_Ptr GraphicsManager::GetCurrentCamera()
 		{
 			if (_CurrentGraphicsState == nullptr) return nullptr;
 			return _CurrentGraphicsState->GetActiveCamera();

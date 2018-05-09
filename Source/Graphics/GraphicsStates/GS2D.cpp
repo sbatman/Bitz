@@ -8,15 +8,15 @@ namespace Bitz
 	{
 		GraphicsStates::GS2D::GS2D()
 		{
-			_ActiveCamera = new Camera();
-			_ActiveCamera->SetMode(Camera::CameraMode::Ortho);
+			_ActiveCamera = std::make_shared<Camera>();
+			_ActiveCamera->SetMode(Camera::CameraMode::ORTHO);
 			_CurrentBlendState = BlendStates::ALPHA;
-			_StockShader = Shaders::Shader_Ptr(new Shaders::Stock2D());
+			_StockShader = std::static_pointer_cast<Shaders::Shader>(std::make_shared<Shaders::Stock2D>());
 		}
 
 		GraphicsStates::GS2D::~GS2D()
 		{
-			delete _ActiveCamera;
+			_ActiveCamera = nullptr;
 			_StockShader = nullptr;
 		}
 
@@ -47,7 +47,7 @@ namespace Bitz
 			glEnable(GL_DEPTH_TEST);
 		}
 
-		GFX::Camera* GraphicsStates::GS2D::GetActiveCamera() const
+		GFX::Camera_Ptr GraphicsStates::GS2D::GetActiveCamera() const
 		{
 			return _ActiveCamera;
 		}

@@ -81,7 +81,6 @@
     <ProjectGuid>{03DF354A-C732-459D-B722-956F7E7BD180}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>TestAppWindows</RootNamespace>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

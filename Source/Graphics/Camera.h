@@ -21,8 +21,8 @@ namespace Bitz
 
 			enum CameraMode
 			{
-				Perspective,
-				Ortho
+				PERSPECTIVE,
+				ORTHO
 			};
 
 			Camera();
@@ -31,13 +31,13 @@ namespace Bitz
 			/// <summary>
 			/// Sets the new fov for the camera, only applicable wehen in perspective mode
 			/// </summary>
-			/// <param name='newPosition'>The new fov, will be clamped between 1 and 360</param>
-			void SetFOV(const float_t newValue);
+			/// <param name='newValue'>The new fov, will be clamped between 1 and 360</param>
+			void SetFOV(float_t newValue);
 			/// <summary>
 			/// Sets the new mode for the camera
 			/// </summary>
-			/// <param name='newPosition'>The new mode which will be applied on the next draw this camera is used</param>
-			void SetMode(const CameraMode newMode);
+			/// <param name='newMode'>The new mode which will be applied on the next draw this camera is used</param>
+			void SetMode(CameraMode newMode);
 
 			/// <summary>
 			/// Gets the current fov
@@ -63,7 +63,7 @@ namespace Bitz
 			/// <summary>
 			/// Gets the current zoom level (its a scaling factor >1.0 to zoom in <1.0 to zoom out) default : 1.0f
 			/// </summary>
-			void SetZoom(const float_t newZoom);
+			void SetZoom(float_t newZoom);
 
 		protected:
 			/// <summary>
@@ -108,5 +108,6 @@ namespace Bitz
 			/// </summary>
 			glm::mat4 _ViewMatrix;
 		};
+		typedef std::shared_ptr<Camera> Camera_Ptr;
 	}
 }

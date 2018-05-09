@@ -201,7 +201,6 @@
     <ProjectGuid>{66A88188-ACCC-4D4A-A032-ABDB1470E5F9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BitzWindows</RootNamespace>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>Bitz</ProjectName>
   </PropertyGroup>
@@ -309,7 +308,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -356,7 +355,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;python33.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

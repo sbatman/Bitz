@@ -16,9 +16,9 @@ namespace Bitz
 				void EnterState() override;
 				void ExitState() override;
 				bool IsNormalsEnabled() const override;
-				Camera * GetActiveCamera() const override;
+				Camera_Ptr GetActiveCamera() const override;
 			private:
-				Camera * _ActiveCamera;
+				Camera_Ptr _ActiveCamera;
 			};
 		}
 	}

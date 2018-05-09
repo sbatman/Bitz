@@ -30,7 +30,7 @@ namespace Bitz
 
 		protected:
 			virtual bool IsComplete() const;
-			virtual void OnEnter(const GameState_Ptr preceedingState) = 0;
+			virtual void OnEnter(GameState_Ptr preceedingState) = 0;
 			virtual void OnExit() = 0;
 			virtual void OnUpdate(double ms) = 0;
 			virtual void OnDraw() = 0;

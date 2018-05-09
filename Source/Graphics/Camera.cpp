@@ -5,7 +5,7 @@
 Bitz::GFX::Camera::Camera()
 {
 	_ForceMakeActiveOnApply = false;
-	_CurrentMode = CameraMode::Perspective;
+	_CurrentMode = CameraMode::PERSPECTIVE;
 	_FOV = 75;
 	_Zoom = 1;
 }
@@ -34,7 +34,7 @@ void Bitz::GFX::Camera::MakeActive()
 {
 	switch (_CurrentMode)
 	{
-	case Perspective:
+	case PERSPECTIVE:
 	{
 		glMatrixMode(GL_PROJECTION);
 		_ProjectionMatrix = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.5f, 1000.0f);
@@ -47,7 +47,7 @@ void Bitz::GFX::Camera::MakeActive()
 		glLoadMatrixf(glm::value_ptr(_ProjectionMatrix));
 	}
 	break;
-	case Ortho:
+	case ORTHO:
 	{
 		glMatrixMode(GL_PROJECTION);
 		_ProjectionMatrix = glm::ortho(0.0, (double_t)GraphicsManager::GetScreenSize().X, (double_t)GraphicsManager::GetScreenSize().Y, 0.0, 0.0, 1.0);
