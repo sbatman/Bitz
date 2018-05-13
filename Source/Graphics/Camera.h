@@ -19,7 +19,7 @@ namespace Bitz
 			friend class GraphicsManager;
 		public:
 
-			enum CameraMode
+			enum class CameraMode
 			{
 				PERSPECTIVE,
 				ORTHO
@@ -81,7 +81,7 @@ namespace Bitz
 			/// <summary>
 			/// Used for float comparisons
 			/// </summary>
-			const float_t EPSILON = 0.001f;
+			const float_t _Epsilon = 0.001f;
 			/// <summary>
 			/// The current camera mode
 			/// </summary>

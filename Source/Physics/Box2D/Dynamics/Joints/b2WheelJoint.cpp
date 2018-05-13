@@ -288,7 +288,7 @@ bool b2WheelJoint::SolvePositionConstraints(const b2SolverData& data)
 
 	b2Vec2 rA = b2Mul(qA, m_localAnchorA - m_localCenterA);
 	b2Vec2 rB = b2Mul(qB, m_localAnchorB - m_localCenterB);
-	b2Vec2 d = (cB - cA) + rB - rA;
+	b2Vec2 d = cB - cA + rB - rA;
 
 	b2Vec2 ay = b2Mul(qA, m_localYAxisA);
 

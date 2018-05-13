@@ -18,6 +18,7 @@
 #include <fstream>
 #include <limits>
 #include <atomic>
+#include <list>
 
 const float EPSILON = 0.00001f;
 

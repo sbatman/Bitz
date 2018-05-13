@@ -1,6 +1,7 @@
 #include "../../Common.h"
 #include "GS2D.h"
 #include "../Shaders/Stock2D.h"
+#include "../Shaders/ShaderService.h"
 
 namespace Bitz
 {
@@ -11,13 +12,7 @@ namespace Bitz
 			_ActiveCamera = std::make_shared<Camera>();
 			_ActiveCamera->SetMode(Camera::CameraMode::ORTHO);
 			_CurrentBlendState = BlendStates::ALPHA;
-			_StockShader = std::static_pointer_cast<Shaders::Shader>(std::make_shared<Shaders::Stock2D>());
-		}
-
-		GraphicsStates::GS2D::~GS2D()
-		{
-			_ActiveCamera = nullptr;
-			_StockShader = nullptr;
+			_StockShader = Shaders::ShaderService::CreateShader<Shaders::Stock2D>();
 		}
 
 		void GraphicsStates::GS2D::EnterState()

@@ -50,6 +50,7 @@ namespace Bitz
 
 			private:
 			};
+			typedef std::shared_ptr<Model> Model_Ptr;
 		}
 	}
 }

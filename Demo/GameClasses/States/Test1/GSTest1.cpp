@@ -20,7 +20,7 @@ void GSTest1::OnEnter(Bitz::GameLogic::GameState_Ptr)
 {
 	for (auto x = 0; x < ORBCOUNT; x++)
 	{
-		auto o = std::shared_ptr<Orb>(new Orb());
+		auto o = std::make_shared<Orb>();
 		o->SetColour(Vector4F(1.0f, (x % 150) / 255.0f, 0.0f, 0.05f));
 		_TestOrbs.push_back(o);
 	}
@@ -33,8 +33,8 @@ void GSTest1::OnExit()
 
 void GSTest1::OnUpdate(double ms)
 {
-	int xLimit = Bitz::GFX::GraphicsManager::GetScreenSize().X;
-	int yLimit = Bitz::GFX::GraphicsManager::GetScreenSize().Y;
+	const int xLimit = Bitz::GFX::GraphicsManager::GetScreenSize().X;
+	const int yLimit = Bitz::GFX::GraphicsManager::GetScreenSize().Y;
 	if (xLimit != 0 && yLimit != 0)
 	{
 		for (std::shared_ptr<Orb> o : _TestOrbs)o->Update(xLimit, yLimit, static_cast<float_t>(xLimit*0.5f), static_cast<float_t>(yLimit*0.5f));

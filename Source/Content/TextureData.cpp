@@ -36,19 +36,18 @@ namespace Bitz
 			return _ID;
 		}
 
-		TextureData_Ptr TextureData::Load(const std::string fileName)
+		TextureData_Ptr TextureData::Load(const std::string& fileName)
 		{
 			int32_t width = 0, height = 0;
-			uint8_t * byteArray;
 
-			std::vector<byte> imageData = IO::ReadAllBytes(fileName.c_str());
+			const std::vector<byte> imageData = IO::ReadAllBytes(fileName);
 			Serialize::Packet * packet = Serialize::Packet::FromByteArray(imageData);
 			std::vector<Bitz::Serialize::Packet::PakObject> objects = packet->GetObjects();
-			width = *((int32_t *)objects[0].Ptr);
-			height = *((int32_t *)objects[1].Ptr);
-			byteArray = ((uint8_t *)objects[2].Ptr);
+			width = *static_cast<int32_t *>(objects[0].Ptr);
+			height = *static_cast<int32_t *>(objects[1].Ptr);
+			uint8_t * byteArray = static_cast<uint8_t *>(objects[2].Ptr);
 
-			TextureData_Ptr returnTextureData = TextureData_Ptr(new TextureData());
+			TextureData_Ptr returnTextureData = std::make_shared<TextureData>();
 			_LoadedTextureData.push_back(returnTextureData);
 			returnTextureData->_PixelData = new uint8_t[width*height * 4];
 
@@ -65,7 +64,7 @@ namespace Bitz
 			return _OpenglTextureID;
 		}
 
-		void TextureData::SetOpenglTextureID(uint32_t newID)
+		void TextureData::SetOpenglTextureID(const uint32_t newID)
 		{
 			_OpenglTextureID = newID;
 		}
@@ -83,7 +82,7 @@ namespace Bitz
 
 		void TextureData::ClearAllOpenGLIDs()
 		{
-			for (TextureData_Ptr tex : _LoadedTextureData)tex->SetOpenglTextureID(-1);
+			for (const TextureData_Ptr& tex : _LoadedTextureData)tex->SetOpenglTextureID(-1);
 		}
 	}
 }

@@ -42,17 +42,17 @@ namespace Bitz
 
 		double_t Timer::GetElapsedMS() const
 		{
-			return  (GetElapsedTicks() / _Frequency) * MSINSEC;
+			return  GetElapsedTicks() / _Frequency * MSINSEC;
 		}
 
 		double_t Timer::GetElapsedSeconds() const
 		{
-			return  (GetElapsedTicks() / _Frequency);
+			return  GetElapsedTicks() / _Frequency;
 		}
 
 		int64_t Timer::GetElapsedTicks() const
 		{
-			return _Running ? (SystemCurrentTicks() - _Start) : (_Stop - _Start);
+			return _Running ? SystemCurrentTicks() - _Start : _Stop - _Start;
 		}
 
 		bool Timer::IsRunning() const

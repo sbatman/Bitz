@@ -3,7 +3,6 @@
 #include "../Math/Math.h"
 #include "../Interfaces/Core.h"
 #include "../Interfaces/IAnchorable.h"
-#include "../Interfaces/IDisposable.h"
 
 namespace Bitz
 {
@@ -30,7 +29,6 @@ namespace Bitz
 			virtual void UpdateDependents();
 			virtual void AddDependent(const Interfaces::IAnchorable_Ptr newDependednt);
 			virtual void RemoveDependent(const Interfaces::IAnchorable_Ptr newDependednt);
-			virtual void Dispose() override;
 
 		private:
 			std::vector<Interfaces::IAnchorable_Ptr> _Anchorables = std::vector<Interfaces::IAnchorable_Ptr>();

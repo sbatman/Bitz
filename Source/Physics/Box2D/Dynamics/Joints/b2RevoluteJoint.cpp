@@ -97,7 +97,7 @@ void b2RevoluteJoint::InitVelocityConstraints(const b2SolverData& data)
 	float32 mA = m_invMassA, mB = m_invMassB;
 	float32 iA = m_invIA, iB = m_invIB;
 
-	bool fixedRotation = (iA + iB == 0.0f);
+	bool fixedRotation = iA + iB == 0.0f;
 
 	m_mass.ex.x = mA + mB + m_rA.y * m_rA.y * iA + m_rB.y * m_rB.y * iB;
 	m_mass.ey.x = -m_rA.y * m_rA.x * iA - m_rB.y * m_rB.x * iB;
@@ -190,7 +190,7 @@ void b2RevoluteJoint::SolveVelocityConstraints(const b2SolverData& data)
 	float32 mA = m_invMassA, mB = m_invMassB;
 	float32 iA = m_invIA, iB = m_invIB;
 
-	bool fixedRotation = (iA + iB == 0.0f);
+	bool fixedRotation = iA + iB == 0.0f;
 
 	// Solve motor constraint.
 	if (m_enableMotor && m_limitState != e_equalLimits && fixedRotation == false)
@@ -300,7 +300,7 @@ bool b2RevoluteJoint::SolvePositionConstraints(const b2SolverData& data)
 	float32 angularError = 0.0f;
 	float32 positionError = 0.0f;
 
-	bool fixedRotation = (m_invIA + m_invIB == 0.0f);
+	bool fixedRotation = m_invIA + m_invIB == 0.0f;
 
 	// Solve angular limit constraint.
 	if (m_enableLimit && m_limitState != e_inactiveLimit && fixedRotation == false)

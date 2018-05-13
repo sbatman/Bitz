@@ -124,7 +124,7 @@ void b2CollideEdgeAndCircle(b2Manifold* manifold,
 	// Region AB
 	float32 den = b2Dot(e, e);
 	b2Assert(den > 0.0f);
-	b2Vec2 P = (1.0f / den) * (u * A + v * B);
+	b2Vec2 P = 1.0f / den * (u * A + v * B);
 	b2Vec2 d = Q - P;
 	float32 dd = b2Dot(d, d);
 	if (dd > radius * radius)
@@ -289,7 +289,7 @@ void b2EPCollider::Collide(b2Manifold* manifold, const b2EdgeShape* edgeA, const
 		}
 		else if (convex1)
 		{
-			m_front = offset0 >= 0.0f || (offset1 >= 0.0f && offset2 >= 0.0f);
+			m_front = offset0 >= 0.0f || offset1 >= 0.0f && offset2 >= 0.0f;
 			if (m_front)
 			{
 				m_normal = m_normal1;
@@ -305,7 +305,7 @@ void b2EPCollider::Collide(b2Manifold* manifold, const b2EdgeShape* edgeA, const
 		}
 		else if (convex2)
 		{
-			m_front = offset2 >= 0.0f || (offset0 >= 0.0f && offset1 >= 0.0f);
+			m_front = offset2 >= 0.0f || offset0 >= 0.0f && offset1 >= 0.0f;
 			if (m_front)
 			{
 				m_normal = m_normal1;

@@ -141,8 +141,8 @@ void b2PulleyJoint::InitVelocityConstraints(const b2SolverData& data)
 		m_impulse *= data.step.dtRatio;
 
 		// Warm starting.
-		b2Vec2 PA = -(m_impulse)* m_uA;
-		b2Vec2 PB = (-m_ratio * m_impulse) * m_uB;
+		b2Vec2 PA = -m_impulse* m_uA;
+		b2Vec2 PB = -m_ratio * m_impulse * m_uB;
 
 		vA += m_invMassA * PA;
 		wA += m_invIA * b2Cross(m_rA, PA);

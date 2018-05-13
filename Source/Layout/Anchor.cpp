@@ -11,7 +11,6 @@ namespace Bitz
 
 		Anchor::~Anchor()
 		{
-			if (!IsDisposed()) Dispose();
 		}
 
 		void Anchor::SetPosition(const Math::Vector2F newPosition)
@@ -33,12 +32,6 @@ namespace Bitz
 		void Anchor::RemoveDependent(const Interfaces::IAnchorable_Ptr newDependednt)
 		{
 			_Anchorables.erase(std::remove(_Anchorables.begin(), _Anchorables.end(), newDependednt), _Anchorables.end());
-		}
-
-		void Anchor::Dispose()
-		{
-			_Anchorables.clear();
-			IAnchorable::Dispose();
 		}
 	}
 }

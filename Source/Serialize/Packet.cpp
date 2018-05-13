@@ -74,19 +74,19 @@ void Packet::AddByteArray(uint8_t const* value, uint32_t const length)
 	_ParamCount++;
 }
 
-const uint32_t Packet::ToByteArray(uint8_t ** dataPointer)
+uint32_t Packet::ToByteArray(uint8_t ** dataPointer)
 {
 	if (_ReturnByteArray == nullptr)
 	{
 		_ReturnByteArraySize = _DataPos + PACKET_HEADER_LENGTH;
 		_ReturnByteArray = new uint8_t[_ReturnByteArraySize];
-		Memcpy(_ReturnByteArray, _ReturnByteArraySize, PacketStartBytes, sizeof(PacketStartBytes));
-		Memcpy(_ReturnByteArray + 4, _ReturnByteArraySize, &_ParamCount, sizeof(_ParamCount));
-		Memcpy(_ReturnByteArray + 6, _ReturnByteArraySize, &_ReturnByteArraySize, sizeof(_ReturnByteArraySize));
-		Memcpy(_ReturnByteArray + 10, _ReturnByteArraySize, &_Type, sizeof(_Type));
+		Memcpy(_ReturnByteArray, _ReturnByteArraySize, PacketStartBytes, sizeof PacketStartBytes);
+		Memcpy(_ReturnByteArray + 4, _ReturnByteArraySize, &_ParamCount, sizeof _ParamCount);
+		Memcpy(_ReturnByteArray + 6, _ReturnByteArraySize, &_ReturnByteArraySize, sizeof _ReturnByteArraySize);
+		Memcpy(_ReturnByteArray + 10, _ReturnByteArraySize, &_Type, sizeof _Type);
 		Memcpy(_ReturnByteArray + 12, _ReturnByteArraySize, _Data, _DataPos);
 	}
-	(*dataPointer) = _ReturnByteArray;
+	*dataPointer = _ReturnByteArray;
 	return _ReturnByteArraySize;
 }
 
@@ -102,18 +102,18 @@ uint16_t Packet::GetType() const
 
 Packet * Packet::FromByteArray(std::vector<byte> data)
 {
-	return FromByteArray((uint8_t *)&data[0]);
+	return FromByteArray(static_cast<uint8_t *>(&data[0]));
 }
 
 Packet * Packet::FromByteArray(const uint8_t* data)
 {
 	Packet * p = new Packet();
-	Memcpy(&p->_ParamCount, sizeof(p->_ParamCount), data + 4, sizeof(uint16_t));
-	Memcpy(&p->_DataArraySize, sizeof(p->_DataArraySize), data + 6, sizeof(uint32_t));
-	Memcpy(&p->_Type, sizeof(p->_Type), data + 10, sizeof(uint16_t));
+	Memcpy(&p->_ParamCount, sizeof p->_ParamCount, data + 4, sizeof(uint16_t));
+	Memcpy(&p->_DataArraySize, sizeof p->_DataArraySize, data + 6, sizeof(uint32_t));
+	Memcpy(&p->_Type, sizeof p->_Type, data + 10, sizeof(uint16_t));
 	p->_DataArraySize -= PACKET_HEADER_LENGTH;
 	p->_Data = new uint8_t[p->_DataArraySize];
-	Memcpy(p->_Data, p->_DataArraySize, (data + 12), p->_DataArraySize);
+	Memcpy(p->_Data, p->_DataArraySize, data + 12, p->_DataArraySize);
 	p->_DataPos = p->_DataArraySize;
 	p->UpdateObjects();
 	return p;
@@ -136,10 +136,10 @@ void Packet::DestroyReturnByteArray()
 void Packet::ExpandDataArray()
 {
 	uint8_t * oldData = _Data;
-	uint32_t oldDataSize = _DataArraySize;
+	const uint32_t oldDataSize = _DataArraySize;
 	_Data = new uint8_t[_DataArraySize * 2];
 	_DataArraySize = _DataArraySize * 2;
-	Memcpy(_Data, sizeof(_Data) *_DataArraySize, oldData, oldDataSize);
+	Memcpy(_Data, sizeof _Data *_DataArraySize, oldData, oldDataSize);
 	delete[] oldData;
 }
 
@@ -156,47 +156,47 @@ void Packet::UpdateObjects()
 		switch (static_cast<ParamTypes>(type))
 		{
 		case FLOAT:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<float_t>(ArrayPos)), FLOAT, sizeof(float_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<float_t>(ArrayPos)), FLOAT, sizeof(float_t));
 			ArrayPos += sizeof(float_t);
 			break;
 		case DOUBLE:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<double_t>(ArrayPos)), DOUBLE, sizeof(double_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<double_t>(ArrayPos)), DOUBLE, sizeof(double_t));
 			ArrayPos += sizeof(double_t);
 			break;
 		case INT16:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<int16_t>(ArrayPos)), INT16, sizeof(int16_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<int16_t>(ArrayPos)), INT16, sizeof(int16_t));
 			ArrayPos += sizeof(int16_t);
 			break;
 		case UINT16:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<uint16_t>(ArrayPos)), UINT16, sizeof(uint16_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<uint16_t>(ArrayPos)), UINT16, sizeof(uint16_t));
 			ArrayPos += sizeof(uint16_t);
 			break;
 		case INT32:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<int32_t>(ArrayPos)), INT32, sizeof(int32_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<int32_t>(ArrayPos)), INT32, sizeof(int32_t));
 			ArrayPos += sizeof(int32_t);
 			break;
 		case UINT32:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<uint32_t>(ArrayPos)), UINT32, sizeof(uint32_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<uint32_t>(ArrayPos)), UINT32, sizeof(uint32_t));
 			ArrayPos += sizeof(uint32_t);
 			break;
 		case INT64:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<int64_t>(ArrayPos)), INT64, sizeof(int64_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<int64_t>(ArrayPos)), INT64, sizeof(int64_t));
 			ArrayPos += sizeof(int64_t);
 			break;
 		case UINT64:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<uint64_t>(ArrayPos)), UINT64, sizeof(uint64_t)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<uint64_t>(ArrayPos)), UINT64, sizeof(uint64_t));
 			ArrayPos += sizeof(uint64_t);
 			break;
 		case BOOL:
-			_PackedObjects.push_back(PakObject(static_cast<void *>(GetDataFromArray<bool>(ArrayPos)), BOOL, sizeof(bool)));
+			_PackedObjects.emplace_back(static_cast<void *>(GetDataFromArray<bool>(ArrayPos)), BOOL, sizeof(bool));
 			ArrayPos += sizeof(bool);
 			break;
 		case BYTE_PACKET:
 		{
 			uint8_t ** dataPtr = new uint8_t *;
 			int length = GetDataFromArray(ArrayPos, dataPtr);
-			_PackedObjects.push_back(PakObject(static_cast<void *>(*dataPtr), BYTE_PACKET, length));
-			ArrayPos += (length + 4);
+			_PackedObjects.emplace_back(static_cast<void *>(*dataPtr), BYTE_PACKET, length);
+			ArrayPos += length + 4;
 			delete dataPtr;
 		}
 		break;
@@ -241,13 +241,13 @@ T * Packet::GetDataFromArray(int offset)
 	return value;
 }
 
-uint32_t  Packet::GetDataFromArray(int offset, uint8_t ** pointer)
+uint32_t  Packet::GetDataFromArray(int offset, uint8_t ** pointer) const
 {
 	uint32_t arrayLength = 0;
 	Memcpy(&arrayLength, sizeof(uint32_t), _Data + offset, sizeof(uint32_t));
-	(*pointer) = new uint8_t[arrayLength];
+	*pointer = new uint8_t[arrayLength];
 	offset += sizeof(uint32_t);
-	Memcpy((*pointer), arrayLength, _Data + offset, arrayLength);
+	Memcpy(*pointer, arrayLength, _Data + offset, arrayLength);
 	return arrayLength;
 }
 

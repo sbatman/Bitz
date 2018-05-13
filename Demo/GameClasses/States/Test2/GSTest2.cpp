@@ -24,8 +24,8 @@ void GSTest2::OnEnter(const Bitz::GameLogic::GameState_Ptr)
 
 void GSTest2::OnExit()
 {
-	for (size_t i = 0; i < 50; i++) if (_TestGround[i] != nullptr)delete _TestGround[i];
-	for (size_t i = 0; i < 25; i++)if (_TestCreate[i] != nullptr)delete _TestCreate[i];
+	for (auto& i : _TestGround) delete i;
+	for (auto& i : _TestCreate) delete i;
 	delete _PhyWorld;
 }
 
@@ -33,17 +33,17 @@ void GSTest2::OnUpdate(double ms)
 {
 	_PhyWorld->Step(1.0f / 60.0f, 6, 2);
 
-	for (size_t i = 0; i < 50; i++)_TestGround[i]->Update();
+	for (auto& i : _TestGround)i->Update();
 
-	for (size_t i = 0; i < 25; i++)_TestCreate[i]->Update();
+	for (auto& i : _TestCreate)i->Update();
 }
 
 void GSTest2::OnDraw()
 {
 	GraphicsManager::BeginRender(Game::RenderState2d);
 
-	for (size_t i = 0; i < 50; i++)_TestGround[i]->Draw();
+	for (auto& i : _TestGround)i->Draw();
 
-	for (size_t i = 0; i < 25; i++)_TestCreate[i]->Draw();
+	for (auto& i : _TestCreate)i->Draw();
 	GraphicsManager::EndRender();
 }

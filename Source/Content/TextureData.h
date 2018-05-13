@@ -39,7 +39,7 @@ namespace Bitz
 			/// Loads the PNG at the provided fileName returning a TextureData
 			/// </summary>
 			/// <param name='fileName'>The filename to load relative to ContentManager::GetGraphicsRoot()</param>
-			static TextureData_Ptr Load(const std::string fileName);
+			static TextureData_Ptr Load(const std::string& fileName);
 			/// <summary>
 			/// Resets the OpenGL Id's of all loaded assets, this is usualy triggered when the OpenGL context has gone down
 			/// </summary>

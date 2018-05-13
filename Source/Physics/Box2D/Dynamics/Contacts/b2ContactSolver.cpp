@@ -321,7 +321,7 @@ void b2ContactSolver::SolveVelocityConstraints()
 
 			// Compute tangent force
 			float32 vt = b2Dot(dv, tangent) - vc->tangentSpeed;
-			float32 lambda = vcp->tangentMass * (-vt);
+			float32 lambda = vcp->tangentMass * -vt;
 
 			// b2Clamp the accumulated force
 			float32 maxFriction = friction * vcp->normalImpulse;

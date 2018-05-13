@@ -94,7 +94,7 @@ namespace Bitz
 			/// Sets the window used for rendering
 			/// </summary>
 			/// <param name='graphicsState'>The window to use for rendering</param>
-			static void SetActiveWindow(Window * window);
+			static void SetActiveWindow(Window_Ptr window);
 			/// <summary>
 			/// Gets the currnet active render engine
 			/// </summary>
@@ -106,7 +106,7 @@ namespace Bitz
 			/// Initalises the Graphics manager, making the rendering context current and creating resources
 			/// </summary>
 			/// <param name='window'>The window to be used by the rendering framework for output.</param>
-			static void Init(Window * window);
+			static void Init(Window_Ptr window);
 			/// <summary>
 			/// Standard update function for the graphics manager to allow it to perform required operations on the window
 			/// </summary>
@@ -176,7 +176,7 @@ namespace Bitz
 			/// <summary>
 			/// A pointer to the active window
 			/// </summary>
-			static Window * _ActiveWindow;
+			static Window_Ptr _ActiveWindow;
 		};
 	}
 }

@@ -13,7 +13,7 @@ namespace Bitz
 		class ISizeable
 		{
 		public:
-			virtual ~ISizeable() {}
+			virtual ~ISizeable() = default;
 			virtual T GetSize() const
 			{
 				return _Size;
@@ -30,7 +30,7 @@ namespace Bitz
 		class IPositionable
 		{
 		public:
-			virtual ~IPositionable() {}
+			virtual ~IPositionable() = default;
 			virtual T GetPosition() const
 			{
 				return _Position;
@@ -47,7 +47,7 @@ namespace Bitz
 		class IRotateable
 		{
 		public:
-			virtual ~IRotateable() {}
+			virtual ~IRotateable() = default;
 			virtual T GetRotation() const
 			{
 				return _Rotation;
@@ -93,7 +93,7 @@ namespace Bitz
 		class INameable
 		{
 		public:
-			virtual ~INameable() {}
+			virtual ~INameable() = default;
 			/// <summary>
 			/// Gets the current name of this class
 			/// </summary>
@@ -115,19 +115,24 @@ namespace Bitz
 		};
 
 		/// <summary>
-		/// This interface describes a class that has an Update function that can be paused
+		/// This interface describes a class that has Update and Draw logic that can be paused
 		/// </summary>
-		class IUpdateable
+		class IGameObject
 		{
 		public:
-			virtual ~IUpdateable() {}
+			virtual ~IGameObject() = default;
 
 			/// <summary>
 			/// Calls the class Internale Update function if the update isn't paused
 			/// </summary>
 			virtual void Update(double ms)
 			{
-				if (!_UpdatePaused)InternalUpdate(ms);
+				if (!_UpdatePaused)OnUpdate(ms);
+			}
+
+			virtual void Draw()
+			{
+				if (!_DrawPaused)OnDraw();
 			}
 			/// <summary>
 			/// Returns whether the class update function is paused
@@ -137,6 +142,7 @@ namespace Bitz
 			{
 				return _UpdatePaused;
 			}
+
 			/// <summary>
 			/// Pauses or resumes the class update function
 			/// </summary>
@@ -145,9 +151,29 @@ namespace Bitz
 			{
 				_UpdatePaused = paused;
 			}
+
+			/// <summary>
+			/// Returns whether the class draw function is paused
+			/// </summary>
+			/// <returns>True if it is paused else false</returns>
+			virtual bool IsDrawPaused() const
+			{
+				return _DrawPaused;
+			}
+
+			/// <summary>
+			/// Pauses or resumes the class draw function
+			/// </summary>
+			/// <param name='paused'>True to pause the draw else false</param>
+			virtual void PauseDraw(const bool paused)
+			{
+				_DrawPaused = paused;
+			}
 		protected:
 			bool _UpdatePaused = false;
-			virtual void InternalUpdate(double ms) = 0;
+			bool _DrawPaused = false;
+			virtual void OnUpdate(double ms) = 0;
+			virtual void OnDraw() = 0;
 		};
 
 		/// <summary>
@@ -156,7 +182,7 @@ namespace Bitz
 		class IVisible
 		{
 		public:
-			virtual ~IVisible() {}
+			virtual ~IVisible() = default;
 			/// <summary>
 			/// Returns whether the class is visible or not
 			/// </summary>
@@ -180,7 +206,7 @@ namespace Bitz
 		class IColourable
 		{
 		public:
-			virtual ~IColourable() {}
+			virtual ~IColourable() = default;
 			virtual Vector4F GetColour() const
 			{
 				return _Colour;
@@ -199,6 +225,6 @@ namespace Bitz
 			}
 		protected:
 			Vector4F _Colour = Vector4F(1);
-		};		
+		};
 	}
 }

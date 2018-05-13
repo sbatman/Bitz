@@ -33,32 +33,32 @@ namespace Bitz
 			{
 				assert(_VertArray != nullptr);
 				int size = _VertCount * DIMENTIONS * sizeof(float_t);
-				Memcpy(vertArray + (*startPosition), size, _VertArray, size);
-				(*startPosition) += (_VertCount * DIMENTIONS);
+				Memcpy(vertArray + *startPosition, size, _VertArray, size);
+				*startPosition += _VertCount * DIMENTIONS;
 			}
 
 			void Model::PopulateColArray(float_t* colArray, int32_t* startPosition)
 			{
 				assert(_ColArray != nullptr);
 				int size = _VertCount * 4 * sizeof(float_t);
-				Memcpy(colArray + (*startPosition), size, _ColArray, size);
-				(*startPosition) += (_VertCount * 4);
+				Memcpy(colArray + *startPosition, size, _ColArray, size);
+				*startPosition += _VertCount * 4;
 			}
 
 			void Model::PopulateTexArray(float_t* texArray, int32_t* startPosition)
 			{
 				assert(_TexArray != nullptr);
 				int size = _VertCount * 2 * sizeof(float);
-				Memcpy(texArray + (*startPosition), size, _TexArray, size);
-				(*startPosition) += (_VertCount * 2);
+				Memcpy(texArray + *startPosition, size, _TexArray, size);
+				*startPosition += _VertCount * 2;
 			}
 
 			void Model::PopulateNormArray(float_t* normArray, int32_t* startPosition)
 			{
 				assert(_NormArray != nullptr);
 				int size = _VertCount * 3 * sizeof(float);
-				Memcpy(normArray + (*startPosition), size, _NormArray, size);
-				(*startPosition) += (_VertCount * 3);
+				Memcpy(normArray + *startPosition, size, _NormArray, size);
+				*startPosition += _VertCount * 3;
 			}
 
 			void Model::SetSpecularTexture(const Texture_Ptr newTexture)

@@ -15,13 +15,13 @@ namespace Bitz
 
 		void GameStateService::Update(double ms)
 		{
-			for (GameState_Ptr s : _ActiveGameStates) s->Update(ms);
+			for (GameState_Ptr s : _ActiveGameStates) s->OnUpdate(ms);
 
 			for (GameState_Ptr s : _ActiveGameStates)
 			{
 				if (s->IsComplete())
 				{
-					GameState_Ptr nextState = s->GetNextGameState();
+					const GameState_Ptr nextState = s->GetNextGameState();
 					EndState(s);
 					StartState(nextState, s);
 				}

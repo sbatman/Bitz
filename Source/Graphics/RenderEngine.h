@@ -13,7 +13,7 @@ namespace Bitz
 		class RenderEngine
 		{
 		public:
-			RenderEngine(Window * window);
+			RenderEngine(Window_Ptr window);
 			~RenderEngine();
 
 			void Init();
@@ -22,8 +22,8 @@ namespace Bitz
 			void End();
 			void Present();
 			void Clear(Vector3F colour);
-			Window * GetWindow();
-			void Render(Drawables::IDrawable* idrawable);
+			Window_Ptr GetWindow();
+			void Render(Drawables::IDrawable_Ptr idrawable);
 			void SetSize(Vector2I newSize);
 			Vector2I GetSize() const;
 
@@ -44,12 +44,16 @@ namespace Bitz
 				Shaders::Shader_Ptr CustomShader = nullptr;
 				glm::mat4 Matrix;
 
-				DrawInterval()
-				{
+				DrawInterval() = default;
 
-				}
-
-				DrawInterval(uint32_t start, uint32_t end, Content::TextureData_Ptr texture, Drawables::IDrawable::RenderMode mode, Shaders::Shader_Ptr customShader = nullptr, glm::mat4 matrix = glm::mat4(), Content::TextureData_Ptr specularTexture = nullptr)
+				DrawInterval(
+					const uint32_t start,
+					const uint32_t end,
+					const Content::TextureData_Ptr& texture,
+					const Drawables::IDrawable::RenderMode mode,
+					const Shaders::Shader_Ptr customShader = nullptr,
+					const glm::mat4 matrix = glm::mat4(),
+					const Content::TextureData_Ptr specularTexture = nullptr)
 				{
 					VertCountStart = start;
 					VertCountEnd = end;
@@ -58,11 +62,6 @@ namespace Bitz
 					Mode = mode;
 					CustomShader = customShader;
 					Matrix = matrix;
-				}
-
-				~DrawInterval()
-				{
-					
 				}
 			};
 
@@ -104,11 +103,11 @@ namespace Bitz
 			/// <summary>
 			/// The current Context that is being used for rendering
 			/// </summary>
-			GLContext * _CurrentRenderingContext;
+			GLContext_Ptr _CurrentRenderingContext;
 			/// <summary>
 			/// The current window used for rendering
 			/// </summary>
-			Window * _CurrentWindow;
+			Window_Ptr _CurrentWindow;
 			/// <summary>
 			/// The currently active shader used for this pass of rendering
 			/// </summary>

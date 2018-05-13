@@ -20,11 +20,11 @@ namespace Bitz
 		double_t GraphicsManager::_LastFrameTime = 0;
 		GraphicsStates::BaseGS * GraphicsManager::_CurrentGraphicsState = nullptr;
 		RenderEngine * GraphicsManager::_ActiveRenderEngine = nullptr;
-		Window * GraphicsManager::_ActiveWindow = nullptr;
+		Window_Ptr GraphicsManager::_ActiveWindow = nullptr;
 
 		Camera_Ptr GraphicsManager::_LastActiveCamera = nullptr;
 
-		void GraphicsManager::Init(Window * window)
+		void GraphicsManager::Init(Window_Ptr window)
 		{
 #ifdef WIN32
 			SetActiveWindow(window);
@@ -33,7 +33,7 @@ namespace Bitz
 			if (_FrameTimer == nullptr)_FrameTimer = new Timer();
 		}
 
-		void GraphicsManager::SetActiveWindow(Window * window)
+		void GraphicsManager::SetActiveWindow(Window_Ptr window)
 		{
 			if (window == _ActiveWindow)return;
 			if (_ActiveWindow != nullptr)
@@ -43,8 +43,6 @@ namespace Bitz
 					delete _ActiveRenderEngine;
 					_ActiveRenderEngine = nullptr;
 				}
-				delete window;
-				window = nullptr;
 			}
 
 			_ActiveWindow = window;
@@ -132,7 +130,7 @@ namespace Bitz
 		void GraphicsManager::Clear()
 		{
 			if (_ActiveRenderEngine == nullptr) return;
-			_ActiveRenderEngine->Clear((!_Debug_EnableBackbufferColourAlt || _FrameNumber % 2) ? _BufferClearColour : _Debug_BackbufferColourAlt);
+			_ActiveRenderEngine->Clear(!_Debug_EnableBackbufferColourAlt || _FrameNumber % 2 ? _BufferClearColour : _Debug_BackbufferColourAlt);
 		}
 
 		double_t GraphicsManager::GetLastFrameTimeMS()
@@ -141,14 +139,14 @@ namespace Bitz
 			return _LastFrameTime;
 		}
 
-		void GraphicsManager::Render(std::shared_ptr<Drawables::IDrawable> idrawable)
+		void GraphicsManager::Render(Drawables::IDrawable_Ptr idrawable)
 		{
 			assert(_HasInit);
 			assert(_InRenderScope&& "Begin render has not been called");
 
 			if (_ActiveRenderEngine == nullptr) return;
 
-			_ActiveRenderEngine->Render(idrawable.get());
+			_ActiveRenderEngine->Render(idrawable);
 		}
 
 		Camera_Ptr GraphicsManager::GetCurrentCamera()

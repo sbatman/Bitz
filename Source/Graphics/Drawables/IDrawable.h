@@ -28,13 +28,13 @@ namespace Bitz
 				};
 				virtual ~IDrawable()
 				{
-					if (_VertArray != nullptr)delete[] _VertArray;
+					delete[] _VertArray;
 					_VertArray = nullptr;
-					if (_ColArray != nullptr)delete[] _ColArray;
+					delete[] _ColArray;
 					_ColArray = nullptr;
-					if (_TexArray != nullptr)delete[] _TexArray;
+					delete[] _TexArray;
 					_TexArray = nullptr;
-					if (_NormArray != nullptr)delete[] _NormArray;
+					delete[] _NormArray;
 					_NormArray = nullptr;
 				}
 				virtual void PopulateVertArray(float_t * vertArray, int32_t * startPosition) = 0;
@@ -65,6 +65,7 @@ namespace Bitz
 				RenderMode _RenderMode;
 				Texture_Ptr _Texture = nullptr;
 			};
+			typedef std::shared_ptr<IDrawable> IDrawable_Ptr;
 		}
 	}
 }

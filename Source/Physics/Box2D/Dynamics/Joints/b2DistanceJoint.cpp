@@ -232,7 +232,7 @@ b2Vec2 b2DistanceJoint::GetAnchorB() const
 
 b2Vec2 b2DistanceJoint::GetReactionForce(float32 inv_dt) const
 {
-	b2Vec2 F = (inv_dt * m_impulse) * m_u;
+	b2Vec2 F = inv_dt * m_impulse * m_u;
 	return F;
 }
 

@@ -6,12 +6,13 @@
 #include "..\Debug\Logging.h"
 #include "Shaders\ShaderService.h"
 #include "GraphicsManager.h"
+#include "..\Content\ContentManager.h"
 
 namespace Bitz
 {
 	namespace GFX
 	{
-		RenderEngine::RenderEngine(Window * window)
+		RenderEngine::RenderEngine(Window_Ptr window)
 		{
 			assert(window != nullptr);
 
@@ -53,7 +54,6 @@ namespace Bitz
 				_TexCache = nullptr;
 			}
 			_CurrentRenderingContext = nullptr;
-			delete _CurrentWindow;
 			_CurrentWindow = nullptr;
 			for (int i = 0;i < MAXTEXTUREUNITS;i++)_ActiveTexture[i] = nullptr;
 			Content::TextureData::ClearAllOpenGLIDs();
@@ -107,12 +107,12 @@ namespace Bitz
 			_DrawIntervals.clear();
 		}
 
-		Window * RenderEngine::GetWindow()
+		Window_Ptr RenderEngine::GetWindow()
 		{
 			return _CurrentWindow;
 		}
 
-		void RenderEngine::Render(Drawables::IDrawable* idrawable)
+		void RenderEngine::Render(Drawables::IDrawable_Ptr idrawable)
 		{
 			if (!idrawable->ShouldDraw())return;
 			if (_RenderedVertCount + idrawable->GetVertCount() > BUFFERVERTCOUNT)
@@ -127,9 +127,9 @@ namespace Bitz
 			if (_NormGLCacheLoc != -1)idrawable->PopulateNormArray(_NormCache, &_NormCachePos);
 			if (_TexGLCacheLoc != -1)idrawable->PopulateTexArray(_TexCache, &_TexCachePos);
 
-			Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : nullptr;
+			const Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : Bitz::Content::ContentManager::GetWhiteTexture()->_Data;
 
-			bool is3D = idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD;
+			const bool is3D = idrawable->_RenderMode == Drawables::IDrawable::RenderMode::ThreeD;
 
 			DrawInterval interval;
 			bool intervalGenerated = false;
@@ -138,8 +138,10 @@ namespace Bitz
 			{
 				if (is3D)
 				{
-					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
-					interval = DrawInterval(uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetSpecularTexture()->_Data);
+					Drawables::Model_Ptr theModel = std::dynamic_pointer_cast<Drawables::Model>(idrawable);
+					auto specularTexture = theModel->GetSpecularTexture();
+					if (specularTexture == nullptr)specularTexture = Bitz::Content::ContentManager::GetBlackTexture();
+					interval = DrawInterval(uint32_t(0), uint32_t(-1), data, idrawable->_RenderMode, nullptr, theModel->GetTransformation(), specularTexture->_Data);
 					intervalGenerated = true;
 				}
 				else
@@ -153,8 +155,8 @@ namespace Bitz
 				_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
 				if (is3D)
 				{
-					Drawables::Model * theModel = static_cast<Drawables::Model *>(idrawable);
-					interval = DrawInterval(uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, nullptr, (theModel)->GetTransformation(), theModel->GetSpecularTexture()->_Data);
+					Drawables::Model_Ptr theModel = std::dynamic_pointer_cast<Drawables::Model>(idrawable);
+					interval = DrawInterval(uint32_t(_RenderedVertCount), uint32_t(-1), data, idrawable->_RenderMode, nullptr, theModel->GetTransformation(), theModel->GetSpecularTexture()->_Data);
 					intervalGenerated = true;
 				}
 				else

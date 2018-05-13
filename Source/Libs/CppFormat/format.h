@@ -309,7 +309,7 @@ namespace fmt {
 		std::size_t size_;
 		std::size_t capacity_;
 
-		Buffer(T *ptr = 0, std::size_t capacity = 0)
+		Buffer(T *ptr = nullptr, std::size_t capacity = 0)
 			: ptr_(ptr), size_(0), capacity_(capacity) {}
 
 		/**
@@ -428,7 +428,7 @@ namespace fmt {
 		template <typename T, std::size_t SIZE, typename Allocator>
 		void MemoryBuffer<T, SIZE, Allocator>::grow(std::size_t size) {
 			std::size_t new_capacity =
-				(std::max)(size, this->capacity_ + this->capacity_ / 2);
+				std::max(size, this->capacity_ + this->capacity_ / 2);
 			T *new_ptr = this->allocate(new_capacity);
 			// The following code doesn't throw, so the raw pointer above doesn't leak.
 			std::copy(this->ptr_,
@@ -480,7 +480,7 @@ namespace fmt {
 			if (value == value) return 0;
 			int dec = 0, sign = 0;
 			char buffer[2];  // The buffer size must be >= 2 or _ecvt_s will fail.
-			_ecvt_s(buffer, sizeof(buffer), value, 0, &dec, &sign);
+			_ecvt_s(buffer, sizeof buffer, value, 0, &dec, &sign);
 			return sign;
 		}
 		inline int isinfinity(double x) { return !_finite(x); }
@@ -777,7 +777,7 @@ namespace fmt {
 			static no &check(...);
 
 		public:
-			enum { value = (sizeof(check(get())) == sizeof(yes)) };
+			enum { value = sizeof(check(get())) == sizeof(yes) };
 		};
 
 #define FMT_CONVERTIBLE_TO_INT(Type) \
@@ -1086,7 +1086,7 @@ namespace fmt {
 			unsigned shift = index * 4;
 			uint64_t mask = 0xf;
 			return static_cast<internal::Arg::Type>(
-				(types_ & (mask << shift)) >> shift);
+				(types_ & mask << shift) >> shift);
 		}
 
 	public:
@@ -1167,7 +1167,7 @@ namespace fmt {
 			// Returns the argument with specified index or, if arg_index is equal
 			// to the maximum unsigned value, the next argument.
 			Arg get_arg(const Char *s,
-				unsigned arg_index = (std::numeric_limits<unsigned>::max)());
+				unsigned arg_index = std::numeric_limits<unsigned>::max());
 
 			// Parses argument index, flags and width and returns the argument index.
 			unsigned parse_header(const Char *&s, FormatSpec &spec);
@@ -1452,7 +1452,7 @@ inline IntFormatSpec<TYPE, AlignTypeSpec<0>, Char> pad( \
 			enum { SIZE = N + (N == 0 || N >= ArgList::MAX_PACKED_ARGS ? 1 : 0) };
 
 			typedef typename Conditional<
-				(N < ArgList::MAX_PACKED_ARGS), Value, Arg>::type Type[SIZE];
+				N < ArgList::MAX_PACKED_ARGS, Value, Arg>::type Type[SIZE];
 		};
 
 #if FMT_USE_VARIADIC_TEMPLATES
@@ -2171,7 +2171,7 @@ inline IntFormatSpec<TYPE, AlignTypeSpec<0>, Char> pad( \
 		std::size_t offset = buffer_.size();
 		unsigned width = spec.width();
 		if (sign) {
-			buffer_.reserve(buffer_.size() + (std::max)(width, 1u));
+			buffer_.reserve(buffer_.size() + std::max(width, 1u));
 			if (width > 0)
 				--width;
 			++offset;
@@ -2221,7 +2221,7 @@ inline IntFormatSpec<TYPE, AlignTypeSpec<0>, Char> pad( \
 				start, buffer_size, format, width_for_sprintf, spec.precision(), value);
 			if (n >= 0 && offset + n < buffer_.capacity()) {
 				if (sign) {
-					if ((spec.align() != ALIGN_RIGHT && spec.align() != ALIGN_DEFAULT) ||
+					if (spec.align() != ALIGN_RIGHT && spec.align() != ALIGN_DEFAULT ||
 						*start != ' ') {
 						*(start - 1) = sign;
 						sign = 0;
@@ -2563,7 +2563,7 @@ inline IntFormatSpec<TYPE, AlignTypeSpec<0>, Char> pad( \
 				// Integer division is slow so do it for a group of two digits instead
 				// of for every digit. The idea comes from the talk by Alexandrescu
 				// "Three Optimization Tips for C++". See speed-test for a comparison.
-				unsigned index = (value % 100) * 2;
+				unsigned index = value % 100 * 2;
 				value /= 100;
 				*--buffer_end = internal::Data::DIGITS[index + 1];
 				*--buffer_end = internal::Data::DIGITS[index];

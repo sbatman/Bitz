@@ -155,7 +155,7 @@ namespace {
 	// Buffer should be at least of size 1.
 	int safe_strerror(
 		int error_code, char *&buffer, std::size_t buffer_size) FMT_NOEXCEPT {
-		assert(buffer != 0 && buffer_size != 0);
+		assert(buffer != nullptr && buffer_size != 0);
 
 		class StrError {
 		private:
@@ -219,7 +219,7 @@ namespace {
 		static const char ERROR_STR[] = "error ";
 		fmt::internal::IntTraits<int>::MainType ec_value = error_code;
 		// Subtract 2 to account for terminating null characters in SEP and ERROR_STR.
-		std::size_t error_code_size = sizeof(SEP) + sizeof(ERROR_STR) - 2;
+		std::size_t error_code_size = sizeof SEP + sizeof ERROR_STR - 2;
 		error_code_size += fmt::internal::count_digits(ec_value);
 		if (message.size() <= fmt::internal::INLINE_BUFFER_SIZE - error_code_size)
 			out << message << SEP;
@@ -493,7 +493,7 @@ FMT_FUNC void fmt::internal::report_unknown_type(char code, const char *type) {
 
 FMT_FUNC fmt::internal::UTF8ToUTF16::UTF8ToUTF16(fmt::StringRef s) {
 	int length = MultiByteToWideChar(
-		CP_UTF8, MB_ERR_INVALID_CHARS, s.c_str(), -1, 0, 0);
+		CP_UTF8, MB_ERR_INVALID_CHARS, s.c_str(), -1, nullptr, 0);
 	static const char ERROR_MSG[] = "cannot convert string from UTF-8 to UTF-16";
 	if (length == 0)
 		FMT_THROW(WindowsError(GetLastError(), ERROR_MSG));
@@ -512,12 +512,12 @@ FMT_FUNC fmt::internal::UTF16ToUTF8::UTF16ToUTF8(fmt::WStringRef s) {
 }
 
 FMT_FUNC int fmt::internal::UTF16ToUTF8::convert(fmt::WStringRef s) {
-	int length = WideCharToMultiByte(CP_UTF8, 0, s.c_str(), -1, 0, 0, 0, 0);
+	int length = WideCharToMultiByte(CP_UTF8, 0, s.c_str(), -1, nullptr, 0, nullptr, nullptr);
 	if (length == 0)
 		return GetLastError();
 	buffer_.resize(length);
 	length = WideCharToMultiByte(
-		CP_UTF8, 0, s.c_str(), -1, &buffer_[0], length, 0, 0);
+		CP_UTF8, 0, s.c_str(), -1, &buffer_[0], length, nullptr, nullptr);
 	if (length == 0)
 		return GetLastError();
 	return 0;
@@ -572,9 +572,9 @@ FMT_FUNC void fmt::internal::format_windows_error(
 	FMT_TRY{
 	  String system_message;
 	  if (FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-		  FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, 0,
+		  FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
 		  error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		  reinterpret_cast<LPWSTR>(system_message.ptr()), 0, 0)) {
+		  reinterpret_cast<LPWSTR>(system_message.ptr()), 0, nullptr)) {
 		UTF16ToUTF8 utf8_message;
 		if (utf8_message.convert(system_message.c_str()) == ERROR_SUCCESS) {
 		  out << message << ": " << utf8_message;
@@ -692,7 +692,7 @@ void fmt::BasicWriter<Char>::write_str(
 
 template <typename Char>
 inline Arg fmt::BasicFormatter<Char>::parse_arg_index(const Char *&s) {
-	const char *error = 0;
+	const char *error = nullptr;
 	Arg arg = *s < '0' || *s > '9' ?
 		next_arg(error) : get_arg(parse_nonnegative_int(s), error);
 	if (error) {
@@ -758,7 +758,7 @@ template <typename Char>
 Arg fmt::internal::PrintfFormatter<Char>::get_arg(
 	const Char *s, unsigned arg_index) {
 	(void)s;
-	const char *error = 0;
+	const char *error = nullptr;
 	Arg arg = arg_index == UINT_MAX ?
 		next_arg(error) : FormatterBase::get_arg(arg_index - 1, error);
 	if (error)

@@ -95,7 +95,7 @@ namespace Bitz
 			///     and populating the pointer provided. The pointer will become invalid
 			///     id the packet is deleted.
 			/// </summary>
-			const uint32_t ToByteArray(uint8_t ** dataPointer);
+			uint32_t ToByteArray(uint8_t ** dataPointer);
 			/// <summary>
 			///     Retutns a vector containing pointers to all the objects in this packet
 			///     The pointers will become invalid if this packet is deleted
@@ -172,7 +172,7 @@ namespace Bitz
 			template <typename T>
 			T * GetDataFromArray(int offset);
 
-			uint32_t  GetDataFromArray(int offset, uint8_t ** pointer);
+			uint32_t  GetDataFromArray(int offset, uint8_t ** pointer) const;
 
 			/// <summary>
 			///     Adds the provided data to the specified position in the data array

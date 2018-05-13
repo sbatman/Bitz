@@ -23,6 +23,8 @@ namespace Bitz
 			HWND _HWND;
 			HDC _HDC;
 		};
+
+		typedef std::shared_ptr<GLContext> GLContext_Ptr;
 	}
 }
 

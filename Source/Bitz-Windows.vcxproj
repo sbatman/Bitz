@@ -47,7 +47,6 @@
     <ClCompile Include="Input\Keyboard.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="Interfaces\IAnchorable.cpp" />
-    <ClCompile Include="Interfaces\IDisposable.cpp" />
     <ClCompile Include="Layout\Anchor.cpp" />
     <ClCompile Include="Libs\CppFormat\format.cc" />
     <ClCompile Include="Libs\Glew\glew.c" />
@@ -135,7 +134,6 @@
     <ClInclude Include="Input\Mouse.h" />
     <ClInclude Include="Interfaces\Core.h" />
     <ClInclude Include="Interfaces\IAnchorable.h" />
-    <ClInclude Include="Interfaces\IDisposable.h" />
     <ClInclude Include="Layout\Anchor.h" />
     <ClInclude Include="Libs\CppFormat\format.h" />
     <ClInclude Include="Libs\Glew\glew.h" />

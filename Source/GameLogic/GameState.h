@@ -17,12 +17,12 @@ namespace Bitz
 		/// Optimal use of this structure will offer an objectorientation of not just classes and objects
 		/// within the code, but an oject orientation of the logic pathways themselves.
 		/// </summary>
-		class GameState : public Interfaces::INameable, public Interfaces::IUpdateable
+		class GameState : public Interfaces::INameable, public Interfaces::IGameObject
 		{
 			friend GameStateService;
 		public:
 			GameState(std::string name);
-			~GameState();
+			~GameState() = default;
 
 			Time::Timer * GetTimeSinceEnter() const;
 			bool IsCurrent() const;
@@ -30,20 +30,18 @@ namespace Bitz
 
 		protected:
 			virtual bool IsComplete() const;
-			virtual void OnEnter(GameState_Ptr preceedingState) = 0;
+			virtual void OnEnter(const GameState_Ptr& preceedingState) = 0;
 			virtual void OnExit() = 0;
-			virtual void OnUpdate(double ms) = 0;
-			virtual void OnDraw() = 0;
+			void OnUpdate(double ms) override = 0;
+			void OnDraw() override = 0;
 
 		private:
 			Time::Timer * _EntryTimer;
 			bool _Current;
 			GameState_Ptr _NextGameState = nullptr;
 
-			void Enter(GameState_Ptr preceedingState);
+			void Enter(const GameState_Ptr& preceedingState);
 			void Exit();
-			void InternalUpdate(double ms) override;
-			void Draw();
 		};
 	}
 }

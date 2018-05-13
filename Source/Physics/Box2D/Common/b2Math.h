@@ -577,8 +577,8 @@ inline b2Vec2 b2MulT(const b2Rot& q, const b2Vec2& v)
 
 inline b2Vec2 b2Mul(const b2Transform& T, const b2Vec2& v)
 {
-	float32 x = (T.q.c * v.x - T.q.s * v.y) + T.p.x;
-	float32 y = (T.q.s * v.x + T.q.c * v.y) + T.p.y;
+	float32 x = T.q.c * v.x - T.q.s * v.y + T.p.x;
+	float32 y = T.q.s * v.x + T.q.c * v.y + T.p.y;
 
 	return b2Vec2(x, y);
 }
@@ -587,8 +587,8 @@ inline b2Vec2 b2MulT(const b2Transform& T, const b2Vec2& v)
 {
 	float32 px = v.x - T.p.x;
 	float32 py = v.y - T.p.y;
-	float32 x = (T.q.c * px + T.q.s * py);
-	float32 y = (-T.q.s * px + T.q.c * py);
+	float32 x = T.q.c * px + T.q.s * py;
+	float32 y = -T.q.s * px + T.q.c * py;
 
 	return b2Vec2(x, y);
 }
@@ -676,17 +676,17 @@ template<typename T> inline void b2Swap(T& a, T& b)
 /// largest power of 2. For a 32-bit value:"
 inline uint32 b2NextPowerOfTwo(uint32 x)
 {
-	x |= (x >> 1);
-	x |= (x >> 2);
-	x |= (x >> 4);
-	x |= (x >> 8);
-	x |= (x >> 16);
+	x |= x >> 1;
+	x |= x >> 2;
+	x |= x >> 4;
+	x |= x >> 8;
+	x |= x >> 16;
 	return x + 1;
 }
 
 inline bool b2IsPowerOfTwo(uint32 x)
 {
-	bool result = x > 0 && (x & (x - 1)) == 0;
+	bool result = x > 0 && (x & x - 1) == 0;
 	return result;
 }
 

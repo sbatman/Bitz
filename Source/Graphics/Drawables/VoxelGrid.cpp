@@ -19,7 +19,7 @@ namespace Bitz
 					{
 						for (int z = 0;z < _Dimentions.Z;z++)
 						{
-							_VoxelStore[x + (y*_Dimentions.X) + (z*_Dimentions.X*_Dimentions.Y)].Type = -1;
+							_VoxelStore[x + y*_Dimentions.X + z*_Dimentions.X*_Dimentions.Y].Type = -1;
 						}
 					}
 				}
@@ -41,7 +41,7 @@ namespace Bitz
 					{
 						for (int z = 0;z < _Dimentions.Z;z++)
 						{
-							if (_VoxelStore[x + (y*_Dimentions.X) + (z*_Dimentions.X*_Dimentions.Y)].Type != -1)_PopulatedVoxelCount++;
+							if (_VoxelStore[x + y*_Dimentions.X + z*_Dimentions.X*_Dimentions.Y].Type != -1)_PopulatedVoxelCount++;
 						}
 					}
 				}
@@ -70,14 +70,14 @@ namespace Bitz
 							Voxel targetVoxel = GetVoxelAtPosition(x, y, z);
 							if (targetVoxel.Type != -1)
 							{
-								float_t _tlf[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) - 0.5f };
-								float_t _trf[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) - 0.5f };
-								float_t _blf[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) - 0.5f };
-								float_t _brf[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) - 0.5f };
-								float_t _tlb[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) + 0.5f };
-								float_t _trb[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) - 0.5f, (z - centerOffsetZ) + 0.5f };
-								float_t _blb[3] = { (x - centerOffsetX) - 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) + 0.5f };
-								float_t _brb[3] = { (x - centerOffsetX) + 0.5f, (y - centerOffsetY) + 0.5f, (z - centerOffsetZ) + 0.5f };
+								float_t _tlf[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ - 0.5f };
+								float_t _trf[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ - 0.5f };
+								float_t _blf[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ - 0.5f };
+								float_t _brf[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ - 0.5f };
+								float_t _tlb[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ + 0.5f };
+								float_t _trb[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ + 0.5f };
+								float_t _blb[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ + 0.5f };
+								float_t _brb[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ + 0.5f };
 
 								float_t colors[12] =
 								{
@@ -107,7 +107,7 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), normals, 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[facesDrawn * 24], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _tlf, _blf, _trf, &verpos);
-									Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
+									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _blf, _brf, _trf, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
@@ -120,7 +120,7 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[2 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[facesDrawn * 24], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _tlb, _blb, _tlf, &verpos);
-									Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
+									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _blb, _blf, _tlf, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 									facesDrawn++;
@@ -132,7 +132,7 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[4 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _trf, _brf, _trb, &verpos);
-									Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
+									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _brf, _brb, _trb, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 									facesDrawn++;
@@ -144,7 +144,7 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[6 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _trb, _brb, _tlb, &verpos);
-									Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
+									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _brb, _blb, _tlb, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
@@ -157,7 +157,7 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[8 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _tlb, _tlf, _trb, &verpos);
-									Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
+									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _tlf, _trf, _trb, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
@@ -170,7 +170,7 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[10 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _blf, _blb, _brf, &verpos);
-									Memcpy(&colArray[(facesDrawn * 24) + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
+									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									CopyTri(vertArray, _blb, _brb, _brf, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
@@ -196,9 +196,9 @@ namespace Bitz
 
 			void VoxelGrid::CopyTri(float_t * vertList, const float_t* p1, const float_t* p2, const float_t* p3, int* arrayPosition)
 			{
-				Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p1, sizeof(float_t) * 3);	(*arrayPosition) += 3;
-				Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p2, sizeof(float_t) * 3);	(*arrayPosition) += 3;
-				Memcpy(vertList + (*arrayPosition), sizeof(float_t) * 3, p3, sizeof(float_t) * 3);	(*arrayPosition) += 3;
+				Memcpy(vertList + *arrayPosition, sizeof(float_t) * 3, p1, sizeof(float_t) * 3);	*arrayPosition += 3;
+				Memcpy(vertList + *arrayPosition, sizeof(float_t) * 3, p2, sizeof(float_t) * 3);	*arrayPosition += 3;
+				Memcpy(vertList + *arrayPosition, sizeof(float_t) * 3, p3, sizeof(float_t) * 3);	*arrayPosition += 3;
 			}
 
 			bool VoxelGrid::ShouldDraw()
@@ -217,7 +217,7 @@ namespace Bitz
 				if (position.X < 0 || position.Y < 0 || position.Z < 0) throw std::invalid_argument("Voxel position not valid");
 				if (position.X >= _Dimentions.X || position.Y >= _Dimentions.Y || position.Z >= _Dimentions.Z) throw std::invalid_argument("Voxel position not valid");
 
-				_VoxelStore[position.X + (position.Y*_Dimentions.X) + (position.Z*_Dimentions.X*_Dimentions.Y)] = newVoxel;
+				_VoxelStore[position.X + position.Y*_Dimentions.X + position.Z*_Dimentions.X*_Dimentions.Y] = newVoxel;
 
 				_VertArrayDirty = true;
 			}
@@ -233,7 +233,7 @@ namespace Bitz
 
 				if (x < 0 || x >= _Dimentions.X || y < 0 || y >= _Dimentions.Y || z < 0 || z >= _Dimentions.Z) return nullVoxel;
 
-				return _VoxelStore[x + (y*_Dimentions.X) + (z*_Dimentions.X*_Dimentions.Y)];
+				return _VoxelStore[x + y*_Dimentions.X + z*_Dimentions.X*_Dimentions.Y];
 			}
 		}
 	}

@@ -8,7 +8,7 @@ namespace Bitz
 
 	namespace GFX
 	{
-		Window::Window(std::wstring title, uint32_t width, uint32_t height, HINSTANCE hInstance)
+		Window::Window(const std::wstring& title, const uint32_t width, const uint32_t height, const HINSTANCE hInstance)
 		{
 			_WindowSize = Vector2I(width, height);
 			// register window class
@@ -27,21 +27,20 @@ namespace Bitz
 			// create main window
 			_HWnd = CreateWindow(title.c_str(), title.c_str(), WS_CAPTION | WS_SYSMENU | WS_VISIBLE | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, 0, 0, _WindowSize.X, _WindowSize.Y, NULL, NULL, hInstance, NULL);
 			ApplyWindowSizeChange();
-			_GlContext = new Bitz::GFX::GLContext();
+			_GlContext = std::make_shared<GLContext>();
 			_GlContext->Init(_HWnd);
 
-			Bitz::GFX::GraphicsManager::Init(this);
+			Bitz::GFX::GraphicsManager::Init(std::shared_ptr<Window>(this));
 		}
 
 		Window::~Window()
 		{
-			delete _GlContext;
 			_GlContext = nullptr;
 		}
 
 		void Window::SetQuitFunction(void(function)(void))
 		{
-			OnQuitEvent = function;
+			_OnQuitEvent = function;
 		}
 
 		Bitz::Math::Vector2I Window::GetWindowSize() const
@@ -49,7 +48,7 @@ namespace Bitz
 			return _WindowSize;
 		}
 
-		void Window::SetWindowSize(const Vector2I newSize)
+		void Window::SetWindowSize(const Vector2I& newSize)
 		{
 			_WindowSize = newSize;
 			ApplyWindowSizeChange();
@@ -64,7 +63,7 @@ namespace Bitz
 				// handle or dispatch messages
 				if (msg.message == WM_QUIT)
 				{
-					if (OnQuitEvent != nullptr)OnQuitEvent();
+					if (_OnQuitEvent != nullptr)_OnQuitEvent();
 				}
 				else
 				{
@@ -74,22 +73,22 @@ namespace Bitz
 			}
 		}
 
-		GLContext * Window::GetGLContext() const
+		GLContext_Ptr Window::GetGLContext() const
 		{
 			return _GlContext;
 		}
 
 		void Window::ApplyWindowSizeChange()
 		{
-			DWORD dwStyle = static_cast<DWORD>(GetWindowLongPtr(_HWnd, GWL_STYLE));
-			DWORD dwExStyle = static_cast<DWORD>(GetWindowLongPtr(_HWnd, GWL_EXSTYLE));
-			HMENU menu = GetMenu(_HWnd);
+			const auto dwStyle = static_cast<DWORD>(GetWindowLongPtr(_HWnd, GWL_STYLE));
+			const auto dwExStyle = static_cast<DWORD>(GetWindowLongPtr(_HWnd, GWL_EXSTYLE));
+			const HMENU menu = GetMenu(_HWnd);
 			RECT windowSize = { 0, 0, _WindowSize.X, _WindowSize.Y };;
 			AdjustWindowRectEx(&windowSize, dwStyle, menu != nullptr, dwExStyle);
-			SetWindowPos(_HWnd, nullptr, 0, 0, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top, SWP_NOZORDER | SWP_NOMOVE);
+			SetWindowPos(_HWnd, nullptr, 50, 50, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top, SWP_NOZORDER | SWP_NOMOVE);
 		}
 
-		LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+		LRESULT CALLBACK Window::WndProc(const HWND hWnd, const UINT message, const WPARAM wParam, const LPARAM lParam)
 		{
 			switch (message)
 			{

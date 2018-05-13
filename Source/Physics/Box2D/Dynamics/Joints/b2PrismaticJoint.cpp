@@ -148,7 +148,7 @@ void b2PrismaticJoint::InitVelocityConstraints(const b2SolverData& data)
 	// Compute the effective masses.
 	b2Vec2 rA = b2Mul(qA, m_localAnchorA - m_localCenterA);
 	b2Vec2 rB = b2Mul(qB, m_localAnchorB - m_localCenterB);
-	b2Vec2 d = (cB - cA) + rB - rA;
+	b2Vec2 d = cB - cA + rB - rA;
 
 	float32 mA = m_invMassA, mB = m_invMassB;
 	float32 iA = m_invIA, iB = m_invIB;

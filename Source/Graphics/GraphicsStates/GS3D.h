@@ -12,7 +12,6 @@ namespace Bitz
 			{
 			public:
 				GS3D();
-				~GS3D();
 				void EnterState() override;
 				void ExitState() override;
 				bool IsNormalsEnabled() const override;

@@ -17,7 +17,7 @@ namespace Bitz
 			return _ParentAnchor;
 		}
 
-		void IAnchorable::SetParentAnchor(const Layout::Anchor_Ptr newParentAnchor)
+		void IAnchorable::SetParentAnchor(const Layout::Anchor_Ptr& newParentAnchor)
 		{
 			_ParentAnchor = newParentAnchor;
 		}
@@ -27,7 +27,7 @@ namespace Bitz
 			return _Offset;
 		}
 
-		void IAnchorable::SetOffset(const Math::Vector2F newOffset)
+		void IAnchorable::SetOffset(const Math::Vector2F& newOffset)
 		{
 			SetPosition(_ParentAnchor->GetPosition() + _Offset);
 			_Offset = newOffset;
@@ -36,11 +36,6 @@ namespace Bitz
 		void IAnchorable::TriggerPositonUpdate()
 		{
 			SetPosition(_ParentAnchor->GetPosition() + _Offset);
-		}
-
-		void IAnchorable::Dispose()
-		{
-			_ParentAnchor = nullptr;
 		}
 	}
 }

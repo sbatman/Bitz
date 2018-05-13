@@ -96,9 +96,6 @@
     <ClCompile Include="Interfaces\IAnchorable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Interfaces\IDisposable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Layout\Anchor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -351,9 +348,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces\IAnchorable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IDisposable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Layout\Anchor.h">

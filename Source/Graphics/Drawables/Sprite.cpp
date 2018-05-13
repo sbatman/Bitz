@@ -82,8 +82,8 @@ namespace Bitz
 
 				uint32_t dataLength = _VertCount * DIMENTIONS * sizeof(float_t);
 
-				Memcpy(vertArray + (*startPosition), dataLength, _VertArray, dataLength);
-				(*startPosition) += _VertCount * DIMENTIONS;
+				Memcpy(vertArray + *startPosition, dataLength, _VertArray, dataLength);
+				*startPosition += _VertCount * DIMENTIONS;
 			}
 
 			void Sprite::PopulateTexArray(float_t * texArray, int32_t * startPosition)
@@ -92,8 +92,8 @@ namespace Bitz
 
 				uint32_t dataLength = _VertCount * 2 * sizeof(float_t);
 
-				Memcpy(texArray + (*startPosition), dataLength, _TexArray, dataLength);
-				(*startPosition) += _VertCount * 2;
+				Memcpy(texArray + *startPosition, dataLength, _TexArray, dataLength);
+				*startPosition += _VertCount * 2;
 			}
 
 			void Sprite::PopulateColArray(float_t* colArray, int32_t* startPosition)

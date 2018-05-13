@@ -169,7 +169,7 @@ void b2PolygonShape::Set(const b2Vec2* vertices, int32 count)
 	for (int32 i = 1; i < n; ++i)
 	{
 		float32 x = ps[i].x;
-		if (x > x0 || (x == x0 && ps[i].y < ps[i0].y))
+		if (x > x0 || x == x0 && ps[i].y < ps[i0].y)
 		{
 			i0 = i;
 			x0 = x;
@@ -412,7 +412,7 @@ void b2PolygonShape::ComputeMass(b2MassData* massData, float32 density) const
 		float32 intx2 = ex1*ex1 + ex2*ex1 + ex2*ex2;
 		float32 inty2 = ey1*ey1 + ey2*ey1 + ey2*ey2;
 
-		I += (0.25f * k_inv3 * D) * (intx2 + inty2);
+		I += 0.25f * k_inv3 * D * (intx2 + inty2);
 	}
 
 	// Total mass

@@ -55,7 +55,7 @@ namespace Bitz
 			{
 			case WM_KEYDOWN:
 			{
-				if (lParam & (1 << 30)) return;
+				if (lParam & 1 << 30) return;
 				_CurrentKeyStates[wParam] = true;
 			}
 			break;

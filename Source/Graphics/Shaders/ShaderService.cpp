@@ -16,7 +16,7 @@ namespace Bitz
 
 			void ShaderService::UnRegisterShader(Shader_Ptr shaderInstance)
 			{
-				_KnownShaders.erase(std::remove(_KnownShaders.begin(), _KnownShaders.end(), shaderInstance), _KnownShaders.end());
+				_KnownShaders.erase(std::remove(begin(_KnownShaders), end(_KnownShaders), shaderInstance), end(_KnownShaders));
 			}
 
 			std::vector<Shader_Ptr> ShaderService::GetCurrentShaders()

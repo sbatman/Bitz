@@ -12,10 +12,6 @@ namespace Bitz
 			_Name = name;
 		}
 
-		GameState::~GameState()
-		{
-		}
-
 		Time::Timer * GameState::GetTimeSinceEnter() const
 		{
 			return _EntryTimer;
@@ -26,7 +22,7 @@ namespace Bitz
 			return _Current;
 		}
 
-		void GameState::Enter(const GameState_Ptr preceedingState)
+		void GameState::Enter(const GameState_Ptr& preceedingState)
 		{
 			_EntryTimer = new Time::Timer();
 			_EntryTimer->Start();
@@ -45,16 +41,6 @@ namespace Bitz
 			_Current = false;
 			Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Exiting GameState {0}", _Name));
 			OnExit();
-		}
-
-		void GameState::InternalUpdate(double ms)
-		{
-			OnUpdate(ms);
-		}
-
-		void GameState::Draw()
-		{
-			OnDraw();
 		}
 
 		bool GameState::IsComplete() const

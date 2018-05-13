@@ -208,13 +208,13 @@ void b2GearJoint::InitVelocityConstraints(const b2SolverData& data)
 
 	if (data.step.warmStarting)
 	{
-		vA += (m_mA * m_impulse) * m_JvAC;
+		vA += m_mA * m_impulse * m_JvAC;
 		wA += m_iA * m_impulse * m_JwA;
-		vB += (m_mB * m_impulse) * m_JvBD;
+		vB += m_mB * m_impulse * m_JvBD;
 		wB += m_iB * m_impulse * m_JwB;
-		vC -= (m_mC * m_impulse) * m_JvAC;
+		vC -= m_mC * m_impulse * m_JvAC;
 		wC -= m_iC * m_impulse * m_JwC;
-		vD -= (m_mD * m_impulse) * m_JvBD;
+		vD -= m_mD * m_impulse * m_JvBD;
 		wD -= m_iD * m_impulse * m_JwD;
 	}
 	else
@@ -244,18 +244,18 @@ void b2GearJoint::SolveVelocityConstraints(const b2SolverData& data)
 	float32 wD = data.velocities[m_indexD].w;
 
 	float32 Cdot = b2Dot(m_JvAC, vA - vC) + b2Dot(m_JvBD, vB - vD);
-	Cdot += (m_JwA * wA - m_JwC * wC) + (m_JwB * wB - m_JwD * wD);
+	Cdot += m_JwA * wA - m_JwC * wC + (m_JwB * wB - m_JwD * wD);
 
 	float32 impulse = -m_mass * Cdot;
 	m_impulse += impulse;
 
-	vA += (m_mA * impulse) * m_JvAC;
+	vA += m_mA * impulse * m_JvAC;
 	wA += m_iA * impulse * m_JwA;
-	vB += (m_mB * impulse) * m_JvBD;
+	vB += m_mB * impulse * m_JvBD;
 	wB += m_iB * impulse * m_JwB;
-	vC -= (m_mC * impulse) * m_JvAC;
+	vC -= m_mC * impulse * m_JvAC;
 	wC -= m_iC * impulse * m_JwC;
-	vD -= (m_mD * impulse) * m_JvBD;
+	vD -= m_mD * impulse * m_JvBD;
 	wD -= m_iD * impulse * m_JwD;
 
 	data.velocities[m_indexA].v = vA;
@@ -337,7 +337,7 @@ bool b2GearJoint::SolvePositionConstraints(const b2SolverData& data)
 		coordinateB = b2Dot(pB - pD, m_localAxisD);
 	}
 
-	float32 C = (coordinateA + m_ratio * coordinateB) - m_constant;
+	float32 C = coordinateA + m_ratio * coordinateB - m_constant;
 
 	float32 impulse = 0.0f;
 	if (mass > 0.0f)

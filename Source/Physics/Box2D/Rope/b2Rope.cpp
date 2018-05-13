@@ -22,12 +22,12 @@
 b2Rope::b2Rope()
 {
 	m_count = 0;
-	m_ps = NULL;
-	m_p0s = NULL;
-	m_vs = NULL;
-	m_ims = NULL;
-	m_Ls = NULL;
-	m_as = NULL;
+	m_ps = nullptr;
+	m_p0s = nullptr;
+	m_vs = nullptr;
+	m_ims = nullptr;
+	m_Ls = nullptr;
+	m_as = nullptr;
 	m_gravity.SetZero();
 	m_k2 = 1.0f;
 	m_k3 = 0.1f;
@@ -206,8 +206,8 @@ void b2Rope::SolveC3()
 
 		float32 angle = b2Atan2(a, b);
 
-		b2Vec2 Jd1 = (-1.0f / L1sqr) * d1.Skew();
-		b2Vec2 Jd2 = (1.0f / L2sqr) * d2.Skew();
+		b2Vec2 Jd1 = -1.0f / L1sqr * d1.Skew();
+		b2Vec2 Jd2 = 1.0f / L2sqr * d2.Skew();
 
 		b2Vec2 J1 = -Jd1;
 		b2Vec2 J2 = Jd1 - Jd2;
@@ -237,9 +237,9 @@ void b2Rope::SolveC3()
 
 		float32 impulse = -m_k3 * mass * C;
 
-		p1 += (m1 * impulse) * J1;
-		p2 += (m2 * impulse) * J2;
-		p3 += (m3 * impulse) * J3;
+		p1 += m1 * impulse * J1;
+		p2 += m2 * impulse * J2;
+		p3 += m3 * impulse * J3;
 
 		m_ps[i] = p1;
 		m_ps[i + 1] = p2;
