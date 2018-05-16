@@ -18,6 +18,7 @@ namespace Bitz
 				_Position = Vector3F(0);
 				_Size = Vector3F(1);
 				SetColour(Vector4F(1.0f, 1.0f, 1.0f, 1.0f));
+
 			}
 
 			Model::~Model()
@@ -61,6 +62,14 @@ namespace Bitz
 				*startPosition += _VertCount * 3;
 			}
 
+			void Model::PopulateAdditionalArray(float_t* additionalArray, int32_t* startPosition)
+			{
+				assert(_AdditionalArray != nullptr);
+				int size = _VertCount * 3 * sizeof(float);
+				Memcpy(additionalArray + *startPosition, size, _AdditionalArray, size);
+				*startPosition += _VertCount * 3;
+			}
+
 			void Model::SetSpecularTexture(const Texture_Ptr newTexture)
 			{
 				_SpecularTexture = newTexture;
@@ -76,7 +85,7 @@ namespace Bitz
 				_VertCount = count;
 				int32_t dataSize = _VertCount * DIMENTIONS;
 
-				if (_VertArray != nullptr)delete[] _VertArray;
+				delete[] _VertArray;
 
 				_VertArray = new float[dataSize];
 
@@ -89,8 +98,16 @@ namespace Bitz
 				{
 					_TexArray = new float[_VertCount * 2]{ 0 };
 				}
+
+
+				if (_AdditionalArray == nullptr)
+				{
+					_AdditionalArray = new float[dataSize] { 0 };
+				}
+
 				SetColour(_Colour);
 				Memcpy(_VertArray, dataSize*sizeof(float_t), verts, dataSize*sizeof(float_t));
+
 			}
 
 			void Model::SetNormalArray(const float_t * norms, const  int32_t count)
@@ -98,7 +115,7 @@ namespace Bitz
 				assert(_VertCount == count && "Number of normals set must not be less than or exceed the number of verts present in the model");
 				int32_t dataSize = count * DIMENTIONS;
 
-				if (_NormArray != nullptr)delete[] _NormArray;
+				delete[] _NormArray;
 
 				_NormArray = new float[dataSize];
 				
@@ -110,7 +127,7 @@ namespace Bitz
 				assert(_VertCount == count && "Number of TexCorrds set must not be less than or exceed the number of verts present in the model");
 				int32_t dataSize = count * 2;
 
-				if (_TexArray != nullptr)delete[] _TexArray;
+				delete[] _TexArray;
 
 				_TexArray = new float[dataSize];
 
@@ -122,11 +139,23 @@ namespace Bitz
 				assert(_VertCount == count && "Number of Colours set must not be less than or exceed the number of verts present in the model");
 				int32_t dataSize = count * 4;
 
-				if (_ColArray != nullptr)delete[] _ColArray;
+				delete[] _ColArray;
 
 				_ColArray = new float[dataSize];
 
 				Memcpy(_ColArray, dataSize*sizeof(float_t), colours, dataSize*sizeof(float_t));
+			}
+
+			void Model::SetAdditionalArray(const float_t* additional, const int32_t count)
+			{
+				assert(_VertCount == count && "Number of Colours set must not be less than or exceed the number of verts present in the model");
+				const int32_t dataSize = count * 3;
+
+				delete[] _AdditionalArray;
+
+				_AdditionalArray = new float[dataSize];
+
+				Memcpy(_AdditionalArray, dataSize * sizeof(float_t), additional, dataSize * sizeof(float_t));
 			}
 
 			void Model::SetColour(const Vector4F newColour)
@@ -163,11 +192,11 @@ namespace Bitz
 			glm::mat4 Model::GetTransformation() const
 			{
 				glm::mat4 matrix;
-
+				matrix = glm::translate(matrix, glm::vec3(_Position.X, _Position.Y, _Position.Z));
 				if (_Rotation.X != 0)matrix = glm::rotate(matrix, _Rotation.X, glm::vec3(1, 0, 0));
 				if (_Rotation.Y != 0)matrix = glm::rotate(matrix, _Rotation.Y, glm::vec3(0, 1, 0));
 				if (_Rotation.Z != 0)matrix = glm::rotate(matrix, _Rotation.Z, glm::vec3(0, 0, 1));
-				matrix = glm::translate(matrix, glm::vec3(-_Position.X, -_Position.Y, -_Position.Z));
+	
 				matrix = glm::scale(matrix, glm::vec3(_Size.X, _Size.Y, _Size.Z));
 				return matrix;
 			}

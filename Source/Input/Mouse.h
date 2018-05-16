@@ -4,6 +4,7 @@
 
 namespace Bitz
 {
+	class Core;
 	namespace GFX
 	{
 		class GraphicsManager;
@@ -16,7 +17,9 @@ namespace Bitz
 		{
 			friend class GFX::GraphicsManager;
 			friend class GFX::Window;
+			friend class Core;
 		public:
+
 			/// <summary>
 			/// Enum on the queryable mouse buttons
 			/// </summary>
@@ -36,6 +39,13 @@ namespace Bitz
 			/// </summary>
 			/// <returns>int32_t containing the mouse y position relative to the window top</returns>
 			static int32_t GetY();
+
+			static Vector2F GetCenterRelative(bool reset);
+
+		
+
+			
+
 			/// <summary>
 			/// Returns whether the specified mouse button is down
 			/// </summary>
@@ -44,8 +54,8 @@ namespace Bitz
 			static bool IsButtonDown(MouseButtons button);
 		private:
 			static Math::Vector2I _LastMouse;
+			static Math::Vector2I _LastDiffCheckPos;
 			static bool _ButtonDown[5];
-
 #ifdef WIN32
 			static void HandleWindowMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 #endif

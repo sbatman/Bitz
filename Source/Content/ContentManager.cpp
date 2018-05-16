@@ -3,6 +3,7 @@
 #include "TextureData.h"
 #include "../Graphics/Texture.h"
 #include <algorithm>
+#include "MagicaVoxelData.h"
 
 namespace Bitz
 {
@@ -106,5 +107,6 @@ namespace Bitz
 		}
 
 		template GFX::Texture_Ptr ContentManager::Load<GFX::Texture>(std::string fileName);
+		template MagicVoxelData_Ptr ContentManager::Load<MagicVoxelData>(std::string fileName);
 	}
 }

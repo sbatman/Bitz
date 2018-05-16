@@ -9,11 +9,10 @@ namespace Bitz
 	{
 		namespace GraphicsStates
 		{
-			class BaseGS
+			class GraphicsState
 			{
 			public:
 				enum BlendStates { NONE, ALPHA, ADDATIVE };
-				virtual ~BaseGS() = default;
 				virtual void EnterState() = 0;
 				virtual void ExitState() = 0;
 				virtual Camera_Ptr GetActiveCamera() const = 0;
@@ -27,6 +26,8 @@ namespace Bitz
 				BlendStates _CurrentBlendState = BlendStates::NONE;
 				Shaders::Shader_Ptr _StockShader;
 			};
+
+			typedef std::shared_ptr<GraphicsState> GraphicsState_Ptr;
 		}
 	}
 }

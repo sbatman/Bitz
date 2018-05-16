@@ -7,6 +7,7 @@
 #include "Graphics\GraphicsManager.h"
 #include "GameLogic\GameStateService.h"
 #include "Content\IO.h"
+#include "Input/Mouse.h"
 
 namespace Bitz
 {
@@ -42,6 +43,7 @@ namespace Bitz
 		assert(!_Running && "Core cannot be run as it is already running");
 		_Running = true;
 		_CurrentGameCore = game;
+
 
 		try {
 			if (_CurrentGameCore->LoadContent() && _CurrentGameCore->Init())

@@ -1,6 +1,6 @@
 #pragma once
 #include "../../Common.h"
-#include "BaseGS.h"
+#include "GraphicsState.h"
 
 namespace Bitz
 {
@@ -8,7 +8,7 @@ namespace Bitz
 	{
 		namespace GraphicsStates
 		{
-			class GS2D : public BaseGS
+			class GS2D : public GraphicsState
 			{
 			public:
 				GS2D();

@@ -12,7 +12,7 @@ GSTest2::~GSTest2()
 {
 }
 
-void GSTest2::OnEnter(const Bitz::GameLogic::GameState_Ptr)
+void GSTest2::OnEnter(const Bitz::GameLogic::GameState_Ptr&)
 {
 	_PhyWorld = new b2World(b2Vec2(0, 1));
 

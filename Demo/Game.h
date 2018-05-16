@@ -11,8 +11,8 @@ public:
 	Game();
 	~Game();
 
-	static Bitz::GFX::GraphicsStates::GS2D * RenderState2d;
-	static Bitz::GFX::GraphicsStates::GS3D * RenderState3d;
+	static std::shared_ptr<Bitz::GFX::GraphicsStates::GS2D> RenderState2d;
+	static std::shared_ptr<Bitz::GFX::GraphicsStates::GS3D> RenderState3d;
 
 protected:
 	virtual bool Update() override;

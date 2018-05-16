@@ -4,8 +4,8 @@ using namespace Bitz::Math;
 using namespace Bitz::Content;
 using namespace Bitz::GFX;
 
-GraphicsStates::GS2D * Game::RenderState2d;
-GraphicsStates::GS3D * Game::RenderState3d;
+std::shared_ptr<GraphicsStates::GS2D> Game::RenderState2d;
+std::shared_ptr<GraphicsStates::GS3D> Game::RenderState3d;
 
 std::shared_ptr<GSTest1> Game::GameState_Test1 = nullptr;
 std::shared_ptr<GSTest2> Game::GameState_Test2 = nullptr;
@@ -35,13 +35,14 @@ bool Game::Init()
 {
 	Bitz::Debug::Logging::EnableLogToBlackHole();
 
-	RenderState2d = new GraphicsStates::GS2D();
+	RenderState2d = std::make_shared<GraphicsStates::GS2D>();
 	RenderState2d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 0));
-	RenderState2d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ADDATIVE);
+	RenderState2d->SetActiveBlendState(Bitz::GFX::GraphicsStates::GraphicsState::ADDATIVE);
 
-	RenderState3d = new GraphicsStates::GS3D();
-	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, -30));
-	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::BaseGS::ALPHA);
+	RenderState3d = std::make_shared<GraphicsStates::GS3D>();
+	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 10));
+	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::GraphicsState::ALPHA);
+	RenderState3d->CurrentLight->SetPosition(Vector3F(0, 0, 10));
 
 	if (GameState_Test3 == nullptr)
 	{

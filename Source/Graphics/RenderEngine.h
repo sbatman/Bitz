@@ -97,6 +97,14 @@ namespace Bitz
 			/// The position along the vertex normal array that has been populated this draw
 			/// </summary>
 			int32_t _NormCachePos;
+			/// <summary>
+			/// The array used for storing additional data before its sent to the card
+			/// </summary>
+			float_t * _AdditionalCache;
+			/// <summary>
+			/// The position along the additional data that has been populated this draw
+			/// </summary>
+			int32_t _AdditionalCachePos;
 
 			std::vector<glm::mat4> _MatCache;
 
@@ -129,7 +137,7 @@ namespace Bitz
 			int _ColGLCacheLoc = -1;
 			int _NormGLCacheLoc = -1;
 			int _TexGLCacheLoc = -1;
-			int _MatGLCacheLoc = -1;
+			int _AdditionalGLCacheLoc = -1;
 
 
 			/// <summary>

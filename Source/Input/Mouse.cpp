@@ -25,6 +25,23 @@ namespace Bitz
 			return _LastMouse.Y;
 		}
 
+		Vector2F Mouse::GetCenterRelative(bool reset)
+		{
+			RECT windowRect;
+			GetWindowRect(GFX::GraphicsManager::GetActiveWindow()->_HWnd, &windowRect);
+
+			RECT clientRect;
+			GetClientRect(GFX::GraphicsManager::GetActiveWindow()->_HWnd, &clientRect);
+
+			POINT mousePos = POINT();
+			GetCursorPos(&mousePos);
+
+			auto center = Vector2F(GFX::GraphicsManager::GetScreenSize().X *0.5f, GFX::GraphicsManager::GetScreenSize().Y *0.5f);
+			auto diff = center - Vector2F(mousePos.x, mousePos.y);
+			SetCursorPos(center.X, center.Y);
+			return diff;
+		}
+
 		bool Mouse::IsButtonDown(MouseButtons button)
 		{
 			return _ButtonDown[button];

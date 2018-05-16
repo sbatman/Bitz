@@ -32,11 +32,12 @@ namespace Bitz
 				virtual void PopulateTexArray(float_t * texArray, int32_t * statPosition) override;
 				virtual void PopulateColArray(float_t* colArray, int32_t* startPosition) override;
 				virtual void PopulateNormArray(float_t* normArray, int32_t* startPosition) override;
+				virtual void PopulateAdditionalArray(float_t* additionalArray, int32_t* startPosition) override;
 
 			protected:
 				virtual void UpdateQuad();
 				virtual void FlagQuadDirty();
-
+				
 			private:
 				bool _QuadDirty = true;
 			};

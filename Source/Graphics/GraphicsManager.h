@@ -3,7 +3,7 @@
 #include "Window.h"
 #include "Drawables\IDrawable.h"
 #include "Camera.h"
-#include "GraphicsStates/BaseGS.h"
+#include "GraphicsStates/GraphicsState.h"
 #include "RenderEngine.h"
 #include "../Time/Timer.h"
 
@@ -70,6 +70,8 @@ namespace Bitz
 			/// </summary>
 			/// <returns>The count of frames completed</returns>
 			static Vector2I GetScreenSize();
+
+			static GraphicsStates::GraphicsState_Ptr GetCurrentGraphicsState();
 	
 			/// <summary>
 			/// Populates the VBO renderlist with this IDrawable
@@ -81,7 +83,7 @@ namespace Bitz
 			/// Begins a render pass causing the graphics manager to clear the screen and render screen contents to the buffer
 			/// </summary>
 			/// <param name='graphicsState'>The graphics state to use for this pass</param>
-			static void BeginRender(GraphicsStates::BaseGS * graphicsState);
+			static void BeginRender(GraphicsStates::GraphicsState_Ptr graphicsState);
 			/// <summary>
 			/// Ends the render pass causing the graphics manager to present the current data to the screen
 			/// </summary>
@@ -95,6 +97,11 @@ namespace Bitz
 			/// </summary>
 			/// <param name='graphicsState'>The window to use for rendering</param>
 			static void SetActiveWindow(Window_Ptr window);
+
+			/// <summary>
+			/// Gets the window used for rendering
+			/// </summary>
+			static Window_Ptr GetActiveWindow();
 			/// <summary>
 			/// Gets the currnet active render engine
 			/// </summary>
@@ -164,7 +171,7 @@ namespace Bitz
 			/// <summary>
 			/// The current graphics state
 			/// </summary>
-			static GraphicsStates::BaseGS * _CurrentGraphicsState;
+			static GraphicsStates::GraphicsState_Ptr _CurrentGraphicsState;
 			/// <summary>
 			/// The last active camera saved for some optimisations like projection matix baking
 			/// </summary>

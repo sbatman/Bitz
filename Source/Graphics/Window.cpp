@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "GraphicsManager.h"
 #include "../Input/Keyboard.h"
+#include "../Input/Mouse.h"
 
 
 namespace Bitz
@@ -58,7 +59,7 @@ namespace Bitz
 		{
 			MSG msg;
 			// check for messages
-			if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+			while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 			{
 				// handle or dispatch messages
 				if (msg.message == WM_QUIT)
@@ -122,7 +123,7 @@ namespace Bitz
 			case WM_RBUTTONUP:
 			case WM_XBUTTONDOWN:
 			case WM_XBUTTONUP:
-				//Bitz::Input::Mouse::HandleWindowMessage(hWnd, message, wParam, lParam);
+				Bitz::Input::Mouse::HandleWindowMessage(hWnd, message, wParam, lParam);
 				return 0;
 			}
 			return DefWindowProc(hWnd, message, wParam, lParam);

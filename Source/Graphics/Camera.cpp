@@ -23,10 +23,10 @@ void Bitz::GFX::Camera::Apply()
 	}
 	glMatrixMode(GL_MODELVIEW);
 	_ViewMatrix = glm::mat4();
-	if (_Rotation.X > _Epsilon) glm::rotate(_ViewMatrix, -_Rotation.X, glm::vec3(1.0f, 0.0f, 0.0f));
-	if (_Rotation.Y > _Epsilon) glm::rotate(_ViewMatrix, -_Rotation.Y, glm::vec3(0.0f, 1.0f, 0.0f));
-	if (_Rotation.Z > _Epsilon) glm::rotate(_ViewMatrix, -_Rotation.Z, glm::vec3(0.0f, 0.0f, 1.0f));
-	_ViewMatrix = glm::translate(_ViewMatrix, glm::vec3(_Position.X, _Position.Y, _Position.Z));
+	if (abs(_Rotation.X) > _Epsilon) _ViewMatrix *= glm::rotate(glm::mat4(), -_Rotation.X, glm::vec3(1.0f, 0.0f, 0.0f));
+	if (abs(_Rotation.Y) > _Epsilon) _ViewMatrix *= glm::rotate(glm::mat4(), -_Rotation.Y, glm::vec3(0.0f, 1.0f, 0.0f));
+	if (abs(_Rotation.Z) > _Epsilon) _ViewMatrix *= glm::rotate(glm::mat4(), -_Rotation.Z, glm::vec3(0.0f, 0.0f, 1.0f));
+	_ViewMatrix = glm::translate(_ViewMatrix, glm::vec3(-_Position.X, -_Position.Y, -_Position.Z));
 	glLoadMatrixf(glm::value_ptr(_ViewMatrix));
 }
 
@@ -37,7 +37,7 @@ void Bitz::GFX::Camera::MakeActive()
 	case CameraMode::PERSPECTIVE:
 	{
 		glMatrixMode(GL_PROJECTION);
-		_ProjectionMatrix = glm::perspective(_FOV, GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.5f, 1000.0f);
+		_ProjectionMatrix = glm::perspective(static_cast<float>((_FOV / 180.0) * M_PI), GraphicsManager::GetScreenSize().X / static_cast<float>(GraphicsManager::GetScreenSize().Y), 0.5f, 1000.0f);
 		if (abs(_Zoom - 1) > _Epsilon)
 		{
 			_ProjectionMatrix = glm::translate(_ProjectionMatrix, glm::tvec3<float, glm::precision::defaultp>(GraphicsManager::GetScreenSize().X *0.5f, GraphicsManager::GetScreenSize().Y *0.5f, 0));

@@ -18,6 +18,7 @@ GSTest3::GSTest3() : GameState("Main")
 	
 	Drawables::VoxelGrid::Voxel vox;
 	vox.Type = 1;
+	vox.Specular = 1;
 	for (int x = 0;x < 30;x++)
 	{
 		if (x % 4 == 0)continue;
@@ -48,7 +49,7 @@ GSTest3::~GSTest3()
 {
 }
 
-void GSTest3::OnEnter(const Bitz::GameLogic::GameState_Ptr)
+void GSTest3::OnEnter(const Bitz::GameLogic::GameState_Ptr&)
 {
 
 }

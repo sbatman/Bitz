@@ -18,6 +18,8 @@ namespace Bitz
 				{
 					int32_t Type = -1;
 					Vector4B Colour;
+					float_t Specular = 0;
+					float_t Emissive = 0;
 				};
 
 				VoxelGrid(const Vector3I dimentions);

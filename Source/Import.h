@@ -6,6 +6,7 @@
 #include "Content/ContentManager.h"
 #include "Content/IO.h"
 #include "Content/TextureData.h"
+#include "Content/MagicaVoxelData.h"
 
 //GameLogic
 #include "GameLogic/GameCore.h"
@@ -17,13 +18,14 @@
 #include "Graphics/GLContext.h"
 #include "Graphics/GraphicsManager.h"
 #include "Graphics/Texture.h"
-#include "Graphics//GraphicsStates/GS2D.h"
-#include "Graphics//GraphicsStates/GS3D.h"
+#include "Graphics/GraphicsStates/GS2D.h"
+#include "Graphics/GraphicsStates/GS3D.h"
+#include "Graphics/Effects/Light.h"
 #include "Graphics/Drawables/Sprite.h"
 #include "Graphics/Drawables/Model.h"
 #include "Graphics/Drawables/VoxelGrid.h"
 #include "Graphics/Shaders/Shader.h"
-#include "Graphics\Window.h"
+#include "Graphics/Window.h"
 
 //Physics
 #include "Physics/I2DPhysicsEnabled.h"

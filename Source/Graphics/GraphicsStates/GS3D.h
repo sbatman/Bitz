@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Common.h"
-#include "BaseGS.h"
+#include "GraphicsState.h"
+#include "../Effects/Light.h"
 
 namespace Bitz
 {
@@ -8,7 +9,7 @@ namespace Bitz
 	{
 		namespace GraphicsStates
 		{
-			class GS3D : public BaseGS
+			class GS3D : public GraphicsState
 			{
 			public:
 				GS3D();
@@ -16,8 +17,10 @@ namespace Bitz
 				void ExitState() override;
 				bool IsNormalsEnabled() const override;
 				Camera_Ptr GetActiveCamera() const override;
+				Light::Light_Ptr CurrentLight;
 			private:
 				Camera_Ptr _ActiveCamera;
+
 			};
 		}
 	}

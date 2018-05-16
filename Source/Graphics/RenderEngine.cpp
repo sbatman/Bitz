@@ -7,6 +7,7 @@
 #include "Shaders\ShaderService.h"
 #include "GraphicsManager.h"
 #include "..\Content\ContentManager.h"
+#include "GraphicsStates/GS3D.h"
 
 namespace Bitz
 {
@@ -29,6 +30,7 @@ namespace Bitz
 			_ColCache = new float_t[BUFFERVERTCOUNT * 4];
 			_TexCache = new float_t[BUFFERVERTCOUNT * 2];
 			_NormCache = new float_t[BUFFERVERTCOUNT * 3];
+			_AdditionalCache = new float_t[BUFFERVERTCOUNT * 3];
 
 			for (int i = 0;i < MAXTEXTUREUNITS;i++)_ActiveTexture[i] = nullptr;
 
@@ -52,6 +54,11 @@ namespace Bitz
 			{
 				delete[] _TexCache;
 				_TexCache = nullptr;
+			}
+			if (_AdditionalCache != nullptr)
+			{
+				delete[] _AdditionalCache;
+				_AdditionalCache = nullptr;
 			}
 			_CurrentRenderingContext = nullptr;
 			_CurrentWindow = nullptr;
@@ -95,6 +102,7 @@ namespace Bitz
 			_ColGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Color");
 			_NormGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Normal");
 			_TexGLCacheLoc = _ActiveShader->GetAttributeLocation("in_TexCoordinate");
+			_AdditionalGLCacheLoc = _ActiveShader->GetAttributeLocation("in_Additional");
 
 			_ActiveShader->SetVariable("ProjectionMatrix", GraphicsManager::GetCurrentCamera()->GetProjectionMatrix());
 			_ActiveShader->SetVariable("ViewMatrix", GraphicsManager::GetCurrentCamera()->GetViewMatrix());
@@ -103,6 +111,7 @@ namespace Bitz
 			_ColCachePos = 0;
 			_TexCachePos = 0;
 			_NormCachePos = 0;
+			_AdditionalCachePos = 0;
 			_RenderedVertCount = 0;
 			_DrawIntervals.clear();
 		}
@@ -126,6 +135,7 @@ namespace Bitz
 			if (_ColGLCacheLoc != -1)idrawable->PopulateColArray(_ColCache, &_ColCachePos);
 			if (_NormGLCacheLoc != -1)idrawable->PopulateNormArray(_NormCache, &_NormCachePos);
 			if (_TexGLCacheLoc != -1)idrawable->PopulateTexArray(_TexCache, &_TexCachePos);
+			if (_AdditionalGLCacheLoc != -1)idrawable->PopulateAdditionalArray(_AdditionalCache, &_AdditionalCachePos);
 
 			const Content::TextureData_Ptr data = idrawable->GetTexture() != nullptr ? idrawable->GetTexture()->_Data : Bitz::Content::ContentManager::GetWhiteTexture()->_Data;
 
@@ -200,6 +210,11 @@ namespace Bitz
 				glVertexAttribPointer(_TexGLCacheLoc, 2, GL_FLOAT, false, 0, _TexCache);
 				glEnableVertexAttribArray(_TexGLCacheLoc);
 			}
+			if (_AdditionalGLCacheLoc != -1)
+			{
+				glVertexAttribPointer(_AdditionalGLCacheLoc, 3, GL_FLOAT, false, 0, _AdditionalCache);
+				glEnableVertexAttribArray(_AdditionalGLCacheLoc);
+			}
 
 			for (int i = 0;i < MAXTEXTUREUNITS;i++)	_ActiveShader->SetVariable(fmt::format("Texture{0}", i), i);
 
@@ -221,10 +236,11 @@ namespace Bitz
 				{
 
 					_ActiveShader->SetVariable("ModelMatrix", _DrawIntervals[i].Matrix);
-					
-					glm::vec4 lightDirection = glm::vec4(0.2f,0.0f,1.0f, 1.0f);
 
-					_ActiveShader->SetVariable("LightDirection", glm::vec3(lightDirection.x, lightDirection.y, lightDirection.z));
+					const auto lightPosition = std::static_pointer_cast<GraphicsStates::GS3D>(GraphicsManager::GetCurrentGraphicsState())->CurrentLight->GetPosition();
+					const auto camera = GraphicsManager::GetCurrentCamera();
+					_ActiveShader->SetVariable("LightPosition", glm::vec3(lightPosition.X, lightPosition.Y, lightPosition.Z));
+					_ActiveShader->SetVariable("CameraPosition", glm::vec3(camera->GetPosition().X, camera->GetPosition().Y, camera->GetPosition().Z));
 
 				}
 				glDrawArrays(GL_TRIANGLES, _DrawIntervals[i].VertCountStart, _DrawIntervals[i].VertCountEnd - _DrawIntervals[i].VertCountStart);

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Content\ContentManager.cpp" />
     <ClCompile Include="Content\IO.cpp" />
+    <ClCompile Include="Content\MagicaVoxelData.cpp" />
     <ClCompile Include="Content\TextureData.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Debug\Console.cpp" />
@@ -34,7 +35,7 @@
     <ClCompile Include="Graphics\Drawables\VoxelGrid.cpp" />
     <ClCompile Include="Graphics\GLContext.cpp" />
     <ClCompile Include="Graphics\GraphicsManager.cpp" />
-    <ClCompile Include="Graphics\GraphicsStates\BaseGS.cpp" />
+    <ClCompile Include="Graphics\GraphicsStates\GraphicsState.cpp" />
     <ClCompile Include="Graphics\GraphicsStates\GS2D.cpp" />
     <ClCompile Include="Graphics\GraphicsStates\GS3D.cpp" />
     <ClCompile Include="Graphics\RenderEngine.cpp" />
@@ -50,6 +51,7 @@
     <ClCompile Include="Layout\Anchor.cpp" />
     <ClCompile Include="Libs\CppFormat\format.cc" />
     <ClCompile Include="Libs\Glew\glew.c" />
+    <ClCompile Include="Graphics\Effects\Light.cpp" />
     <ClCompile Include="Physics\Box2D\Collision\b2BroadPhase.cpp" />
     <ClCompile Include="Physics\Box2D\Collision\b2CollideCircle.cpp" />
     <ClCompile Include="Physics\Box2D\Collision\b2CollideEdge.cpp" />
@@ -105,6 +107,7 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Content\ContentManager.h" />
     <ClInclude Include="Content\IO.h" />
+    <ClInclude Include="Content\MagicaVoxelData.h" />
     <ClInclude Include="Content\TextureData.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Debug\Console.h" />
@@ -119,7 +122,7 @@
     <ClInclude Include="Graphics\Drawables\VoxelGrid.h" />
     <ClInclude Include="Graphics\GLContext.h" />
     <ClInclude Include="Graphics\GraphicsManager.h" />
-    <ClInclude Include="Graphics\GraphicsStates\BaseGS.h" />
+    <ClInclude Include="Graphics\GraphicsStates\GraphicsState.h" />
     <ClInclude Include="Graphics\GraphicsStates\GS2D.h" />
     <ClInclude Include="Graphics\GraphicsStates\GS3D.h" />
     <ClInclude Include="Graphics\RenderEngine.h" />
@@ -137,6 +140,7 @@
     <ClInclude Include="Layout\Anchor.h" />
     <ClInclude Include="Libs\CppFormat\format.h" />
     <ClInclude Include="Libs\Glew\glew.h" />
+    <ClInclude Include="Graphics\Effects\Light.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />

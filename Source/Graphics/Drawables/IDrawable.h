@@ -36,11 +36,14 @@ namespace Bitz
 					_TexArray = nullptr;
 					delete[] _NormArray;
 					_NormArray = nullptr;
+					delete[] _AdditionalArray;
+					_AdditionalArray = nullptr;
 				}
 				virtual void PopulateVertArray(float_t * vertArray, int32_t * startPosition) = 0;
 				virtual void PopulateColArray(float_t * colArray, int32_t * startPosition) = 0;
 				virtual void PopulateTexArray(float_t * texArray, int32_t * startPosition) = 0;
 				virtual void PopulateNormArray(float_t * normArray, int32_t * startPosition) = 0;
+				virtual void PopulateAdditionalArray(float_t * additionalArray, int32_t * startPosition) = 0;
 				virtual uint32_t GetVertCount() const = 0;
 				virtual void SetTexture(const Texture_Ptr newTexture)
 				{
@@ -61,6 +64,7 @@ namespace Bitz
 				float_t * _ColArray = nullptr;
 				float_t * _TexArray = nullptr;
 				float_t * _NormArray = nullptr;
+				float_t * _AdditionalArray = nullptr;
 				int32_t _VertCount = 0;
 				RenderMode _RenderMode;
 				Texture_Ptr _Texture = nullptr;

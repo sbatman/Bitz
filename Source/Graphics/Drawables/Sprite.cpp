@@ -80,7 +80,7 @@ namespace Bitz
 			{
 				if (_QuadDirty)UpdateQuad();
 
-				uint32_t dataLength = _VertCount * DIMENTIONS * sizeof(float_t);
+				const uint32_t dataLength = _VertCount * DIMENTIONS * sizeof(float_t);
 
 				Memcpy(vertArray + *startPosition, dataLength, _VertArray, dataLength);
 				*startPosition += _VertCount * DIMENTIONS;
@@ -90,7 +90,7 @@ namespace Bitz
 			{
 				if (_QuadDirty)UpdateQuad();
 
-				uint32_t dataLength = _VertCount * 2 * sizeof(float_t);
+				const uint32_t dataLength = _VertCount * 2 * sizeof(float_t);
 
 				Memcpy(texArray + *startPosition, dataLength, _TexArray, dataLength);
 				*startPosition += _VertCount * 2;
@@ -110,6 +110,17 @@ namespace Bitz
 			void Sprite::PopulateNormArray(float_t * normArray, int32_t * startPosition)
 			{
 				return;
+			}
+
+			void Sprite::PopulateAdditionalArray(float_t* additionalArray, int32_t* startPosition)
+			{
+				//no proper data for here yet so just copying 
+				if (_QuadDirty)UpdateQuad();
+
+				uint32_t dataLength = _VertCount * DIMENTIONS * sizeof(float_t);
+
+				Memcpy(additionalArray + *startPosition, dataLength, _AdditionalArray, dataLength);
+				*startPosition += _VertCount * DIMENTIONS;
 			}
 
 			void Sprite::UpdateQuad()

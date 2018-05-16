@@ -6,11 +6,15 @@
 
 namespace Bitz
 {
-
+	namespace Input
+	{
+		class Mouse;
+	}
 	namespace GFX
 	{
 		class Window
 		{
+			friend class Input::Mouse;
 		public:
 			Window(const std::wstring& title, uint32_t width, uint32_t height, HINSTANCE hInstance);
 			~Window();

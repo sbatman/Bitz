@@ -14,11 +14,11 @@ namespace Bitz
 		bool GraphicsManager::_Debug_EnableBackbufferColourAlt = false;
 
 		Vector3F GraphicsManager::_Debug_BackbufferColourAlt = Vector3F(0.5f, 0.3f, 0.5f);
-		Vector3F GraphicsManager::_BufferClearColour = Vector3F(0);
+		Vector3F GraphicsManager::_BufferClearColour = Vector3F(0.6f,0.6f,0.6f);
 		Timer * GraphicsManager::_FrameTimer = nullptr;
 		uint64_t GraphicsManager::_FrameNumber = 0;
 		double_t GraphicsManager::_LastFrameTime = 0;
-		GraphicsStates::BaseGS * GraphicsManager::_CurrentGraphicsState = nullptr;
+		GraphicsStates::GraphicsState_Ptr GraphicsManager::_CurrentGraphicsState = nullptr;
 		RenderEngine * GraphicsManager::_ActiveRenderEngine = nullptr;
 		Window_Ptr GraphicsManager::_ActiveWindow = nullptr;
 
@@ -55,6 +55,11 @@ namespace Bitz
 			}
 		}
 
+		Window_Ptr GraphicsManager::GetActiveWindow()
+		{
+			return _ActiveWindow;
+		}
+
 		void GraphicsManager::Update()
 		{
 			assert(_HasInit);
@@ -84,7 +89,7 @@ namespace Bitz
 			_FrameNumber++;
 		}
 
-		void GraphicsManager::BeginRender(GraphicsStates::BaseGS * graphicsState)
+		void GraphicsManager::BeginRender(GraphicsStates::GraphicsState_Ptr graphicsState)
 		{
 			assert(_HasInit);
 
@@ -165,6 +170,11 @@ namespace Bitz
 			return _ActiveRenderEngine != nullptr ? _ActiveRenderEngine->GetSize() : Vector2I(0);
 		}
 
+		GraphicsStates::GraphicsState_Ptr GraphicsManager::GetCurrentGraphicsState()
+		{
+			return _CurrentGraphicsState;
+		}
+
 		void GraphicsManager::StaticDispose()
 		{
 			assert(_HasInit);
@@ -184,7 +194,7 @@ namespace Bitz
 			if (_CurrentGraphicsState != nullptr)
 			{
 				_CurrentGraphicsState->ExitState();
-				delete _CurrentGraphicsState;
+				_CurrentGraphicsState = nullptr;
 			}
 
 			_LastActiveCamera = nullptr;

@@ -13,6 +13,7 @@ namespace Bitz
 			_ActiveCamera->SetMode(Camera::CameraMode::PERSPECTIVE);
 			_CurrentBlendState = BlendStates::ALPHA;
 			_StockShader = Shaders::ShaderService::CreateShader<Shaders::Stock3D>();
+			CurrentLight = std::make_shared<Light>();
 		}
 
 		void GraphicsStates::GS3D::EnterState()
