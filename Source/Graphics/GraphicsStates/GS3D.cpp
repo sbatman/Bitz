@@ -12,8 +12,7 @@ namespace Bitz
 			_ActiveCamera = std::make_shared<Camera>();
 			_ActiveCamera->SetMode(Camera::CameraMode::PERSPECTIVE);
 			_CurrentBlendState = BlendStates::ALPHA;
-			_StockShader = Shaders::ShaderService::CreateShader<Shaders::Stock3D>();
-			CurrentLight = std::make_shared<Light>();
+			_StockShader = Shaders::ShaderService::CreateShader<Shaders::Stock3D>();			
 		}
 
 		void GraphicsStates::GS3D::EnterState()
@@ -45,6 +44,16 @@ namespace Bitz
 		Camera_Ptr GraphicsStates::GS3D::GetActiveCamera() const
 		{
 			return _ActiveCamera;
+		}
+
+		void GraphicsStates::GS3D::AddLight(Effects::Light_Ptr light)
+		{
+			Lights.push_back(light);
+		}
+
+		void GraphicsStates::GS3D::RemoveLight(Effects::Light_Ptr light)
+		{
+			std::remove(std::begin(Lights), std::end(Lights), light);
 		}
 
 		bool GraphicsStates::GS3D::IsNormalsEnabled() const

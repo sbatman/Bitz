@@ -25,6 +25,7 @@ namespace Bitz
 			Window_Ptr GetWindow();
 			void Render(Drawables::IDrawable_Ptr idrawable);
 			void SetSize(Vector2I newSize);
+			void GLErrorCheck();
 			Vector2I GetSize() const;
 
 			const uint32_t BUFFERVERTCOUNT = 1000000;

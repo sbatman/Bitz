@@ -21,6 +21,7 @@ namespace Bitz
 				int32_t virtual GetAttributeLocation(const std::string& attributeName) const;
 				void virtual SetVariable(const std::string& variableName, glm::mat4 matrix);
 				void virtual SetVariable(const std::string& variableName, int32_t value);
+				void virtual SetVariable(const std::string& variableName, float_t value);
 				void virtual SetVariable(const std::string& variableName, Bitz::Math::Vector3F value);
 				void virtual SetVariable(const std::string& variableName, glm::vec3 value);
 				void virtual SetVariable(const std::string& variableName, Bitz::Math::Vector4F value);

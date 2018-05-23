@@ -178,14 +178,20 @@ namespace Bitz
 			}
 			if(intervalGenerated)_DrawIntervals.push_back(interval);
 			_RenderedVertCount += idrawable->GetVertCount();
-			assert(glGetError() == GL_NO_ERROR);
+			GLErrorCheck();
 		}
 
 		void RenderEngine::SetSize(Vector2I newSize)
 		{
 			_CurrentWindow->SetWindowSize(newSize);
 			glViewport(0, 0, newSize.X, newSize.Y);
-			assert(glGetError() == GL_NO_ERROR);
+			GLErrorCheck();
+		}
+
+		void RenderEngine::GLErrorCheck()
+		{
+			auto error = glGetError();
+			assert(error== GL_NO_ERROR);
 		}
 
 		void RenderEngine::End()
@@ -218,43 +224,50 @@ namespace Bitz
 
 			for (int i = 0;i < MAXTEXTUREUNITS;i++)	_ActiveShader->SetVariable(fmt::format("Texture{0}", i), i);
 
-			if (_DrawIntervals.size() == 0)return;
+			if (_DrawIntervals.empty())return;
 
 			if (Settings::DEBUG_LOGGING_GRAPHICS_VERBOSE)Debug::Logging::Log(Debug::Logging::ErrorType::Notice, fmt::format("Rendering {0} Verts in {1} Intervals", _RenderedVertCount, _DrawIntervals.size()));
 
 			_DrawIntervals.back().VertCountEnd = _RenderedVertCount;
 
-			for (uint32_t i = 0; i < _DrawIntervals.size(); i++)
+			for (auto& drawInterval : _DrawIntervals)
 			{
 				int texUnit = 0;
-				for (auto tex : _DrawIntervals[i].Texture)
+				for (const auto tex : drawInterval.Texture)
 				{
 					SetActiveTexture(tex, texUnit++);
 				}
 
-				if (_DrawIntervals[i].Mode == Drawables::IDrawable::RenderMode::ThreeD)
+				if (drawInterval.Mode == Drawables::IDrawable::RenderMode::ThreeD)
 				{
 
-					_ActiveShader->SetVariable("ModelMatrix", _DrawIntervals[i].Matrix);
+					_ActiveShader->SetVariable("ModelMatrix", drawInterval.Matrix);
 
-					const auto lightPosition = std::static_pointer_cast<GraphicsStates::GS3D>(GraphicsManager::GetCurrentGraphicsState())->CurrentLight->GetPosition();
+					const auto lights = std::static_pointer_cast<GraphicsStates::GS3D>(GraphicsManager::GetCurrentGraphicsState())->Lights;
 					const auto camera = GraphicsManager::GetCurrentCamera();
-					_ActiveShader->SetVariable("LightPosition", glm::vec3(lightPosition.X, lightPosition.Y, lightPosition.Z));
 					_ActiveShader->SetVariable("CameraPosition", glm::vec3(camera->GetPosition().X, camera->GetPosition().Y, camera->GetPosition().Z));
 
+					float_t lightid = 0;
+					for(const Effects::Light_Ptr& light : lights)
+					{
+						light->SetupShader(_ActiveShader, lightid++);
+					}					
+
+					_ActiveShader->SetVariable("LightCount", lightid);
+
 				}
-				glDrawArrays(GL_TRIANGLES, _DrawIntervals[i].VertCountStart, _DrawIntervals[i].VertCountEnd - _DrawIntervals[i].VertCountStart);
+				glDrawArrays(GL_TRIANGLES, drawInterval.VertCountStart, drawInterval.VertCountEnd - drawInterval.VertCountStart);
 
 			}
 			_ActiveShader->Disable();
 			_ActiveShader = nullptr;
-			assert(glGetError() == GL_NO_ERROR);
+			GLErrorCheck();
 		}
 
 		void RenderEngine::Present()
 		{
 			_CurrentRenderingContext->FinishRender();
-			assert(glGetError() == GL_NO_ERROR);
+			GLErrorCheck();
 		}
 
 		void RenderEngine::Clear(Vector3F colour)

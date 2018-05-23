@@ -8,7 +8,7 @@ namespace Bitz
 	{
 		namespace Drawables
 		{
-			VoxelGrid::VoxelGrid(const Vector3I dimentions)
+			VoxelGrid::VoxelGrid(const Vector3I& dimentions)
 			{
 				_VertArrayDirty = true;
 				_Dimentions = dimentions;
@@ -56,9 +56,9 @@ namespace Bitz
 
 				float_t tex[12] = { 0,0, 0,1, 1,0, 0,1, 1,1, 1,0 };
 
-				float centerOffsetX = _Dimentions.X*0.5f;
-				float centerOffsetY = _Dimentions.Y*0.5f;
-				float centerOffsetZ = _Dimentions.Z*0.5f;
+				const float centerOffsetX = _Dimentions.X*0.5f;
+				const float centerOffsetY = _Dimentions.Y*0.5f;
+				const float centerOffsetZ = _Dimentions.Z*0.5f;
 
 				int32_t facesDrawn = 0;
 
@@ -68,17 +68,17 @@ namespace Bitz
 					{
 						for (int z = 0;z < _Dimentions.Z;z++)
 						{
-							Voxel targetVoxel = GetVoxelAtPosition(x, y, z);
+							const Voxel targetVoxel = GetVoxelAtPosition(x, y, z);
 							if (targetVoxel.Type != -1)
 							{
-								float_t _tlf[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ - 0.5f };
-								float_t _trf[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ - 0.5f };
-								float_t _blf[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ - 0.5f };
-								float_t _brf[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ - 0.5f };
-								float_t _tlb[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ + 0.5f };
-								float_t _trb[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ + 0.5f };
-								float_t _blb[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ + 0.5f };
-								float_t _brb[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ + 0.5f };
+								float_t tlf[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ - 0.5f };
+								float_t trf[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ - 0.5f };
+								float_t blf[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ - 0.5f };
+								float_t brf[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ - 0.5f };
+								float_t tlb[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ + 0.5f };
+								float_t trb[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY - 0.5f, z - centerOffsetZ + 0.5f };
+								float_t blb[3] = { x - centerOffsetX - 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ + 0.5f };
+								float_t brb[3] = { x - centerOffsetX + 0.5f, y - centerOffsetY + 0.5f, z - centerOffsetZ + 0.5f };
 
 								float_t colors[12] =
 								{
@@ -117,10 +117,10 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), normals, 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[facesDrawn * 24], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t)* 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _tlf, _blf, _trf, &verpos);
+									CopyTri(vertArray, tlf, blf, trf, &verpos);
 									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _blf, _brf, _trf, &verpos);
+									CopyTri(vertArray, blf, brf, trf, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
 									facesDrawn++;
@@ -132,10 +132,10 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[2 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[facesDrawn * 24], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _tlb, _blb, _tlf, &verpos);
+									CopyTri(vertArray, tlb, blb, tlf, &verpos);
 									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _blb, _blf, _tlf, &verpos);
+									CopyTri(vertArray, blb, blf, tlf, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 									facesDrawn++;
 								}
@@ -146,10 +146,10 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[4 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _trf, _brf, _trb, &verpos);
+									CopyTri(vertArray, trf, brf, trb, &verpos);
 									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _brf, _brb, _trb, &verpos);
+									CopyTri(vertArray, brf, brb, trb, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 									facesDrawn++;
 								}
@@ -160,10 +160,10 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[6 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _trb, _brb, _tlb, &verpos);
+									CopyTri(vertArray, trb, brb, tlb, &verpos);
 									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _brb, _blb, _tlb, &verpos);
+									CopyTri(vertArray, brb, blb, tlb, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
 									facesDrawn++;
@@ -175,10 +175,10 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[8 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _tlb, _tlf, _trb, &verpos);
+									CopyTri(vertArray, tlb, tlf, trb, &verpos);
 									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _tlf, _trf, _trb, &verpos);
+									CopyTri(vertArray, tlf, trf, trb, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
 									facesDrawn++;
@@ -190,10 +190,10 @@ namespace Bitz
 									Memcpy(normalArray + verpos, 9 * 2 * sizeof(float_t), &normals[10 * 9], 9 * 2 * sizeof(float_t));
 									Memcpy(&colArray[(facesDrawn * 24)], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _blf, _blb, _brf, &verpos);
+									CopyTri(vertArray, blf, blb, brf, &verpos);
 									Memcpy(&colArray[facesDrawn * 24 + 12], sizeof(float_t) * 12, colors, sizeof(float_t) * 12);
 									Memcpy(additionalArray + verpos, sizeof(float_t) * 9, additional, sizeof(float_t) * 9);
-									CopyTri(vertArray, _blb, _brb, _brf, &verpos);
+									CopyTri(vertArray, blb, brb, brf, &verpos);
 									Memcpy(&texArray[facesDrawn * 12], sizeof(float_t) * 12, tex, sizeof(float_t) * 12);
 
 									facesDrawn++;
@@ -211,10 +211,10 @@ namespace Bitz
 				SetAdditionalArray(additionalArray, facesDrawn * 6);
 				//SetColour
 
-				delete vertArray;
-				delete normalArray;
-				delete texArray;
-				delete colArray;
+				delete[] vertArray;
+				delete[] normalArray;
+				delete[] texArray;
+				delete[] colArray;
 			}
 
 			void VoxelGrid::CopyTri(float_t * vertList, const float_t* p1, const float_t* p2, const float_t* p3, int* arrayPosition)

@@ -14,7 +14,7 @@ namespace Bitz
 		bool GraphicsManager::_Debug_EnableBackbufferColourAlt = false;
 
 		Vector3F GraphicsManager::_Debug_BackbufferColourAlt = Vector3F(0.5f, 0.3f, 0.5f);
-		Vector3F GraphicsManager::_BufferClearColour = Vector3F(0.6f,0.6f,0.6f);
+		Vector3F GraphicsManager::_BufferClearColour = Vector3F(0.0f,0.0f,0.0f);
 		Timer * GraphicsManager::_FrameTimer = nullptr;
 		uint64_t GraphicsManager::_FrameNumber = 0;
 		double_t GraphicsManager::_LastFrameTime = 0;

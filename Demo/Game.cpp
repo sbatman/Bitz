@@ -42,13 +42,13 @@ bool Game::Init()
 	RenderState3d = std::make_shared<GraphicsStates::GS3D>();
 	RenderState3d->GetActiveCamera()->SetPosition(Vector3F(0, 0, 10));
 	RenderState3d->SetActiveBlendState(Bitz::GFX::GraphicsStates::GraphicsState::ALPHA);
-	RenderState3d->CurrentLight->SetPosition(Vector3F(0, 0, 10));
+//	RenderState3d->CurrentLight->SetPosition(Vector3F(0, 0, 10));
 
-	if (GameState_Test3 == nullptr)
-	{
-		GameState_Test3 = std::make_shared<GSTest3>();
-		Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
-	}
+	//if (GameState_Test3 == nullptr)
+	//{
+	//	GameState_Test3 = std::make_shared<GSTest3>();
+	//	Bitz::GameLogic::GameStateService::StartState(GameState_Test3);
+	//}
 	
 	//if (GameState_Test1 == nullptr)
 	//{
@@ -56,11 +56,11 @@ bool Game::Init()
 	//	Bitz::GameLogic::GameStateService::StartState(static_cast<Bitz::GameLogic::GameState_Ptr>(GameState_Test1));
 	//}
 	
-	/*if (GameState_Test2 == nullptr)
+	if (GameState_Test2 == nullptr)
 	{
 		GameState_Test2 = std::make_shared<GSTest2>();
 		Bitz::GameLogic::GameStateService::StartState(GameState_Test2);
-	}*/
+	}
 
 	return true;
 }

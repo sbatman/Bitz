@@ -55,13 +55,13 @@ namespace Bitz
 					_InternalLock.lock();
 					Input::Keyboard::Update();
 					GFX::GraphicsManager::Update();
-					double_t elapsedMS = _RunningTimer.GetElapsedMS();
+					const double_t elapsedMS = _RunningTimer.GetElapsedMS();
 
 					if (_LastDraw > elapsedMS)_LastDraw = elapsedMS;
 					if (_LastUpdate > elapsedMS)_LastUpdate = elapsedMS;
 
 					double updateDiff = elapsedMS - _LastUpdate;
-					double drawDiff = elapsedMS - _LastDraw;
+					const double drawDiff = elapsedMS - _LastDraw;
 
 					while(updateDiff > _MSPerUpdate)
 					{
@@ -99,9 +99,9 @@ namespace Bitz
 				}
 			}
 
-			bool unloadSuccessful = _CurrentGameCore->UnloadContent();
+			const bool unloadSuccessful = _CurrentGameCore->UnloadContent();
 			assert(unloadSuccessful && "Unload Content Failed");
-			bool exitSuccessful = _CurrentGameCore->OnExit();
+			const bool exitSuccessful = _CurrentGameCore->OnExit();
 			assert(exitSuccessful && "Exit Failed");
 
 			GFX::GraphicsManager::StaticDispose();

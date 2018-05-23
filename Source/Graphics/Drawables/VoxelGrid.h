@@ -22,7 +22,7 @@ namespace Bitz
 					float_t Emissive = 0;
 				};
 
-				VoxelGrid(const Vector3I dimentions);
+				VoxelGrid(const Vector3I& dimentions);
 				~VoxelGrid();
 				virtual bool ShouldDraw() override;
 				virtual Vector3I GetDimentions() const;

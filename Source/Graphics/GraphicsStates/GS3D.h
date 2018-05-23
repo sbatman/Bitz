@@ -17,10 +17,11 @@ namespace Bitz
 				void ExitState() override;
 				bool IsNormalsEnabled() const override;
 				Camera_Ptr GetActiveCamera() const override;
-				Light::Light_Ptr CurrentLight;
+				std::vector<Effects::Light_Ptr> Lights;
+				void AddLight(Effects::Light_Ptr);
+				void RemoveLight(Effects::Light_Ptr);
 			private:
 				Camera_Ptr _ActiveCamera;
-
 			};
 		}
 	}

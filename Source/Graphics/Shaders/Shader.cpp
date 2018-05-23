@@ -142,6 +142,15 @@ namespace Bitz
 					assert(glGetError() == GL_NO_ERROR);
 				}
 			}
+			void Shader::SetVariable(const std::string& variableName, float_t value)
+			{
+				const GLint loc = glGetUniformLocation(_Program, variableName.c_str());
+				if (loc != -1)
+				{
+					glUniform1f(loc, value);
+					assert(glGetError() == GL_NO_ERROR);
+				}
+			}
 			void Shader::SetVariable(const std::string& variableName, Bitz::Math::Vector3F value)
 			{
 				const GLint loc = glGetUniformLocation(_Program, variableName.c_str());
