@@ -264,6 +264,9 @@
     <ClCompile Include="Graphics\GraphicsStates\GraphicsState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Drawables\VoxelCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Import.h">
@@ -546,6 +549,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\GraphicsStates\GraphicsState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Drawables\VoxelCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

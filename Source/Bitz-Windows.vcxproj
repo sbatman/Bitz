@@ -32,6 +32,7 @@
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\Drawables\Model.cpp" />
     <ClCompile Include="Graphics\Drawables\Sprite.cpp" />
+    <ClCompile Include="Graphics\Drawables\VoxelCollection.cpp" />
     <ClCompile Include="Graphics\Drawables\VoxelGrid.cpp" />
     <ClCompile Include="Graphics\GLContext.cpp" />
     <ClCompile Include="Graphics\GraphicsManager.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Graphics\Drawables\IDrawable.h" />
     <ClInclude Include="Graphics\Drawables\Model.h" />
     <ClInclude Include="Graphics\Drawables\Sprite.h" />
+    <ClInclude Include="Graphics\Drawables\VoxelCollection.h" />
     <ClInclude Include="Graphics\Drawables\VoxelGrid.h" />
     <ClInclude Include="Graphics\GLContext.h" />
     <ClInclude Include="Graphics\GraphicsManager.h" />

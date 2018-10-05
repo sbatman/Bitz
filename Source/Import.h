@@ -24,6 +24,7 @@
 #include "Graphics/Drawables/Sprite.h"
 #include "Graphics/Drawables/Model.h"
 #include "Graphics/Drawables/VoxelGrid.h"
+#include "Graphics/Drawables/VoxelCollection.h"
 #include "Graphics/Shaders/Shader.h"
 #include "Graphics/Window.h"
 
